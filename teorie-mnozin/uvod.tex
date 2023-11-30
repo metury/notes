@@ -1,0 +1,81 @@
+\chapter{Úvod}
+
+\section{Jazyk teorie množin}
+
+Jazyk teorie $x \in Y$. Také se bude používat *metajazyk* jako například: “definovat”, “formule” a “třída”.
+
+\subsection{Symboly}
+
+\begin{itemize}
+	\item Proměnné pro množiny $X,Y,Z,x_{1},x_{2}, \dots$.
+	\item Binární predikátový (relační) symbol $=$ a taky $\in$ (náležení).
+	\item Dále také logické spojky: $\neg ,\land ,\lor ,\rightarrow , \leftarrow (\Leftarrow , \Rightarrow)$.
+	\item Také kvantifikátory: $\forall \text{ a } \exists$.
+	\item Samozřejmě i závorky $(), []$.
+\end{itemize}
+
+\subsection{Formule}
+
+Atomické formule $x = y \text{ a } x \in y$.
+
+\begin{enumerate}
+	\item Jsou-li $\varphi, \psi$ formule, pak $\neg \varphi , \varphi \lor \psi , \varphi \land \psi , \varphi \rightarrow \psi , \varphi \leftrightarrow \psi$ jsou také formule (popřípadě i uzávorkované).
+	\item Je-li $\varphi$ formule, pak $(\forall x) \varphi \text{ a } (\exists x)\varphi$ jsou také formule.
+\end{enumerate}
+
+Každá formule pak lze dostat z atomických formulí konečně mnoha pravidly 1 a 2.
+
+\subsection{Rozšíření jazyka (zkratky)}
+
+\begin{itemize}
+	\item $x \neq y$ je pro $\neg (x = y)$.
+	\item $x \notin y$ je pro $\neg (x \in y)$.
+	\item $x \subseteq y$ je pro "$x$ je podmnožina y" $(\forall u)(u \in x \rightarrow u \in y)$.
+	\item $x \subset y$ je pro "$x$ je vlastní podmnožina" $(x \subseteq y \land x \neq y)$.
+\end{itemize}
+
+\textit{Cvičeni: Napište formulí “množina $x$ je prázdná”.}
+
+\section{Axiomy logiky (“jak se chovají logické symboly”)}
+
+Axiomy výrokové logiky např.: schéma axiomů: Jsou-li $\varphi , \psi$ formule, pak
+
+$$
+\varphi \rightarrow (\psi \rightarrow \varphi)
+$$
+
+je **axiom**.
+
+Axiomy predikátové logiky např.: Schéma axiomů: Jsou-li $\varphi, \psi$ formule, $x$ proměnná, která není volná ve $\varphi$, pak
+
+$$
+(\forall x) (\varphi \rightarrow \psi) \rightarrow (\varphi \rightarrow (\forall x)\psi)
+$$
+
+je axiom.
+
+Axiomy pro rovnost:
+
+\begin{itemize}
+	\item $x$ je proměnná, pak $x=x$ je axiom.
+	\item $x,y,z$ jsou proměnné, $R$ je relační symbol, pak
+\end{itemize}
+
+$$
+(x=y) \rightarrow (\forall z)(R(x,z) \leftrightarrow R(y,z))
+$$
+
+$$
+(x=y) \rightarrow (\forall z)(x \in z \leftrightarrow y \in z)
+$$
+
+$$
+(x=y) \rightarrow (\forall z)(z \in x \leftrightarrow z \in y)
+$$
+
+Odvozovací pravidla:
+
+\begin{itemize}
+	\item Z $\varphi, \varphi \rightarrow \psi$ odvoď $\psi$.
+	\item Z $\varphi'$ odvoď $(\forall x)\varphi$.
+\end{itemize}

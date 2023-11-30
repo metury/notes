@@ -1,0 +1,159 @@
+\chapter{Toky v sítích}
+
+\begin{definice}
+	Síť je čtveřice $(G, z, s, c)$, kde $G = (V, E)$ je orientovaný graf (tedy $V \subseteq V \times V$), $z \in V$ je \textbf{zdroj}, $s \in V$ je \textbf{stok} ($z \neq s$) a $c: E \to \mathbb{R}_{0}^{+}$. Hodnotu $c(e)$ nazýváme \textbf{kapacitou} hrany $e \in E$.
+\end{definice}
+
+\begin{definice}
+	Tok v síti $(G = (V, E), z, s, c)$ je $f: E \to \mathbb{R}_{0}^{+}$ splňující následující podmínky:
+	
+	\begin{enumerate}
+		\item $\forall r \in E : 0 \leq f(e) \leq c(e)$ (velikost toku je omezená kapacitou)
+		\item \textbf{Kirchhoffův zákon} co přitéká do vrcholu, musí odtéct, neboli:
+	\end{enumerate}
+	
+	$$
+	\forall u \in V \setminus \{ z, s\}: \sum_{v:(u,v) \in E} f(u,v) - \sum_{v:(v, u) \in E} f(v,u) = 0
+	$$
+\end{definice}
+
+\begin{definice}
+	\textbf{Velikost toku} $f$ je $w(f) = \sum_{v:(z,v) \in E} f(z,v) - \sum_{v:(v, z) \in E} f(v,z)$.
+\end{definice}
+
+\begin{tvrz}
+	Pro každou síť existuje maximální tok.
+\end{tvrz}
+
+\begin{dukaz}[Náčrt]
+	Z analýzy víme, že spojitá funkce na kompaktní množině nabývá maxima. Množina $\mathcal{F} \subseteq \mathbb{R}^{|E|}$ všech toků je kompaktní funkce $w: \mathcal{F} \to \mathbb{R}$ je spojitá.
+\end{dukaz}
+
+\begin{definice}
+	Řez v síti $(G, z, s, c)$ je $R \subseteq E$ taková, že každá orientovaná cesta ze zdroje $z$ do stoku $s$ používá aspoň jednu hranu z $R$.
+\end{definice}
+
+Speciálně hrany vycházející ze $z$ či hrany vycházející do $s$ tvoří řez.
+
+\begin{definice}
+	\textbf{Kapacita řezu} $R$ je $c(R) = \sum_{e \in R}c(e)$.
+\end{definice}
+
+Řezu je jen konečně mnoho $\Rightarrow$ jistě existuje řez minimální kapacity.
+
+\begin{veta}[hlavní věta o tocích]
+	Velikost maximálního toku = kapacita minimálního řezu, nebo-li, pro každou síť platí: $\max \ w(f) = \min \ c(R)$, kde $f$ je tok a $R$ řez.
+\end{veta}
+
+\begin{definice}[Elementární řez]
+	Pro $A \subseteq V$, kde $z \in A$ a $s \notin A$, nazveme množinu $R_A = \{ e = (u,v) \in E: u \in A, v \notin A\}$ \textbf{elementárním řezem}. Opravdu se jedná o řez, protože pokaždé su musí nějak opustit $A$.
+\end{definice}
+
+\begin{pozor}
+	Každý řez $R$ obsahuje elementární řez.
+\end{pozor}
+
+\begin{dukaz}
+	Zvolme $A$ jako množinu vrcholů dosažitelných po orientované cestě ze zdroje v grafu $(V, E \setminus R)$. Potom $z \in A, s \notin A$, protože $R$ je řez $\Rightarrow R_A$ existuje $(u,v) \in R_A \Leftrightarrow u \in A, v \notin A \Rightarrow (u,v) \in R$, tedy $R_A \subseteq R$.
+\end{dukaz}
+
+\begin{pozor}
+	Každý \textbf{v inkluzi minimální} řez $R$ je elementární. Nebo-li $R \setminus \{ e \}$ není řezem pro $\forall e \in R$.
+\end{pozor}
+
+\begin{dukaz}
+	Z předchozího pozorování musí $R$ obsahovat elementární řez $R_A \subseteq R$ a z minimality platí $R_A = R$.
+\end{dukaz}
+
+\begin{lemma}
+	Je-li $f$ tok a $R_A$ elementární řez, pak platí:
+	
+	$$
+	w(f) = \sum_{u \in A, v \notin A, (u,v) \in E}f(u,v) - \sum_{u \in A, v \notin A, (v, u) \in E} f(v,u)
+	$$
+\end{lemma}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\begin{dukaz} (Věty)
+	Empty.
+\end{dukaz}
+
+\section{Fordův-Fulkersonův algoritmus}
+
+\begin{algorithmic}[1]
+	\State Nastav $f(e) = 0$ pro $\forall e \in E$
+	\While {$\exists$ zlepšující cesta $P$}
+	\State  vylepšuj po ní tok o $\epsilon_P$
+	\EndWhile\\
+	\Return Stávající tok $f$
+\end{algorithmic}
+
+\begin{veta}[o celočíselnosti]
+	Jsou-li kapacity celočíselné, pak F.F. najde max. tok po konečně mnoha krocáích a navíc má takový tok celočíselnou velikost.
+\end{veta}
+
+\begin{dukaz}
+	Tok se vždy zlepší o celé číslo $\epsilon_P >$ a $w(f) < \infty$.
+\end{dukaz}
+
+Existují sítě s iracionálními kapacitami, kde F.F nenajde maximální tok a nekonverguje k výsledku. V síti s celočíselnými kapacitami má F.F. alg. časovou složitost $O(w(f)(|V|+|E|))$, kde $f$ je tok. Takže je to v čase $O(|V|+|E|)$. Pokud bychom specifikovali výběr zlepšující cesty na nejkratší dostaneme \textbf{Edmondsův-Karpův algoritmus}, který má časovou složitost $0(|V|+|E|^2)$.
+
+\section{Königova-Egerváryho věta}
+
+\begin{definice}
+	V grafu $G = (V,E)$ nazveme množinu $C \subseteq V$ \textbf{vrcholovým pokrytím}, pokud $C \cap e \neq \emptyset$ pro $\forall e \in E$.
+\end{definice}
+
+Zjistit minimální velikost vrcholové pokrytí je NP-těžká úloha.
+
+\begin{definice}
+	\textbf{Párováním} v $G$ je podgraf tvořený disjunktními hranami.
+\end{definice}
+
+\begin{veta}(Königova-Egerváryho věta)
+	V bipartitiním grafu je velikost min. vrcholového pokrytí rovna velikosti maximálního párování (do počtu hran).
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\section{Hallova věta}
+
+\begin{definice}
+	Mějme konečné množiny $X$ a $I$. \textbf{Množinový systém} $\mathcal{M}$ je $(M_{i}: i \in I)$, kde $M_{i} \subseteq X$. \textbf{Systém ruzných reprezentantů (SRR)} pro $\mathcal{M}$ je prosté zobrazení $f: I \to X$ takové, že $\forall i \in I : f(i) \in M_{i}$. Tedy $f$ je výběr jednoho prvku z každé $M_{i}$ takový, že žádný prvek nevybereme víckrát. \textbf{Incidenční graf} systému $\mathcal{M}$ je bipartitní graf $G_{\mathcal{M}}=(I \cup X, E)$, kde $E = \{ \{ i,x\}: i \in I, x \in X, x \in M_{i} \}$. Pokud $\mathcal{M}$ má SSR $\Leftrightarrow$ $S_{\mathcal{M}}$ obsahuje párování velikosti $|I|$.
+\end{definice}
+
+\begin{veta}[Hallova věta]
+	$\mathcal{M}$ má SSR $\Leftrightarrow \forall J \subseteq I: |\cup_{j \in J}M_{j}| \geq |J|$. Pravé části se říká \textbf{Hallova podmínka}, také se věta označuje jako \textbf{Hall's marriage theorem}.
+\end{veta}
+
+\begin{definice}
+	Empty.
+\end{definice}
+
+
+S axiomem výběru by šlo dokázat variantu s konečnými $M_{i}$ a nekonečnými $I,X$. S nekonečnými $I,X$ to platit nemusí.
+
+\section{Rozšiřování latinských obdélníků}
+
+\begin{dusl}
+	V každém bipartitním grafu $G =  (A \cup B, E)$ s $E \neq \emptyset$ a $\mathtt{deg}_{G}(x) \geq \mathtt{deg}_{G}(y)$ pro každé $x \in A, y \in B$ existuje párování velikosti $|A|$.
+\end{dusl}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Latinský obdélník typu $k \times n$ pro $k \leq n$ je tabulka s řádky s $n$ sloupci vyplněnými symboly $1, \dots, n$ tak, že se v žádném řádku ani sloupci žádný symbol neopakuje.
+
+\begin{veta}
+	Každý latinský obdélník typu $k \times n$ lze doplnit na latinský čtverec řádu  $n$.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}

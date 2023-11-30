@@ -1,0 +1,139 @@
+\chapter{Třídy}
+
+\begin{definice}
+	$\varphi(x)$ je formule a $\{x; \varphi(x)\}$ označuje “seskupení” množin, pro které platí $\varphi(x)$.
+\end{definice}
+
+\begin{itemize}
+	\item Pokud $\varphi(x)$ je tvaru $x \in a \land \psi(x)$, pak je to množina (axiom vydělení).
+	\item $\{x; \varphi(x) \}$ je třídový term, soubor které označuje je \textbf{třída} určená formulí $\varphi(x)$.
+	\item “Definovatelný soubor množin.”
+	\item Je-li $y$ množina, pak $y = \{x; x \in y \land x = x\}$ je třída.
+	\item Tedy každá množina je i třída.
+	\item \textbf{Vlastní třída} je třída, která není množinou.
+\end{itemize}
+
+\section{Rozšíření jazyka:}
+
+\begin{itemize}
+	\item Ve formulích na místě volných proměnných připustíme třídové termy.
+	\item Navíc proměnné pro třídy jsou $X,Y, \dots$ (nebude možné je kvantifikovat).
+\end{itemize}
+
+\section{Atomické proměnné}
+
+\begin{itemize}
+	\item $x = y, x \in y, x = X, x \in X, X \in x, X=Y, X \in Y$
+	\item Plus ještě výrazy vzniklé nahrazením $\{x, \varphi(x)\}$ za $x$ a $\{y, \varphi(y)\}$ za $y$.
+	\item Ostatní formule rozšířeného jazyka vznikají pomocí logických spojek $(\neg, \lor, \land, \leftarrow, \rightarrow, \leftrightarrow)$ a kvantifikací množinových proměnných $((\forall x)\dots(\exists y)\dots)$.
+	\item Formule s třídovými termy bez třídových proměnných označován jako “zkrácený zápis” formule základního jazyka.
+	\item Formule s třídovými proměnnými označované jako “schéma formulí” základního (popř. rozšířeného) jazyka.
+\end{itemize}
+
+\section{Eliminace třídových termů}
+
+$x,y,z,X,Y$ jsou proměnné a $\varphi(x), \psi(x)$ formule základního jazyka. $X$ zastupuje \newline $\{x, \varphi(x)\}$ a $Y$ zastupuje $\{y, \varphi(y)\}$.
+
+\begin{enumerate}
+	\item $z \in X$ zastupuje $z \in \{x, \varphi(x)\}$.
+	\begin{itemize}
+		\item "$z$ je prvkem třídy všech množin, splňující $\varphi(x)$."
+		\item Nahradíme: $\varphi (z)$.
+	\end{itemize}
+	\item $z = X$ zastupuje $z = \{x, \varphi(x)\}$.
+	\begin{itemize}
+		\item “Množina $z$ se rovná třídě $X$.”
+		\item Nahradíme: $(\forall u)( u \in z \leftrightarrow \varphi(u))$.
+	\end{itemize}
+	\item $X \in Y$ zastupuje $\{x, \varphi(x)\} \in \{y, \psi(y)\}$.
+	\begin{itemize}
+		\item Nahradíme: $(\exists u)(\forall v)((v \in u \leftrightarrow \varphi (v)) \land \psi(u))$.
+	\end{itemize}
+	\item $X \in y$ zastupuje $\{x, \varphi(x)\} \in y$.
+	\begin{itemize}
+		\item Nahradíme: $(\exists u)(\forall v)((v \in u \leftrightarrow \varphi (v)) \land u \in y)$.
+	\end{itemize}
+	\item $X = Y$ zastupuje $\{x, \varphi(x)\} = \{y, \psi(y)\}$.
+	\begin{itemize}
+		\item Nahradíme: $(\forall u)(\varphi(u) \leftrightarrow \psi(v))$
+	\end{itemize}
+\end{enumerate}
+
+Meta pozorování: Formule rozšířeného jazyka určují stejné třídy jako formule základního jazyka. Příklad $\{x; x \notin \{z, \psi(z)\}\} \rightarrow \{x; \neg \psi(x)\}$.
+
+\section{Třídové operace}
+
+\begin{definice}
+	\begin{itemize}
+		\item $A \cap B$ je $\{x, x \in A \land x \in B\}$.
+		\item $A \cup B$ je $\{x, x \in A \lor x \in B\}$.
+		\item $A \setminus B$ je $\{x, x \in A \land x \notin B\}$.
+		\item Pokud $A = \{x, \varphi(x)\}$ a $B = \{y, \psi(y)\}$, pak $A \cap B = \{z, \varphi(z) \land \psi(z)\}$.
+	\end{itemize}
+\end{definice}
+
+\begin{definice}
+	$\{x; x = x\}$ je \textbf{univerzální třída}, která se značí jako $V$.
+\end{definice}
+
+\begin{itemize}
+	\item $A$ je třída, (absolutní) doplněk $A$ je $V \setminus A$, který se značí jako $-A$.
+	\item $A \subseteq B, A \subset B$ značí, že $A$ je podtřídou $B$ (popř. vlastní podtřídou).
+\end{itemize}
+
+\textit{Cvičení: Rozepište v základním jazyce teorie množin.}
+
+\begin{enumerate}
+	\item \textit{$\bigcup A$ nebo-li suma třídy $A$ je $\{x, (\exists a)(a \in A \land x = a)\}$}
+	\item \textit{$\bigcap A$ nebo-li průnik třídy $A$ je $\{x, (\forall a)(a \in A \rightarrow x = a)\}$}
+	\item \textit{$\mathcal{P}(A)$ nebo-li potenciál třídy $A$ je $\{a, a \subseteq A\}$.}
+\end{enumerate}
+
+\textit{$\bigcap \emptyset = V$, protože $\{x, (\forall a)(a \in \emptyset \rightarrow x \in a)\}.$}
+
+\textit{Cvičení: $a \neq \emptyset$, je $\bigcap a$ množina?}
+
+\textit{Cvičení: Je $\mathcal{P}(V) = V^{2}$?}
+
+\begin{lemma}
+	Univerzální třída $V$ není množina.
+\end{lemma}
+
+\begin{proof}
+	\textit{Cvičení.}
+\end{proof}
+
+\begin{lemma}
+	Je-li $A$ třída $a$ množina, průnik $A \cap a$ je množina.
+\end{lemma}
+
+\begin{proof}
+	Schéma axiomu vydělení $A = \{x, \varphi(x)\}, a \cap A = \{x, x \in a \land \varphi(x)\}$.
+\end{proof}
+
+\begin{definice}
+	\textbf{Kartézský součin tříd} $A,B$ značen $A \times B$ je $\{(a,b), a \in A \land b \in B\}$ což je zkrácený zápis pro $\{x, (\exists a)(\exists b)(x = (a,b) \land a \in A \land b \in B)\}$.
+\end{definice}
+
+\begin{lemma}
+	Jsou-li $a,b$ množiny pak i $a \times b$ je množina.
+\end{lemma}
+
+\begin{proof}
+	\begin{itemize}
+		\item Platí $a \times b \subseteq \mathcal{P}(\mathcal{P}( a \cup b))$.
+		\item Vpravo je množina axiomu dvojice , sumy, dvakrát potence.
+		\item Pak podle lemma (axiomu vydělení) $A = a \times b, a = \mathcal{P}(\mathcal{P}(a \cup b))$ tedy $a \times b$ je množina.
+		\item Pokud $u \in a, v \in b$, pak $\{u\},\{u,v\} \subseteq a \cup b$ tedy $\{u\},\{u,v\} \in \mathcal{P}(a \cup b)$, stejně pak $\{\{u\}, \{u,v\}\} \subseteq \mathcal{P}(a \cup b)$ a $\{\{u\}, \{u,v\}\} \in \mathcal{P}(\mathcal{P}(a \cup b))$.
+	\end{itemize}
+\end{proof}
+
+\begin{definice}
+	$X$ je třída, pak $X^{1} = X$, induktivně pak $X^{n} = X^{n-1} \times X$.
+\end{definice}
+
+$X^{n}$ je třída všech uspořádaných $n$-tic prvků $X$.
+
+Pozorování: $V^{n} \subseteq V^{n-1} \subseteq \dots \subseteq V^{1} = V$
+
+\textit{Cvičení: Ukažte, že obecně neplatí $X \times X^{2} = X^{3}$. Například pro $X = \{\emptyset\}$.}

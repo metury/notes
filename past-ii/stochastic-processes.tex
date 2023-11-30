@@ -1,0 +1,162 @@
+\chapter{Stochastic processes}
+
+Stochastic process is a sequence of random variables $X_{1}, X_{2}, X_{3}, \dots$. We will show that there exist many of them.
+
+\begin{itemize}
+	\item Markov chain (+ extra condition)
+	\item Wiener process
+	\begin{itemize}
+		\item Browner motion
+		\item Stock prices
+		\item Limit version of RN
+	\end{itemize}
+	\item \textbf{Arrival times} or alternatively \textbf{waiting for success}.
+\end{itemize}
+
+We will be looking at the last type of the processes.
+
+\section{Bernoulli process (denoted as $\text{Bp}(p)$)}
+
+That is we have $X_{1}, X_{2}, \dots$ iid and each one of them is $X_{i} \sim \text{Ber}(p)$ so with probability $p$ it is $1$ and $0$ with probability $1-p$.
+
+\begin{observ}
+	\begin{itemize}
+		\item $X_{n}, X_{n+1}, \dots$ is also $\text{Bp}(p)$
+		\item $X_{N}, X_{N+1}, \dots$ is also $\text{Bp}(p)$, with $N$ a random variable dependent only on the past
+	\end{itemize}
+\end{observ}
+
+Then we will define $T =\min \{t : X_{t} = 1\}$ or by words the time of the first success / arrival. And we can easily see that $T \sim \text{Geom}(p)$ so $\mathbb{E}[T] = \frac{1}{p}$ and $\text{var} [T] = \frac{1-p}{p^{2}}$.
+
+Now we will try to generalize this by $T_{k}$ as the time of the $k$-th arrival. So $T_{1} = T$. Or written as $T_{k} = \min \{t : X_{1} + X_{2} + \dots + X_{t} = k\}$.
+
+Other interesting variable is the $k$-th waiting time (inter arrival) and it will be denoted as $L_{k}$. To describe this variable it is the time between $k-1$ arrival and $k$-th arrival. Then it follows
+
+$$
+L_{k} = T_{k} - T_{k-1} \text{ when we put } T_{0} = 0
+$$
+
+$$
+L_{k} \sim L_{1} = T \Rightarrow L_{k} \sim \text{Geom}(p)
+$$
+
+And all $L_{i}$ are independent. From the other way we can define $T_{k}$ as the sum $\sum_{i=1}^{k} = L_{i}$. So we can then get expected value and variance.
+
+$$
+\mathbb{E}[T_{k}] = \mathbb{E}[L_{1}] + \mathbb{E}[L_{2}] + \dots + \mathbb{E}[L_{k}] = \frac{k}{p}
+$$
+
+$$
+\text{var}[T_{k}] = \text{var}[L_{1}] + \text{var}[L_{2}] + \dots + \text{var}[L_{k}] = k \cdot \frac{1-p}{p^{2}}
+$$
+
+How could we compute $\Pr[T_{k} = t] = ?$ Easily we can compute this by convolution formula $\binom{t-1}{k-1} p^{k}(1-p)^{t-k}$.
+
+Lastly we define $N_{t}$ as the sum $X_{1} + X_{2} + \dots + X_{t}$ which is the number of successes till the time $t$. And $N_{t} \sim \text{Bin}(t,p)$. So $\mathbb{E}[N_{t}] = tp$ and $\text{var}[N_{t}] = tp(1-p)$.
+
+\subsection{Alternative definition}
+
+We can define Bernoulli process by different definition. First we will define $L_{1}, L_{2}, \dots$ as iid $\sim \text{Geom}(p)$ and then $T_{k} = \sum_{i=1}^{k} L_{i}$. And $X_{i}$ is $1$ if $T_{k} = i$ for some $k$ or $0$ otherwise. Then $(X_{i})_{i}$ is $\text{Bp}(p)$.
+
+\subsection{Merging of Bernoulli process}
+
+We will have two processes which are independent.
+
+$$
+\begin{array}{rl}
+X_{1}, X_{2}, X_{3}, \dots & \text{Bp}(p) \\
+Y_{1}, Y_{2}, Y_{3}, \dots & \text{Bp}(q)
+\end{array}
+$$
+
+Then the merge is $Z_{i} = X_{i} \text{ or } Y_{i}$. Properly it is
+
+$$
+\begin{array}{rl}
+Z_{1}, Z_{2}, Z_{3}, \dots & \text{Bp}(p + q - pq) = \text{Bp}(1 - (1-p)(1-q))
+\end{array}
+$$
+
+\subsection{Splitting Bernoulli process}
+
+We can also split one Bernoulli process. Firstly we got
+
+$$
+\begin{array}{rl}
+Z_{1}, Z_{2}, Z_{3}\dots & \text{Bp}(r)
+\end{array}
+$$
+
+If $Z_{i}=1$ then $X_{i} = 1$ with probability $\alpha$ and $0$ with probability $(1 - \alpha)$ and if $Z_{i} = 0$ then $X_{i}=0$. By this construction we get new Bernoulli process.
+
+$$
+\begin{array}{rl}
+X_{1}, X_{2}, X_{3}, \dots & \text{Bp}(\alpha r)
+\end{array}
+$$
+
+\section{Poisson process (denoted as $\text{Pp}(\lambda)$)}
+
+As we defined Bernoulli process we also can define Poisson process which can be described as a continuous approximation of $\text{Bp}(p)$. Now the arrival times are real numbers.
+
+\begin{defn}
+	\begin{enumerate}
+		\item For any interval of length $\tau$ probability of $k$ arrivals is the same. Denoted as $P(k, \tau)$.
+		\item Number of arrivals in $[a,b]$ is independent of number in $[0, a)$.
+		\item $P(0, \tau) = 1 - \lambda \tau + o(1)$, $P(1, \tau) = \lambda \tau + o(1)$, $P(k, \tau) = o(1)$. for $k \geq 2$ where $o(1)$ is something that goes to zero
+	\end{enumerate}
+\end{defn}
+
+% TODO: What is the small o??
+
+Then the sequence $T_{1}. T_{2}, T_{3}, \dots$ is $\text{Pp}(\lambda)$ where Ts are the arrival times.
+
+% $Pr[N_t = k] = P(k, t) = $
+
+As in Bernoulli process we have $T_{k}$ as the time of $k$-th arrival. Then $N_{T}$ is the number of arrivals in $[0,t]$ and $N_{T} \sim \text{Pois}(\lambda t)$ so $P(k, t) = e^{-\lambda t} \frac{(\lambda t)^{k}}{k!}$.
+
+We can show that by the following approximation:
+
+$$
+\begin{array}{c}
+	Pr[N_t = k] = P(k,t) \implies P(1, \frac{t}{l}) = \frac{\lambda t}{l} + o(1) \\
+	Pr[N_t = k] = P(k, t) \approx P[\text{there are K small intervals that has 1 arrival}] = \\
+	= Pr[Bin(l, \frac{\lambda t}{l}) = k] \newline \implies lim_{l \to \infty} Bin(l, \frac{\lambda t}{l}) \to Pois(\lambda  t)
+\end{array}
+$$
+
+Then again $L_{k} = T_{k} - T_{k-1}$ so $\Pr[L_{k} \geq t] = \Pr[\text{no arrival in }[T_{k-1}, T_{k-1}+t]]$ and that is equal to $P(0,t) = e^{-\lambda t}$. Next $\Pr[L_{k} \leq t] = 1 - e^{-\lambda t} \Rightarrow L_{k} \sim \text{Exp}(\lambda)$.
+
+\subsection{Alternative description}
+
+As in Bernoulli process we can define Poisson process the other way around. We start with sequence of iid $L_{1}, L_{2}, \dots \sim \text{Exp}(\lambda)$. Then $T_{k}$ is the sum $T_{k} = \sum_{i=1}^{k} L_{i}$. And we also get the same $N_{t}$.
+
+\begin{thm}
+	This also defines $\text{Pp}(\lambda)$. In other words it satisfies all of the three properties.
+\end{thm}
+
+Again as in Bp we can see that expected value of $T_{k}$ and variance is the sum of expected values (resp. variances) of $L_{i}$ which are $\frac{1}{\lambda}$ (resp. $\frac{1}{\lambda^{2}}$). By convolution we get that
+
+$$
+f_{T_{k}} (t) = \frac{\lambda^{k} t^{k-1}e^{-\lambda t}}{(k-1)!}
+$$
+
+\subsection{Splitting of Pp}
+
+We have a $\text{Pp}(\lambda)$ and each one is split (1 or 0) with probability $p$ (resp. $1-p$). And then we get two processes $\text{Pp}(p \lambda)$ and $\text{Pp}((1-p) \lambda)$ and these are independent. Two new processes have still the same properties but with new $\lambda'$. To properly show that this holds we need to show all the properties from the definition.
+
+% TODO
+
+$$
+Pr[T_1 > t] = Pr[T>t \ \&  \ T' > t] =  \dots
+$$
+
+\begin{rem}
+	Proving independence is quite cumbersome. The proof is based on an example from the lecture.
+\end{rem}
+
+\subsection{Merging of Pp}
+
+If we have two processes $\text{Pp}(\lambda)$ and $\text{Pp}(\lambda')$ we can merge these to get $\text{Pp}(\lambda + \lambda')$. Again to properly show that this holds we must show that the $\min$ of two $\text{Exp}$ distributions is again $\text{Exp}$ distribution with the sum. Which is quite easy since they are independent, then we get the product of exponent functions which is the same as the sum of their exponents.
+
+What if we look at the $\Pr[T - t > s \vert T > t]$ which by definition is $\frac{\Pr[T > s+t \land T > t]}{\Pr [T > t]}$ and that is equal to $\frac{e^{-\lambda (s+t)}}{e^{-\lambda t}} e^{-\lambda s}$ and we get the property that the Poisson process is \textbf{memory-less} so it doesn't matter when we will start measuring our data.

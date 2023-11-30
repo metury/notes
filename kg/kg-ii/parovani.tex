@@ -1,0 +1,214 @@
+\chapter{Párování v grafech}
+
+\begin{definice}
+	\textbf{Párování} v grafu $G=(V,E)$ je množina hran $M \subseteq E$ taková, že každý vrchol z $G$ je obsažen v nejvýš jedné hraně v $M$. $\mu (G) :=$ velikost největšího párování v grafu $G$.
+\end{definice}
+
+\begin{definice}
+	\textbf{Vrcholové pokrytí} v grafu $G=(V,E)$ je množina vrcholů $T \subseteq V$ t.ž. každá hrana obsahuje aspoň jeden vrchol z $T$. $\tau (G) :=$ velikost nejmenšího vrcholového pokrytí v grafu $G$.
+\end{definice}
+
+\begin{cvic}
+	Nechť $G=(V,E)$ je bipartitni graf s partitami $A,B, |A| \leq |B|$, souvislý. Jaké nerovnosti (nebo rovnosti) platí mezi $\mu (G), \tau (G), |A|$:
+	
+	\begin{itemize}
+		\item $\mu (G) \leq |A|$
+		\item $\mu (G) = \tau (G)$ (plyne z König-Egarvaryho vety)
+	\end{itemize}
+\end{cvic}
+
+\begin{pozor}
+	$\mu (G) \leq \tau (G)$ v libovolném grafu $G$.
+\end{pozor}
+
+\begin{cvic}
+	Dokažte:
+	
+	\begin{enumerate}
+		\item $\exists G: \mu (G) \neq \tau (G)$
+		\begin{itemize}
+			\item $K4$ s tím že uprostřed je vrchol (má $\mu (G) = 2$ a $\tau (G) = 3$)
+		\end{itemize}
+		\item $\forall G: \tau (G) \leq 2 \mu (G)$
+		\begin{itemize}
+			\item v nejhorším případě vezmu oba vrcholy všech hran z $M$
+		\end{itemize}
+	\end{enumerate}
+\end{cvic}
+
+\begin{definice}
+	\textbf{Volný vrchol}: vrchol nesousedící s žádnou hranou z $M$. \textbf{volná střídavá cesta}: cesta spojující dva volné vrcholy na níž se střídají párovácí($\in M$) a nepárovácí($\notin M$) hrany.	
+\end{definice}
+
+\begin{lemma}
+	Nechť $M$ je párování v $G$. Potom $M$ je největší párování v $G \Leftrightarrow$ v $G$ neexistuje volná střídající se cesta pro $M$.
+\end{lemma}
+
+\begin{dukaz}
+	$\Rightarrow$ Pokud v $G$ existuje VSC pak lze tyto hrany přehodit. Potom je to spor s tím, že je největší. $\Leftarrow$ Nechť $M$ není největší potom existuje $N$ větší párování než $M$. Uvažme graf s hranami $M \cup N$. Každá komponenta grafu je buď:
+	
+	\begin{enumerate}
+		\item izolovaná hrana v $M \cap N$
+		\item kružnice sudé délky, kde se střídají $M$ a $N$
+		\item cesta na níž se střídají $M$ a $N$
+	\end{enumerate}
+	
+	Protože $|N| > |M|$ v $M \cup N$ musí být komponenta $K$, která má víc hran z $N$ než z $M$. $K$ je cesta liché délky, která začíná a končí hranou z $N$, tedy $K$ je VSC pro $M$.
+\end{dukaz}
+
+\begin{definice}
+	\textbf{Kytka} v grafu $G$ a párování $M$ je podgraf tvořený \textbf{stonkem} $S$ a \textbf{květem} $K$, kde $S$ je cesta sudé délky mezi dvěma vrcholy $x$ a $y$, kde $x$ je volný a $y \in K$, navíc na $S$ se střídají párovací a nepárovací hrany. $K$ je lichá kružnice, která neobsahuje žádný vrchol z $S$ a střídají se na ni párovací a nepárovací hrany (u $y$ má dvě nepárovací hrany).
+\end{definice}
+
+Může nastat že $x=y$ a $S=\{x\}$.
+
+\begin{pozor}
+	Hrany z květu jsou nepárovací. Jinak by se nejednalo o párování.
+\end{pozor}
+
+\begin{definice}
+	\textbf{Kontrakce} květu $K$ nahradí $K$ jedním vrcholem $y$, smaže všechny hrany indukované $K$ a každou hranu $\{u,v\}$, kde $u \in K$ a $v \notin K$ nahradí hranou $\{y,v\}$. Označme $G.K$ graf vzniklý z $G$ kontrakcí květu $K$, $M.K$ pak párování vznikle z $M$ odstraněním všech hran $K$.
+\end{definice}
+
+\begin{lemma}
+	Nechť $M$ je párování v grafu $G$ obsahující kytku se stonkem $S$ a květem $K$. Potom $M$ je největší párování v $G \Leftrightarrow M.K$ je největší párování v $G.K$.
+\end{lemma}
+
+Nebo-li: \textit{$M$ má VSC v $G \Leftrightarrow M.K$ má VSC v $G.K$}. Navíc z VSC v $M.K$ v $G.K$ lze v polynomiálním čase najít VSC v $M$ a $G$.
+
+\begin{proof}
+	$\Rightarrow$ (v alternativním znění) Nechť $P$ je VSC v $M.K$. Potom:
+	
+	\begin{enumerate}
+		\item $y \in P \Rightarrow P$ je i VSC v M
+		\item $y$ je vnitřní vrchol v $P$, potom lze nahradit obloukem z $K$ (jsou dva oblouky, protože je tam celkově lichý počet hran, tak jedna cesta musí být lichá a druhá sudá, tudíž to lze spojit)
+		\item $y$ je koncový vrchol v $P$, potom $y$ musí být volný, tudíž $x=y$, poté prakticky stejný postup jako u 2.
+	\end{enumerate}
+	
+	$\Leftarrow$ $G$ má VSC $\Rightarrow G.K$ má VSC, pokud $S$ má délku $0$, to jest $y$ je volný vrchol. Následně to pak už není cesta ale sled. Začnu tedy z konce cesty a poprvé co se dostanu do $y$ tak skončím. $M \triangle S:$ Párování v $G$ vznikne tak, že se na $S$ prohodí párovací a nepárovací hrany.
+	
+	Pozorování: V $M \triangle S$ je květ $K$ kytka se stonkem délky $0$. Pozorování: $|M \triangle S| = |M|$.
+	
+	$G$ má VSC $\Rightarrow G.K$ má VSC, navíc $S$ má délku $0$. $(G,M)$ má VSC $\Leftrightarrow (G, M \triangle S)$ má VSC $\Rightarrow (G.K, (M \triangle S).K)$ má VSC $\Leftrightarrow (G.K, M.K)$ má VSC.
+\end{proof}
+
+\begin{algorithm}[!h]
+	\caption{NajdiVSCneboKytku}
+	\begin{algorithmic}[1]
+		\Require Graf $G= (V,E)$ párování $M$
+		\Ensure Buď VSC $P$ pro $(G,M)$, nebo kytka $S \cup K$ v $(G,M)$, nebo "M je největší párování v G".
+		\State Používáme frontu vrcholů `F`, pro každý vrchol $x \in V$ máme hladinu $h(x) \in \mathbb{N}_{0}$ a rodiče $r(x) \in V$.
+		\State Na začátku `F` $= \emptyset, h(x)$ a $r(x)$ jsou nedefinované.
+		\For{každý volný vrchol $x$}
+		\State Zařaď $x$ do `F`, $h(x) = 0$.
+		\EndFor
+		\State Dokud `F` $\neq \emptyset$: odebereme $x$ z `F`.
+		\If{$h(x)$ je lichá. Nechť $y$ je vrchol spojený s $x$ hranou $M$.}
+			\State Pokud $h(y)$ není definovaná: $h(y) = h(x) +1$, $r(y)=x$, zařaď $y$ do `F`.
+			\State Pokud $h(y)$ je sudá: to nemůže nastat
+			\If{(1.3) Pokud $h(y)$ je lichá: $Px=$ cesta $x, r(x), r(r(x)), \dots$, $Py$ je cesta $y, r(y), r(r(y)), \dots$ obě cesty vedou až do volného vrcholu.}
+				\State Pokud $Px \cap Py = \emptyset$ tak potom $Px \cup Py \cup \{x,y\}$ je \textbf{VSC}, konec.
+				\State Pokud $Px \cap Py \neq \emptyset$ našli jsme \textbf{kytku} $Px \cap Py \cap \{x,y\}$, konec.
+			\EndIf
+		\Else{ Pokud $h(x)$ je sudá. Pro každý $y$ t.z. $\{xy\} \notin M$:}
+			\State Pokud $h(y)$ není definovaná: $h(y) = h(x) +1$, $r(y) = x$, vlož $y$ do `F`.
+			\State Pokud $h(y)$ je lichá, tak nedělej nic.
+			\State Pokud $h(y)$ je sudá: najdi VSC nebo kytku jako v 1.3,konec.
+		\EndIf
+		\State Pokud dojdeme do stavu, že $F = \emptyset$, napiš "M je největší", konec.
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{lemma}
+	Pokud NajdiVSCneboKytku napíše "M je největší", tak $M$ je největší.
+\end{lemma}
+
+\begin{proof}
+	Pokud $M$ není největší, tak obsahuje VSC $v_{0} v_{1} \dots v_{k} \in V$, dokážeme indukci podle $i$, že každý z vrcholů $v_{0} \dots v_{k}$ dostal přidělenou hladinu $h(v_{i})$ splňující $h(v_{i}) \equiv i \mod 2$. Pro $i=0$ $v_{0}$ je volný, tedy $h(v_{0})= 0$. Hotovo. Pro $i > 0$, $i$ liché, indukční předpoklad je $h(v_{i-1})$ je sudá: tak z algoritmu buď už $v_{i}$ měla lichou $h(v_{i})$ nebo ji dostala. (Kdyby sudá, tak vyhodí VSC nebo Kytku.) Pro $i>0$ $i$ je sudé, indukční předpoklad, že $h(v_{i-1})$ je lichá: tak obdobně bude $h(v_{i})$ sudé. Jistě $k$ je liché, tedy $h(v_{k})$ je lichá, ale $v_{k}$ je volný vrchol, tedy $h(v_{k}) =0$ a to je spor.
+\end{proof}
+
+\begin{algorithm}[!h]
+	\caption{ZvětšiPárování}
+	\begin{algorithmic}[1]
+		\Require $G,M$
+		\Ensure párování $M'$ v $G$, $|M'| > |M|$ nebo "M je největší"
+		\State Procedura NajdiVSCneboKytku(G,M)
+		\State $M$ je největší, tak konec
+		\State VSC, invertuji a zvětši M, konec
+		\If{Kytka}
+			\State ZvětšiPárování(G.K,M.K)
+			\State $M.K$ je největší, potom i $M$ je největší
+			\State $M'$ je větší párování v $G.K$ než $M.K$: $M^\ast := M' \cup (\frac{|k|-1}{2} \text{ hran květu })$ tak aby to šlo.
+		\EndIf
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[!h]
+	\caption{Algoritmus pro hledání největšího párování}
+	\begin{algorithmic}[1]
+		\Require $G$
+		\Ensure největší párování v $G$
+		\State $M:=$ libovolné párování (buď prázdné, nebo hladově nějaké)
+		\State Opakuj ZvětšiPárování(G,M) dokud to jde.
+		\Return Vypiš nalezéné párování.
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{definice}
+	\textbf{Perfektní párování} v grafu $G$ je párování v němž každý vrchol sousedí s právě jednou párovací hranou.
+\end{definice}
+
+\begin{pozor}
+	Perfektní párování je největší párování.
+\end{pozor}
+
+\begin{pozor}
+	Ne každý graf má perfektní párování (trojúhelník).
+\end{pozor}
+
+\begin{definice}
+	\textbf{Lichá komponenta} grafu $G$ je komponenta s lichým počtem vrcholů. \textbf{$\text{odd}(G)$} := počet lichých komponent v $G$. Pro graf $G= (V,E)$ a množinu $S \subseteq V : G-S = (V \setminus S, E \cap \binom{V \setminus S}{2})$.
+\end{definice}
+
+\begin{veta}[Tutte]
+	Pro každý $G=(V,E)$ platí $G$ má perfektní párování $\Leftrightarrow \forall S \subseteq V: \text{odd}(G-S) \leq |S|$. Druhá část se nazývá \textit{Tutteova podmínka}.
+\end{veta}
+
+\begin{dukaz}
+	$\Rightarrow$ Nechť $G$ má perfektní párování $M$. Pro spor, nechť $\exists S \subseteq V: \text{odd}(G-S) >|S|$. Potom ale z každé liché komponenty $G-S$ vede aspoň jedna hrana z $M$ do $S$, tudíž $\text{odd}(G-S) \leq |S|$ a to je spor. $\Leftarrow$ Nechť $G$ splňuje Tutteovu podmínku. Pozorování: $\text{odd}(G) = 0$, jinak spor $S = \emptyset$. Chci dokázat, že $G$ má perfektní párování a to pomocí indukce podle $|\binom{V}{2} \setminus E|$.
+	
+	Pro $|\binom{V}{2} \setminus E| = 0$: $G$ je úplný graf, navíc $\text{odd}(G) = 0$. Tudíž zjevně má perfektní párování. Pro $|\binom{V}{2} \setminus E| > 0: S:= \{x \in V: \deg (x) = |V|-1\}$. Rozliším dva případy:
+	
+	\begin{enumerate}
+		\item Každá komponenta $G-S$ je úplný graf: $G$ snadno najdu perfektní párování, díky tomu, že $\text{odd}(G-S) \leq |S|$.
+		\item Existuje komponenta $Q$ grafu $G-S$, která není úplná. V $Q$ lze najít dva nesousední vrcholy $x,y$, které mají společného souseda z $Q$. Protože $z \notin S, \exists w: w$ nesousedí se $z$. Označme $G_{1} = (V, E \cup \{xy\}), G_{2} = (V, E \cup \{zw\})$.
+	\end{enumerate}
+	
+	Pozorování $G_{1}, G_{2}$ splňují Tutteovu podmínku. Pak z indukčního předpokladu $G_{1}$ má perfektní párování $M_{1}$ a $G_{2}$ má $M_{2}$. Pokud $M_{1}$ neobsahuje hranu $\{xy\}$, tak $M_{1}$ je perfektní párování v $G$. Tak je to hotové.
+	
+	Pokud ale $\{xy\} \in M_{1}$ tak podobně předpokládám, že $\{zw\} \in M_{2}$. Uvažme graf $H = (V, M_{1} \cup M_{2})$: každá komponenta $H$ je buď hrana patřící $M_{1} \cap M_{2}$, nebo sudá kružnice na níž se střídají hrany z $M_{1}$ a $M_{2}$. V každé komponentě $H$ neobsahující hranu $\{xy\}$ můžu vrcholy spárovat pomocí hran $M_{1}$. Nechť $C$ je komponenta $H$ obsahující $\{xy\}$. Pokud $C$ neobsahuje $\{zw\}$, vrcholy spáruji pomocí $M_{2}$, hotovo. Ve zbylém případu v $C$ použijeme jednu z hran $\{xy\}, \{zw\}$ a zbytek lze spárovat pomocí $M_{1} \setminus \{xy\} \text{ a } M_{2} \setminus \{zw\}$. Tedy $G$ má perfektní párování.
+\end{dukaz}
+
+\begin{definice}
+	Graf je \textbf{$d$-regulární}, pokud všechny jeho vrcholy mají stupeň $d$.
+\end{definice}
+
+\begin{definice}
+	Graf je (vrcholově) \textbf{$k$-souvislý}, pokud má aspoň $k+1$ vrcholů a nemá vrcholový řez velikosti $< k$.
+\end{definice}
+
+\begin{lemma}
+	Nechť $G = (V,E)$ je graf, jehož každý vrchol má lichý stupeň, nechť $A \subseteq V$ je množina liché velikosti. Potom $G$ obsahuje lichý počet hran z $A$ do $V \setminus A$.
+\end{lemma}
+
+\begin{dukaz}
+	$S = 2k + \text{ ven}$ je součet stupňů v $A$. Ten musí být lichý. $2k$ je pro každou hranu, která má oba vrcholy v $A$. Tudíž \textit{ven} musí být liché.
+\end{dukaz}
+
+\begin{veta}[Petersen]
+	Každý 3-regulární a 2-souvislý graf má perfektní párování.
+\end{veta}
+
+\begin{dukaz}
+	Nechť $G = (V,E)$ je 3-regulární a 2-souvislý graf. Tvrdíme: $\forall S \subseteq V: \text{ odd}(G-S) \leq |S|$. Pro $S = \emptyset$ Tutteova podmínka platí: $|V|$ je sudá (z principu sudosti grafů) a taky souvislý $\Rightarrow \text{ odd}(G)=0$. $S \neq \emptyset, l := \text{ odd}(G-S)$ nechť $Q_{1},\dots,Q_{l}$ jsou liché komponenty $G-S$. Nechť $p$ je počet hran mezi $S$ a $Q_{1} \cap \dots \cap Q_{l}$. Pozorování: $p \leq 3|S|$ - plyne z toho, že je 3-regulární. Pozorování: z každé $Q_{i}$ vedou aspoň 2 hrany do $S$ to plyne z toho, že je $G$ 2-souvislý, jinak by existovala artikulace. Pozorování: z každé $Q_{i}$ vedou aspoň 3 hrany do $S$. To plyne z lemma. $\Rightarrow p \geq 3l \Rightarrow l \leq |S|$. A ještš použít Tutteovu větu.
+\end{dukaz}

@@ -1,0 +1,313 @@
+\chapter{Barvení grafů}
+
+\begin{definice}
+	Značení:
+	
+	\begin{itemize}
+		\item $\Delta(G)$ - největší stupeň v $G$
+		\item $\delta(G)$ - nejmenší stupeň v $G$
+		\item $\chi(G)$ - barevnost $G$
+		\item $d(G)$ - degenerovanost $G$, nebo-li nejmenší $d \in \mathbb{N}_{0}$ takové, že $G$ je $d$-degenerovaný.
+		\item $G$ je $d$-degenerovaný: každý jeho neprázdný podgraf má vrchol stupně $\leq d$.
+	\end{itemize}
+\end{definice}
+
+\begin{pozor}
+	$\delta (G) \leq d(G) \leq \Delta (G)$
+\end{pozor}
+
+\begin{pozor}
+	$\chi (G) \leq d(G) +1 \leq \Delta (G) + 1$
+\end{pozor}
+
+\begin{lemma}
+	Nechť $G$ je souvislý graf, který má aspoň jeden vrchol stupně menšího než $\Delta (G)$. Potom $\chi(G) \leq \Delta(G)$.
+\end{lemma}
+
+\begin{proof}
+	Nechť $x \in V(G)$ je vrchol stupně $< \Delta (G)$. Tvrdím: $\delta (G) \leq \Delta (G) -1$. Zvolme libovolný podgraf $H$. Dva případy:
+	
+	\begin{enumerate}
+		\item $x \in H$ tak hotovo, protože $\deg_{H}(x) \leq \deg_{G}(x) \leq \Delta(G) -1$.
+		\item $x \notin H$ Protože $G$ je souvislý, tak existuje $y \in V(H)$, který má v $G$ souseda, který nepatří do $H$ $\deg_{H}(y) \leq \deg_{G}(y) - 1 \leq \Delta(G) - 1 \Rightarrow \chi(G) \leq d(G) + 1\ leq \Delta (G)$.
+	\end{enumerate}
+\end{proof}
+
+\begin{veta}[Brooks]
+	Pro každý souvislý graf $G$, který není ani úplný graf ani lichá kružnice, platí $\chi(G) \leq \Delta (G)$.
+\end{veta}
+
+\begin{dukaz}
+	Nechť $k$ je vrcholová souvislost $G$. Potom zavedeme $\Delta := \Delta (G)$.
+	
+	Pokud $k = 1$, tak existuje artikulace $x$. Graf $G$ rozdělíme na $G_{1}$ a $G_{2}$ podle dané artikulace s tím, že $x$ je v oubou grafech. Z toho pak plyne, že $\deg_{G_{1}}(x) < \Delta$ a $\deg_{G_{2}}(x) < \Delta$. Pak po použití lemma máme $\chi(G_{1}) \leq \Delta \land \chi(G_{2}) \leq \Delta:$ obarvím $G_{1}$ obarvením $f_{1}$ pomocí $\Delta$ barev, stejně i pro $G_{2}$ s $f_{2}$. BŮNO: $f_{1}(x) = f_{2}(x)$, jinak udělám permutaci barev. Pak mám obarvení celého $G$.
+	
+	Pro $k=2$ udělám to stejné, akorát rozdělím grafy podle $x,y$, které jsou právě vrcholovým řezem grafu $G$. BŮNO: $\deg_{G_{1}}(x) \geq \deg_{G_{2}}(x)$. Poznámka: podgrafy $G$ s $\Delta(G) \leq 2$ věta platí, předp. $\Delta(G) = \Delta \geq 3$. Nyní mám možnosti:
+	
+	\begin{enumerate}
+		\item $\{xy\}$ patří do $E(G)$ (i $E(G_{1}) \land E(G_{2})$) pomocí lemma obarvíme $G_{1}$ i $G_{2}$ pomocí $\Delta$ barev, $x$ má jinou barvu než $y$ a dostanu i obarvení $G$.
+		\item $\deg_{G_{1}}(x) \leq \Delta - 2$ nebo $\deg_{G_{1}}(y) \leq \Delta - 2$, přidám $\{xy\}$ a pořád platí obarvení pomocí lemma.
+		\item $\deg_{G_{1}}(x) = \deg_{G_{1}}(y) = \Delta - 1 \Rightarrow \deg_{G_{2}}(x) = \deg_{G_{2}}(y) = 1$, tak místo $xy$ použiji $\{vy\}$, kde $v$ je soused $x$ z $G_{2}$. dále viz 2).
+	\end{enumerate}
+	
+	$k \geq 3: G$ souvislý, není úplný $\Rightarrow G$ obsahuje 2 nesousedící vrcholy $x$ a $y$, které mají společného souseda $z$. $G - x - y$ je souvislý, tedy jeho vrcholy lze uspořádat do posloupnosti $v_{1},v_{2}, \dots, v_{n-2}$ tak, že $v_{n-2} = z$ a každý $v_{i} \in \{v_{1}, \dots, v_{n-3}\}$ má aspoň jednoho souseda mezi $v_{i+1}, \dots, v_{n-2}$. Vrcholy tedy uspořádám $x,y,v_{1},v_{2},\dots,v_{n-2}$ a obarvím $G$ hladově zleva doprava pomocí $\Delta$ barev.
+\end{dukaz}
+
+\begin{definice}
+	\textbf{Hranové obarvení} grafu $G = (V,E)$ je funkce $f: E \to \mathbb{Z}$ taková, že pro 2 různé hrany $e, e' \in E$ sdílející vrchol platí $f(e) \neq f(e')$. \textbf{Hranová barevnost} grafu $G$ značená $\chi_{e}(G)$ je nejmenší $k$ takové, že $G$ má hranové obarvení používající $k$ barev.
+\end{definice}
+
+\begin{definice}
+	\textbf{Line graph} značen jako $L(G)$ vznikne z grafu $G$.
+	
+	$$
+	L(G) = (E, \{ef\} \in \binom{E}{2}; e \cap f \neq \emptyset)
+	$$
+\end{definice}
+
+\begin{pozor}
+	$\chi_{e}(G) = \chi(L(G)) \leq \Delta(L(G)) + 1 \leq 2 \Delta (G) - 1$
+\end{pozor}
+
+\begin{veta}[Vizing]
+	$\forall G: \chi_{e}(G) \leq \Delta(G) + 1$
+\end{veta}
+
+\begin{proof}
+	Mějme $G = (V,E), \Delta = \Delta(G)$. Nechť $H = (V,E_{H})$ je co největší podgraf $G$, který lze hranově obarvit pomocí $\Delta + 1$ barev, nechť $f_{H}$ je takové hranové obarvení. Pokud $H=G$ jsme hotovi. Pro spor nechť existuje $e_{0} = \{xy_{0}\} \in E \setminus E_{H}$. Řeknu, že barva $\beta \in \{1,2,\dots, \Delta + 1\}$ je *volná* u vrcholu $w$, pokud žádná hrana $H$ incidentí s $w$ nemá barvu $\beta$. \textit{Pozorování:} Každý vrchol má $\geq 1$ volnou barvu. Nechť $e_{0}, e_{1}, e_{2}, \dots, e_{k}$ je co nejdelší posloupnost různých hran, kde $e_{i} = \{xy_{i}\}$, pro každé $i = 1, \dots, k: f_{H}(e_{1})$ je barva, která je volná u $y_{i-1}$. Nechť $\beta$ je volná barva u $y_{k}$. Pak jsou případy:
+	
+	\begin{enumerate}
+		\item $\beta$ je volná u $x$
+		\begin{itemize}
+			\item $e_{k}$ obarvím $\beta$ a pro $j = 0, \dots, k-1$ hranu $e_{j}$ obarvím $f_{H}(e_{j+1})$. To je ale spor s maximalitou $H$.
+		\end{itemize}
+		\item $\beta$ je použitá na nějaké hraně $\tilde{e}$ incidentní s $x$, nepatřící do $\{e_{0}, e_{1}, \dots, e_{k}\}$
+		\begin{itemize}
+			\item $e_{k+1} := \tilde{e}$ Opět spor s maximalitou $e_{0}, e_{1}, \dots, e_{k}$.
+		\end{itemize}
+		\item $\beta$ je použitá na nějaké hraně $e_{j} \in \{e_{1}, \dots, e_{k-1}\}$
+		\begin{itemize}
+			\item Nechť $\alpha$ je volná barva u $x$. Dle předpokladu $\alpha \neq \beta$. Nechť $P$ je co největší souvislý podgraf $H$ na jehož hranách jsou jen barvy $\alpha$ a $\beta$ a který obsahuje hranu $e_{j}$. $P$ má maximální stupeň $\leq 2$, $\deg_{P}(x) = 1 \Rightarrow P$ je cesta, která má začátek v $x$.
+			\item Nechť $z$ je druhý konec $P$. Uvažujeme obarvení $\tilde{f_{H}}: E_{H} \to \{1, \dots, \Delta + 1\}$ vznikne z $f_{H}$ tak, že na $P$ prohodíme barvy $\alpha$ a $\beta$. 2 podpříklady:
+			\begin{enumerate}
+				\item $z = y_{j-1}:$ v $\tilde{f_{H}}$ je $\beta$ volná u $x$ i u $y_{k}$. $\alpha$ je volná u $y_{j-1}$ a použitá na $e_{j} \Rightarrow$ nastává případ 1) pro $e_{0}, \dots, e_{k}$.
+				\item $z \neq y_{j-1}:$ v $\tilde{f_{H}}$ je $\beta$ volná u $x$ i u $y_{j-1} \Rightarrow$ nastává případ 1 pro $e_{0}, \dots, e_{j-1}$.
+			\end{enumerate}
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
+
+\section{Perfektní grafy}
+
+\begin{definice}
+	Značení:
+	
+	\begin{itemize}
+		\item $\omega(G)$ - klikovost $G$, nebo-li velikost největší kliky v $G$.
+		\item $\alpha(G)$ - nezávislost $G$, nebo-li velikost největší nezávislé množiny v $G$
+		\item Doplněk grafu $G =(V,E)$ je graf $\bar{G}=(V, \binom{V}{2} \setminus E)$.
+	\end{itemize}
+\end{definice}
+
+\begin{pozor}
+	$$
+	\begin{array}{cc}
+		\omega (G) = \alpha (\bar{G}) & \omega(\bar{G}) = \alpha(G)
+	\end{array}
+	$$
+\end{pozor}
+
+\begin{pozor}
+	$\chi(G) \geq \omega(G)$
+\end{pozor}
+
+\begin{pozor}
+	$\omega(C_{2k+1}) > 2$
+\end{pozor}
+
+\begin{definice}
+	Graf $G = (V,E)$ je \textbf{perfektní}, pokud pro každý indukovaný podgraf $H$ grafu $G$ platí $\omega(H) = \chi(H)$.
+\end{definice}
+
+\begin{pozor}
+	$G$ perfektní graf, $G' \leq_{i} G \Rightarrow G'$ je perfektní.
+\end{pozor}
+
+\begin{dusl}
+	$G$ obsahuje $C_{2k+1}$ nebo $\overline{C_{2k+1}}$ jako indukovaný podgraf $\Rightarrow G$ není perfektní.
+\end{dusl}
+
+\begin{veta}[Silná věta o perfektníc grafech]
+	$G$ je perfektní iff $G$ neobsahuje $C_{2k+1}$ ani $\overline{C_{2k+1}}$ (pro $k \geq 2$) jako indukovaný podgraf.
+\end{veta}
+
+\begin{definice}
+	Nezávislá množina $N$ v grafu $G = (V,E)$ je \textbf{rozlehlá}, pokud každá klika $G$ velikosti $\omega(G)$ obsahuje vrchol z $N$. Ekvivalentně: $\omega(G-N) = \omega(G)-1$.
+\end{definice}
+
+\begin{lemma}[1]
+	Pro graf $G = (V,E)$ jsou následující tvrzení ekvivalentní:
+	
+	\begin{enumerate}
+		\item $G$ je perfektní,
+		\item $\forall H \leq_{i} G: H$ má rozlehlou nezávislou množinu,
+		\item $\forall H \leq_{i} G, \forall x \in V(H):H$ má rolehlou nezávislou množinu obsahující $x$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{dukaz}
+	$3 \Rightarrow 2$ triviálně.
+	
+	$2 \Rightarrow 1$ Nechť $G' \leq_{i} G$ a chceme $\omega(G') = \chi(G')$. Obarvení $G'$ pomocí $\omega(G')$ barev najdeme takto: $N_{1}$ je rozlehlá NzMna v $G_{1}$ a té dáme barvu 1. Následně $N_{2} :=$ NzMna v $G' - N_{1}$ barvu 2 a tak dále opakujeme dokud nemáme obarvené celé $G'$. $\omega(G' - N_{1}) = \omega(G') -1$, $\omega(G' - (N_{1} \cup N_{2})) = \omega(G') -2$ a tak dále. Proto použijeme právě $\omega(G')$ barev. Hotovo.
+	
+	$1 \Rightarrow 3$ Nechť $G$ je perfektní graf, mějme $H \leq_{i} G, \forall x \in V(H)$. Víme $\omega(H) = \chi(H)$. Vrcholy $H$ barvy $f(x)$ jsou rozlehlá nezávislá množina. Každá největší klika musí mít právě jeden vrchol s danou barvou.
+\end{dukaz}
+
+\begin{definice}
+	Nechť $G= (V,E)$ je graf s vrcholem $x$. Nechť $k \in \mathbb{N}$. Potom \textbf{$k$-násobné nafouknutí} vrcholu $x$, která vytvoří $G^{+}$ takto:
+	
+	\begin{enumerate}
+		\item Vrchol $x$ se nahradí $k$-ticí nových vrcholů $x_{1}, \dots x_{k}$ tvořící kliku.
+		\item Každý soused vrcholu $x$ v $G$ se spojí se všemi $x_{1}, \dots, x_{k}$.
+	\end{enumerate}
+\end{definice}
+
+
+\begin{lemma}[2]
+	Pokud $G$ je perfektní a $G^{+}$ je jeho nafouknutí, tak i $G^{+}$ je perfektní.
+\end{lemma}
+
+
+\begin{dukaz}
+	Dokážeme, že $\forall H \leq_{i} G^{+}$ má rozlehlou nezávislou množinu. Pak ještě použijeme Lemma 1 a máme hotovo. Volme $H \leq_{i} G^{+}:$ Pokud $H$ obsahuje nejvýš jeden z $x_{1}, \dots, x_{k}$ tak $H \leq_{i} G$, takže $H$ má rozlehlou NzMnu dle Lemma 1. Předpokládejme, že $H$ obsahuje aspoň dva vrcholy z $x_{1}, \dots, x_{k}$. Potom $H$ je nfouknutí nějakého $H^{-} \leq_{i} G, x \in V(H^{-})$. Dle Lemma 1, $H^{-}$ obsahuje rozlehlou NzMnu $N^{-}$ obsahující $x$. BÚNO: $x_{1} \in V(H)$. Tvrdím: $N := (N^{-} \setminus \{x\}) \cup \{x_{1}\}$ je rozlehlá NzMna v $H$. Jistě $N$ je nezávislá. Nechť $K$ je klika $H$ velikosti $\omega(H)$. Pak jsou dvě možnosti:
+	
+	\begin{enumerate}
+		\item $K \cap \{x_{1}, \dots, x_{k}\} = \emptyset$ v tom případě je $K$ i největší v $H^{-}$, tedy $N^{-} \cap K \neq \emptyset$, dokonce $(N^{-} \setminus \{x\}) \cap K \neq \emptyset, N \cap K \neq \emptyset$.
+		\item $K \cap \{x_{1}, \dots, x_{k}\} \neq \emptyset$ nutně $K$ obsahuje všechny vrcholy z $\{x_{1}, x_{2}, \dots ,x_{k}\}$ patřící do $H$, tedy i $x_{1} \in K$, tedy $K \cap N = \{x_{1}\} \neq \emptyset$.
+	\end{enumerate}
+	
+	Tedy $N$ he rozlehlá NzMna $H$.
+\end{dukaz}
+
+\begin{definice}
+	Značení: $H <_{i} G := H \leq_{i} G \text{ \& } H \ncong G$ - $H$ je vlastní indukovaný podgraf $G$.
+\end{definice}
+
+\begin{veta}[Slabá věta o perfektních grafech.]
+	$G$ je perfektní iff $\bar{G}$ je perfektní.
+\end{veta}
+
+\begin{dukaz}
+	Sporem: $\exists$ perfektní graf $G = (V,E)$. ale $\bar{G}$ není perfektní. Volme $G$ tak, že $|V|$ je co nejmenší. Tedy $\forall H <_{i} G$ platí, že $H$ i $\bar{H}$ jsou perfektní. Jinak to je menší graf co do velikosti $|V|$. Protože $\bar{G}$ není perfektní, tak dle Lemma 1 $\exists G' \leq_{i} \bar{G}: G'$ nemá rozlehlou NzMnu. Tvrdím, že $G' \cong \bar{G}$, kdyby $G' <_{i} \bar{G}$ tak $G'$ není perfektní, ale $\bar{G'} <_{i} G$ tedy $\bar{G'}$ je perfektní, spor s minimalitou $G$. Tedy $\bar{G}$ nemá rozlehlou NzMnu. Tj. pro každou NzMnu $\bar{N}$ v $\bar{G}$ existuje v $\bar{G}$ klika velikosti $\omega(G)$ disjunktní s $\bar{N}$. Tedy pro každou kliku $K$ v $G$ existuje v $G$ NzMna velikosti $\alpha(G)$ disjunktní s $K$. Nechť $Q_{1},Q_{2}, \dots, Q_{t}$ je seznam všech klik v $G$. Nechť $N_{i}$ je NzMna $G$ velikosti $\alpha(G)$ disjunktní s $Q_{i}$, pro $i = 1,\dots, t$. Pro každý vrcholy $x \in V$ nechť $f(x)$ je počet indexů $i \in \{1, \dots, t\}$ takových, že $x \in N_{i}$. $G^{+}$ vznikne z $G$ tak, že se každý vrchol $x$ nafoukne $f(x)$-krát. Vrcholy $x \in V$ s $f(x) = 0$ se smažou. Dle Lemma 2 $G^{+}$ je stále perfektní. $|V(G^{+}| = t \alpha(G) = t \alpha(G^{+})$. Víme: $\chi(G^{+}) \alpha(G^{+}) \geq |V(G^{+})| = t \alpha(G^{+})$. Tedy $\chi(G^{+}) \geq t$ -- \textbf{(1)}. Ale $\chi(G^{+}) = \omega(G^{+})$ -- \textbf{(2)}. Nechť $Q^{+}$ je největší klika v $G^{+}$, ta musela vzniknout nafouknutím nějaké kliky $Q_{j}$ v $G$. \textbf{(3)} -- $|Q^{+}| = \sum_{x \in Q_{j}} f(x) = \sum_{x \in Q_{j}} \sum_{i=1}^{t}|N_{i} \cap \{x\}| = \sum_{i=1}^{t}\sum_{x \in Q_{j}} |N_{i} \cap \{x\}| = \sum_{i=1}^{t} |Q_{j} \cap N_{i} \leq t -1$. Protože $Q_{j} \cap N_{j} = \emptyset$ dle definice $N_{j}$ a dohromady (1), (2) a (3) je spor.
+\end{dukaz}
+
+\begin{definice}[Připomenutí]
+	Částečné uspořádaná množina $(X, \leq)$, kde $\leq$ je reflexivní, slabě antisymetrická a tranzitivní. \textbf{Řetězec:} podmnožina $X$, v níž každé dva prvky jsou porovnatelné. \textbf{Antiřetězec:} podmnožina $X$, v níž žádné dva prvky nejsou porovnatelné. Také je dobré znát \textbf{Hasseho diagram}.
+\end{definice}
+
+\begin{cvic}
+	Dokažte: Pokud každý řetězec v $(X, \leq)$ má velikost $\leq k$, tak $(X,\leq)$ se dá rodělit na $\leq k$, antiřetězců. -- Indukcí dle $k$ (postupně se mažou maximální prvky).
+
+\end{cvic}
+
+\begin{definice}
+	Pro částečně uspořádanou množinu $(X,\leq)$ definuji graf \textbf{porovnatelnosti} $G_{\leq} = (X,E)$, kde $E = \{\{xy\} \in \binom{X}{2}: x \leq y \lor y \leq x\}$.
+\end{definice}
+
+\begin{cvic}
+	Dokažte: $G_{\leq}$ je perfektní. Klikovost = nejdelší řětězec. Barevnost = počet antiřetězců. Použití předchozího cvičení.
+\end{cvic}
+
+\begin{veta}[Dilworth]
+	Pokud v částečně uspořádané množině $(X,\leq)$ má každý antiřetězec velikost $l$, tak $(X, \leq)$ se dá rozdělit na $\leq l$ řetězců.
+\end{veta}
+
+\begin{dukaz}
+	Každý $G_{\leq}$ je perfektní $\Rightarrow \bar{G_{\leq}}$ je perfektní. $\omega(\bar{G_{\leq}}) \leq l$ \& $\chi(\bar{G_{\leq}}) \leq l \Rightarrow l$ Nzmna $\to l$ klik $\Rightarrow$ řetězce v $(X, \leq)$.
+\end{dukaz}
+
+\begin{pozor}
+	Bipartitní grafy jsou perfektní.
+\end{pozor}
+
+\begin{definice}[Značení]
+	$\text{m}(G):=$ velikost největšího párování v grafu $G$ a $\text{vp}(G):=$ veliksot nejmenšího vrcholového pokrytí v grafu $G$.
+\end{definice}
+
+\begin{pozor}
+	$\text{m}(G) \leq \text{vp}(G)$
+\end{pozor}
+
+Připomenutí: Konig-Egerváryho věta: $G$ bipartitní: $\text{m}(G) = \text{vp}(G)$.
+
+\begin{definice}
+	Graf $G = (V,E)$ je \textbf{chordální}, pokud neobsahuje kružnici délky $\geq 4$ jako indukovaný podgraf.
+\end{definice}
+
+\begin{pozor}
+	Graf $G$ je chordální a $H \leq_{i} G \Rightarrow H$ je chordální.
+\end{pozor}
+
+\begin{definice}
+	Nechť $G = (V,E)$ je graf, nechť $x$ a $y$ jsou dva nesousední vrcholy v $G$. \textbf{$xy$-řez} je množina $R \subseteq V$, t.ž. $x$ a $y$ jsou v různých komponentách $G-R$.
+\end{definice}
+
+\begin{lemma}
+	Graf $G= (V,E)$ je chordální iff pro každé dva nesousední vrcholy $x,y$ existuje $xy$-řez, který je klika v $G$.
+\end{lemma}
+
+\begin{dukaz}
+	"$\Leftarrow$" Nechť $G$ není chordální. Chceme dva nesousední vrcholy $x,y$, t.ž. žádný $xy$-řez není klika. Nechť $G$ obsahuje indukovanou kružnici $C$ délky $\geq 4$, nechť $x,y$ jsou nesousedící vrcholy na $C$. Vždy musím odebrat aspoň 2 vrcholy z cyklu. Ale mezi nimi není hrana a tudíž nemůže se jednat o kliku. S tím, že odstraněné vrcholy musí přerušit dvě cesty $P_{1}, P_{2}$. Kde $P_{1}$ a $P_{2}$ je rozdělení $C$ dle $x,y$.
+	
+	"$\Rightarrow$" Nechť $G$ je chordální, nechť $x,y$ jsou dva nesousedící vrcholy. Nechť $R$ je $xy$-řez minimální vzhledem k inkluzi. Ukážeme, že $R$ je klika v $G$. Sporem: nechť existují nesousedící vrcholy $u,v \in R$. Nechť $G_{x}, G_{y}$ jsou komponenty $G-R$ obsahující $x$ respektive $y$. Pozorování: $u$ i $v$ má aspoň jednoho souseda v $G_{x}$ i v $G_{y}$ z minimality řezu. Nechť $P_{x}$ je co nejkratší csta z $u$ do $v$ jejichž vnitřní vrcholy patří do $G_{x}$. Podobně $P_{y}$. $P_{x} \cup P_{y}$ je indukovaná kružnice délky $\geq 4$, spor.
+\end{dukaz}
+
+\begin{definice}
+	Vrchol $x$ grafu $G$ je \textbf{simpliciální}, pokud sousedi $x$ tvoří kliku v $G$.
+\end{definice}
+
+\begin{pozor}
+	Vrchol stupně $\leq 1$ je simpliciální.
+\end{pozor}
+
+\begin{lemma}
+	Každý chordální graf (s aspoň jedním vrcholem) má simpliciální vrchol.
+\end{lemma}
+
+\begin{dukaz}
+	Dokážeme: $\forall$ chordální graf $G = (V,E)$ je buď úplný nebo má dva nesousední simpliciální vrcholy. Indukcí dle $|V|$.
+	
+	$|V|=1$ $G$ je úplný.
+	
+	$|V|>1$ Pokud $G$ není úplný (jinak triviálně platí). Volme $x,y$ nesousedící vrcholy v $G$. Nechť $R$ je $xy$-řez tvořící kliky v $G$ (Lemma). $G_{x}, G_{y}$ jsou komponenty $G-R$ obsahující $x$ popřípadě $y$. $G_{x}^{+},G_{y}^{+}$ jsou podgrafy $G$ indukované $G_{x} \cup R$ respektive $G_{y} \cup R$. IP: $G_{x}^{+}$ je buď úplný, nebo obsahuje dva nesousedící simpliciální vrcholy. V obou případech to znamená, že $G_{x}^{+}$ obsahuje simpliciální vrchol $s_{x}$ nepatřící do $R$. Obdobně $s_{y}$ je simpliciální vrchol v $G_{y}^{+}$ nepatřící do $R$. V $G$ mají $s_{x}$ i $s_{y}$ stejné sousedy jako v $G_{x}^{+}$ resp. $G_{y}^{+}$, tedy $s_{x}$ a $s_{y}$ jsou dva nesousedící simpliciální vrcholy v $G$.
+\end{dukaz}
+
+\begin{definice}
+	\textbf{Perfektní eliminační schéma} (\textit{PES}) grafu $G$ je uspořádání vrcholů $G$ do posloupnosti $v_{1}, v_{2}, v_{3}, \dots, v_{n}$ takové, že $\forall i = 1, \dots ,n$ sousedi $v_{i}$ mezi $\{v_{1}, \dots, v_{i-1}\}$ tvoří kliky v $G$. (Ekvivalentně: $v_{i}$ je simpliciální v indukovaném podgrafu $G$ $\{v_{1}, \dots, v_{i}\}$.)
+\end{definice}
+
+\begin{veta}
+	Následující vlastnosti grafu $G = (V,E)$ jsou ekvivalentní:
+	
+	\begin{enumerate}
+		\item $G$ je chordální,
+		\item $\forall H \leq_{i} G: H$ má simplic. vrchol,
+		\item $G$ má PES.
+	\end{enumerate}
+\end{veta}
+
+\begin{dukaz}
+	$1 \Rightarrow 2: \forall H \leq_{i} G$ je chordální $\Rightarrow$ z Lemma $H$ má simpliciální vrchol. $2 \Rightarrow 3:$ Vezmu simpliciální vrchol v $G$ dám ho doprava v PES. Odeberu z $G$ a takhle pořád opakuji. $3 \Rightarrow 1: G$ s PES, pak každá $C$ s $|V| \geq 4$ musí mít chordu. Podívám se na poslední vrchol v PES. Pak z vlastnosti PES musí mít předchozí vrcholy chordu.
+\end{dukaz}
+
+\begin{dusl}
+	Důkaz $2 \Rightarrow 3$ říká, že v polynomiálním čase lze pro dané $G$ najít PES nebo zjistit, že neexistuje.
+\end{dusl}
+
+\begin{veta}
+	Každý chordální graf je perfektní. Pro chordální graf $G$ lze v polynomiálním čase zjistit $\omega(G) = \chi(G)$, spolu s nevětší klikou a optimálním obarvením.
+\end{veta}
+
+\begin{dukaz}
+	Už víme, že lze vytvořit PES. Pro každý vrchol v PES platí, že jeho předchozí sousedi tvoří kliku a s daným vrcholem tvoří kliku o jedna větší. Pak již stačí najít vrchol s největším počtem předchozích vrcholů (značeno $k$) a potom $\omega(G) = k+1$. Pro spor vezmu největší kliku z algoritmu. Kdyby nebyl největší, tak lze přidat další, ale ten musí být sousedem a tudíž ho algoritmus musel najít. Pro obarvení budu postupovat zleva a danému vrcholu dám nejmenší možnou barvu. Zaznačím si největší barvu a novou barvu přidám jakmile vrchol bude mít v předchozích vrcholech právě tolik sousedů. Tím pádem nikdy nepřekročím velikost maximální kliky a tedy $\chi(G) = \omega(G)$. Najdu tedy obarvení, které je rovno klice a tedy je i perfektní.
+\end{dukaz}

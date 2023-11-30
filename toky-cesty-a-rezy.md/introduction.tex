@@ -1,0 +1,18 @@
+\chapter{Introduction}
+
+Firstly we remind some basics from flows and cuts. 
+
+\section{Network flow}
+
+\textbf{Flow} is defined on a \textbf{network}. Network is on a oriented graph $G = (V,E)$ and it has two special vertices $s,t \in V$ called source and target. Also we have a capacity, which is a mapping $c : E \to \R_{0}^{+}$. Flow then is a mapping $f : E \to \R_{0}^{+}$ which has two properties.
+
+\begin{enumerate}
+	\item $\forall e \in E: f(e) \leq c(e)$
+	\item Kirchoff's law: $\forall v \neq s, t \in V: \sum_{uv \in E} f(uv) - \sum_{vu \in E} f(vu) = 0$
+\end{enumerate}
+
+\section{Min $s,t$-cut}
+
+Now we also remind ourselves another term which is a $s,t$-cut. Which is a $M \subset E$ such that no $s,t$-path exists in $G' = (V, E \setminus M)$.
+
+These basic terms can be generalized to a \textbf{multi-commodity flow} problem and \textbf{multi-cut} problem.

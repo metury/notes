@@ -1,0 +1,83 @@
+% Parameters of the paper.
+\documentclass[12pt,a4paper]{report}
+\setlength\textwidth{160mm}
+\setlength\textheight{247mm}
+\setlength\oddsidemargin{0mm}
+\setlength\evensidemargin{0mm}
+\setlength\topmargin{0mm}
+\setlength\headsep{0mm}
+\setlength\headheight{0mm}
+\let\openright=\clearpage
+
+%\usepackage[czech]{babel}  % Czech
+\usepackage{babel}          % English
+\usepackage{lmodern}        %
+\usepackage[T1]{fontenc}    % Change the font
+\usepackage{textcomp}       %
+
+\usepackage[utf8]{inputenc} % Coding.
+
+%%% Další užitečné balíčky (jsou součástí běžných distribucí LaTeXu)
+\usepackage{amsmath}        % rozšíření pro sazbu matematiky
+\usepackage{amsfonts}       % matematické fonty
+\usepackage{amsthm}         % sazba vět, definic apod.
+\usepackage{bbding}         % balíček s~nejrůznějšími symboly
+\usepackage{bm}             % tučné symboly (příkaz \bm)
+\usepackage{graphicx}       % vkládání obrázků
+\usepackage{fancyvrb}       % vylepšené prostředí pro strojové písmo
+\usepackage{indentfirst}    % zavede odsazení 1. odstavce kapitoly
+\usepackage{natbib}         % zajištuje možnost odkazovat na~literaturu
+\usepackage[nottoc]{tocbibind} % zajistí přidání seznamu literatury,
+                            % obrázků a tabulek do~obsahu
+\usepackage{icomma}         % inteligetní čárka v~matematickém módu
+\usepackage{dcolumn}        % lepší zarovnání sloupců v~tabulkách
+\usepackage{booktabs}       % lepší vodorovné linky v~tabulkách
+\usepackage{paralist}       % lepší enumerate a itemize
+\usepackage[dvipsnames]{xcolor}         % barevná sazba
+                            %
+\usepackage{caption}        % Packages pro subfigures.
+\usepackage{subcaption}     %
+\usepackage{pdfpages}       % Vkladani pdfka.
+\usepackage{hyperref}       % Odkazy.
+\usepackage{tikz}           % Grafy a obrázky.
+\usepackage{algpseudocode}  % Pseudokód
+\usepackage{algorithm}
+\usepackage{titling}
+\usepackage{amssymb}
+
+\include{../makra} % Use global macros.
+
+\newcommand{\TODO}[1]{\begin{center}\textit{\textcolor{Emerald}{TODO: #1}}\end{center}}
+
+\title{Kombinatorika a grafy}
+\author{Tomáš Turek}
+\titlepicture[width=3in]{res/tree.pdf}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\part{Kombinatorika a grafy I}
+	\include{kg-i/odhady}
+	\include{kg-i/vytvorujici-funkce}
+	\include{kg-i/kpr}
+	\include{kg-i/toky}
+	\include{kg-i/souvislost}
+	\include{kg-i/pocitani-dvema-zpusoby}
+	\include{kg-i/ramsey}
+	\include{kg-i/samoopravne-kody}
+	\part{Kombinatorika a grafy II}
+	\include{kg-ii/parovani}
+	\include{kg-ii/minory}
+	\include{kg-ii/plochy}
+	\include{kg-ii/barveni}
+	\include{kg-ii/extremalni-komb}
+	\include{kg-ii/vytvorujici-funkce}
+	\include{kg-ii/orbity}
+	\part{Kombinatorika a grafy III}
+	\include{kg-iii/structural-graph}
+	\include{kg-iii/tree-decomposition}
+	\include{kg-iii/polynoms}
+	\include{kg-iii/vc-dimension}
+\end{document}
+

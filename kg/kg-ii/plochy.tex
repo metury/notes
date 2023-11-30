@@ -1,0 +1,175 @@
+\chapter{Kreslení grafů na plochy}
+
+\begin{definice}
+	Nechť $X \subseteq \mathbb{R}^{n}, Y \subseteq \mathbb{R}^{m}$. Zobrazení $f: X \to Y$ je \textbf{homeomorfismus} pokud $f$ je pojitá bijekce $X$ na $Y$ a $f^{-1}$ je spojitá bijekce $Y$ na $X$.
+\end{definice}
+
+\begin{definice}
+	$X,Y$ jsou \textbf{homeomorfní}, pokud existuje homeomorfismus $X$ na $Y$. Značím $X \cong Y$.
+\end{definice}
+
+\begin{fakt}
+	Homeomorfismus zachovává kompaktnost, uzavřenost a otevřenost. Omezenst však ne.
+\end{fakt}
+
+\begin{definice}
+	\textbf{Plocha} je souvislá kompaktní 2-rozměrná varieta bez hranic.
+\end{definice}
+
+\begin{prikl}
+	Příklady: sféra, torus. Nepříklady: $\mathbb{R}^{2}$, otevřený kruh, dvě separátní sféry.
+\end{prikl}
+
+\begin{definice}[operace s plochami]
+	\begin{enumerate}
+		\item Přidání ucha:
+		\begin{itemize}
+			\item "Odebrání dvou kruhů a přidáním válce mezi ně."
+			\item Na diagramu se kreslí, že mají orientaci opačným směrem.
+		\end{itemize}
+		\item Přidání křižítka:
+		\begin{itemize}
+			\item "Odebrání jednoho kruhu a přidání křižítka, tj. že se jeden bod propojí s přesně opačným bodem na druhé straně, ale nikdy se nepřekříží."
+		\end{itemize}
+	\end{enumerate}
+\end{definice}
+
+\begin{definice}
+	\textbf{Orientovatelná plocha} rodu $g$, značená $\Sigma_{g} (g \geq 0)$, je plocha vzniklá ze sféry přidáním $g$ uší.
+\end{definice}
+
+\begin{definice}
+	\textbf{Neorientovatelná plocha} rodu $g$, značená $\Pi_{g} (g \geq 1)$, je plocha vzniklá ze sféry přídáním $g$ křižítek.
+\end{definice}
+
+\begin{fakt}
+	Plocha vzniklá ze sféry přidáním $k \geq 1$ křižítek a $l \geq 0$ uší je $\Pi_{k+2l}$.
+\end{fakt}
+
+\begin{fakt}
+	Každá plocha je homeomorfní právě jedné ploše z posloupnosti $\Sigma_{0}, \Pi_{1}, \Sigma_{1}, \Pi_{2}, \dots$.
+\end{fakt}
+
+\begin{definice}
+	Známé plochy:
+	
+	\begin{itemize}
+		\item $\Sigma_{0}$ je \textbf{sféra}.
+		\item $\Sigma_{1}$ je \textbf{torus}.
+		\item $\Sigma_{2}$ je \textbf{dvojitý torus}.
+		\item $\Pi_{1}$ je \textbf{projektivní rovina}.
+		\item $\Pi_{2}$ je \textbf{kleinova láhev}.
+	\end{itemize}
+\end{definice}
+
+\begin{definice}
+	Nakreslení grafu $G = (V,E)$ na plochu $\Gamma$ je zobrazení $\mathcal{G}$, které:
+	
+	\begin{enumerate}
+		\item vrcholům $x \in V$ přiřadí bod $\bar{x} \in \Gamma$,
+		\item hraně $e = \{xy\} \in E$ přiřadí křivku $\bar{e} \subseteq \Gamma$ spojující $\bar{x}$ a $\bar{y}$. ("Křivka" je homeomorfní kopie intervalu $[0,1]$.)
+	\end{enumerate}
+	
+	Navíc platí:
+	
+	\begin{enumerate}
+		\item $x,y \in V, x \neq y \Rightarrow \bar{x} \neq \bar{y}$,
+		\item pro $x \in V, e \in E: \bar{x} \in \bar{e} \Rightarrow x \in e$,
+		\item pro $e, f \in E, e \neq f: \bar{e} \cap \bar{f} \neq \emptyset \Rightarrow \bar{e} \cap \bar{f} = \{\bar{x}\}$, kde $e \cap f = \{x\}$.
+	\end{enumerate}
+\end{definice}
+
+\begin{definice}
+	\textbf{Stěna} je souvislá komponenta $\Gamma \setminus (\bigcup_{x \in V} \bar{x} \cup \bigcup_{e \in E} \bar{e})$.
+\end{definice}
+
+\begin{definice}
+	Nakreslení je \textbf{buňkové} (\textit{2-cell}), pokud každá jeho stěna je homeomorfní otevřenému kruhu.
+\end{definice}
+
+\begin{fakt}
+	Nakreslení $\mathcal{G}$ na $\Sigma_{0}$ je buňkové iff nakreslený graf je souvislý.
+\end{fakt}
+
+\begin{definice}
+	\textbf{Eulerova chrakteristika} plochy $\Gamma$ značená $\chi (\Gamma)$, je:
+	
+	$$
+	\chi(\Gamma) =
+	\left\{
+	\begin{array}{ll}
+		2 - 2g & \text{pro } \Gamma \cong \Sigma_{g} \\
+		2 - g & \text{pro } \Gamma \cong \Pi_{g} \\
+	\end{array}
+	\right.
+	$$
+\end{definice}
+
+\begin{veta}[Zobecněná Eulerova formule]
+	Nechť $\mathcal{G}$ je buňkové nakreslení grafu $G=(V,E)$ na ploše $\Gamma$ a označme $h(\mathcal{G}) = |V|, e(\mathcal{G}) = |E|, f(\mathcal{G})=\text{\# stěn }\mathcal{G}$. Potom $h(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G}) = \chi(\Gamma)$.
+\end{veta}
+
+\begin{dukaz}
+	Předpokládáme, že $\Gamma \cong \Sigma_{g}$ (případně $\Gamma \cong \Pi_{g}$ je podobný). Indukcí podle $g$.
+	- $g=0:$ Eulerova formule pro rovinné grafy. Hotovo. $g>0:$ Zafixujeme si ucho reprezentované kružnicemi $u,u'$. Nechť $e_{1},e_{2},\dots,e_{k}$ jsou hrany křížící $u,u'$ v pořadí daným orientací $u,u'$ ($e_{1},e_{2}, \dots, e_{k}$ nejsou nutně různé). Jistě $k \geq 1$, jinak by nakreslení nebylo buňkové. Označme $\text{LS}(\mathcal{G}) = n(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G})$. Nechť $\mathcal{G}_{1}$ vznikne z $\mathcal{G}$ tak, že se na každou $e_{i}$ přidají dělící vrcholy $x_{i}$ a $y_{i}$, těsně k $u$ a $u'$. $\text{LS}(\mathcal{G}_{1}) = \text{LS}(\mathcal{G})$. Nechť $\mathcal{G}_{2}$ vznikne z $\mathcal{G}_{1}$ tak, že pro $\forall i = 1, \dots , k$ přidám cestu délky 3 z $x_{i}$ do $x_{i+1}$ a z $y_{i}$ do $y_{i+1}$ a $x_{k}$ do $x_{i}$ a $y_{k}$ do $y_{i}$, cesty jsou těsně u $u$ a $u'$. $\text{LS}(\mathcal{G}_{2}) = \text{LS}(\mathcal{G}_{1})$. $\mathcal{G}_{3}$ nakreslení na $\Sigma_{g-1}$ vzniklé z $\mathcal{G}_{2}$ odstraněním $u,u'$ a všech hran, které ho kříží. $n(\mathcal{G}_{2}) = n(\mathcal{G}_{3}), e(\mathcal{G}_{2}) - k = e(\mathcal{G}_{3}), f(\mathcal{G}_{2}) = f(\mathcal{G}_{3}) - 2 + k$. $\text{LS}(\mathcal{G}_{2}) = \text{LS}(\mathcal{G}_{3}) - 2 =^{IP} \chi(\Sigma_{g-1}) - 2 = \chi(\Sigma_{g})$.
+\end{dukaz}
+
+\begin{fakt}
+	Pro nebuňkové nakreslení $\mathcal{G}$ platí: $h(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G}) > \chi(\Gamma)$.
+\end{fakt}
+
+\begin{dusl}
+	Nechť $G+(V,E)$ je graf, který má nakreslení $\mathcal{G}$ na $\Gamma$, nechť $|V| \geq 3$. Potom:
+	
+	\begin{enumerate}
+		\item $|E| \leq 3 |V| - 3 \chi (\Gamma)$,
+		\item (průměrný stupeň $G = \frac{2|E|}{|V|}$)$\leq 6 - \frac{6 \chi(\Gamma)}{|V|}$.
+	\end{enumerate}
+\end{dusl}
+
+\begin{dukaz}
+	BŮNO $\mathcal{G}$ je buňkové, každá stěna je incidentní s aspoň 3mi hranami, každá hrana je incidentní s nejvýš dvěma stěnami. Tedy $3 f(\mathcal{G}) \leq$ počet incidencí "hrana-stěna": $\leq 2 e(\mathcal{G}) \Rightarrow f(\mathcal{G}) \leq \frac{2}{3} e(\mathcal{G})$. Tedy: $\chi(\Gamma) \leq |V| - \frac{1}{3}|E|$.
+\end{dukaz}
+
+\begin{definice}
+	Pro plochu $\Gamma$ označme:
+	
+	$$
+	H_{\Gamma} := \left\lfloor \frac{5+\sqrt{49-24 \chi(\Gamma)}}{2} \right\rfloor
+	$$
+\end{definice}
+
+\begin{veta}
+	Nechť $\Gamma$ je plocha, $\Gamma \ncong \Sigma_{0}$. Potom každý graf, který má nakreslení na $\Gamma$ obsahuje vrchol stupně $\leq H_{\Gamma}$.
+\end{veta}
+
+\begin{dukaz}
+	$\Gamma \cong \Pi_{1}:$ průměrný stupeň nakreslení $\mathcal{G}$ na $\Gamma$ je $\leq 6 - \frac{6}{n(\mathcal{G})} < 6 \Rightarrow \exists$ vrchol stupně $\leq 5 = H_{\Pi_{1}}$. $\Gamma \cong \Pi_{2}$ nebo $\Gamma \cong \Sigma_{1}:$ průměrný stupeň $\leq 6$. Hotovo. $\chi(\Gamma) < 0:$ Mějme nakreslení $\mathcal{G}$ na $\Gamma$, uvažme pro minimální stupeň $\delta$ nakreslení $\mathcal{G}$ dva odhady.
+	
+	\begin{enumerate}
+		\item $\delta \leq 6 - \frac{6 \chi(\Gamma)}{n(\mathcal{G})}$
+		\item $\delta \leq n(\mathcal{G}) -1$
+	\end{enumerate}
+	
+	tedy $\delta \leq \min \{6 - \frac{6 \chi(\Gamma)}{n(\mathcal{G})}, n(\mathcal{G}) -1\}$. Budeme zkoumat $\max_{n \in \mathbb{N}}(\min \{6 - \frac{6 \chi(\Gamma)}{n(\mathcal{G})}, n(\mathcal{G}) -1\} \leq \lfloor \delta_{0} \rfloor)$. Hledáme $n_{0}: 6 - \frac{6 \chi(\Gamma)}{n_{0}} = n_{0} -1 \Leftrightarrow 6n_{0} - 6\chi(\Gamma) = n_{0}^{2} - n_{0} \Leftrightarrow n_{0}^{2} - 7n_{0} + 6\chi(\Gamma) = 0$. $n_{0} = \frac{7+\sqrt{49-24\chi(\Gamma)}}{2}$. $\delta_{0} = n_{0} - 1 = \frac{5+\sqrt{49-24\chi(\Gamma)}}{2}$.
+\end{dukaz}
+
+\begin{definice}
+	Graf $G=(V,E)$ je \textbf{$d$-degenerovaný}, pokud každý jeho podgraf obsahuje vrchol stupně $\leq d$.
+\end{definice}
+
+\begin{dusl}
+	Každý graf nakreslitelný na plochu $\Gamma \ncong \Sigma_{0}$ je $H_{\Gamma}$-degenerovaný.
+\end{dusl}
+
+\begin{pozor}
+	Každý $d$-degenerovaný graf má barevnost $\leq d+1$.
+\end{pozor}
+
+\begin{dusl}[Heawood]
+	Každý graf nakreslitelný na $\Gamma \ncong \Sigma_{0}$ má barevnost $\leq H_{\Gamma} + 1$.
+\end{dusl}
+
+\begin{fakt}[Ringel-Youngs]
+	Na každou plochu $\Gamma \ncong \Pi_{2}$ se dá nakreslit $K_{H_{\Gamma}+1}$.
+\end{fakt}

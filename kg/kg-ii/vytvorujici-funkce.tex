@@ -1,0 +1,224 @@
+\chapter{Vytvořující funkce}
+
+$$
+(a_{0}, a_{1}, \dots) \subseteq \mathbb{R} \to A(x) = a_{0} + x a_{1} + x^{2} a_{2} + \dots
+$$
+
+\begin{definice}
+	\textbf{Formální mocninná řada} reprezentující posloupnost reálných čísel $(a_{0}, a_{1}, a_{2}, \dots)$ je výraz tvaru $a_{0} + a_{1}x+ a_{2}x^{2}+ \dots = \sum_{n=0}^{\infty}a_{n}x^{n}$.
+\end{definice}
+
+\begin{definice}[Značení]
+	$[|\mathbb{R}|]$ je množina formálních mocninných řad (v proměnné $x$ nad $\mathbb{R}$).
+\end{definice}
+
+Pro $A(x) \in \mathbb{R}[|x|], A(x) = a_{0} + a_{1}x + a_{2} x^{2} + \dots$ je $[x^{n}]A(x)$ koeficient u $x^{n}$ v $A(x)$, tj. $a_n$.
+
+\section{Operace s formálními mocninnými řadami}
+
+Násobení:
+
+$$
+\alpha \in \mathbb{R}: \alpha A(x) = (\alpha a_{0}) + (\alpha a_{1}) x + (\alpha a_{2})x^{2} + \dots
+$$
+
+Sčítání:
+
+$$
+A(x), B(x) \in \mathbb{R}[|x|], A(x) = a_{0} + a_{1}x + \dots, B(x) = b_{0} +b_{1}x + \dots
+$$
+
+$$
+A(x) + B(x) = (a_{0} + b_{0}) + (a_{1} + b_{1})x + (a_{2} + b_{2}) x^{2} + \dots
+$$
+
+$$
+0 = 0 + 0x + 0x^{2} + 0x^{3} + \dots \text{ má vlastnost:}
+$$
+
+$$
+\forall A \in \mathbb{R}[|x|]: A + 0 = 0 + A = A
+$$
+
+Násobení:
+
+$$
+A(x) \cdot B(x) = c_{0} + c_{1}x + c_{2}x^{2} + c_{3} x^{3} + \dots \text{, kde}
+$$
+
+$$
+c_{n} = \sum_{k=0}^{n}a_{k}b_{n-k}
+$$
+
+$$
+1 = 1 + 0x + 0x^{2} + 0x^{3} + \dots \text{, má vlastnost:}
+$$
+
+$$
+\forall A \in \mathbb{R}[|x|]: A \cdot 1 = 1 \cdot A = A
+$$
+
+\begin{fakt}
+	$(A+B)C = AC + BC$ a $\mathbb{R}[|x|]$ je \textit{okruh} (tj. komutativní okruh s jednotkou).
+\end{fakt}
+
+\begin{definice}
+	Pro $A \in \mathbb{R}[|x|]$ označme $A^{-1}$ (nebo $\frac{1}{A}$) mocninnou řadu $B \in \mathbb{R}[|x|]$ splňující $AB = 1 \in \mathbb{R}[|x|]$. $A^{-1}$ je \textbf{multiplikativní inverze (převrácená hodnota) $A$}.
+\end{definice}
+
+\begin{pozn}
+	Ne všechny FMŘ mají inverzní prvky, například $0$.
+\end{pozn}
+
+\begin{tvrz}
+	Pokud $\mathbb{R}[|x|] \ni A(x) = a_{0} + a_{1} x + a_{2} x^{2} + \dots$ má $A^{-1}(x)$ v tom případě je $A^{-1}(x)$ jednoznačná.
+\end{tvrz}
+
+\begin{dukaz}
+	$a_{0} = 0 \Rightarrow A^{-1}(x)$ neexistuje. Předpoklad $a_{0} \neq 0$ hledejme $b_{0},b_{1},b_{2},\dots \in \mathbb{R}$ tak, aby
+	
+	$$
+	\begin{array}{c}
+		(a_{0} + a_{1} x + a_{2} x^{2} + \dots)(b_{0} + b_{1} x + b_{2} x^{2} + \dots) = 1 \\
+		\Updownarrow \\
+		a_{0}b_{0} = 1 \\
+		a_{1}b_{0} + a_{0}b_{1} = 0 \\
+		a_{2}b_{0} + a_{1}b_{1} + a_{0}b_{2} = 0 \\
+		\vdots \\
+		\Updownarrow \\
+		b_{0} = \frac{1}{a_{0}} \\
+		b_{1} = - \frac{1}{a_{0}} \cdot a_{1}b_{0} \\
+		b_{2} = - \frac{1}{a_{0}}(a_{2}b_{0} + a_{1}b_{1}) \\
+		\vdots \\
+	\end{array}
+	$$
+\end{dukaz}
+
+\begin{definice}
+	Nechť $A_{1}(x), A_{2}(x), \dots$ je posloupnost FMŘ řeknu, že součet $A_{1}(x) + A_{2}(x) + \dots$ je \textbf{konvergentní}, pokud $\forall n \in \mathbb{N}_{0}$ existuje jen konečně mnoho indexů $j \in \mathbb{N}_{0}$ takových, že $[x^{n}]A_{j}(x) \neq 0$. V takovém případě pak definuji $A_{1}(x) + A_{2}(x) + A_{3}(x) + \dots$ jako FMŘ $S(x) \in \mathbb{R}[|x|]$ splňující (jen konečně mnoho nenul):
+	
+	$$
+	\forall n \in \mathbb{N}_{0}: [x^{n}]S(x) := [x^{n}]A_{1}(x) + [x^{n}]A_{2}(x) + [x^{n}]A_{3}(x) + \dots
+	$$
+\end{definice}
+
+\begin{definice}
+	Mějme $A(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots, B(x) = b_{0} + b_{1} x + b_{2} x^{2} + \dots \in \mathbb{R}[|x|]$, nechť $b_{0} = 0$. Potom:
+	
+	$$
+	A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + a_{3}B^{3}(x) + \dots = \sum_{n = 0}^{\infty}a_{n}B^{n}(x)
+	$$
+\end{definice}
+
+\begin{pozn}
+	Pokud $b_{0} =0$, tak $B(x) = b_{1}x + b_{2}x^{2} + b_{3}x^{3} + \dots = x (b_{1} + b_{2} x + b_{3} x^{2} + \dots)$ a tedy $B^{n}(x) = x^{n}(b_{1} + b_{2} x + b_{3} x^{2} + \dots)$ má nulové koeficienty stupňů $0,1,2,3,4, \dots, n-1$.
+\end{pozn}
+
+Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall n \in \mathbb{N}_{0}$ pouze sčítance $a_{0}, a_{1}B(x, a_{2} B^{2}(x), \dots, a_{n}B^{n}(x)$ mohou mít nenulový koeficient u $x^{n}$.
+
+\begin{definice}
+	\textbf{Kombinatorická třída} je množina $\mathcal{A}$ taková, že každý prvek $\alpha \in \mathcal{A}$ má definovanou velikost $|\alpha| \in \mathbb{N}_{0}$ a pro každé $n \in \mathbb{N}_{0}, \mathcal{A}$ má jen konečně mnoho prvků velikosti $n$. Značení: $\mathcal{A}_{n}:=\{\alpha \in \mathcal{A}; |\alpha| = n\}$.
+\end{definice}
+
+\begin{definice}
+	\textbf{Obyčejná vytvořující funkce} kombinační třídy $\mathcal{A}$, značená $\text{OVF}(\mathcal{A})$ je FMŘ $\sum_{n = 0}^{\infty} |\mathcal{A}_{n}|x^{n}$.
+\end{definice}
+
+\begin{pozor}
+	$\text{OVF}(\mathcal{A}) = \sum_{\alpha \in \mathcal{A}} x^{|\alpha|}$
+\end{pozor}
+
+\begin{pozor}
+	Pokud $\mathcal{A}$ a $\mathcal{B}$ disjunktní kombinační třídy, tak $\text{OVF}(\mathcal{A} \cup \mathcal{B}) = \text{OVF}(\mathcal{A}) + \text{OVF}(\mathcal{B})$.
+\end{pozor}
+
+\begin{definice}
+	Nechť $\mathcal{A}, \mathcal{B}$ jsou kombinační třídy. Potom $\mathcal{A} \times \mathcal{B} := \{(\alpha,\beta); \alpha \in \mathcal{A}, \beta \in \mathcal{B}\}$, kde $|(\alpha, \beta)| = |\alpha| + |\beta|$.
+\end{definice}
+
+\begin{pozor}
+	$\text{OVF}(\mathcal{A} \times \mathcal{B}) = \text{OVF}(\mathcal{A}) \cdot \text{OVF}(\mathcal{B})$
+\end{pozor}
+
+\begin{dukaz}
+	$$
+	\text{OVF}(\mathcal{A} \times \mathcal{B}) = \sum_{n=0}^{\infty} |(\mathcal{A} \times \mathcal{B})_{n}|x^{n} = \sum_{n=0}^{\infty}\left(\sum_{k=0}^{n}|\mathcal{A}_{k}| \cdot |\mathcal{B}_{n-k}|\right)x^{n} =
+	$$
+	
+	$$
+	= \sum_{n=0}^{\infty} \sum_{k=0}^{n} |\mathcal{A}_{k}|x^{k} \cdot |\mathcal{B}_{n-k}|x^{n-k} = \text{OVF}(\mathcal{A}) \cdot \text{OVF}(\mathcal{B})
+	$$
+\end{dukaz}
+
+\begin{pozor}
+	$$
+	\mathcal{A}^{k} = \mathcal{A} \times \mathcal{A} \times \dots \times \mathcal{A}, \text{OVF}(\mathcal{A}^{k}) = \text{OVF}(\mathcal{A})^{k}
+	$$
+\end{pozor}
+
+\begin{definice}
+	Nechť $\mathcal{A}$ je kombinační třída taková, že $\mathcal{A}_{0} = \emptyset$, potom:
+	
+	$$
+	\text{Seq}(\mathcal{A}) = \{\emptyset\} \cup \mathcal{A}^{1} \cup \mathcal{A}^{2} \cup \dots
+	$$
+	
+	tj. množina všech konečných posloupností prvků $\mathcal{A}$.
+\end{definice}
+
+\begin{pozor}
+	$$
+	\text{OVF}(\text{Seq}(\mathcal{A})) = 1 + \text{OVF}(\mathcal{A}) + \text{OVF}(\mathcal{A})^{2} + \dots = \frac{1}{1 - \text{OVF}(\mathcal{A})}
+	$$
+\end{pozor}
+
+\begin{definice}
+	\textbf{Labelovaná kombinatorická třída} je množina $\mathcal{A}$, jejíž každý prvek $\alpha$ má danou množinu vrcholů $V(\alpha)$, což je konečná množina $\mathbb{N}$, kde platí následující:
+	
+	\begin{enumerate}
+		\item Označíme-li $\mathcal{A}_{V} := \{\alpha \in \mathcal{A}: V(\alpha) = V\}$, pak pro každé $V \subseteq \mathbb{N}$ konečné platí $|\mathcal{A}_{V}| < + \infty$.
+		\item Pro dvě konečné množiny vrcholů $V,W \subseteq \mathbb{N}$ takové, že $|V| = |W|$, platí $|\mathcal{A}_{V}| = |\mathcal{A}_{W}|$
+	\end{enumerate}
+	
+	Značení: $\mathcal{A}_{n} := \mathcal{A}_{\{1,2,3, \dots , n\}}$ a $\mathcal{A}_{\ast} := \mathcal{A}_{0} \cup \mathcal{A}_{1} \cup \mathcal{A}_{2} \cup \dots$ pro $\alpha \in \mathcal{A}:|\alpha| := |V(\alpha)|$.
+\end{definice}
+
+\begin{definice}
+	\textbf{Exponenciální vytvořující funkce} labelované kombinatorické třídy $\mathcal{A}$, značená $\text{EVF}(\mathcal{A})$ je
+	
+	$$
+	\sum_{n=0}^{\infty}|\mathcal{A}_{n}|\frac{x^{n}}{n!} = \sum_{\alpha \in \mathcal{A}_{\ast}} \frac{x^{|\alpha|}}{|\alpha|!}
+	$$
+\end{definice}
+
+\begin{pozor}
+	Pro labelované kombinatorické třídy $\mathcal{A}, \mathcal{B}$, které jsou disjunktní, platí
+	
+	$$
+	\text{EVF}(\mathcal{A} \cup \mathcal{B}) = \text{EVF}(\mathcal{A}) + \text{EVF}(\mathcal{B}).
+	$$
+\end{pozor}
+
+\begin{definice}
+	\textbf{Labelovaný součin} $\mathcal{A} \otimes \mathcal{B}$ labelovaných kombinačních tříd $\mathcal{A}, \mathcal{B}$ je labelo-\newline vaná kombinační třída $\{(\alpha, \beta); \alpha \in \mathcal{A}, \beta \in \mathcal{B}, V(\alpha) \cap V(\beta) = \emptyset\}$, kde $V((\alpha, \beta)) := V(\alpha) \cup V(\beta)$.
+\end{definice}
+
+\begin{tvrz}
+	$\text{EVF}(\mathcal{A} \otimes \mathcal{B}) = \text{EVF}(\mathcal{A}) \cdot \text{EVF}(\mathcal{B})$
+\end{tvrz}
+
+\begin{dukaz}
+	Levou stranu si označím jako $LS(x)$ a pravou jako $PS(x)$. $\forall n \in \mathbb{N}_{0}: [x^{n}] LS$ jestli se rovná $[x^{n}] PS$
+	
+	$$
+	[x^{n}]LS = \frac{1}{n!} |(\mathcal{A} \otimes \mathcal{B})_{n}| = \frac{1}{n!} \sum_{V \subseteq \{1,2,3, \dots ,n\}} |\mathcal{A}_{V}| |\mathcal{B}_{\{1,\dots,n\} \setminus V}| =
+	$$
+	
+	$$
+	= \frac{1}{n!} \sum_{k=0}^{n} \binom{n}{k} |\mathcal{A}_{k}| |\mathcal{B}_{n-k}| = \sum_{k = 0}^{n} \frac{|\mathcal{A}_{k}|}{k!} \frac{|\mathcal{B}_{n-k}|}{(n-k)!} =
+	$$
+	
+	$$
+	= \sum_{k=0}^{n} [x^{k}]\text{EV}(\mathcal{A})[x^{n-k}]\text{EVF}(\mathcal{B}) = PS(x)
+	$$
+\end{dukaz}

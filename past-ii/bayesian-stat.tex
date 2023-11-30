@@ -1,0 +1,238 @@
+\chapter{Bayesian statistics}
+
+\section{What is probability?}
+
+We may look at probability from different angles.
+
+\begin{enumerate}
+	\item Math concepts.
+	\begin{itemize}
+		\item axioms, examples $\frac{\# \text{good}}{\#\text{all}}$, theorems ...
+		\item interesting/useful probabilistic method as "to show $A \neq 0$ we show $\Pr[A] >0$", lower bounds for Ramsey number
+	\end{itemize}
+	\item Description of real world. Question: \textit{Does Nature play dice?}
+	\begin{itemize}
+		\item YES, if quantum theory is right so called \textit{true randomness}
+		\item imprecise measurements so called \textit{pseudo randomness}
+	\end{itemize}
+\end{enumerate}
+
+Then we we have two possible approaches.
+
+\begin{enumerate}
+	\item \textbf{Frequntist's approach} $\frac{\text{\# good}}{\text{\# all}}$
+	\item \textbf{Bayesian approach} as subjective probability, so we are counting with all possible universes and what is the probability this will happen in our universe.
+\end{enumerate}
+
+\section{Bayesian statistics}
+
+\begin{enumerate}
+	\item $\Theta$ is random variable describing some quantity of interest
+	\item $X = (X_{1}, \dots, X_{n})$ measurements
+\end{enumerate}
+
+\begin{rem}
+	In Frequentist's approach $\Theta$ does not exist we have $\vartheta$ as unknown fixed \newline parameter.
+\end{rem}
+
+\begin{table}\centering
+	\begin{tabular}{| c | c | c |}
+		variable & PMF          & PDF          \\
+		\hline
+		1 & $p_{\Theta}$ & $f_{\Theta}$ \\
+		2 & $p_{X}$ & $f_{X}$ \\
+	\end{tabular}
+\end{table}
+
+\subsection{Bayes theorem}
+
+$$
+\Pr[B \vert A] = \frac{\Pr[B] \Pr[A \vert B]}{\Pr[A]}
+$$
+
+Where $\Pr[A], \Pr[B] > 0$. We will consider $B$ as $\Theta = \vartheta$ and $A$ as measurements $X = x$. Now we get:
+
+$$
+\Pr[\Theta = \vartheta \vert X = x] = \frac{\Pr[\Theta = \vartheta] \Pr[X = x \vert \Theta = \vartheta]}{\Pr[X = x]}
+$$
+
+Where $\Pr[\Theta = \vartheta \vert X = x]$ is called \textbf{posterior} and it is the probability after some measurements. $\Pr[\Theta = \vartheta]$ is called \textbf{prior} as an probability and $\Pr[X = x \vert \Theta = \vartheta]$ is our current model of the world (\textit{likelihood}).
+
+\subsection{Bayes theorem using PMF}
+
+$$
+p_{\Theta\vert X} (\vartheta \vert x) = \frac{p_{\Theta}(\vartheta) p_{X\vert\Theta}(x \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')p_{X\vert\Theta}(x \vert \vartheta')} = c p_{\Theta}(\vartheta) p_{X \vert \Theta}(x \vert \vartheta)
+$$
+
+For some constant $c$.
+
+\section{What do we want?}
+
+\begin{enumerate}
+	\item Point estimate for $\Theta$.
+	\item Interval estimate for $\Theta$.
+	\item Hypothesis testing.
+\end{enumerate}
+
+For \textit{interval estimate} we have given $X$ and want to find $[a,b]$ as $(a = a(X), b = b(X))$. $\Pr[a(x) < \Theta < b(X) \vert X = x] \geq 1 - \alpha$. Perhaps $\Pr[\Theta < a(x) \vert X =x ] = \frac{\alpha}{2}$ and $\Pr[\Theta > b(x) \vert X =x ] = \frac{\alpha}{2}$.
+
+For \textit{point estimate} we have two approaches.
+
+\subsection{1) MAP as for maximum aposteriori probability}
+
+$$
+\hat{\vartheta} = \arg\max_{\vartheta} p_{\Theta \vert X} (\vartheta \vert x)
+$$
+
+If $X = x$ what is the most likely value?
+
+\subsection{2) LMS as for least mean square}
+
+$$
+\begin{array}{rcl}
+\hat{\vartheta} & = & \arg\min_{\vartheta} \mathbb{E}[(\Theta - \vartheta)^{2} \vert X = x] \\
+& = & \arg\min_{\vartheta} \mathbb{E}[\Theta \vert X = x]
+\end{array}
+$$
+
+\section{Naive Bayes}
+
+By the Bayesian statistics we get for $X_{1}$:
+
+$$
+p_{\Theta\vert X_{1}} (\vartheta \vert x_{1}) = \frac{p_{\Theta}(\vartheta) p_{X_{1} \vert\Theta}(x_{1} \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')p_{X_{1}\vert\Theta}(x_{1} \vert \vartheta')}
+$$
+
+But what if we have $n$ measurements to consider. Then we have $\Pr[\Theta = \vartheta \vert X_{1} = x_{1}, X_{2} = x_{2}, \dots]$ which can be computed by naive Bayes as:
+
+$$
+= \frac{p_{\Theta}(\vartheta) \prod_{i=1}^{n}p_{X_{i}\vert \Theta} (x_{i} \vert \vartheta)}{\sum_{\vartheta'} p_{\Theta}(\vartheta')\prod_{i=1}^{n}p_{X_{i}\vert \Theta} (x_{i} \vert \vartheta')}
+$$
+
+Also $p_{X \vert \Theta}(x_{i}, \dots, x_{1} \vert \Theta = \vartheta)$ is \textit{joint PMF} and we assume conditional independence.
+
+\section{Bayes theorem using PDF}
+
+As for PMF we have Bayesian statistics for PDF.
+
+$$
+f_{\Theta \vert X}(\vartheta \vert x) = \frac{f_{\Theta}(\vartheta) f_{X \vert \Theta}(x \vert \vartheta)}{\int_{-\infty}^{\infty} f_{\Theta}(\vartheta') f_{X \vert \Theta} (x \vert \vartheta') \text{ d} \vartheta'}
+$$
+
+\section{Beta distribution}
+
+To see some nice properties of Bayesian theorem we will look into one new distribution. We will have $\alpha, \beta \geq 1$ and $\vartheta \in [0,1]$. Then
+
+$$
+f_{\Theta} (\vartheta) = \frac{\vartheta^{\alpha - 1} (1-\vartheta)^{\beta - 1}}{B (\alpha,\beta)}
+$$
+
+Where $B(\alpha, \beta)$ is called \textbf{beta function} and for all $\alpha, \beta$ it is a constant. For example the beta function for $B(1,1)$ is equal to $1$ from $[0,1]$ and $0$ otherwise. And $B(1,2) = \frac{1}{2}$. It serves as a normalizing constant for the beta distribution.
+
+Firstly the maximum is at $\frac{\alpha -1}{\alpha + \beta - 2}$ which is the \textbf{mode} (\textit{cz: modus}).
+
+Secondly:
+
+$$
+B(\alpha, \beta) = \frac{(\alpha - 1)! (\beta - 1)!}{(\alpha+\beta-2)!} = \frac{1}{\binom{\alpha + \beta - 2}{\alpha -1}}
+$$
+
+Lastly $\mathbb{E} [\Theta] = \frac{\alpha}{\alpha + \beta}$ which is the \textbf{mean}.
+
+Now we will look into the Bayesian theorem using Beta distribution as a prior and Binomial distribution as a likelihood.
+
+$$
+p_{X \vert \Theta}(k \vert \vartheta) = \binom{n}{k} \vartheta^{k} (1-\vartheta)^{n-k}
+$$
+
+$$
+f_{\Theta \vert X}(\vartheta \vert x) = c_{1} \vartheta^{\alpha - 1}(1 - \vartheta)^{\beta - 1} \cdot c_{2} \vartheta^{x} (1- \beta)^{1-x} \cdot c_{3} =
+$$
+
+Where $c_{1},c_{2},c_{3}$ do not depend on $\vartheta$ and are some constants.
+
+$$
+= c_{4} \vartheta^{\alpha + k -1}(1 - \vartheta)^{\beta + n - k -1}
+$$
+
+And that is some other Beta distribution with $\alpha' = \alpha + x$ and $\beta' = \beta + n - x$. And also we have these point estimates:
+
+\begin{enumerate}
+	\item MAP $\hat{\vartheta} = \frac{x}{n}$ which is same as likelihood.
+	\item LMS $\hat{\vartheta} = \mathbb{E}(\Theta \vert X = x) = \frac{x+1}{n+2}$
+\end{enumerate}
+
+\section{Normal random variable}
+
+Also we can look at Bayesian theorem with normal variables. \textit{Note: This doesn't seem so interesting and useful, since it is only computation and nothing else.}
+
+% TODO: have a look at this if you have any time left.
+
+\section{Conditional expectation}
+
+Firstly we will remind how expectation is defined. $\mathbb{E}[Y] = \sum_{y \in \text{Img}(Y)} y \Pr[Y = y]$ if $Y$ is discrete or $= \int_{-\infty}^{\infty} y f_{Y}(y) \text{ d}y$ if $y$ is continuous. Now we will show how conditional expectation is defined.
+
+$$
+\begin{array}{rcl}
+\mathbb{E}[Y \vert A] & = & \sum_{y \in \text{Img}(Y)}y \Pr[Y = y \vert A] \\ \\
+& = & \int_{-\infty}^{\infty} y f_{Y \vert A}(y) \text{ d}y
+\end{array}
+$$
+
+Now if we have $X,Y$ discrete random variables and $x \in \mathbb{R}$, then:
+
+$$
+\mathbb{E}[Y \vert X = x] =: g(x)
+$$
+
+So $g$ is a function $\mathbb{R} \to \mathbb{R}$. Then
+
+$$
+\mathbb{E} [Y \vert X] =: g(X)
+$$
+
+So we have two functions $\Omega \to^{X} \mathbb{R} \to^{g} \mathbb{R}$. Now we will show one property which is called \textbf{Law of Iterated Expectation}.
+
+$$
+\mathbb{E}[\mathbb{E}[Y \vert X]] =^{\text{DEF}} \mathbb{E}[g(X)] =^{\text{LOTUS}} \sum_{x \in \text{Img}(X)}g(x) \Pr[X = x] =
+$$
+
+$$
+=^{\text{DEF}} \sum_{x \in \text{Img}(X)}\Pr[X=x] \mathbb{E} [Y \vert X =x] = \mathbb{E}[Y]
+$$
+
+Where the last equivalence is by the Law of total Expectation. So by this we get $\mathbb{E}[\mathbb{E}[Y \vert X]] = \mathbb{E}[Y]$ if $\mathbb{E}[Y] < \infty$.
+
+Now, we will use a similar approach to find an alternative definition of variance.
+
+Let $Y = \hat{Y} - \tilde{Y}$ where $\hat{Y}$ and $\tilde{Y}$ are statistically independent and $var(\tilde{Y}) = \mathbb{E}[\tilde{Y}^2]$
+
+$$
+var(Y) = var(\hat{Y}) + var(\tilde{Y}) - 2cov(\hat{Y}, \tilde{Y})
+$$
+
+From the property of the statistical independence we get $cov(\hat{Y}, \tilde{Y}) = 0$.
+
+$$
+\mathbb{E} [(Y - E[Y\vert X])^2 \vert X] = var[Y \vert X] =: h(X)
+$$
+
+\section{Law of iterated variance}
+
+$$
+\text{var} [Y] = \mathbb{E}[\text{var}[Y \vert X]] + \text{var}[\mathbb{E}[Y \vert X]]
+$$
+
+Or it is called an \textbf{Eve's rule} (\textit{as E for expected value and V for variance}). We may simulate it by saying that the first part of the sum is expected value of variance within one group and the second part is inter group variance. \textit{This is also partly from the example that was sadly omitted.}
+
+Next we can show that Least Mean Square is iff condition expectation. That is for given $Y$ what is the value of $y$ that minimizes $\mathbb{E}[Y - y]^{2}$?
+
+$$
+\mathbb{E}[Y - y]^{2} = \mathbb{E}[Y^{2}] - 2y\mathbb{E}[Y] + y^{2} = f(y)
+$$
+
+$$
+f'(y) = - 2 \mathbb{E}[Y] + 2y = 0 \Rightarrow y = \mathbb{E}[Y]
+$$
+
+Now we want for all $x$ find $y = y(x)$ such that $\mathbb{E}[(Y - y(x))^{2} \vert X = x]$ is minimized. We can show by similar calculation that $y(x) = \mathbb{E}[Y \vert X =x ]$. And our best (in the LMS sense) estimation is $\hat{Y} = \mathbb{E} [Y \vert X]$.

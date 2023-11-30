@@ -1,0 +1,77 @@
+\chapter{Moment Generating Function}
+
+\begin{defn}
+	If $X$ is a random variable, $s \in \mathbb{R}$ then $M_X(s) = \mathbb{E}[e^{sX}]$ where $M_X$ is the moment generating function of $X$.
+\end{defn}
+
+\begin{thm}
+	For all $s$ where $M_X(s)$ is defined and finite:
+	
+	$$
+	M_X(s) = \sum_{k=0}^\infty \frac{1}{k!} \mathbb{E}[X^k] s^k
+	$$
+\end{thm}
+
+\begin{proof}
+	$\mathbb{E}[X^k]$ is called the $k$-th moment. $\mathbb{E}[X^2] = var(X) + \mathbb{E}[X]^2$
+	
+	$$
+	e^s = \sum_{k=0}^\infty \frac{s^k}{k!}
+	$$
+	
+	$$
+	\mathbb{E}[e^{sX}] = \mathbb{E}[\sum^{\infty}_{k=0} \frac{(sX)^k}{k!}] = \sum^{\infty}_{k=0} \frac{1}{k!} \mathbb{E}[X^k] s^k
+	$$
+\end{proof}
+
+For continuous distribution $Y$, we compute MGF with the help of LOTUS rule as follows:
+
+$$
+M_Y(s) = \int_{-\infty}^\infty e^{sy} f_Y(y) dy
+$$
+
+\begin{thm}
+	$$
+	M_{aX+b}(s) = e^{bs}M_X(as)
+	$$
+\end{thm}
+
+\begin{thm}
+	if $X$ and $Y$ are independent, then $M_{X+Y}(s) = M_X(s)M_Y(s)$
+\end{thm}
+
+\begin{thm}
+	$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_X(s) = M_Y(s) \in \mathbb{R} \implies F_X = F_Y$
+\end{thm}
+
+\begin{thm}
+	$\exists \epsilon > 0 \forall s \in [-\epsilon, \epsilon]: M_{Y_n}(s) \rightarrow  M_Z(s) \in \mathbb{R} \ \&  \ F_Z \text{ is continuous } \implies F_{Y_n} \rightarrow F_Z$
+\end{thm}
+
+In this case instead of two random variables, we have a sequence of random variables.
+
+\begin{thm}[Central Limit Theorem]
+	$X_1, \dots, X_n \ \ i.i.d., \ \ \mathbb{E}[X_i] = \mu, \ \ var(X_i) = \sigma^2$, $Y_n = \frac{1}{\sigma \sqrt{n}} ((\sum_{i=1}^n X_i) - n \mu)$. Then $Y_n$ converges to $\mathcal{N}(0, 1)$.
+\end{thm}
+
+\begin{thm}[Chernooff's theorem]
+	$X_1, \dots, X_n \ \ i.i.d., \sim Bern(\frac{1}{2})$, $X = X_1 + \dots + X_n, \ \ \ var(X) = n$, $t > 0: Pr[X \leq -t] = Pr[X \geq t] \leq e^{\frac{-t^2}{2\sigma^2}}$.
+\end{thm}
+
+\section{Source coding theorem}
+
+How to encode the information in the most efficient way?
+
+Model: sequence of $X_1, \dots, X_n i.i.d.$ over finite alphabet.
+
+Goal: find the most efficient encoding of the sequence.
+
+$X = (X_1, \dots, X_n)$
+
+$L(n \epsilon) = min \{ L : \exists C_n \subset A^n \ \  s.t. \ |C_n| < 2^l \ \& \ Pr[X \in C_n] \geq 1 -\epsilon \}$
+
+\begin{thm}[Shannon's source coding theorem]
+	$$
+	\forall \epsilon > 0: lim_{n \rightarrow \infty} \frac{L(n \epsilon)}{n} = H(X)
+	$$
+\end{thm}

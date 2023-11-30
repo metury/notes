@@ -1,0 +1,129 @@
+\chapter{Kontrakce a minory}
+
+\begin{definice}
+	Nechť $G = (V,E)$ je graf, $e = \{x,y\} \in E$ pak \textbf{kontrakce} hrany $e$ je operace, která vrcholy $x,y$ nahradí jedním vrcholem $v_{e}$ a pro každý vrchol $z \in V \setminus \{x,y\}$ sousedící s $x$ nebo $y$ se hrany $\{xz\},\{yz\}$ nahradí $\{v_{e}z\}$. Výsledek se značí $G.e$.
+\end{definice}
+
+\begin{lemma}[o kontrahovatelné hraně]
+	V každém 3-souvislém grafu $G = (V,E)$, který není izomorfní $K_{4}$ existuje hrana $e \in E$ taková, že $G.e$ je opět 3-souvislý graf.
+\end{lemma}
+
+\begin{tvrz}
+	Pro každou hranu $e = \{xy\} \in E$ existuje vrchol $z \in V \setminus \{x,y\}$ takový, že $G - \{x,y,z\}$ je nesouvislý, navíc každý z vrcholů $\{x,y,z\}$ má aspoň jednoho souseda v každé komponentě $G-\{x,y,z\}$.
+\end{tvrz}
+
+\begin{dukaz}
+	Víme, že $G.e$ není 3-souvislý, navíc $|V(G.e)| \geq 4$ jinak je to $K_{4}$, tedy existuje v $G.e$ vrcholový řez $R$ velikosti nejvýše 2. Jistě $v_{e} \in R$ jinak by $R$ byl řez v $G$> $R \neq \{v_{e}\}$ jinak by $\{x,y\}$ byl řez v $G$. Tedy $R = \{v_{e},z\}$ a $\{x,y,z\}$ je řez v $G$. Kdyby např. $x$ neměl žádného souseda v nějaké komponentě $C$ grafu $G - \{x,y,z\}$, tak $G - \{y,z\}$ je nesouvislý, spor s tím, že $G$ má být 3-souvislý.
+\end{dukaz}
+
+\begin{dukaz}
+	Pro spor nechť $G = (V,E)$ je protipříklad. Volme $e = \{x,y\} \in E$ a vrchol $z \in V$, komponentu $C$ grafu $G - \{x,y,z\}$ tak, aby $C$ mělo co nejméně vrcholů. Nechť $w$ je vrchol $C$ sousedící se $z$. Pro hranu $f = \{z,w\}$ použiji pomocné tvrzení: $\exists v \in V \setminus \{z,w\}: G -\{z,w,v\}$ je nesouvislý a každá jeho komponenta obsahuje vrchol sousedící s $w$. Nechť $D$ je komponenta $G - \{z,v,w\}$ neobsahující $x$ ani $y$. Tedy $D \subseteq C \setminus \{w\}: D$ obsahuje souseda $w$, ten musí být uvnitř $C$, žádná cesta uvnitř $D$ neobsahuje $x,y,z,w$ tedy $D$ je uvnitř jediné komponenty $G -\{x,y,z\}$, tedy $D$ je uvnitř $C$, tedy i uvnitř $C \setminus \{w\}$. To je spor s minimalitou $C$.
+\end{dukaz}
+
+\begin{veta}[Tutteova charakterizace 3-souvislých grafů]
+	Graf $G = (V,E)$ je 3-souvislý $\Leftrightarrow \exists$ posloupnost grafů $G_{0},G_{1},\dots ,G_{k}$, kde:
+	
+	\begin{enumerate}
+		\item $G_{0} \cong K_{4}, G_{k} \cong G$.
+		\item $\forall i = 1, \dots , k: G_{i}$ obsahuje hranu $e = \{x,y\}$ spojující dva vrcholy $x,y$ stupně $\geq 3$, $\deg(x) = \deg(y) = 3$ a $G_{i-1} \cong G_{i}.e$.
+	\end{enumerate}
+\end{veta}
+
+\begin{proof}
+	"$\Rightarrow$" Opakovaná aplikace lemma o kontrahovatelné hraně.
+	
+	"$\Leftarrow$" Nechť $G_{0}, \dots ,G_{k}$ splňuje podmínky na pravé straně. Dokážeme, že všechny grafy $G_{0}, \dots ,G_{k}$ jsou 3-souvislé. Indukcí pdole $i$ dokážeme, že $G_{i}$ je 3-souvislý. $i = 0 : K_{4}$ je 3-souvislý. $i > 0$ předpokládáme, že $G_{i-1}$ je 3-souvislý, pro spor nechť $G_{i}$ není 3-souvislý, $\exists u,v \in V(G_{i}): G_{i} - \{u,v\}$ je nesouvislý, navíc $\exists e = \{x,y\} \in E(G_{i}) = G_{i}.e = G_{i-1}$. Případy:
+	
+	\begin{enumerate}
+		\item $\{u,v\} \cap \{x,y\} = \emptyset$ $G_{i-1}$ pak není 3-souvislý. Spor.
+		\item $\{u,v\} = \{x,y\}$ pak $G_{i-1}$ je 1-souvislý. Spor.
+		\item $|\{u,v\} \cap \{x,y\}| = 1$ BŮNO: $x = u$: nelze, protože $\deg (y) \geq 3$, tedy komponenta $G_{i} - \{u,v\}$ obsahující $y$ má aspoň 2 vrcholy, tedy $G_{i}.e = G_{i-1}$ má řez $\{v, v_{e}\}$. Spor.
+	\end{enumerate}
+\end{proof}
+
+\begin{definice}
+	Graf $H$ je \textbf{minor} rafu $G$ pokud $H$ lze vyrobit z $G$ posloupností mazání hrany, kontrakce hrany, mazání vrcholu. Značení: $H \leq_{m} G$.
+\end{definice}
+
+\begin{definice}
+	Graf $F$ je \textbf{dělení} grafu $H$, pokud $F$ vznikne z $H$ tak, že se každá hrana $\{x,y\} \in E(H)$ nahradí cestou délky $\geq 1$.
+\end{definice}
+
+\begin{definice}
+	Graf $H$ je \textbf{topologický minor} grafu $G$, pokud $G$ obsahuje nějaké dělení grafu $H$ jako podgraf. Značení $H \leq_{t} G$.
+\end{definice}
+
+\begin{definice}
+	Graf $H$ je \textbf{indukovaný podgraf} grafu $G$, pokud je $H$ podgraf grafu $G$ a zároveň má všechny hrany původního grafu indukované vrcholům grafu $H$. Značení $H \leq_{i} G$. $H$ je \textbf{podgraf} grafu $G$. Značení $H \subseteq G$.
+\end{definice}
+
+\begin{pozor}
+	Platí implikace $H \leq_{i} G \Rightarrow H \subseteq G \Rightarrow H \leq_{t} G \Rightarrow H \leq_{m} G$. Ale neplatí žádná opačná implikace.
+\end{pozor}
+
+\begin{lemma}
+	$H = (V_{H}, E_{H})$ je graf, $V_{H} = \{x_{1}, x_{2}, \dots, x_{k}\}, G=(V_{G},E_{G})$ je graf. Potom $H \leq_{m} G$ iff $G$ obsahuje $k$ disjunktních souvislých neprázdných podgrafů $B_{1}, B_{2}, \dots , B_{k}$ takových, že pokud $\{x_{i}, x_{j}\} \in E_{H}$, tak $G$ obsahuje aspoň jednu hranu spojující vrchol $B_{I}$ s vrcholem $B_{j}$.
+\end{lemma}
+
+\begin{dukaz}
+	Danou vlastnost si označíme jako vlastnost p. "$\Leftarrow$" Zkontrahuji všechny hrany v $B_{i}$. Nadbytečné hrany a vrcholy odstraním. "$\Rightarrow$" Nechť $H \leq_{M} G$, tj. existuje posloupnost grafů $G_{0}, G_{1}, \dots ,G_{p}$, kde $H \cong G_{0}, G_{p} \cong G$ a pro $\forall i = 1, \dots, p: G_{i-1}$ vznikne z $G_{i}$ smazáním hrany nebo vrcholu anebo kontrakcí hrany. Dokážeme indukcí podle $i = 0, \dots, p$, že $G_{i}$ má vlastnost p. $i = 0: \forall j = 1, \dots ,k: \{x_{j}\} = B_{j}$. $i > 0$ předpokládejme $G_{i-1}$ splňuje vlastnost p. Pak přidáním vrcholu nebo hrany - nic neděláme, zůstávají stejné. Dekontrakce hrany. Pokud není v $B_{j}$ tak hotovo (zůstane stejné). Pokud ale je v $B_{j}$ tak oba nové vrcholy přidáme do $B_{j}$ a ostatní stejné.
+\end{dukaz}
+
+\begin{definice}
+	Pro uspořádání $\leq$ a množinu grafů $F = \{F_{1}, F_{2}, \dots\}$ označím $\mathcal{F}\text{orb}_{\leq}(F) := \{G \text{ graf}; \forall H \in F: H \nleq G\}$. (Plyne ze slova Forbidden, nebo-li zakázané.)
+\end{definice}
+
+\begin{definice}
+	Třída grafů $\mathcal{G}$ je \textbf{uzavřená} vůči uspořádání $\leq$ pokud $\forall G \in \mathcal{G}$ $\forall H \leq G: H \in \mathcal{G}$.
+\end{definice}
+
+\begin{pozor}
+	Třída $\mathcal{G}$ se dá přepsat jako $\mathcal{F}\text{orb}_{\leq}(F)$ pro nějakou množinu $F$ iff $\mathcal{G}$ je uzavřená vůči $\leq$.
+\end{pozor}
+
+\begin{fakt}
+	Rovinné grafy jsou uzavřené vůči $\subseteq, \leq_{i}, \leq_{t}, \leq_{m}$.
+\end{fakt}
+
+Připomenutí: $G = (V,E)$ rovinný, souvislý, má nakreslení mající $f$ stěn, potom $|V|-|E| + f = 2$. Pokud $|V| \geq 3$ tak $|E| \leq 3|V| - 6$. Pokud $|V| \geq 4$ a $G$ neobsahuje trojůhelník jako podgraf, tak $|E| \leq 2|V| - 4$.
+
+\begin{veta}[Kuratowski, Wagner]
+	Pro graf $G = (V,E)$ je ekvivalentní:
+	
+	\begin{enumerate}
+		\item $G$ je rovinný,
+		\item $G \in \mathcal{F}\text{orb}_{\leq_{t}}(K_{5},K_{3,3})$,
+		\item $G \in \mathcal{F}\text{orb}_{\leq_{m}}(K_{5},K_{3,3})$.
+	\end{enumerate}
+\end{veta}
+
+\begin{proof}
+	$1 \Rightarrow 2: G$ je rovinný $\Rightarrow$ každý topologický minor je rovinný $\Rightarrow K_{5} \not\leq_{t} G \land K_{3,3} \not\leq_{t} G \Rightarrow G \in \mathcal{F}\text{orb}_{\leq_{t}}(K_{5},K_{3,3})$.
+	
+	$1 \Rightarrow 3:$ Obdobně jako předchozí.
+	
+	$3 \Rightarrow 2: H \leq_{t} J \Rightarrow H \leq_{m} J$ a taky $H \nleq_{m} J \Rightarrow H \nleq_{t} J$. $J \in \mathcal{F}\text{orb}_{\leq_{m}}(H) \Rightarrow J \in \mathcal{F}\text{orb}_{\leq_{t}}(H)$ nebo-li $\mathcal{F}\text{orb}_{\leq_{m}}(H) \subseteq \mathcal{F}\text{orb}_{\leq_{t}}(H)$.
+	
+	$2 \Rightarrow 3:$  Připomenutí: Pro graf $H$ s maximálním stupněm $\leq 3$. $H \leq_{t} G \Leftrightarrow H \leq_{m} G$. A taky $K_{5} \leq_{m} H \Rightarrow ((K_{5} \leq_{t} H) \lor (K_{3,3} \leq_{t} H))$. Pak dokážeme obměnu ($\neg 3 \Rightarrow \neg 2$) $K_{5} \leq_{m} G \lor K_{3,3} \leq_{m} G \Rightarrow K_{5} \leq_{t} G \lor K_{3,3} \leq_{m} G \Rightarrow G \notin \mathcal{F}\text{orb}(K_{5},K_{3,3}$.
+	
+	$3 \Rightarrow 1$ Indukcí podle $|V|$. $|V| \leq 4:$ Jistě $G$ ke rovinný. Předpoklad, že $|V| \geq 5$ a $G \in \mathcal{F}\text{orb}_{\leq_{m}}(K_{5},K_{3,3})$. Nechť $k$ je vrcholová souvislost. Rozlišíme případy:
+	
+	\begin{enumerate}
+		\item $k=0$: každá komponenta je dle indukčního předpokladu rovinná $\Rightarrow G$ je rovinný.
+		\item $k=1$: Lze rozdělit graf $G$ na dva grafy $G_{1}, G_{2}$ podle dané artikulace $x$. S tím, že oba grafy mají i daný vrchol $x$. Podle IP jsou oba grafy rovinné, navíc jdou nakreslit tak, že $x$ bude vždy na vnější stěně (pomocí projekce na sféru), potom je můžeme "slepit" dohromady a máme stále rovinný graf.
+		\item $k = 2$ Obdobně rozdělím graf na $G_{1}, G_{2}$ a z nich vytvořím $G_{1}^{+}:= G_{1} \cup \{xy\}$ a $G_{2}^{+}:= G_{2} \cup \{xy\}$. Následně tvrdím: $G_{1}^{+}, G_{2}^{+} \in \mathcal{F}\text{orb}_{\leq_{m}}(K_{5},K_{3,3}).$ $G_{1}$ i $G_{2}$ obsahuje cestu $P_{1}$ a $P_{2}$ z $x$ do $y$ (jinak by $x$ nebo $y$ obsahovalo řez).
+		\begin{itemize}
+			\item $G_{1}^{+} \leq_{m} G$ (dokonce $G_{1}^{+} \leq_{m} G1 \cup P_{2} \subseteq G$).
+			\item $G_{1}^{+} \in \mathcal{F}\text{orb}_{\leq_{m}}(K_{5},K_{3,3})$ kdyby např. $K_{5} \leq_{m} G_{1}^{+} \leq_{m} G$, tak $K_{5} \leq_{m} G$ a to je spor. Dle IP $G_{1}^{+}$ i $G_{2}^{+}$ jsou rovinné, oba se dají nakreslit tak, že hrana $\{xy\}$ je na vnější stěně. Následně pak slepím $G_{1}^{+}$ a $G_{2}^{+}$ a popřípadě smažu hranu $\{xy\}$ a získám rovinný graf.
+		\end{itemize}
+		\item $k \geq 3:$ $G$ je 3-souvislý: Fakt: v rovinném nakreslení 2-souvislého grafu je každá stěna ohraničená kružnicí. A taky lemma o kontrahovatenlné hraně: $\exists e =\{xy\} \in E$ taková, že $G.e$ je 3-souvislý, tedy $G.e - v_{e}$ je 2-souvislý.
+		\begin{itemize}
+			\item Pozorování: $G.e - v_{e} = G - \{x,y\}$. Dle IP $G.e$ je rovinný. Zvolme rovinné nakreslení $G.e$. V $G.e - v_{e}$ je stěna, z níž byl smazán $v_{e}$ ohraničená kružnicí $C$. Do stěny ohraničné $C$ nakreslíme vrchol $x$. Každý soused $v_{e}$ v grafu $G.e$ leží na $C$, tedy každý soused $x$ v grafu $G$ různý od $y$ leží na $C$. Označme $N_{C}(x):$ sousedé $x$ na $C$ a podobně $N_{C}(y)$. Teď rozdělme případy.
+			\begin{enumerate}
+				\item $|N_{C}(x) \cap N_{C}(y)| \geq 3:$ to nelze, $C \cup \{x,y\}$ indukují dělení $K_{5}$.
+				\item $\exists a_{1},a_{2} \in N_{C}(x), b_{1}, b_{2} \in N_{C}(y): |\{a_{1},a_{2},b_{1},b_{2}\}| = 4$ leží na $C$ v pořadí $a_{1}, b_{1}, a_{2}, b_{2}$: to taky nelze, pak je tam $K_{3,3}$.
+				\item Nenastane ani jedna z předchozích možností. Vrcholy $N_{c}(x)$ rozdělí $C$ na cesty $P_{1},P_{2}, \dots, P_{k}, \exists j: N_{C}(y) \subseteq P_{j}$.
+			\end{enumerate}
+		\end{itemize}
+	\end{enumerate}
+\end{proof}

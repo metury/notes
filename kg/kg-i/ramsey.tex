@@ -1,0 +1,95 @@
+\chapter{Úvod do Ramseyovy teorie}
+
+"Každý velký systém obsahuje homogenní podsystém" dané velikosti.
+
+\begin{definice}
+	\textbf{Obarvení} množiny $X$ $r$ barvami (zkráceně $r$-obarvení) je libovolné zobraze-\newline ní přiřazující každému prvku z $X$ jednu z $r$ barev.
+\end{definice}
+
+\begin{veta}[Dirichletův princip, Pigeonhole principle]
+	$\forall r, n_{1}, \dots , n_{r} \in \mathbb{N}$: obarvíme-li prvky množiny $X$ $r$ barvami, pak je-li $|X| \geq 1+ \sum_{i = 1}^{r}(n_{i} - 1)$, $X$ obsahuje $n_{i}$ prvků $i$-té barvy.
+\end{veta}
+
+\begin{dukaz}
+	Triviální.
+\end{dukaz}
+
+Co kdybychom chtěli obarvit dvojice?
+
+\begin{definice}
+	Pro $k,l \in \mathbb{N}$ buď $R(k,l)$ nejmenší $N \in \mathbb{N}$ takové, že každé $2$-obarvení \textit{(BÚNO: červené a modré obarvení)} $E(K_{N})$ obsahuje červené $K_{k}$ nebo modré $K_{l}$ jako podgraf.
+\end{definice}
+
+\begin{veta}[Ramseyova věta pro $2$ barvy]
+	$\forall k,l \in \mathbb{N}: R(k,l)$ je konečné. Dokonce $R(k,l) \leq \binom{k+l-2}{k-1} = \binom{k+l-2}{l-1}$.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Určit Ramseyovská čísla $R(k,l)$ přesně je velice obtížné (už pro malé případy). Známá čísla $R(3,3) = 6$, $R(4,4) = 18$.
+
+\begin{veta}
+	$\forall k \geq 3: R(k,k) > 2^{k/2}$
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Rozšíření Ramseyovy věty na více barev a také na barvení $p$-tic vrcholů.
+
+\begin{definice}
+	Pro čísla $p,r,n_{1}, \dots , n_{r} \in \mathbb{N}$ ($p$ - velikost barevných množin, $r$ - počet barev, $n_{i}$ - velikost 1-barevných podstruktur, které chceme najít) definujeme **Ramseyovo číslo** $R_{p}(n_{1}, \dots , n_{n})$ jako nejmenší $N \in \mathbb{N}$ takové, že pro každou množinu $X$ s $|X| \geq N$ a každé $r$-obarvení množiny $\binom{X}{p}$ existuje $i \in \{ 1, \dots , n \}$ a $Y \subseteq X$ takové, že $|Y_{i}| = n_{i}$ a všechny $p$-tice z $\binom{Y}{p}$ mají $i$-tou barvu.
+\end{definice}
+
+\begin{veta}[Ramseyova věta pro $p$-tice]
+	Pro každé $p,r,n_{1}, \dots , n_{n}$ je $R_{p}(n_{1}, \dots , n_{n})$ konečné.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\section{Aplikace - Erdösova-Szekeresova věta}
+
+\begin{definice}
+	$P$ = konečná množina bodů v rovině $\mathbb{R}^{2}$. $P$ je v \textbf{obecné poloze}, pokud neobsahuje 3 body na přímce. $P$ je v \textbf{konvexní poloze}, pokud tvoří množinu vrcholů konvexního mnohoúhelníku.
+\end{definice}
+
+\begin{lemma}
+	Každá množina 5 bodů v $\mathbb{R}^{2}$ v obecné poloze obsahuje 4 body v konvexní poloze.
+\end{lemma}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\begin{veta}[Erdösova-Szekeresova věta]
+	Pro každé $r \in \mathbb{N}$ existuje nejmenší $ES(r) \in \mathbb{N}$ takové, že každá konečná množina s $\geq ES(r)$ body v $\mathbb{R}^{2}$ b obecné poloze obsahuje $r$ bodů v konvexní poloze.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Erdösova-Szekeresova domněnka je že $\forall r \geq 2: ES(r) = 2^{r-2}+1$. Zatím se zná, že to je dolní odhad a horní jako $\leq 2^{r+o(r)}$.
+
+\begin{veta}[Nekonečná verze Ramseyovy věty]
+	Pro každé $p,r \in \mathbb{N}$ a pro každé $r$-obarvení množiny $\binom{\mathbb{N}}{p}$ existuje nekonečná $A \subseteq \mathbb{N}$ taková, že všechny její $p$-tice mají v daném $r$-obarvení stejnou barvu.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Nekonečná verze implikuje konečnou. Dá se dokázat sporem, my si ji ukážeme pro $n_{1} = \dots = n_{n} = n$.
+
+\begin{lemma}[Königovo lemma]
+	V každém zakořeněném stromě, který má nekonečně mnoho vrcholů ale jen konečné stupně existuje nekonečná cest začínající v kořeni.
+\end{lemma}
+
+\begin{dukaz}(implikace konečné věty)
+	Empty.
+\end{dukaz}

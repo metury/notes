@@ -12,6 +12,11 @@
 *.cb2
 .*.lb
 
+kg/kg.pdf
+past-ii/past-ii.pdf
+teorie mnozin/temno.pdf
+toky-cesty-a-rezy/flows-paths-cuts.pdf
+
 ## Intermediate documents:
 *.dvi
 *.xdv

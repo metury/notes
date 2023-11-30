@@ -1,0 +1,342 @@
+\chapter{Srovnávání mohutností}
+
+\begin{definice}
+	\begin{itemize}
+		\item Množiny $x,y$ mají \textbf{stejnou mohutnost} (psáno $x \approx y$) pokud existuje prosté zobrazení $x$ na $y$ (nebo-li bijekce). Někdy označováno jako $x$ je \textit{ekvivalentní} $y$.
+		\item Množina $x$ má \textbf{mohutnost menší nebo rovnou} mohutnosti $y$ (psáno $x \preceq y$) pokud existuje prosté zobrazení $x$ do $y$. Někdy označováno jako $x$ je \textit{subvalentní} $y$.
+		\item $x$ má \textbf{menší mohutnost} než $y$ (psáno $x \prec y$) pokud platí $x \preceq y \land \neg (x \approx y))$.
+	\end{itemize}
+\end{definice}
+
+Pozorování: $x \subseteq y \rightarrow x \preceq y$ (identita),  $x \subset y \rightarrow x \preceq y$ (ne $x \prec y$, například $\mathbb{N} \approx \mathbb{N}\setminus\{1\})$.
+
+\begin{pozn}
+	To jestli $\preceq$ je trichotomická v **ZF** nelze rozhodnout. Přidáím axiomu výběru už ale ano.
+\end{pozn}
+
+\begin{lemma}
+	Jsou-li $x,y,z$ množiny, potom:
+	
+	\begin{enumerate}
+		\item $x \approx x$
+		\item $x \approx y \rightarrow y \approx x$
+		\item $((x \approx y) \land (y \approx z)) \rightarrow x \approx z$, tedy $\approx$ je ekvivalence.
+		\item $x \preceq x$
+		\item $x \preceq y \land y \preceq z \rightarrow x \preceq z$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Prakticky jen triviální, stačí najít dané zobrazení.
+	
+	\begin{itemize}
+		\item $Id$
+		\item $F \rightarrow F^{-1}$
+		\item $F \land G \rightarrow F \circ G$
+		\item $Id$
+		\item $F \land G \rightarrow F \circ G$
+	\end{itemize}  
+\end{proof}
+
+Pozorování: $x \approx y \rightarrow (x \preceq y \land y \preceq x)$
+
+\begin{thm}[Cantor-Bernstein]
+	$$
+	(x \preceq y \land y \preceq x) \rightarrow x \approx y
+	$$
+\end{thm}
+
+\begin{proof}
+	Důkaz se provede pomocí grafů. Také bude potřeba dodatečné lemma, které bude později. Jako graf si představíme bipartitní, kde jedna partita je $x$ a druhá $y$. Následně přidáme orientované hrany jakožto funkce $f$ a $g$, kde $f: x \to y, g: y \to x$ jsou prosté zobrazení. Teď se podíváme na komponenty grafu.
+	
+	\begin{enumerate}
+		\item Buď může být kružnice sudé délky.
+		\item Nebo cesta s počátkem.
+		\item Anebo cesty obousměrné.
+	\end{enumerate}
+	
+	Nyní uvažme “indukovaná” zobrazení: $(\hat{f}): \mathcal{P}(x) \to \mathcal{P}(y)$. Tahle funkce je monotónní vzhledem k inkluzi. Definujeme $H: \mathcal{P}(x) \to \mathcal{P}(x)$ takto: Pro $u \subseteq x$ nechť $H(u) = x - g[y - f[u]]$. $H$ je monotónní vzhledem k inkluzi. $u_{1} \subseteq u_{2} \Rightarrow f[u_{1}] \subseteq f[u_{2}] \Rightarrow y - f[u_{1}] \supseteq y - f[u_{2}] \Rightarrow$, $\Rightarrow g[y - f[u_{1}] \supseteq g[y - f[u_{2}] \Rightarrow H(u_{1}) \subseteq H(u_{2})$. Podle lemma o pevném bodě $(\exists c)(H(c) = c)$, tedy $x - g[y - f[c]] = c \Rightarrow x - c = g[y - f[c]]$. Tedy $g^{-1}$ je prosté zobrazení $x\setminus c$ na $y \setminus f[c]$. Stačí definovat $h: x \to y$ jako:
+	
+	$$
+	h(u) =
+	\left\{
+	\begin{array}{ll}
+		f(u) & \text{pokud } u = c \\
+		g^{-1}(u) & \text{jinak}
+	\end{array}
+	\right.
+	$$
+	
+	$h$ je prosté zobrazení $x$ na $y$.
+\end{proof}
+
+\begin{definice}
+	Zobrazení $H: \mathcal{P}(x) \to \mathcal{P}(x)$ je \textbf{monotónní} (vzhledem k inkluzi) pokud pro každé dvě množiny $u,v \subseteq x$ platí $u \subseteq v \rightarrow H(u) \subseteq H(v)$.
+\end{definice}
+
+\begin{lemma}
+	Je-li $H: \mathcal{P}(x) \to \mathcal{P}(x)$ zobrazení monotónní vzhledem k inkluzi, pak existuje podmnožina $c \subseteq x$ taková, že $H(c) = c$. Též označován jako \textbf{pevný bod}.
+\end{lemma}
+
+\begin{proof}
+	$A = \{u, u \subseteq x \land u \subseteq H(u)\}$, $c = \bigcup A$ neboli supremum. $u \in A$ pak dostanu dvě možnosti:
+	
+	\begin{enumerate}
+		\item $u \subseteq c$
+		\item $u \subseteq H(u) \subseteq H(c)$ (díky tomu, že $H$ je monotónní)
+	\end{enumerate}
+	
+	Z toho pak plyne, že $H(c)$ je majoranta a tedy $c \subseteq H(c)$. Pak z monotonie platí $H(c) \subseteq H(H(c))$, tedy $H(c) \in A$, takže $H(c) \subseteq c$, nebo-li $c$ je majoranta. Z obou inkluzí pak plyne, že $c = H(c)$.
+\end{proof}
+
+\textit{Cvičení: Ilustrace monotńní funkce $h: [0,1] \to [0,1]$.}
+
+\textit{Cvičení: $A \subseteq \mathcal{P}(x)$ a uspořádání $\subseteq$, pak $\sup_{\subseteq} A = \bigcup A$ a $\inf_{\subseteq} A = \bigcap A$.}
+
+\begin{prikl}
+	\begin{itemize}
+		\item $\omega = \mathbb{N}_{0}$ pak $\omega \approx \omega \times \omega$
+		\item $f: \omega \to \omega \times \omega$ jako $f(n) = (0,n)$
+		\item $g: \omega\times\omega \to \omega$ jako $g((m,n)) = 2^{m}3^{n}$
+		\item Podle Věty platí $\omega \approx \omega \times \omega$.
+		item $h: \omega\to\omega\times\omega$ jako $h((m,n)) = 2^{m}(2n+1)-1$
+	\end{itemize}
+\end{prikl}
+
+\textit{Cvičení: Ověřte, že $g$ je prosté a $h$ je bijekce.}
+
+\textit{Cvičení: $\mathbb{N} \approx \mathbb{Q}$}
+
+\textit{Cvičení: $[0,1] \approx [0,1] \times [0,1]$}
+
+\begin{lemma}
+	Nechť $x,y,z,x_{1},y_{1}$ jsou množiny, pak:
+	
+	\begin{enumerate}
+		\item $x \times y \approx y \times x$
+		\item $x \times (y \times z) \approx (x \times y) \times z$
+		\item $(x \approx x_{1} \land y \approx y_{1}) \rightarrow (x \times y \approx x_{1} \times y_{1})$
+		\item $x \approx y \rightarrow \mathcal{P}(x) \approx \mathcal{P}(y)$
+		\item $\mathcal{P}(X) \approx ^{x}2$, kde $2 = \{\emptyset,\{\emptyset\}\}$
+	\end{enumerate}
+\end{lemma}
+ 
+\begin{proof}
+	Vždy jde o to najít vhodné funkce.
+	
+	\begin{enumerate}
+		\item $(u,v) \to (v,u)$
+		\item $(u,(b,c)) \to ((u,b),c)$
+		\item $f: x \to x_{1}, g: y \to y_{1}: (a,b) \to (f(a),g(b))$
+		\item $f:x \to y, u \to f[u]$ (izomorfismus vzhledem k inkluzi)
+		\item Pro $u \subseteq x$ definujeme charakteristickou funkci $\chi_{a}:x \to 2$, kde;
+	\end{enumerate}
+	
+	$$
+	\chi_{a}(v) =
+	\left\{
+	\begin{array}{ll}
+		1 & v \in a \\
+		0 & v \notin a
+	\end{array}
+	\right.
+	$$
+	
+	Zobrazení $\{(a, \chi_{a}); a \subseteq x\}$ je prosté a zobrazuje $\mathcal{P}(x)$ na $^{x}2$.
+\end{proof}
+
+\section{Konečné množiny}
+
+\begin{definice}[Tarski]
+	Množina $x$ je \textbf{konečná}, označíme $Fin(x)$, pokud každá neprázdná podmnožina $\mathcal{P}(x)$ má \textbf{maximální} prvek vzhledem k inkluzi.
+\end{definice}
+
+\textit{Cvičení: Napište definici pomocí formule.}
+
+Pozorování: $x$ je konečná právě tehdy, když každá neprázdná podmnožina $\mathcal{P}(x)$ má minimální prvek vzhledem k inkluzi.
+
+\begin{proof}
+	Uvažme $d: \mathcal{P}(x) \to \mathcal{P}(x)$ jako $d(u) = x \setminus u$. $u \subseteq v \Leftrightarrow d(u) \supseteq d(v)$
+\end{proof}
+
+\begin{definice}
+	Množina $a$ je \textbf{Dedekindovsky konečná} pokud má větší mohutnost než každá vlastní podmnožina $b \subset a$. (Nebo-li neexistuje prosté zobrazení $a$ na $b$.)
+\end{definice}
+
+\begin{lemma}
+	Je-li množina $a$ konečná tak je i Dedekindovsky konečná.
+\end{lemma}
+
+\begin{proof}
+	Nutno dokázat, že pokud $b \subset a$ pak $b \preceq a$. Sporem: $b \approx a$. Nechť $y = \{b, b \subset a \land b \approx a\}, y \neq \emptyset, y \in \mathcal{P}(a)$. Nechť $c \in y$ je minimální prvek $y$ vzhledem k $\subseteq$. Nechť $f: a \to a$ je prosté zobrazení $a$ na $c$. $d = f[c]$. $f \upharpoonright c$ je prosté zobrazení $c$ na $d$. Tedy $c \approx d$, tedy $d \in y$. $d \subseteq c: (\exists x)( x \in a \setminus c)$ pak $f(x) \in c \setminus d$. Spor s minimalitou volby $c$.
+\end{proof}
+
+\begin{pozn}
+	Opačná implikace v \textbf{ZF} není dokazatelná.
+\end{pozn}
+
+
+\begin{itemize}
+	\item Existuje lineární uspořádání $\leq$, které je dobré, pak i $\geq$ je dobré.
+	\item Existuje lineární uspořádání a každá 2 lineární uspořádání jsou izomorfní.
+	\item $x$ je konečná $\Leftrightarrow \mathcal{P}(\mathcal{P}(x))$ je dedekindovsky konečná.
+\end{itemize}
+
+\begin{thm}
+	\begin{enumerate}
+		\item Je-li $a$ konečná uspořádaná množina (relací $\leq$) pak každá její neprázdná podmnožina $b \subseteq a$ má maximální prvek.
+		\item Každé lineární uspořádání na konečné množině je dobré.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Pro každé $x \in a$ uvažme $| \leftarrow , x] = \{y, y \in a \land y \leq x\}$.
+		\begin{itemize}
+			\item $u = \{|\leftarrow , x], x \in b\}, u \subseteq \mathcal{P}(a), u \neq \emptyset$
+			\item Z konečnosti $a$ existuje $m \in b$ takové, že $| \leftarrow ,m]$ je maximální prvek vzhledem k $\subseteq$.
+			\item $x \leq y \Leftrightarrow | \leftarrow , x] < | \leftarrow , y]$
+			\item Tedy $m$ je maximální prvek $b$ vzhledem k $\subseteq$.
+			\item Minimální prvek se najde podobně, akorát to bude horní množina a minimální prvek.
+		\end{itemize}
+		\item Minimální prvek v lineárním uspořádání je už nejmenší.
+	\end{enumerate}
+\end{proof}
+
+\begin{definice}
+	$F$ je zobrazení $A_{1}$ do $A_{2}$, $R_{1},R_{2}$ jsou relace. $F$ je \textbf{izomorfismus} tříd $A_{1},A_{2}$ vzhledem k $R_{1},R_{2}$ pokud $F$ je prosté zobrazení $A_{1}$ na $A_{2}$ a $(\forall x \in A_{1})(\forall y \in A_{2})(x,y) \in R_{1} \leftrightarrow (F(x),F(y)) \in R_{2}$.
+\end{definice}
+
+\begin{definice}
+	$A$ je mmožina uspořádaná relací $R$. $B$ je mmožina uspořádaná relací $S$. Zobrazení $F$ je \textbf{počátkové vnoření} $A$ do $B$, pokud $A_{1} = Dom(F)$ je dolní podmnožina $A$ a $B_{1} = Rng(F)$ je dolní podmnožina $B$. A $F$ je izomorfismus $A_{1}$ a $B_{1}$ vzhledem k $R,S$.
+\end{definice}
+
+\begin{lemma}
+	Nechť $F,G$ jsou počátkové vnoření dobře uspořádané množiny $A$ do dobře uspořádané množiny $B$. Potom $F \subseteq G$ nebo $G \subseteq F$.
+\end{lemma}
+
+\begin{proof}
+	Nechť $R$ je dobré uspořádání množiny $A$. Nechť $S$ je dobré uspořádání množiny $B$. $Dom(F), Dom(G)$ jsou dolní podmnožiny $A$. $R$ je lineární, tedy $Dom(F) \leq Dom(G) \lor Dom(G) \leq Dom(F)$. (BÚNO: $Dom(F) \leq Dom(G)$, jinak přejmenuji množiny). Dokážeme $(\forall x \in Dom(F)) F(x) = G(x)$. Sporem Nechť $x$ je nejmenší (vzhledem k $R$) prvek množiny $\{z, z \in A \land G(z) \neq F(z)\}$. Tedy $\forall y <_{R} x : F(y) = G(y)$. Z linearity $S$ je $F(x) <_{S} G(x) \lor G(x) <_{S} F(x)$ (BÚNO: $F(x) <_{S} G(x)$). Nechť $b = F(x)$. Je-li $z \in Dom(G)$ pak buď: $z <_{R} x$ $G(z) = F(z)$, $z \geq_{R} x$ $F(x) = b$. Pak $G(z) \geq_{S} G(x) >_{S} F(x) = b$. V obou případech $b \notin Rng(G)$ a tedy $Rng(G)$ není dolní množina a to je spor.
+\end{proof}
+
+\textit{Cvičení: Lineární uspořádání jsou každé dvě dolní množiny porovnatelné inkluzí.}
+
+\textit{Cvičení: Co když místo dobrého uspořádání bude jen lineární uspořádání.}
+
+\begin{thm}[O porovnávání dobrých uspořádání.]
+	$A$ je množina dobře uspořádaná relací $R$.	$B$ je množina dobře uspořádaná relací $S$. Pak existuje právě jedno zobrazení $F$, které je izomorfismus $A$ a dolní množiny $B$, nebo $B$ a dolní množiny $A$.
+\end{thm}
+
+\begin{proof}
+	$P$ je množina všech počátečních vnoření $A$ do $B$. Nechť $F = \bigcup P$. $F$ je zobrazení: Když $(x,y_{1})(x,y_{2}) \in F$ existuje počáteční vnoření $F_{1}, F_{2}$, že $(x,y_{1}) \in F_{1}, (x,y_{2}) \in F_{2}$. Podle lemma $F_{1} \subseteq F_{2}$ nebo naopak. Předpokládejme, že nastala tato situace. Tedy $(x,y_{1}) \in F_{2}; F_{2}$ je zobrazení, tedy $y_{1} = y_{2}$. $F$ je počáteční vnoření: Když $x_{1} <_{R} x_{2} \in Dom(F)$ tak existuje počáteční vnoření $F'$ že $x_{2} \in Dom(F')$. Tedy $x_{1} \in Dom(F') \subseteq Dom(F)$. Podobně pro $Rng(F) = \bigcup Rng(F')$ je dolní. $F(x_{1}) = F'(x_{1}) <_{S} F'(x_{2}) = F(x_{2})$, $Dom (F) = A \lor Rng(F) = B$. Sporem: $A \setminus Dom(F), B \setminus Rng(F)$ jsou neprázdné, mající nejmenší prvky $a,b$. Definujeme $F'= F \cup \{(a,b)\}$ je počáteční vnoření $F' \in P, F' \subseteq F$ a to je spor.
+\end{proof}
+
+\textit{Cvičení: Jednoznačnost $F$.}
+
+\textit{Cvičení: Sjednocení dolních množin je dolní množina.}
+
+\begin{thm}
+	$a$ je konečná množina, pak každé lineární uspořádání na $a$ jsou izomorfní.
+\end{thm}
+
+\begin{proof}
+	$R,S$ jsou dvě lineární uspořádání a také dobrá uspořádání. $(a,R)$ je izomorfní dolní množině $(a,S)$ nebo dolní množina $(a,R)$ je izomorfní $(a,S)$. Dolní množina $b, b \approx a$, z Dedekindovy konečnosti platí, že $a = b$.
+\end{proof}
+
+\begin{lemma}[Zachovávání konečnosti.]
+	\begin{enumerate}
+		\item $(Fin(x) \land y \subseteq x) \rightarrow Fin(y)$
+		\item $(Fin(x) \land y \approx x) \rightarrow Fin(y)$
+		\item $(Fin(x) \land y \preceq x) \rightarrow Fin(y)$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item $w \subseteq \mathcal{P}(y) \subseteq \mathcal{P}(x)$
+		\item $\mathcal{P}(y)$ je izomorfní $\mathcal{P}(x)$
+		\item Plyne z 1 a 2.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}[sjednocení konečných množin]
+	\begin{enumerate}
+		\item $Fin(x) \land Fin(y) \rightarrow Fin(x \cup y)$
+		\item $Fin(x) \rightarrow (\forall y) Fin(x \cup \{y\})$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	$w \subseteq \mathcal{P}(x \cup y)$ neprázdná. $w_{1} = \{ u, (\exists t \in w)( u = t \cap x)\} \subseteq \mathcal{P}(x)$. Má maximální prvek $v_{1}$. $w_{2} = \{u, (\exists t \in w)( t \cap x = v_{1} \land t \cap y = u)\} \subseteq \mathcal{P}(y)$. Má maximální prvek $v_{2}$. $v_{1} \cup v_{2}$ je maximální prvek $w$.
+\end{proof} 
+
+\begin{definice}
+	Třída všech konečných množin $Fin = \{x, Fin(x)\}$.
+\end{definice}
+
+\begin{thm}[Princip indukce pro konečné množiny]
+	Je-li $X$ třída, pro kterou platí:
+	
+	\begin{enumerate}
+		\item $\emptyset \in X$,
+		\item $x \in X \rightarrow (\forall y)(x \cup \{y\} \in X)$, pak $Fin \subseteq X$.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Sporem: Pokud $x \in Fin \setminus X$. nechť $w = \{v, v \subseteq x \land v \in X\}$. Podle 1: $\emptyset \in w$. $w \subseteq \mathcal{P}(x)$, neprázdná. $w$ má maximální prvek $v_{0}$. $v_{0} \subseteq x$. $v_{0} \in X$, tedy $v_{0} \neq x$ a $v_{0} \subset X$. Tedy existuje $y \in x \setminus v_{0}$. Nechť $v_{1} = v_{0} \cup \{y\}$. Podle 2: $v_{1} \in X$. Tedy $v_{1} \in w$, spor s maximalitou $v_{0}$.
+\end{proof}
+
+\begin{lemma}
+	$Fin (x) \rightarrow Fin(\mathcal{P}(x))$
+\end{lemma}
+
+\begin{proof}
+	Indukcí: Nechť $X = \{x, Fin(\mathcal{P}(x))\}$. $\emptyset \in X$, protože $\mathcal{P}(\emptyset) = \{\emptyset\}$ je konečná. Nechť $x \in X, y$ je množina. Chceme aby $x \cup \{y\} \in X$. BÚNO: $y \notin x$ (jinak triviální). Rozdělíme $\mathcal{P}(x \cup \{y\})$ na dvě části: $\mathcal{P}(x \cup \{y\}) = \mathcal{P}(x) \cup (\mathcal{P}(x \cup \{y\}) \setminus \mathcal{P}(x))$. Platí $\mathcal{P}(x) \approx z$, kde $z$ se rovná předchozímu druhému prvku v sjednocení. Pro $u \in \mathcal{P}(x)$ definujeme $f(u) = u \cup \{y\}$. $f$ je prosté zobrazení $\mathcal{P}(x)$ na $z$. Podle předpokladu $Fin(\mathcal{P}(x))$. Podle lemma $Fin(z)$. Podle lemma o sjednocení $Fin(\mathcal{P}(x) \cup z)$. Podle principu indukce $Fin \subseteq X$.
+\end{proof}
+
+\begin{dusl}
+	$Fin(x) \cap Fin(y) \rightarrow Fin(x \times y)$
+\end{dusl}
+
+\begin{proof}
+	Nechť $z = x \cup y$, víme $Fin(z)$. $x \times y \subseteq z \times z \subseteq \mathcal{P}(\mathcal{P}(z))$.
+\end{proof}
+
+\begin{lemma}[sjednocení konečně mnoha konečných množin je konečná množina]
+	Je-li $Fin(a)$ a $(\forall b \in a) Fin(b)$, pak $Fin(\bigcup a)$.
+\end{lemma}
+
+\begin{proof}
+	Indukcí: $X = \{x, x \subseteq Fin \rightarrow Fin(\bigcup x)\}$.
+	
+	\begin{enumerate}
+		\item $\emptyset \in X$, protože $\bigcup \emptyset = \emptyset$.
+		\item Nechť $x \in X, y$ množina. Chceme aby $x \cup \{y\} \in X$.
+	\end{enumerate}
+	
+	Předpokládejme, že $x \cup \{y\} \subseteq Fin$. Speciálně $x \subseteq Fin$. $\bigcup (x \cup \{y\}) = \bigcup x \cup y$. Obě dvě jsou konečné a sjednocení tím pádem je také konečné. Tedy $x \cup \{y\} \in X$. Podle principu indukce $Fin \subseteq X$.
+\end{proof}
+
+\begin{dusl}[Dirichletův princip pro konečné množiny.]
+	Je-li nekonečná množina sjednocení konečně mnoha množin, pak jedna z nich musí být nekonečná.
+\end{dusl}
+
+\begin{lemma}[Každá konečná množina je srovnatelná se všemi množinami.]
+	$Fin(x) \rightarrow (\forall y)( y \preceq x \lor x \preceq y)$
+\end{lemma}
+
+\begin{proof}
+	Indukcí: $x = \{x, (\forall y)(y \preceq x \lor x \preceq y)\}$.
+	
+	\begin{enumerate}
+		\item $\emptyset \in X$, protože $(\forall y) \emptyset \subseteq y$ tedy $\emptyset \preceq y$.
+		\item Nechť $x \in X, u$ je množina. BÚNO: $u \notin X$. Chceme $x \cup \{u\} \in X$, nechť $X$ je množina.
+	\end{enumerate}
+	
+	Když $y \preceq x$, pak $x \preceq x \cup \{u\}$ z tranzitivity $y \preceq x \cup \{u\}$. Nechť $x \prec y$. $g$ je prosté zobrazení $x$ do $y$. Nechť $v \in X \setminus Rng(g)$. Definujeme $h = g \cup \{(u,v)\}, h$ je prosté zobrazení $x \cup \{u\}$ do $y$. Tedy $x \cup \{u\} \preceq y$. Z principu indukce $Fin \subseteq X$.
+\end{proof}
+
+\textit{Cvičení: $Fin(x)$ a $f: x \to y$, pak $Rng (f) \preceq x$ (pomocí indukce).}
+
+\textit{Cvičení: $(\forall x) Fin(x)$ lze dobře uspořádat (indukcí).}

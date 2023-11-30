@@ -1,0 +1,113 @@
+\chapter{Akce grup a počítání orbit}
+
+Grupa $\Gamma$ je multiplikativní: $\alpha, \beta \in \Gamma$ tak i $\alpha\beta \in \Gamma$ součin je v $\Gamma$. $1_{\Gamma}$ neutrální prvek v $\Gamma$ ($\forall \alpha \in \Gamma: 1_{\Gamma} \alpha = \alpha 1_{\Gamma} = \alpha$) a $\alpha^{-1}$ inverzní prvek k $\alpha \in \Gamma$ ($\alpha \alpha^{-1} = \alpha^{-1} \alpha = 1_{\Gamma}$).
+
+\begin{definice}
+	\textbf{Akce} grupy $\Gamma$ na množině $\mathcal{M}$ je binární operace $(\_ \bullet \_):\Gamma \times \mathcal{M} \to \mathcal{M}$. Splňující:
+	
+	\begin{enumerate}
+		\item $\forall p \in \mathcal{M}: 1_{\Gamma} \bullet p = p$,
+		\item $\forall \alpha, \beta \in \Gamma, \forall p \in \mathcal{M}: \alpha \bullet (\beta \bullet p) = (\alpha \beta)\bullet p$.
+	\end{enumerate}
+\end{definice}
+
+\begin{pozor}
+	$\bullet$ je akce $\Gamma$ na $\mathcal{M}$:
+	
+	\begin{enumerate}
+		\item pokud pro $\alpha \in \Gamma, p \in \mathcal{M}: \alpha \bullet p = q \in \mathcal{M}$, pak $(\alpha^{-1})\bullet q = p$. Protože $(\alpha^{-1}) \bullet q = (\alpha^{-1} \alpha) \bullet p 1_{\Gamma} p = p$
+		\item pro pevné $\alpha \in \Gamma$, funkce $p \to \alpha p$ je bijekce $\mathcal{M} \to \mathcal{M}$
+	\end{enumerate}
+\end{pozor}
+
+\begin{definice}
+	Mějme akci $\Gamma$ na $\mathcal{M}$. Prvky $p,q \in \mathcal{M}$ jsou \textbf{ekvivalentní} (vůči $\bullet$) pokud $\exists \alpha \in \Gamma: \alpha \bullet p = q$. Značení $p \simeq q$.
+\end{definice}
+
+\begin{pozor}
+	$\simeq$ je ekvivalence na množině $\mathcal{M}$:
+	
+	\begin{enumerate}
+		\item $p \simeq p: 1_{\Gamma} \bullet p = p$
+		\item $p \simeq q \Rightarrow q \simeq p: \alpha \bullet p = q \Rightarrow (\alpha^{-1}) \bullet q = p$
+		\item $(p \simeq q \land q \simeq r) \Rightarrow p \simeq r: (\alpha \bullet p = q \land \beta \bullet q = r) \Rightarrow (\beta \alpha) \bullet p = r$
+	\end{enumerate}
+\end{pozor}
+
+\begin{definice}
+	Třídy $\simeq$ se nazývají \textbf{orbity}, orbitu obsahující $p \in \mathcal{M}$ značím $[p]$ (nebo $[p]_{\mathcal{M},\bullet})$. Množinu orbit značím $\mathcal{M}/\Gamma$.
+\end{definice}
+
+\begin{definice}
+	\textbf{Stabilizátor} prvku $p \in \mathcal{M}$, značený $\text{Stab}(p)$, je $\{\alpha \in \Gamma: \alpha \bullet p = p\}$.
+\end{definice}
+
+\begin{pozor}
+	$\text{Stab}(p)$ je podgrupa $\Gamma$.
+\end{pozor}
+
+\begin{definice}
+	\textbf{Množina pevných bodů} pro $\alpha \in \Gamma$, značená $\text{Fix}(\alpha)$, je $\{p \in \mathcal{M}, \alpha \bullet p = p\}$.
+\end{definice}
+
+\begin{lemma}[o orbitě a stabilizátoru]
+	Nechť $\Gamma$ je konečná grupa s akcí na $\mathcal{M}$. Potom
+	
+	$$
+	\forall p \in \mathcal{M}: |[p]| \cdot |\text{Stab}(p)| = |\Gamma|
+	$$
+\end{lemma}
+
+\begin{proof}
+	Volme $p \in \mathcal{M}$, nechť $k := |[p]|, [p] = \{q_{1},q_{2},\dots,q_{k}\}$, kde $q_{1}:=p$. Označme $\Gamma_{i} := \{\alpha \in \Gamma: \alpha \bullet p = q_{i}\}, i = 1,2,\dots,k$. Tedy $\Gamma_{1} = \text{Stab}(p)$. Zjevně $\Gamma_{1}, \Gamma_{2}, \dots , \Gamma_{k}$ jsou disjunktní a jejich sjednocení je $\Gamma$. Tvrdím, že $|\Gamma_{1}| = |\Gamma_{2}| = \dots = |\Gamma_{k}|$. Volme $i\geq 2$ a dokážeme $|\Gamma_{1}| = |\Gamma_{i}|$. Jistě $\Gamma_{i}$ je neprázdná, protože jinak by $p \not\simeq q_{i}$ a $q_{i} \notin [p]$. Volme libovolné $\alpha_{0} \in \Gamma_{i}$. Uvážím zobrazení $\Phi : \Gamma_{1} \to \Gamma_{i}$ definované pro $\beta \in \Gamma_{1}: \Phi(\beta) = \alpha_{0} \beta$. Tvrdím, že $\Phi$ je bijekce $\Gamma_{1} \to \Gamma_{i}$. Ověřme:
+	
+	\begin{enumerate}
+		\item $\forall \beta \in \Gamma_{1} : \Phi(\beta) \in \Gamma_{i}$
+		
+		$$
+		\Phi(\beta) \bullet p = (\alpha_{0}\beta) \bullet p = \alpha_{0} \bullet (\beta \bullet p) = q_{i}
+		$$
+		
+		\item $\Phi$ je prosté
+		\begin{itemize}
+			\item Předpokládejme, že $\exists \beta_{1},\beta_{2} \in \Gamma_{1}: \Phi(\beta_{1}) = \Phi(\beta_{2})$, tj. $\alpha_{0} \beta_{1} = \alpha_{0}\beta_{2}$, tj. $\beta_{1} = \beta_{2}$.
+		\end{itemize}
+		\item $\Phi$ je na
+		\begin{itemize}
+			\item Volme $\gamma \in \Gamma_{i}$ hledejme $\beta \in \Gamma_{1}$ t.ž.
+		\end{itemize}
+		
+		$$
+		\Phi(\beta) = \gamma \Leftrightarrow \alpha_{0} \beta = \gamma \Leftrightarrow \beta = \alpha_{0}^{-1} \gamma \in \Gamma_{1}
+		$$
+	\end{enumerate}
+\end{proof}
+
+\begin{veta}["Burnsideovo lemma", "Cauchy-Froheriova fromule"]
+	Nechť $\Gamma$ je koneřná grupa s akcí na množině $\mathcal{M}$. Potom:
+	
+	\begin{enumerate}
+		\item (\textit{jednoduchá verze}) pokud $\mathcal{M}$ je konečná, tak $|\mathcal{M}/\Gamma| = \frac{1}{|\Gamma| }\sum_{\alpha \in \Gamma} |\text{Fix}(\alpha)|$. Nebo-li "počet orbit je průměrný počet bodů".
+		\item (\textit{obecná verze}) Nechť má každá orbita $o \in \mathcal{M}/\Gamma$ přiřazenou váhu $||o|| \in \mathbb{N}_{0}$ tak, že pro každé $n \in \mathbb{N}_{0}$ existuje jen konečně mnoho orbit váhy $n$. Potom:
+		
+		$$
+		\sum_{o \in \mathcal{M}/\Gamma}x^{||o||} = \frac{1}{|\Gamma|}\sum_{\alpha \in \Gamma} \sum_{p \in \text{Fix}(\alpha)} x^{||[p]||}
+		$$
+	\end{enumerate}
+\end{veta}
+
+\begin{dukaz}
+	Levou stranu si označím $LS(x)$ a pravou $PS(x)$. $2 \Rightarrow 1$ Zvolme $||o|| = 0$ pro každé $o \in \mathcal{M}/\Gamma$. Definujeme $\mathcal{D} := \{(\alpha ,p) \in \Gamma \times \mathcal{M}; \alpha \bullet p = p\}$ a $S = \sum_{(\alpha, p) \in \mathcal{D}}x^{||[p]||}$. Pak počítáme dvěma způsoby.
+	
+	$$
+	(1) S = \sum_{\alpha \in \Gamma} \sum_{p \in \mathcal{M}; (\alpha,p) \in \mathcal{D}} x^{||[p]||} = \sum_{\alpha \in \Gamma}\sum_{p \in \text{Fix}(\alpha)} x^{||[p]||} = |\Gamma| \cdot PS(x)
+	$$
+	
+	$$
+	(2) S = \sum_{p \in \mathcal{M}} \sum_{\alpha \in \Gamma; (\alpha, p) \in \mathcal{D}} x^{||[p]||} = \sum_{p \in \mathcal{M}} |\text{Stab}(p)| \cdot x^{||[p]||} =
+	$$
+	
+	$$
+	= \sum_{p \in \mathcal{M}} \frac{|\Gamma|}{||[p]||}x^{||[p]||} = \sum_{o \in \mathcal{M}/\Gamma}\sum_{p \in o} \frac{|\Gamma|}{|o|}x^{||o||} = |\Gamma| \sum_{o \in \mathcal{M}/\Gamma}x^{||o||} = |\Gamma| \cdot LS(x)
+	$$
+\end{dukaz}

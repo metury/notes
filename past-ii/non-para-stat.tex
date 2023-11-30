@@ -1,0 +1,93 @@
+\chapter{Non-parametric statistics}
+
+In parametric statistics, we assume that the data comes from a known distribution and we try to estimate a parameter of that distribution. In non-parametric statistics, we don't assume anything about the distribution of the data.
+
+\section{Permutation test}
+
+is a technique to decide whether observed random variables come from the same distribution or not.
+
+$$
+X_1, \dots, X_m
+$$
+
+$$
+Y_1, \dots, Y_n
+$$
+
+$H_0:$ All of these random variables come from the same distribution.
+
+The quantity computed from values in a sample (statistic) $T$ is the difference of means of Xs and Ys.
+
+$$
+T := \bar{X}_m - \bar{Y}_n
+$$
+
+Alternatively we can use the two-sided test:
+
+$$
+T := \vert \bar{X}_m - \bar{Y}_n \vert
+$$
+
+We pick a paramater $\gamma$ and if $T \geq \gamma$ then we reject $H_0$. In order to decide $\gamma$, we want our test to be statistically significant. Hence the following must hold: \newline $Pr[\text{wrong rejection} ] < \alpha = 0.05$
+
+So we will compute $\gamma$ based on the set of all measured values. Next, the observations of groups $X$ and $Y$ are pooled, and the difference in sample means is calculated and recorded for every possible way of dividing the pooled values into two groups of size $\vert X \vert$ and $\vert Y \vert$. The set of these calculated differences is the exact distribution of possible differences under the null hypothesis that group labels are exchangeable.The p-value of the test is calculated as the proportion of sampled permutations where the difference in means was greater than $T$.
+
+If $(m+n)!$ is too big, we can use a random permutation test. We will generate $k$ random permutations and compute the test statistic for each of them.
+
+\section{One-sampled Sign test}
+
+$X_1, \dots X_n \ i.i.d. $ They have unknown distribution which is continuous, has median $\mu$, possibly mean $\mu$ and is symmetric around $\mu$.
+
+$H_0: \mu = 0$
+
+$Y_i = sgn(X_i)$ is either 1 or 0
+
+% TODO: what happens in case when all Xs are zeros? Do we just skip them?
+
+$Y = \sum Y_i \sim Bin(n, \frac{1}{2})$ assuming $H_0$. Next, we consider the dsitrubution of $Y$ and compute the quantiles based on $\alpha$. If $Y > y_{1-\frac{\alpha}{2}}$ or $Y < y_{\frac{\alpha}{2}}$ then we reject $H_0$.
+
+\section{Paired Sign test}
+
+$(X_1, Y_2), \dots , (X_n, Y_n)$
+
+$H_0 : \mathbb{E}[X]  = \mathbb{E}[Y]$ alternatively $\mathbb{E}[X-Y] = 0$
+
+We create a new variable $Z_i = X_i - Y_i $ and we apply the one-sample sign test on $Z_i$.
+
+\section{Wilcoxon signed-rank test}
+
+The one-sample Wilcoxon signed-rank test can be used to test whether data comes from a symmetric population with a specified median.
+
+$X_1, \dots, X_n$ median is $0$
+
+$H_0: \mu = 0$
+
+We sort $\vert X_1 \vert, \dots, \vert X_n \vert$ and assign ranks $r_1, \dots, r_n$ to them. In case the numbers are the same, we compute the mean of the range. Then we compute $T = \sum_{i=1}^n r_i sgn(X_i)$ which can be computed as $T = T^+ - T^-$
+
+We reject the null hypothesis if $T$ is too large or too small.
+
+\section{Mann-Whitney U-test}
+
+2-sample non-parametric test, which checks whether two samples come from the same distribution.
+
+We compute statistics $U = \sum^{|X|}_i \sum^{|Y|}_j S(X_i, Y_j)$
+
+where $S(X_i, Y_j) = 0$ if $X_i > Y_j$, $S(X_i, Y_j) = 1$ when it is the other way around and $\frac{1}{2}$ if they are equal.
+
+It is a form of a permutation test.
+
+\section{Consequences of statistical designs}
+
+\subsection{Simpson's paradox}
+
+Simpson's paradox is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined.
+
+\begin{example}
+	Females at Harvard have overall smaller success rate than males. However, when compared their success rates in separate majors, females usually dominate. This means that most of the females apply to more competitive majors.
+\end{example}
+
+\subsection{Time dependency}
+
+$X_1, \dots X_n$ all tests assume $i.i.d.$ however, in reality, the data is dependent. $\mathbb{E}[X_i]$ depends on $i$.
+
+We can test this phenomenon by replacing $X_i$ by $X_i - \mu$ where $\mu$ is the median of the measured data. Then we can observe the sequence of pluses and minuses. If the sequence is random, then we can assume that the data is independent.

@@ -1,0 +1,265 @@
+\chapter{Relace}
+
+\begin{definice}
+	\begin{itemize}
+		\item Třída $R$ je (binární) \textbf{relace}, pokud $R \subseteq V \times V$.
+		\item $x R y$ zkratka za $(x,y) \in R$.
+		\item $n$-ární relace je $R \subseteq V^{n}$.
+	\end{itemize}
+\end{definice}
+
+\begin{prikl}
+	\begin{itemize}
+		\item \textit{Relace náležení $E$ je $\{(x,y), x \in y \}$.}
+		\item \textit{Relace identity $Id$ je $\{(x,y),x = y \}$.}
+	\end{itemize}
+\end{prikl}
+
+\begin{definice}
+	Je-li $X$ relace (libovolná třída), pak:
+	
+	\begin{itemize}
+		\item $Dom (X)$ je $\{u,(\exists v)(u,v) \in X\}$
+		\item $Rng (X)$ je $\{v, (\exists u)(u,v) \in X\}$
+		\item Je-li $Y$ třída, pak $X \shortparallel Y (X [Y])$ je $\{z, (\exists y)(y \in Y \land (y,z) \in X\}$.
+		\item Nebo-li obraz třídy $Y$ třídou $X$.
+		\item $X \upharpoonright Y$ je $\{(y,z), y \in Y \land (y,z) \in X\}$.
+		\item Zúžení třídy $X$ na třídu $Y$. (restrikce, parcelizace)
+	\end{itemize}
+\end{definice}
+
+\begin{lemma}
+	Je-li $x$ množina, $Y$ třída, pak $Dom(x), Rng(x), x \upharpoonright Y, x \shortparallel Y$ jsou množiny.
+\end{lemma}
+
+\begin{proof}
+	\begin{itemize}
+		\item Vnoříme do větší množiny.
+		\item Platí $Dom(x) \subseteq \bigcup( \bigcup(x))$.
+		\item Když $u \in Dom(x)$ pak $(\exists v)(u,v) \in x$ a $u \in \{u\} \in (u,v) \in x$. Tedy $\{u\} \in \bigcup (x)$, tedy $u \in \bigcup(\bigcup(x))$.
+		\item Podobně i pro $Rng(x) \subseteq \bigcup(\bigcup(x))$.
+		\item $v \in Rng(x): (\exists u)(u,v) \in x$
+		\item $v \in \{u,v\} \in (u,v) \in x$ tedy $v \in \bigcup(\bigcup(x))$.
+		\item Pak už jenom $x \upharpoonright Y \subseteq x; x \shortparallel Y \subseteq Rng(x)$
+	\end{itemize}
+\end{proof}
+
+\begin{definice}
+	\begin{itemize}
+		\item $R,S$ jsou relace. Pak $R^{-1}$ je $\{(u,v), (v,u) \in R\}$.
+		\item Nebo-li relace \textbf{inverzní} k $R$.
+		\item $R \circ S$ je $\{(u,v); (\exists w)((u,w)\in R \land (w,v) \in S)\}$.
+		\item Nebo-li složení relací $R$ a $S$.
+	\end{itemize}
+\end{definice}
+
+\begin{pozn}
+	$(f \circ g)(x) = g(f(x))$
+\end{pozn}
+
+\textit{Cvičení}
+
+\begin{itemize}
+	\item \textit{Ověřte, že pro libovolnou relaci $R$ je $Id \circ R = R = R \circ Id$.}
+	\item \textit{$(x,y) \in E \circ E \leftrightarrow x \in \bigcup y$}
+\end{itemize}
+
+\begin{definice}
+	Relace $F$ je \textbf{zobrazení (funkce)} pokud:
+	
+	$$
+	(\forall u)(\forall v)(\forall w)(((u,v) \in F \land (u,w) \in F) \rightarrow v = w)
+	$$
+\end{definice}
+
+“Pro každé $v \in Dom(F)$ existuje právě jedna množina $v$ taková, že $(u,v) \in F$.” Píšeme $F(u) = v$.
+
+\begin{definice}
+	\begin{itemize}
+		\item $F$ je zobrazení třídy $X$ \textbf{do} třídy $Y$; $F: X \to Y$, pokud $Dom(F) = X$ a $Rng(F) \subseteq Y$.
+		\item $F$ je zobrazení třídy $X$ \textbf{na} třídu $Y$; pokud navíc platí $Rng(F) = Y$.
+		\item $F$ je \textbf{prosté} zobrazení pokud $F^{-1}$ je zobrazení.
+		\item Pokud $(\forall v)(\forall u)(\forall w)((F(u) = w \land F(v) = w) \rightarrow u = v)$.
+		\item “Každý prvek $Rng(F)$ má právě jeden vzor.”
+	\end{itemize}
+\end{definice}
+
+Pozorování: Pokud $F$ je prosté zobrazení, pak $F^{-1}$ je také prosté zobrazení.
+
+\begin{definice}
+	$A$ je třída, $\varphi$ je formule pak:
+	
+	\begin{itemize}
+		\item $(\exists x \in A) \varphi$ je zkratka za $(\exists x)(x \in A \land \varphi)$.
+		\item $(\forall x \in A) \varphi$ je zkratka za $(\forall x)(x \in A \rightarrow \varphi)$.
+	\end{itemize}	
+\end{definice}
+
+\section{Značení:}
+
+\textbf{Obraz / vzor} třídy $X$ zobrazením $F$.
+
+\begin{itemize}
+	\item $F[X]$ místo $F \shortparallel X$ : $F[X] = \{y, (\exists x \in X) y = F(x)\}$
+	\item $F^{-1}[X]$ místo $F^{-1} \shortparallel X$ : $F^{-1}[X] = \{y, (\exists x \in X) x = F(y)\}$
+\end{itemize}
+
+\begin{definice}
+	$A$ je třída, $a$ je množina, pak $^{a}A$ je $\{f; f: a \to A\}$, třída všech zobrazení z $a$ do $A$.
+\end{definice}
+
+\begin{pozn}
+	\begin{itemize}
+		\item Z axiomu nahrazení $Rng(f)$ je množina, $f \subseteq a \times Rng(f)$, tedy $f$ je množina.
+		\item Nelze definovat $^{B}A$ pokud $B$ je vlastní třída a $A \neq \emptyset$, protože je-li $Dom(f)$ vlastní třída, pak je i $f$.
+		\item $^{\emptyset}A = \{\emptyset\}$
+		\item $^{x}\emptyset = \emptyset$
+	\end{itemize}
+\end{pozn}
+
+\begin{lemma}
+	\begin{enumerate}
+		\item Pro libovolné množiny $x,y$ je $^{x}y$ množina.
+		\item Je-li $x \neq \emptyset, Y$ je vlastní třída, pak $^{x}Y$ je vlastní třída.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Pokud $f: x \to y$. pak $f \subseteq x \times y$, tedy $f \in \mathcal{P}(x \times y)$. Tedy $^{x}y \subseteq \mathcal{P}(x \times y)$.
+		\item Pro $y \in Y$ definujeme konstantní zobrazení $K_{y}: x \to Y$ tak, že $(\forall u \in x)(K_{y}(u) = y)$. $K_{y} = x \times {y}$, protože $x \neq \emptyset$, pro $y \neq y'$ platí $K_{y} \neq K_{y'}$. $K = \{K_{y}, y \in Y\}$ máme $K \subseteq ^{x}Y$.
+		\begin{itemize}
+			\item Teď sporem: Pokud $^{x}Y$ je množina, pak $K$ je množina. Definujeme $F: K \to Y$ jako $F(K_{y})=y$. Z axiomu nahrazení $Y$ je množina a to je spor.
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
+
+\section{Uspořádání}
+
+\begin{definice}
+	Relace $R (\subseteq V \times V)$ je na třídě $A$:
+	
+	Reflexivní:
+	
+	$$
+	(\forall x \in A)((x,x) \in R)
+	$$
+	
+	Antireflexivní:
+	
+	$$
+	(\forall x \in A)((x,x) \notin R)
+	$$
+	
+	Symetrická:
+	
+	$$
+	(\forall x, y \in A)((x,y) \in R \leftrightarrow (y,x) \in R)
+	$$
+	
+	Slabě antisymetrická:
+	
+	$$
+	(\forall x, y \in A)(((x,y) \in R \land (y,x) \in R) \rightarrow y = x)
+	$$
+	
+	Antisymetrická
+	
+	$$
+	(\forall x \in A)(\forall y \in A)(x R y \rightarrow \neg (y R x))
+	$$
+	
+	Trichotomická:
+	
+	$$
+	(\forall x \in A)( \forall y \in A)(xRy \lor yRx \lor x = y)
+	$$
+	
+	Tranzitivní:
+	
+	$$
+	(\forall x,y,z \in A)((xRy \land yRz) \rightarrow xRz)
+	$$
+\end{definice}
+
+Pozorování: Tyto vlastnosti jsou \textbf{dědičné}, to znamená, že platí na každé podtřídě $B \subseteq A$.
+
+\begin{definice}
+	\begin{itemize}
+		\item Relace $R$ je \textbf{uspořádání na třídě $A$}, pokud $R$ je reflexivní, slabě antisymetrická a tranzitivní.
+		\item $x,y \in A$ jsou \textbf{porovnatelné (srovnatelné)} relací $R$ pokud $xRy \lor yRx$.
+	\end{itemize}
+\end{definice}
+
+\subsection{Značení:}
+
+$x \leq_{R} y$ znamená $xRy$, neboli "$x$ je menší nebo rovno $y$ vzhledem k $R$."
+
+\begin{definice}
+	\begin{itemize}
+		\item Uspořádání $R$ je \textbf{lineární} pokud $R$ je trichotomické.
+		\item $R'$ je \textbf{ostré} uspořádání pokud je tvaru $R \setminus Id$ (je antireflexivní, antisymetricá a tranzitivní).
+		\item $x <_{R} y$ značí $x R' y$
+	\end{itemize}
+\end{definice}
+
+\textit{Cvičení: Doplňte tabulku ANO/NE.}
+
+\begin{center}
+	\begin{tabular}{c | c | c}
+		\centering
+		Relace & Uspořádání? & Ostré? \\ \hline
+		$E$    &             &        \\
+		$Id$   &             &
+	\end{tabular}
+\end{center}
+
+\begin{definice}
+	Nechť $R$ je uspořádání na třídě $A$ a nechť $X \subseteq A$. Řekněme, že $a \in A$ je (vzhledem k $R$ a $A$):
+	
+	\begin{itemize}
+		\item \textbf{Majorita (horní mez)} třídy $X$, pokud $(\forall x \in X)(x \leq_{R} a)$.
+		\item \textit{Minoranta (dolní mez)} třídy $X$, pokud $(\forall x \in X)(a \leq_{R} x)$.
+		\item \textbf{Maximální prvek} třídy $X$, pokud $a \in X \land (\forall x \in X)(\neg (a <_{R} x))$.
+		\item \textit{Minimální prvek} třídy $X$, pokud $a \in X \land (\forall x \in X)(\neg (x <_{R} a))$.
+		\item \textbf{Největší prvek} třídy $X$, pokud $a \in X$ a $a$ je majoranta $X$.
+		\item \textit{Největší prvek} třídy $X$, pokud $a \in X$ a $a$ je minoranta $X$.
+		\item \textbf{Supremum} třídy $X$, pokud $a$ je nejmenší prvek třídy všech majorant $X$.
+		\item \textit{Infimum} třídy $X$, pokud $a$ je největší prvek třídy všech minorant $X$.
+	\end{itemize}
+\end{definice}
+
+Pozorování: Největší implikuje maximální, pokud $R$ je lineární, tak platí i opačná implikace. Také největší a supremum je vždy nejvýše 1. Lze značit jako $a = \max_{R}(X)$ a $a = \sup_{R}(X)$.
+
+\begin{definice}
+	\begin{itemize}
+		\item $X$ je \textbf{shora omezená}, pokud existuje majoranta $X$ v $A$.
+		\item $X$ je \textit{zdola omezená}, pokud existuje minoranta $X$ v $A$.
+		\item $X$ je \textbf{dolní množina}, pokud $(\forall x \in X)(\forall y \in A)(y \leq_{R} x \rightarrow y \in X)$.
+		\item Analogicky i \textit{horní množina}.
+		\item $x \in A$, pak $| \leftarrow, x]$ je $\{y, y \in A \land y \leq_{R} x\}$. Nebo-li horní ideál omezená $x$.
+	\end{itemize}
+\end{definice}
+
+Pozorování: $R$ uspořádání na $A$, pak pro libovolné $x,y \in A$ platí $x \leq_{R} y \leftrightarrow |\leftarrow,x] \subseteq |\leftarrow,y]$.
+
+\begin{pozn}
+	\begin{itemize}
+		\item Konstrukce $\mathbb{R}$ z $\mathbb{Q}$: \textbf{Dedekindovy řezy}.
+		\item $X \subseteq \mathbb{Q}, X$ je dolní množina (vzhledem k $\subseteq$) a navíc existuje-li $\sup X$, pak $\sup X \subseteq X$.
+	\end{itemize}
+\end{pozn}
+
+\begin{definice}
+	Uspořádání $R$ na třídě $A$ je \textbf{dobré}, pokud každá neprázdná podmnožina $A: (u \subseteq A)$ má nejmenší prvek vzhledem k $R$.
+\end{definice}
+
+\textit{Cvičení: Napsat definice pomocí logických formulí.}
+
+Pozorování: “Dobré” je dědičná vlastnost. Dobré implikuje lineární.
+
+\textit{Cvičení: Najděte nějaké množiny, na nichž je $E$ dobré ostré uspořádání.}
+
+\begin{definice}
+	\textbf{Ekvivalence} je pokud je reflexivní, symetrická a tranzitivní.
+\end{definice}

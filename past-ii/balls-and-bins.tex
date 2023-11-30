@@ -1,0 +1,86 @@
+\chapter{Balls \& Bins}
+
+This model is if we have $m$ balls and $n$ bins and for each ball we put it independently at random to one bin, where each bin has the same probability.
+
+One well known problem is \textit{Birthday paradox} where we have $k$ people as balls and $365$ days as bins. Then we are asking what is the probability that one bin has at least 2 balls.
+
+$$
+Pr[\text{at least 2 balls in one bin}] = 1 - Pr[\text{max 1 ball in one bin}] =
+$$
+
+$$
+= 1 - \prod_{i=1}^{m-1} \frac{n-i}{n} \approx 1 - \prod_{i=1}^{m-1} e^{\frac{-i}{n}} = 1 - e^{\frac{-m(m-1)}{2n}}
+$$
+
+We also consider other properties, such as the expected number of empty bins:
+
+$$
+Pr[\text{bin } i \text{ is empty}] = (1 - \frac{1}{n})^{m} \approx e^{\frac{-m}{n}}
+$$
+
+$$
+\mathbb{E}[ \text{\# of empty bins}] = n (1- \frac{1}{n})^{m} \approx n e^{\frac{-m}{n}}
+$$
+
+\begin{thm}[Max Load Theorem]
+	If $m=n$ and are big enough and $M = 3 \frac{ln(n)}{ln(ln(n))}$ then $Pr[\text{max \# of balls in a bin} > M] < \frac{1}{n}$.
+\end{thm}
+
+\begin{proof}
+	% TODO: I don't think this is right. The proba of the Bin distribution should be smaller not greater than >= M balls
+	
+	$$
+	Pr[\text{bin } \#1 \text{ has} \geq M \text{ balls} ]  \leq Pr[Bin(n, \frac{1}{n}) = M] < \frac{1}{M!} < (\frac{e}{M})^M
+	% The binomial distribution is wrong in this case
+	$$
+	
+	$$
+	Pr[\text{any bin has} \geq M \text{ balls} ] \leq 
+	$$
+	$$
+	\leq Pr[\text{bin } \#1 \text{ has} \geq M \text{ balls} ] + \dots + Pr[\text{bin } \#n \text{ has} \geq M \text{ balls} ] \leq n (\frac{e}{M})^M
+	$$
+	
+	Now we will show that this expression is smaller than $\frac{1}{n}$. In order to do that, we wil take the logarithm of both sides and we get:
+	
+	$$
+	2ln(n) + M(1-ln(M)) < 0
+	$$
+	
+	We will then substitute $M$ and show that the inequality holds.
+\end{proof}
+
+
+M balls and bins have multiple applications. We will use it for hashing and sorting.
+
+\section{Bucket Sort Application}
+
+We want to sort $n = 2^k$ numbers from range $[0, 2^l-1]$ where $l > k$. The numbers are uniformly random in this range.
+
+\subsection{Algorithm}
+
+\begin{enumerate}
+	\item Put input $x$ to a bucket $b(x)$ where $b(x)$ is a hash function of $x$ and bucket is a list.
+	\item Sort each bucket (list) by a bubble sort in quadratic time.
+	\item Merge the buckets.
+\end{enumerate}
+
+\subsubsection{Time Analysis}
+
+Parts 1 and 3 are linear in $n$. For part 2, we will consider $X_i = \# \text{of inputs in the ith bucket} \sim Bin(n, \frac{1}{n})$. Then $\mathbb{E} \text{ time} = \mathbb{E} \sum (c_iX_i^2)$. Finally, we will use the definition of variance to show that the expected time is $ < 2cn$. Hence the whole algorithm has linear expected time.
+
+\section{Hash Collisions Application}
+
+We want to store $n$ strings and search fast. Using the max load theorem, we will show that max running time with a big enough $n$ is $< 3 \frac{ln(n)}{ln(ln(n))}$.
+
+\begin{thm}
+	Distribution of $X^{(m)}_{1}, \dots, X^{(m)}_n$, where $X_i^{(m)} $ represents the number of balls in bin $i$, is the same as $Y^{(m)}_1, \dots Y^{(m),}_n \ iid$, where $Y^{(m)}_i \sim Pois(\frac{m}{n})$ and $\sum Y_i^{(m)} = k$
+\end{thm}
+
+\begin{proof}
+	It is based on the fact that $X^{(m)}_1 \sim Bin(m, \frac{1}{n}) \approx Pois(\frac{m}{n})$ and then we show that $Pr[X^{(m)}_1 = k_1, \dots X^{(m)}_n = k_n] = P_x = P_Y = Pr[Y^{(m)}_1 = k_1 \dots \vert \sum Y_i = k ]$
+\end{proof}
+
+\begin{thm}[Max Load Theorem 2]
+	If $m=n$ and are big enough and $M = \frac{ln(n)}{ln(ln(n))}$ then $Pr[\text{max \# of balls in a bin} < M] \leq \frac{1}{n}$.
+\end{thm}

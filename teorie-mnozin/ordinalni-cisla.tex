@@ -1,0 +1,185 @@
+\chapter{Ordinální čísla}
+
+\section{"Typy dobře uspořádaných množin.”}
+
+\begin{itemize}
+	\item Kardinální čísla $\subseteq$ ordinální čísla. Mohutnosti dobře uspořádaných množin. S (AC) mohutnosti všech množin.
+	\item Ordinální čísla jsou dobře uspořádaná $\in$, platí pro ně princip transfinitní indukce.
+\end{itemize}
+
+\begin{definice}
+	Třída $X$ je \textbf{tranzitivní} pokud $x \in X \rightarrow x \subseteq X$.
+\end{definice}
+
+\begin{prikl}
+	$\omega$ i každé $n \in \omega$ jsou tranzitivní i $V$.
+\end{prikl}
+
+\textit{Cvičení: $X$ tranzitivní $\leftrightarrow \bigcup X \subseteq X$}
+
+\begin{lemma}
+	\begin{enumerate}
+		\item Jsou-li $X,Y$ tranzitivní pak $X \cap Y, X \cup Y$ jsou tranzitivní.
+		\item $X$ třída, pro kterou každé $x \in X$ je tranzitivní množina, pak $\bigcap X \text{ a } \bigcup X$ jsou tranzitivní.
+		\item Je-li $X$ tranzitivní třída, pak $\in$ je tranzitivní na $X \leftrightarrow$ každý $x \in X$ je tranzitivní množina.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Je pozorování.
+		\item Plyne analogicky z 1.
+		\item Jako \textit{Cvičení}.
+	\end{enumerate}
+\end{proof}
+
+\begin{definice}
+	Množina $x$ je \textbf{ordinální číslo (ordinála)} pokud $x$ je tranzitivní množina a $\in$ je dobré uspořádání na $x$. Třídu všech ordinálních čísel značíme $On$.
+\end{definice}
+
+\begin{prikl}
+	$\omega$ a každé $n \in \omega$ je ordinální číslo.
+\end{prikl}
+
+\begin{dusl}
+	Pro každou nekonečnou množinu $x$ platí $\omega \preceq x$.
+\end{dusl}
+
+\begin{lemma}
+	$On$ je tranzitivní třída.
+\end{lemma}
+
+\begin{proof}
+	$y \in x \in On$. Máme $y \leq x, \in$ je dobré ostré uspořádání na $y$. $\in$ je dobré ostré na $x$. Z lemma 3) je $y$ tranzitivní množina. $y$ je ordinála.
+\end{proof}
+
+\begin{lemma}
+	$\in$ je tranzitivní na $On$.
+\end{lemma}
+
+\begin{lemma}
+	$x,y \in On$, pak:
+	
+	\begin{enumerate}
+		\item $x \notin x$
+		\item $x \cap y \in On$
+		\item $x \in y \leftrightarrow x \subset y$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Sporem z antireflexivity $\in$ na $x$.
+		\item Přímo z definice.
+		\item $\rightarrow$ z tranzitivity $y$ a 1)
+	\end{enumerate}
+	
+	$\leftarrow y \setminus x \neq \emptyset \subseteq y, y \setminus x$ má nejmenší prvek $z$. Platí $z = x$ (\textit{Cvičení}).
+\end{proof}
+
+\begin{thm}
+	$\in$ je dobré ostré uspořádání třídy $On$.
+\end{thm}
+
+\begin{proof}
+	Antireflexivita z lemma 1), tranzitivita pak dohromady dává ostré uspořádání. Trichotomie: $x \neq y \in On$ podle lemma 2) $x \cap y \in On$. Sporem kdyby $x \cap y \subset x \land x \subset y$ pak $x \cap y \in y \land x \cap y \in x$, tedy $x \cap y \in x \cap y$ a to je spor s lemma 1). Když tedy $x \cap y = x$ pak $x \subset y$ tedy $x \in y$. Z toho plyne, že se jedná o lineární uspořádání. Pro dobrost stačí existence minimálního prvku (\textit{Cvičení}).
+\end{proof}
+
+\begin{dusl}
+	$On$ je vlastní třída. Je-li $X$ vlastní třída, tranzitivní, dobře uspořádaná $\in$, pak $X = On$.
+\end{dusl}
+
+
+\subsection{Značení:}
+
+\begin{itemize}
+	\item $\alpha, \beta, \gamma, \dots$ jsou ordinální čísla.
+	\item $\alpha < \beta$ místo $\alpha \in \beta$.
+	\item $\alpha \leq \beta$ místo $\alpha \in beta \lor \alpha = \beta$.
+\end{itemize}
+
+\begin{lemma}
+	\begin{enumerate}
+		\item Množina $x \subseteq On$ je ordinální číslo $\leftrightarrow x$ je tranzitivní.
+		\item $A \subseteq On, A \neq \emptyset$, pak $\bigcap A$ je nejmenší prvek $A$ vzhledem k $\leq$.
+		\item $a \subseteq On$ množina, pak $\bigcup a \in On$ a $\bigcup a = \sup_{\leq}a$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item $\rightarrow$ z definice, $\leftarrow$ z věty.
+		\item Z věty a $\bigcap A = \inf A$.
+		\item $\bigcup a$ je tranzitivní, $\bigcup a \subseteq On$ podle 1) je ordinální číslo.
+	\end{enumerate}
+\end{proof}
+
+\begin{dusl}
+	$\omega$ je supremum množiny všech přirozených čísel v $On$. Konečné ordinály jsou právě přirozená čísla.
+\end{dusl}
+
+\textit{Cvičení: Důkaz: $\bigcup \omega \in On \land \bigcup \omega = \sup_{\leq}\omega$. Zbývá ověřit $\omega = \bigcup \omega$.}
+
+\begin{lemma}
+	$\alpha \in On$, pak $\alpha \cup \{\alpha\}$ je nejmenší ordinální číslo větší než $\alpha$.
+\end{lemma}
+
+\begin{proof}
+	$\alpha \subseteq On$ protože $On$ je tranzitivní. $\alpha \cup \{\alpha\}$ je tranzitivní množina ordinálních čísel. Podle lemma 1) $\alpha \cup \{\alpha\}$ je ordinální číslo. Je-li $\beta \in On, \beta \in \alpha \{\alpha\}$, pak $\beta \in \alpha \lor \beta = \alpha$ tedy $\beta \subseteq \alpha$.
+\end{proof}
+
+\begin{definice}
+	$\alpha \cup \{\alpha\}$ je \textbf{následník} $\alpha$. $\alpha$ je \textbf{předchůdce} $\alpha \cup \{\alpha\}$. $\alpha$ je \textbf{izolované} pokud $\alpha = 0$ nebo pokud $\alpha$ má předchůdce, jinak je \textbf{limitní}.
+\end{definice}
+
+\begin{thm}[O typu dobrého uspořádání.]
+	Je-li $a$ množina dobře uspořádaná relací $r$, pak existuje právě jedno ordinální číslo $\alpha$ a právě jeden izomorfismus $(a,r)$ a $(\alpha, \leq)$. (Bez důkazu.)
+\end{thm}
+
+\begin{definice}
+	$\alpha$ je \textbf{typ} dobrého uspořádání $r$.
+\end{definice}
+
+\begin{pozn}
+	Na ${On}^{2} = On \times On$ lze definovat lexikografické uspořádání i maximo-\newline -lexikografické uspořádání.
+\end{pozn}
+
+\section{Princip transfinitní indukce}
+
+Je-li $A \subseteq On$ třída splňující $(\forall \alpha \in On)(\alpha \subseteq A \rightarrow \alpha \in A)$, potom $A = On$.
+
+\begin{proof}
+	Sporem: $On \setminus A \neq \emptyset$ díky dobrému uspořádání $\in$ existuje nejmenší prvek $\alpha \in On \setminus A$. Potom každé $\beta \in \alpha$ už je prvkem $A$, tedy $\alpha \subseteq A$, z předpokladu věty $\alpha \in A$ a to je spor.
+\end{proof}
+
+\begin{thm}[Druhá verze principu transfinitní indukce.]
+	Je-li $A \subseteq On$ třída splňující:
+	
+	\begin{enumerate}
+		\item $0 \in A$
+		\item Pro každý $\alpha \in On$ platí $\alpha \in A \rightarrow \alpha \cup \{\alpha\} \in A$.
+		\item Je-li $\alpha$ lineární pak $\alpha \subseteq A \rightarrow \alpha \in A$.
+	\end{enumerate}
+	
+	Pak $A = On$.
+\end{thm}
+
+\begin{thm}[O konstrukci transfinitních rekurzí.]
+	Je-li $G: V \to V$ třídové zobrazení, pak existuje právě jedno zobrazení $F: On \to V$ splňující $(\forall \alpha \in On) F(\alpha) = G(F \upharpoonright \alpha)$.
+	
+	Varianty:
+	
+	\begin{itemize}
+		\item $F(\alpha = G(F[\alpha])$
+		\item $F(\alpha) = G(\alpha , F \upharpoonright \alpha)$
+		\item $G_{1}(F(\beta))$ je-li $\alpha$ následník $\beta$, jinak $G_{2}(F[\alpha])$ je-li $\alpha$ limitní.
+	\end{itemize}
+\end{thm}
+
+\begin{proof}
+	Je pomocí transfinitní indukce a axiomu nahrazení.
+\end{proof}
+
+\begin{prikl}
+	$m + n: F(m) = n+m$ se dá nadefinovat jako $F(0) = n, F(S(m)) = S(F(m))$. AC $\to$ VVO: $A$ množina $g$ selektor na $\mathcal{P}(A)$ tak $f(0) = g(A)$ a $f(\beta) = g(A - f[\beta])$.
+\end{prikl}

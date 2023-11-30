@@ -1,0 +1,253 @@
+\chapter{Samoopravné kódy}
+
+\begin{definice}
+	\textbf{Abeceda} $\Sigma$ = konečná množina symbolů, \textbf{slovo} délky $n$ = posloupnost $n$ symbolů, $\Sigma^n$ = množina všech slov délky $n$.
+\end{definice}
+
+\begin{definice}
+	\textbf{Hammingova vzdálenost}: $x,y \in \Sigma^n : d(x,y) = |{i \in \{1,\dots ,n\}: x_i \neq y_i}|$, neboli počet pozic, kde se $x$ a $y$ liší. $d$ je metrika a tedy $(\Sigma^n, d)$ je metrický prostor.
+\end{definice}
+
+\begin{definice}
+	\textbf{(Blokový) kód} je $C \subseteq \Sigma^n$ a prvky $C$ jsou \textbf{kódova slova}. Pomocí $C$ umíme opravit $\leq t$ chyb, pokud $\forall y \in \Sigma^n \exists \text{nanejvys 1 slovo} x \in C \text{t.ž.} d(x,y)\leq t$.
+\end{definice}
+
+\begin{definice}
+	Parametry kódu:
+	
+	\begin{enumerate}
+		\item délka = $n$,
+		\item velikost abecedy $q = |\Sigma|$,
+		\item dimenze $k = \log_q|C|$,
+		\item vzdálenost $d = \min_{x, x' \in C, x \neq x'} d(x, x')$. 
+	\end{enumerate}
+	
+	Kód s parametry $n,k,d,q$ značíme $(n,k,d)_q$.
+\end{definice}
+
+V kódu s parametry $(n,k,d)_q$ dokážeme opravit $\leq \lfloor \frac{d-1}{2} \rfloor$ chyb. Množiny slov ve vzdálenosti $\leq \lfloor \frac{d-1}{2} \rfloor$ od kódových slov jsou navzájem disjunktní. Pokud $d \leq n$, tak dokážeme opravit $\leq \lfloor \frac{n-1}{2} \rfloor$.
+
+\begin{prikl}
+	\begin{enumerate}
+		\item opakovací kód: každý symbol $n$-krát zopakujeme, paramtery: $(n, 1, n)_q$
+		\item charakteristický vektory KPR
+		\begin{itemize}
+			\item kódová slova $P$ - $\{0,1\}$ - vektor, kde na pozici $x$ je $1 \leftrightarrow x \in P$
+			\item $(X, \mathcal{P})$ - KPR řádu $n$
+			\item parametry: $(n^2 + n + 1, \log_{2} (n^2+n+1), 2n)_{2}$
+			\item $|X| = n^2+n+1$ a $|C|=|\mathbb{P}| = n^2+n+1$
+			\item $d = 2n$
+			\item 2 kódove slova sdílí jednu jedničku, na zbytku se liší na $2n$ pozicích 
+		\end{itemize}
+		\item hadamardovy kódy
+		\begin{itemize}
+			\item hadamardova matice řádu $n$ je $H \in \{-1, 1\}$, kde $H \cdot H^T = n \cdot I_n$
+			\item každý 2 různy řádky se liší na $n/2$ pozicích
+			\item zvolme $C=\{\text{řádky} H\} \cup \{-\text{řádky}H\}$
+			\item parametry: $(n, 1+\log_2(n), \frac{n}{2})_2$
+		\end{itemize}
+	\end{enumerate}
+	
+	$$
+	H_1 = 1
+	$$
+	
+	$$
+	H_2 =
+	\begin{pmatrix}
+		1 & 1 \\
+		1 & -1
+	\end{pmatrix}
+	$$
+\end{prikl}
+
+Sylvestrova konstrukce hadamardovy matice:
+
+$$
+H_{n+1} = 
+\begin{pmatrix}
+	H_n & H_n \\
+	H_n & - H_n
+\end{pmatrix}
+$$
+
+\textbf{Hadamardova domněnka:} pro $\forall k \in \mathbb{N} \exists \text{ hadamardova matice řádu } 4k$
+
+Kódy $C, C'$ jsou ekvivalentní, pokud se liší jen pořadím pozic. $\exists \Pi \in S_n: X = (x_1, \dots, x_n) \in C \leftrightarrow \Pi(X) = (X_{\Pi(1), \dots, X_{\Pi(n)} \in C}$. Pro jaké parametry existuje kód?
+
+\begin{definice}
+	Kombinatorická koule je středem $X \in \Sigma^n$ a poloměrem $t$ je $B(X,t) = \{y \in \Sigma^n : d(x,y) \leq t\}$.
+\end{definice}
+
+\begin{lemma}
+	Je-li $C$ kód se vzdáleností $2t+1$, pak $\forall X,X' \in C: B(X,t) \cap B(X',t) = \emptyset$.
+\end{lemma}
+
+\begin{dukaz}
+	Sporem - $\exists z \in B(x, t) \cap B(x', t) \implies d(x, x') \leq d(x,z) + d(x', z) \leq t+t = 2t$, kde $d(x, x')$ je $\geq 2t+1$, takze celkove je $2t+1 \leq 2t$.
+\end{dukaz}
+
+\begin{veta}[Hammingův odhad]
+	$\forall \text{ kód } C$ s parametrama $(n,k,d)_q$ plati, že $|C| \leq \frac{q^n}{V(t)}$.
+\end{veta}
+
+\begin{dukaz}
+	$d = 2t +1 \implies$ koule okolo kódovych slov s poloměrem $t$ jsou disjunktní. $\implies |C| \cdot |V(t)| \leq |\Sigma^n| \implies |C| \leq \frac{|\Sigma^n|}{|V(t)|} = \frac{|q^n|}{|V(t)|}$.
+\end{dukaz}
+
+\begin{definice}
+	\textbf{Perfektní kód} = kód s parametry $(n,k, 2t+1)_q$ a s $|C| = \frac{q^n}{V(t)}$.
+\end{definice}
+
+
+Opakovací kód s $q=2$ a lichou delkou.
+
+\begin{veta}[Gilbertův - Varshalův odhad]
+	$\forall n,q,d \in \mathbb{N}: \exists \text{ kód } C$ s parametry $(n,k,d)_q$, kde $|C| \geq \frac{q^n}{V(d-1)}$.
+\end{veta}
+
+\begin{dukaz}
+	Stačí iterativně odebírat slova z $\Sigma^n$ spolu se slovy v Hammingové vzdálenosti $\leq d-1$. Proces skončí po $\geq \frac{q^n}{V(d-1)}$ krocích, protože odebírané koule jsou nanejvýš disjunktní.
+\end{dukaz}
+
+\begin{definice}
+	\textbf{Linearní kódy} - jako abecedu použít konečné těleso $\mathbb{K} = \Sigma^n$. Podprostor vektorového prostoru $\mathbb{K}^n$ s parametry $n,k,d,q$ značíme $[n,k,d]_q$.
+\end{definice}
+
+\begin{prikl}
+	\begin{enumerate}
+		\item opakovací kódy nad $\mathbb{Z}_p$ [nejsou linearní]
+		\item charakteristický vektory KPR [nejsou linearní]
+		\item hadamardovy kódy [obecně ne, ze Sylvestrovy konstrukce ano]
+	\end{enumerate}
+\end{prikl}
+
+\section{Lineární kódy}
+
+Víme, že každé těleso $\mathbb{K}$ odpovídá Galoisovu tělesu $\mathbb{F}_{q}$. $\forall x,y,z \in \mathbb{K}^{n}: d(x,y) = d(x+z, y+z) = d(x-y,0)$. $\Rightarrow$ minimální vzdálenost $d$ se rovná $\min_{x,y \in C, x \neq y} \{ d(x-y,0) = \min_{x \in C, x \neq 0} \{ d(x,0) \} \}$. $\Rightarrow$ ke zjištění $d$ není třeba zkoumat všechny dvojice, stačí počítat nenulové složky kódových slov. Výhodou lineárních kódů je úsporný popis, namísto všech $q^{r}$ prvků kódu stačí uvést $r$ prvků nějaké jeho báze.
+
+\begin{definice}
+	\textbf{Generující matice} kódu $C$ = matice $M \in \Sigma^{r \times n}$ jejíž řádky tvoří bázi kódu $C$. V prostoru $\mathbb{F}_{q}^{n}$ definujeme \textbf{skalární součin} $<x,y> = \sum_{i=1}^{n}x_{i}y_{i}$ pro $x = (x_{1}, \dots , x_{n}), y = (y_{1}, \dots , y_{n}) \in \mathbb{F}_{q}^{n}$. Nejedná se o klasický skalární součin podle klasické definice, protože neplatí $<x,x> = 0 \Leftrightarrow x=0$ (třeba $x = (1,1,0,0)$ nad $\mathbb{F}_{2}^{4}$).
+\end{definice}
+
+\begin{definice}
+	\textbf{Duálním kódem} k lineárnímu kódu $C$ je jeho ortogonální doplněk.
+	
+	$$
+	C^{\bot} = \{ x \in \mathbb{F}_{q}^{n}: <x,y> = 0 \text{ pro každé } y \in C \}
+	$$
+\end{definice}
+
+
+
+Z povahy našeho skalárního součinu nemusí platit $C \cap C^{\bot} = \{ 0 \}$. Platí $\dim(C^{\bot}) + \dim(C) = n$ a $(C^{\bot})^{\bot} = C$. Generující matice $M^{\bot}$ kódu $C^{\bot}$ se nazývá \textbf{kontrolní matice}. Řádky kontrolní matice určují lineární rovnice, které musí každé slovo z $C$ splňovat (a naopak každý vektor z $\mathbb{F}_{q}^{n}$, který je splňuje, je kódovým slovem v $C$). Nebo-li $C = \{ x \in \mathbb{F}_{q}^{n}: M^{\bot}x = 0 \}$.
+
+Mějme lineární kód $C$ s parametry $[n,r,d]_{q}$.
+
+\subsection{Kódování lineární kódy}
+
+Ze vstupního slova $z \in \mathbb{F}_{q}^{n}$ chceme vytvořit kódové slovo $x \in C \subseteq \mathbb{F}_{q}^{n}$. Nechť $M \in \mathbb{F}_{q}^{r \times n}$ je generující matice kódu $C$. Pro každý lineární kód existuje ekvivalentní kód, jehož generující matice má tvar:
+
+$$
+\begin{pmatrix}
+	I{r} & B
+\end{pmatrix}
+$$
+
+Kde výška je $r$ a šířka $n$. Říká se jí \textbf{standardní forma}. Stačí generující matici upravit Gaussovou eliminací a popřípadě zpermutovat sloupce. $\Rightarrow$ BŮNO: Matice $M$ je ve standardní formě. Jako kódové slovo zvolíme $x = M^{\top}z \in C$. $\Rightarrow x$ má na prvních $r$ souřadnicích slovo $z$ (\textbf{indormační symboly}) a na zbylých $n-r$ souřadnicích obsahuje \textbf{kontrolní symboly}.
+
+$$
+\begin{matrix}
+	&
+	\begin{pmatrix}
+		z
+	\end{pmatrix} \\
+	\begin{pmatrix}
+		I_{r} \\
+		B^{\top}
+	\end{pmatrix}
+	&
+	\begin{pmatrix}
+		z \\
+		.
+	\end{pmatrix}
+\end{matrix}
+$$
+
+\subsection{Dekódování lineárních kódů}
+
+Po odeslání $x \in C$ bylo přijato $y \in \mathbb{F}_{q}^{n}$. Příjemce zná pouze $y$ a chce najít kódové slovo, které je mu nejblíž. Nechť $M^{\bot}$ je kontrolní matice kódu $C$, pokud je matice $M$ve standardní formě pak:
+
+$$
+M^{\bot} =
+\begin{pmatrix}
+	-B{\top} & I_{n-r}
+\end{pmatrix}
+$$
+
+kde šířka je $r$ a výška $n-r$, protože pak $M^{\bot} M^{\top} = -B^{\top}I_{r} + I_{n-r}B^{\top}=0$. Jako \textbf{syndrom slova} $y \in \mathbb{F}_{q}^{n}$ nazveme součin $M^{\bot}y$, protože $C = \{ x \in \mathbb{F}_{q}^{n}:M^{\bot}x=0 \}$, tak máme určené lineární zobrazení $S:\mathbb{F}_{q}^{n} \to \mathbb{F}_{q}^{n-r}$ splňující $C = Ker(S)$. Zobrazení $S$ nazveme \textbf{syndrom}. Zobrazení $S$ je na, protože platí $\dim(Ker(S)) + \dim(Im(S)) = \dim(\mathbb{F}_{q}^{n})$, kde $Im(S)$ je obraz $S$.
+
+\begin{lemma}
+	Zobrazení $S$ je prosté na $B(0,t)$ kde $t=\lfloor \frac{d-1}{2} \rfloor$.
+\end{lemma}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Podle lemma tedy k $S \restriction B(0,t)$ existuje inverzní zobrazení $S^{-1}: S(B(0,t)) \to B(0,t)$. $S^{-1}$ není lineární, ale jde popsat tabulkou s $q^{n-k}$ prvky z $B(0,t)$ a v této tabulce je pro každý syndrom slova uloženo nějaké slovo s minimální vahou a s daným syndromem.
+
+Co víme:
+
+\begin{enumerate}
+	\item Pro $y \in B(x,t)$ máme $S(y-x) = S(y) - S(x) = S(y)$ (díky linearitě a toho že $x \in Ker(S)$). Neboli $y$ a vzniklá chyba $y-x$ mají stejný syndrom.
+	\item Pro $y \in B(x,t)$ máme $y-x \in B(0,t)$ a tedy $y-x = S^{-1}(S(y-x))$. Neboli vzniklou chybu jde vyjádřit pomocí $S$.
+	\item $x = y - (y - x) = y - S^{-1}(S(y-x)) = y - S^{-1}(S(y))$ nezávisý na $x$, pro dané $y$ pomocí syndromu $S(y)$ dokážeme určit kódové slovo $x$, ze kterého vzniklo, nastalo-li $\leq t$ chyb.
+\end{enumerate}
+
+
+\subsection{Jak dekódovat}
+
+Pro přijaté slovo $y \in \mathbb{F}_{q}^{n}$ spočítat $x = y - S^{-1}(M^{\bot}y)$, kde $M^{\bot}$ je kontrolní matice a zobrazení $S^{-1}$ máme připravené jako tabulku. Nastane-li $\leq t$ chyb, je $x$ kódové slovo, ze kterého $y$ vzniklo.
+
+\begin{tvrz}
+	Vzdálenost $d$ kódu $C$ = minimální počet lineárně závislých sloupců kontrolní matice $M^{\bot}$.
+\end{tvrz}
+
+\begin{dukaz}
+	Víme, že $d$ = minimální počet nenulových symbolů v nenulovém slově $x$ z $C$. $x \in C \Leftrightarrow M^{\bot}x = 0$ tedy sliupce $M^{\bot}$ vybrané nenulovými složkami $x$ jsou lineárně závislé.
+\end{dukaz}
+
+\section{Hammingovy kódy}
+
+Příklad lineárních kódů, které jsou dokonce perfektní. Jejich nevýhodou je, že nedokáží opravit příliš mnoho chyb. Například nad tělesem $\mathbb{F}_{2}$. Mějme parametr $r = 3$. Generující matice:
+
+$$
+M =
+\begin{pmatrix}
+	&  &  & - & l_{1} & - \\
+	& I_{2^{r}-r-1} &  & - & l_{2} & - \\
+	&  &  & - & l_{3} & -
+\end{pmatrix}
+$$
+
+Kde $l_{i}$ jsou všechny nenulové vektory z $\mathbb{F}_{2}^{r}$ různé od vektorů kanonické báze. Kontrolní matice:
+
+$$
+M^{\bot} =
+\begin{pmatrix}
+	| & | & | &  &  &  \\
+	l_{1} & l_{2} & l_{3} &  & I_{r} &  \\
+	| & | & | &  &  & 
+\end{pmatrix}
+$$
+
+Parametry matic jsou $r$ a $2^{r}-r-1$. Dva vektory z $\mathbb{F}_{2}^{r} \setminus \{0\}$ jsou lineárně závislé $\Leftrightarrow$ jsou totožné $\Rightarrow$ minimální počet lineárně závislých sloupců v $M^{\bot}$ je $3$ a podle tvrzení 13.2. je vzdálenost kódu $3$. $\Rightarrow$ jedná se o kód s parametry $[2^{r}, 2^{r}-r-1, 3]_{2}$, takže opraví $\leq 1$ chybu
+
+\begin{prikl}
+	Pro  $r=3$ dostaneme kód s parametry $[7,4,3]_{2}$. Jedná se o kód sestavený z Fanovy roviny přidáním počátku a doplňků.
+\end{prikl}
+
+Hommingovy kódy jsou perfektní: stačí ukázat, že Hammingův odhad $|C| \leq \frac{q^{n}}{V(t)}$ je těsný. $t = \lfloor \frac{d-1}{2} \rfloor = \lfloor \frac{3-1}{2} \rfloor = 1$. $V(t) = V(1) = \sum_{i=0}^{t} = (q-1) = 1 + (2^{r}-1) = 2^{r}$. $\frac{q^n}{V(1)} = \frac{2^{@^{r}-1}}{2^{r}} = 2^{2^{r}-r-1}$. $|C| = 2^{r} = 2^{2^{r}-r-1}$ takže Hammingův je skutečně pro Hammingovy kódy těsný.
+
+Lepší reprezentace funkce $S^{-1}$. Tabulka reprezentující $S^{-1}$ má pouze $2^{n-r}=$\newline $= 2^{2^{r}-1-(2^{r}-r-1)} = 2^{r} = n + 1$ prvků. Ve skutečnosti tabulku vůbec nepotřebujeme. Zpermutujeme-li sloupce a řádky $M^{\bot}$ pak, aby $i$-tý sloupec byl binárním zápisem čísla $i$, pak $S(y)$ určuje pozici na níž nastala chyba. $\Rightarrow$ lze dékodovat tak, že pokud $S(y) = 0$, pak $x=y$, jinak je $S(y)$ binárním zápisem čísla $i$ a pak $x =$ slovo vzniklé z $y$ výměnnou bitu, který je v $y$ na pozici $i$.

@@ -1,0 +1,185 @@
+\chapter{Axiomy teorie množin}
+
+“Jak se chová $\in$.” “Jaké množiny existují.”
+
+\textit{Zermelo-Fraenkelova teorie}, zkráceně \textbf{ZF} má celkem 9 axiomů (resp. 7 axiomů a 2 schémata). Pak je ještě 10.axiom výběru (\textbf{AC}) to pak je \textbf{ZF+AC=ZFC}.
+
+\section{1.Axiom existence množin}
+
+“Existuje množina.”
+
+$$
+(\forall x)(x=x)
+$$
+
+\section{2.Axiom extenzionality}
+
+Udává souvislost mezi $\in \text{ a } =$. “Množina je určena svými prvky.”
+
+$$
+(\forall z)(z \in x \leftrightarrow z \in y) \rightarrow x = y
+$$
+
+\textit{Cvičeni: Dokažte $((x \subseteq y) \land (y \subseteq z)) \rightarrow x \subset z$.}
+
+\section{3.Schéma axiomu vydělení}
+
+Je-li $\varphi(x)$ formule, která neobsahuje volnou proměnnou $z$. Pak:
+
+$$
+(\forall a)(\forall x)(\exists z)(x \in z \leftrightarrow (x \in a \land \varphi(x)) 
+$$
+
+je axiom.
+
+“Z množiny $a$ vybereme prvky s vlastností $\varphi(x)$ a ty vytvoří novou množinu $z$.” Díky axiomu extenzionality je taková $z$ právě jedna.
+
+\subsection{Značení:}
+
+\begin{itemize}
+	\item $\{x; x \in a \land \varphi(x)\}$ je zkrácení.
+	\item $\{x \in a; \varphi(x)\}$ "Množina všech prvků $a$ splňující $\varphi(x).$"
+\end{itemize}
+
+\begin{definice}
+	\begin{itemize}
+		\item Průnik: $a \cap b$ je $\{x, x \in a \land x \in b\}$.
+		\item Rozdíl: $a \setminus b$ je $\{x, x \in a \land x \notin b\}$
+	\end{itemize}
+\end{definice}
+
+\textit{Cvičení:}
+
+\begin{itemize}
+	\item \textit{Napište formulí “množina $a$ je jednoprvková”.}
+	\item \textit{Dokažte, že množina všech množin neexistuje.}
+\end{itemize}
+
+\section{4.Axiom dvojice}
+
+$$
+(\forall a)(\forall b)(\exists z)(\forall x)(x \in z \leftrightarrow (x=a \lor x=b))
+$$
+
+“(Ne)každým dvěma množinám $a,b$ existuje množina $z$, která má za prvky právě $a,b$.”
+
+\begin{definice}
+	\begin{itemize}
+		\item $\{a,b\}$ je \textbf{neuspořádaná dvojice} množin $a,b$, jakožto dvouprvková množina s prvky $a,b$ (pokud $a \neq b$).
+		\item $\{a\}$ znamená $\{a,a\}$, nebo-li jednoprvková množina s prvkem $a$.
+	\end{itemize}
+\end{definice}
+
+\begin{prikl}
+	Můžeme vytvořit $\{\emptyset\},\{\{\emptyset\}\}, \{\emptyset,\{\emptyset\}\}, \dots$.
+\end{prikl}
+
+\textit{Cvičení: Dokažte $(\forall z)(x \in z \leftrightarrow y \in z) \rightarrow x = y$.}
+
+\begin{definice}
+	$(a,b)$ je \textbf{uspořádaná dvojice} množin $a,b$. To je pak množina $\{\{a\},\{a,b\}\}$
+\end{definice}
+
+\begin{pozn}
+	Pro $a = b$ je $(a,b) = \{\{a\},\{a,a\}\} = \{\{a\},\{a\}\} = \{\{a\}\}$.
+\end{pozn}
+
+\begin{lemma}
+	$$
+	(x,y) = (u,v) \leftrightarrow (x = u \land y = v)
+	$$
+\end{lemma}
+
+\begin{proof}
+	\begin{itemize}
+		\item $\leftarrow$
+		\item $\{x\} = \{u\}$ plyne z axiomu extenzionality.
+		\item $\{x,y\} = \{u,v\}; \{\{x\},\{x,y\}\} = \{\{u\},\{u,v\}\}$
+		\item $\rightarrow$
+		\item $\{\{x\},\{x,y\}\} = \{\{u\},\{u,v\}\}$ to pak znamená, že $\{x\} = \{u\} \lor \{x\} = \{u,v\}$ kde v obou případech $x=u$.
+		\item $\{u,v\} = \{x\} \lor \{u,v\} = \{x,y\}$ tedy $v = x \lor v = y$
+		\item Pokud $v=x$ pak z $x = u$ plyne, že $v=u=x$.
+	\end{itemize}
+\end{proof}
+
+\begin{definice}
+	Jsou-li $a_{1},a_{2},a_{3}, \dots ,a_{n}$ množiny, definujeme \textbf{uspořádanou $n$-tici} \newline $(a_{1},a_{2},a_{3}, \dots ,a_{n})$. Následně $(a_{1})$ znamená $a_{1}$ a je-li definována $(a_{1}, \dots ,a_{k})$ pak \newline $(a_{1}, \dots ,a_{k}, a_{k+1})$ je $((a_{1}, \dots ,a_{k}), a_{k+1})$.
+\end{definice}
+
+\begin{lemma}
+	$$
+	(a_{1},a_{2},a_{3}, \dots ,a_{n}) = (b_{1},b_{2},b_{3}, \dots ,b_{n}) \leftrightarrow (a_{1} = b_{1} \land \dots a_{n} = b_{n})
+	$$
+\end{lemma}
+
+\begin{proof}
+	Jako cvičení.
+\end{proof}
+
+\section{5.Axiom sumy (axiom of the union)}
+
+$$
+(\forall a)(\exists z)(\forall x)(x \in z \leftrightarrow (\exists y)(x \in y \land y \in a))
+$$
+
+\begin{definice}
+	$\bigcup a$ je \textbf{suma} množiny $a$. Tzn “$\{x, (\exists y)(x \in y \land y \in a)\}$”.
+\end{definice}
+
+Pozorování: Pokud $a = \{b,c\}$, pak $\bigcup \{b,c\} = \{x, x \in b \lor x \in c\}$.
+
+\begin{definice}
+	$b \cup c$ je $\bigcup \{b,c\}$ sjednocení množin $b,c$.
+\end{definice}
+
+\begin{definice}
+	Jsou-li $a_{1}, \dots a_{n}$ množiny, definujeme \textbf{neuspořádanou $n$-tici} $\{a_{1}, \dots a_{n}\}$ ($n$-prvkovou množinu, pokud každé $a_{i}$ je různé) rekurzivně. Je-li definovaná $\{ a_{1}, \dots a_{k}\}$ pro $k \geq 2$, pak $\{ a_{1}, \dots a_{k}, a_{k+1}\}$ je $\{ a_{1}, \dots a_{k}\} \cup \{a_{k+1}\}$.
+\end{definice}
+
+\section{6.Axiom potence (power set, potenční množina)}
+
+$$
+(\forall a)(\exists z)(\forall x)(x \in z \leftrightarrow x \subseteq a)
+$$
+
+“Existuje množina $z$ jejichž prvky jsou právě podmnožiny množiny $a$.”
+
+\begin{definice}
+	$\mathcal{P}(a)$ je “$\{x; x \subseteq a\}$” potenční množina $[2^{a}]$ množiny $a$ (potence $a$).
+\end{definice}
+
+\begin{prikl}
+	$\mathcal{P}(\emptyset) = \{\emptyset\}$ a $\mathcal{P}(\{\emptyset\}) = \{\emptyset, \{\emptyset\}\}$.
+\end{prikl}
+
+\textit{Cvičení: Co je $\mathcal{P}(\bigcup a)$ a jestli $\bigcup (\mathcal{P}(a)) = a$?}
+
+\section{7.Schéma axiomu nahrazení}
+
+“Obraz množiny funkcí je množina.”
+
+Je-li $\psi(u,v)$ formule, která neobsahuje volné proměnné $w,z$, pak
+
+$$
+(\forall u)(\forall v)(\forall w)((\psi(u,v) \land \psi (u,w)) \rightarrow v = w) \rightarrow (\forall a)(\forall z)(\forall v)(v \in z \leftrightarrow (\exists u)(u \in a \land \psi(u,v)))
+$$
+
+je axiom.
+
+\begin{itemize}
+	\item “Je-li $\psi$ funkce (částečná) určená formulí: $\psi (u,v) \text{ je } f(u)=v$, pak obrazem $a$ touto funkcí je opět množina (z).”
+	\item Také implikuje schéma vydělení: $\varphi (u) \land u = v$.
+	\item Poznámka: \textit{transfinitní rekurze, konstrukce $\omega + \omega$, Zornovo lemma, věta o dobrém uspořádání.}
+\end{itemize}
+
+\section{8.Axiom fundovanosti (foundation, regularity)}
+
+$$
+(\forall a)(a \neq \emptyset \rightarrow (\exists x)(x \in a \land x \cap a = \emptyset))
+$$
+
+“Každá množina má prvek, který je s ní disjunktní.”
+
+\textit{Cvičení: Ukažte, že Axiom fundovanosti zakazuje existenci konečných cyklů relace $\in$. Tedy množiny $y$ takové, že $y \in y$, ale i $y_{1},y_{2}, \dots ,y_{n}$ takové, že $y_{1} \in y_{2} \in \dots \in y_{n} \in y_{1}$.}
+
+Díky axiomu fundovanosti lze všechny množiny vygenerovat z prázdné množiny operacemi $\mathcal{P}, \bigcup$.

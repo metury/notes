@@ -1,0 +1,118 @@
+\chapter{Vytvořující funkce}
+
+Početní metoda, kde spojitými funkcemi vyjadřujeme posloupnosti.
+
+\begin{definice}
+	Pro posloupnost $(a_{i})_{i=0}^{\infty}$ je mocninnou řadou $a(x) = \sum_{i=0}^{\infty}a_{i}x^{i}$.
+\end{definice}
+
+Posloupnost lze převést na funkci, ale při převodu nazpátek je třeba aby posloupnost nerostal moc rychle.
+
+\begin{prikl}
+	\begin{enumerate}
+		\item $a_i = 1$ pokud $0 \leq i \leq n$ jinak $a_i = 0$. Tedy $(a_i)_{i=0}^{\infty}=(1,\dots,1,0,0,\dots)$. Potom funkce je $\frac{1-x^{n+1}}{1-x}$ z geometrické řady.
+		\item $\forall i: a_i = 1$ to je potom nekonečná geometrická řada, takže je to $\frac{1}{1-x}$.
+		\item $a_i = \binom{n}{i}$ potom funkce vychází z binomické věty, takže je $(1+x)^{n}$.
+	\end{enumerate}
+\end{prikl}
+
+\begin{tvrz}
+	Pokud pro $(a_i)_{i=0}^{\infty} \exists k \in \mathbb(R)$ takové, že $\forall i: |a_i| \leq k^i$, pak pro všechna $x \in (\frac{-1}{k}, \frac{1}{k})$ řada $a(x) = \sum_{i=0}^{\infty}a_ix^i$ konverguje absolutně a na libovolném $\epsilon$ okolí 0 určuje i $koeficienty_a$, protože $i_a = \frac{a^{(i)}(0)}{i!}$.
+\end{tvrz}
+
+
+Obecný postup:
+
+\begin{enumerate}
+	\item kombinatorický objekt s neznámým počtem
+	\item vytvořující funkce
+	\item rozklad na vytvořující funkce se známými koeficienty
+	\item určení hodnoty
+\end{enumerate}
+
+
+\begin{table}[!h]\centering
+	\begin{tabular}{| l | l | l |}
+		\hline
+		Operace & Posloupnosti & Funkce \\
+		\hline
+		Součet                   & $(a_0+b_0, a_1+b_1, \dots)$                        & $(a+b)(x) = \sum_{i=0}^{\infty}(a_i+b_i)x^i$ \\
+		$\alpha$-násobek         & $(\alpha a_0, \alpha a_1, \dots)$                  & $\alpha a(x) = \sum_{i=0}^{\infty}(\alpha a_i)x^i$ \\
+		Posun vpravo o $n$ pozic & $(0,0,\dots ,a_0, a_1, \dots)$                     & $x^na(x)\sum_{i=0}^{\infty}a_ix^{i+n}$ \\
+		Posun vlevo o $n$ pozic  & $(a_n, a_{n+1}, dots )$                            & $\sum_{i=0}^{\infty}(a_{i+n}x^i = \frac{a(x) - \sum_{i=0}^{\infty}a_ix^i}{x^n}$ \\
+		Dosazení $\alpha x$      & $(a_0, \alpha a_1, \alpha^2 a_2, \dots)$           & $a(\alpha x) = \sum_{i=0}^{\infty}a_i+ \alpha^i x^i$ \\
+		Dosazení $x^n$           & $(a_0, 0, \dots, 0, a_1, 0, \dots)$ & $a(x^n) = \sum_{i=0}^{\infty}a_ix^ni$ \\
+		Derivace                 & $(a_1, 2a_2, 3a_3, \dots)$                         & $a'(x) = \sum_{i=1}^{\infty}ia_ix^{i-1}$ \\
+		Integrál                 & $(0, a_0, \frac{a_1}{2}, \frac{a_2}{3}, \dots)$    & $\int_{0}^{x} a(x) \mathtt{d} x = \sum_{i=0}^{\infty}\frac{a_i}{i+1}x^{i+1}$ \\
+		Součin                   & $(c_0, c_1, c_2, \dots)$                           & $a(x)b(x) = \sum_{i=0}^{\infty}(c_i)x^i$ \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Řešení rekurentních rovnic}
+
+Ukázka na Fibonacciho čísle. Určíme $F_n$ jako koeficient funkce $F(x)=\sum_{i=0}^{\infty}F_ix^i$. Máme $F_{n+2} = F_{n+1} + F_{n}, \forall n\geq 0$. \textbf{Vynásobíme rovnici $x^n$:} $F_{n+2} x^n= F_{n+1} x^n + F_{n} x^n$.\textbf{Sčítáme přes $n \geq 0$:} $\sum_{n \geq 0} F_{n+2} x^n= \sum_{n \geq 0} F_{n+1} x^n + \sum_{n \geq 0} F_{n} x^n$ to se rovná:
+
+$$
+\frac{F(x)-F_0 - F_1}{x^2} = \frac{F(x)-F_0}{x} +F(x)
+$$
+
+teď určíme
+
+$$
+F(x) = \frac{x}{1-x-x^2} = \frac{x}{(1 - \frac{1 + \sqrt{5}}{2}x)(1 - \frac{1 - \sqrt{5}}{2}} = \frac{\frac{1}{\sqrt{5}}}{1 - \frac{1 + \sqrt{5}}{2}x} - \frac{\frac{1}{\sqrt{5}}}{1 - \frac{1 - \sqrt{5}}{2}x}
+$$
+
+to už lze převést
+
+$$
+F_n = \frac{1}{\sqrt{5}}\left[ \left( \frac{1+\sqrt{5}}{2} \right)^n - \left( \frac{1-\sqrt{5}}{2} \right)^n \right]
+$$
+
+to je tzv. \textbf{Binetův vzorec}. Tento postup funguje pro všechny \textbf{Homogenní lineární rekurence $k$-tého stupně s konstantními koeficienty}, tedy typu:
+
+$$
+a_{n+k} = \alpha_{k-1}a_{n+k-1} + \dots + \alpha_0 a_n, k \in \mathbb{N}, \alpha_{k-1}, \dots, \alpha_0 \in \mathbb{R}
+$$
+
+\section{Aplikace vytvořujících funkcí}
+
+Nadefinujeme zobecněnou \textbf{binomickou větu} pro
+
+$$
+n \in \mathbb{R}, r \in \mathbb{Z}_{0}^{+}: \binom{n}{r}:= \frac{n(n-1)(n-2)\dots(n-r+1)}{r!},
+$$
+
+speciálně $\binom{n}{0}=1$.
+
+\begin{veta}[Zobecněná binomická věta]
+	$\forall r \in \mathbb{R}$ je $(1+x)^r$ vytvořující funkcí posloupnosti $\left( \binom{r}{0}, \binom{r}{1}, \binom{r}{2}, \dots \right)$ a řada $\sum_{i=0}^{\infty}\binom{r}{i}x^{i}$ konverguje pro $\forall x \in (-1, 1)$.	
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\begin{dusl}
+	$\forall n \in \mathbb{N} \ \forall x \in (-1,1)$ platí $\frac{1}{(1-x)^{n}}=\sum_{i=0}^{\infty}\binom{n+i-1}{n-1} x^{i}$.
+\end{dusl}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+\section{Aplikace - Catalanova čísla}
+
+\textbf{Zakořeněný binární strom} - buď je prázdný, nebo obsahuje speciální vrchol zvaný \textbf{kořen} a pár zakořeněných stromů, které tvoří \textbf{levý} a \textbf{pravý podstrom}.
+
+$b_{n}$ = počet bin. zak. stromů na $n \in \mathbb{N}_{0}$ vrcholech, potom $b(x) = \sum_{n = 0}^{\infty}b_{n} x^{n}$ je příslušná vytvořující funkce.
+
+\begin{veta}
+	Pro každé $n \in \mathbb{N}_{0}$ platí $b_{n}=\frac{1}{n+1}\binom{2n}{n}$. Kde se $\frac{1}{n+1}\binom{2n}{n}$ značí jako $C_n$ a říká se mu n-té \textbf{Catalanovo číslo}.
+\end{veta}
+
+\begin{dukaz}
+	Empty.
+\end{dukaz}
+
+Catalanova čísla mají mnoho interpretací, například počet triviálních uzávorkování s $n$ páry závorek anebo počet triangulací.
