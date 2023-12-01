@@ -511,7 +511,42 @@ Also we can say $\exists f_{l}(k) = O(k \sqrt{\log k})$. If $G$ is $f_{l}(k)$-co
 We may take a look at an example of model of $K_{4}$ which is in picture \ref{k4-model}.
 
 \begin{figure}[!ht]\centering
-	\includegraphics[width=0.5\textwidth]{res/km-model.pdf}
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+		\node[main] (1) [color=cyan] {};
+		\node[main] (2) [above of=1] [color=cyan] {};
+		\node[main] (3) [below left of=1] [color=cyan] {};
+		\node[main] (4) [below right of=1] [color=cyan] {};
+		\node[main] (5) [left of=1] [color=cyan] {};
+		\node[main] (6) [right of=1] [color=cyan] {};
+		\node[main] (7) [right of=6] [color=cyan] {};
+		\node[main] (8) [below right of=6] [below right of=4] [color=orange] {};
+		\node[main] (9) [below left of=5] [below left of=3] [color=blue] {};
+		\node[main] (10) [left of=9] [color=blue] {};
+		\node[main] (11) [below of=10] [color=blue] {};
+		\node[main] (12) [below of=9] [color=blue] {};
+		\node[main] (13) [below right = 2cm of 12] [color=purple] {};
+		\node[main] (14) [below left of=13] [color=purple] {};
+		\node[main] (15) [below right of=13] [color=purple] {};
+		\path[color=blue] (9) edge (10)
+		(9) edge (12)
+		(10) edge (11)
+		(11) edge (12);
+		\path[color=cyan] (1) edge (2)
+		(1) edge (3)
+		(1) edge (4)
+		(1) edge (5)
+		(1) edge (6)
+		(6) edge (7);
+		\path[color=purple] (13) edge (14)
+		(13) edge (15)
+		(14) edge (15);
+		\path (8) edge (15)
+		(8) edge (6)
+		(8) edge (12)
+		(13) edge (4)
+		(14) edge (12)
+		(10) edge (5);
+	\end{tikzpicture}
 	\caption{Example of $K_{4}$ model.}
 	\label{k4-model}
 \end{figure}
@@ -524,10 +559,29 @@ We may take a look at an example of model of $K_{4}$ which is in picture \ref{k4
 	\textbf{Separation} in $G$ is $(A,B)$ where $A,B \subseteq V(G), A \cup B = V(G)$, no edge between $A \setminus B$ and $B \setminus A$.
 \end{defn}
 
-On picture \ref{separation} we may see an example of $(A,B)$-separation.
+On picture \ref{separation} we may see an example of $(A,B)$-separation. Where the \textcolor{orange}{orange} points are both in $A$ and $B$ and then the rest is either only in one or second part, which are set by their connectivity.
 
 \begin{figure}[!ht]\centering
-	\includegraphics[width=0.3\textwidth]{res/separation.pdf}
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+		\node[main] (1) [color=orange] {};
+		\node[main] (2) [color=orange] [below of=1] {};
+		\node[main] (3) [right of=1] [color=cyan] {};
+		\node[main] (4) [right of=2] [color=cyan] {};
+		\node[main] (5) [left of=2] [color=cyan] {};
+		\node[main] (6) [below left of=5] [color=cyan] {};
+		\node[main] (7) [above left of=5] [color=cyan] {};
+		\path [color=cyan, thick] (1) edge (2)
+		(1) edge (3)
+		(1) edge (4)
+		(1) edge (7)
+		(2) edge (3)
+		(2) edge (4)
+		(2) edge (6)
+		(2) edge (5)
+		(5) edge (6)
+		(5) edge (7)
+		(6) edge (7);
+	\end{tikzpicture}
 	\caption{Example of separation.}
 	\label{separation}
 \end{figure}
