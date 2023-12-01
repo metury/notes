@@ -168,11 +168,11 @@ The meaning of it is shown on the picture \ref{meaning}.
 	Consider the projection of $r$ to the plane defined by $v_i$, $v_j$. Let $W$ be the objective value of our solution:
 	
 	$$
-	\begin{array}{r c l r}
-		\E [W] & =    & \sum_{\{i,j\} \in E} \frac{\theta_{ij}}{\pi} & \text{(by linearity of expectation)} \\
-		       & \geq & \alpha \sum_{\{i,j\} \in E} \frac{1 - \cos (\theta_{ij})}{2} & \text{(by the first lemma)} \\
-		       & =    & \alpha \sum_{\{i,j\} \in E} \frac{1 - v_{i}^T v_{j}}{2} & \textbf{(this is our objective functions of VP)} \\
-		       & \geq & \alpha OPT & \text{(because VP is a relaxation)}
-	\end{array}
+	\begin{aligned}
+		\E [W] & =    & \sum_{\{i,j\} \in E} \frac{\theta_{ij}}{\pi} & \quad \text{(by linearity of expectation)} \\
+		       & \geq & \alpha \sum_{\{i,j\} \in E} \frac{1 - \cos (\theta_{ij})}{2} & \quad \text{(by the first lemma)} \\
+		       & =    & \alpha \sum_{\{i,j\} \in E} \frac{1 - v_{i}^T v_{j}}{2} & \quad \textbf{(this is our objective functions of VP)} \\
+		       & \geq & \alpha OPT & \quad \text{(because VP is a relaxation)}
+	\end{aligned}
 	$$
 \end{proof}
