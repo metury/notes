@@ -91,4 +91,178 @@ By combining these two results we may get a following corollary.
 	If $[x_{1}^{d_1} \dots x_{n}^{d_n}]P_{\overrightarrow{G}} \neq 0$ and $L$ is a list assignment such that $(\forall i) |L(v_i)| > d$ then $G$ is $L$-colorable.
 \end{cor}
 
-\TODO{Complete this section.}
+Now we will see other variants of this polynomial and how it can be computed in other ways. Here we see an example on picture \ref{orientation}. First we may see the original graph and its orientation $\overrightarrow{G}$ on picture \ref{orientation-original}. Then one monomial in a corresponding polynomial is a choice of one $\pm x_{i}$ in the bracket. This choice induces a new orientation $\overrightsimarrow{G}$ which both can be seen on picture \ref{orientation-choice}. Thus the polynomial can be computed as follows:
+
+$$
+\sum_{\overrightsimarrow{G} \text{ orientation of }G} (-1)^{\text{\# of different direction in } \overrightsimarrow{G} \text{ from } \overrightarrow{G}} \prod_{i} x_{i}^{\deg^{-}_{\overrightsimarrow{G}}(v_{i})}
+$$
+
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[node distance={35mm}, thick, main/.style = {draw, circle}]
+			\node[main] (1) {$v_{1}$};
+			\node[main] (2) [above right of=1] {$v_{2}$};
+			\node[main] (3) [below right of=1] {$v_{3}$};
+			\node[main] (4) [above right of=3] {$v_{4}$};
+			\draw[->] (1) -- (2) node[midway, above left] {$(x_{2} - x_{1})$};
+			\draw[->] (3) -- (1) node[midway, below left] {$(x_{1} - x_{3})$};
+			\draw[->] (2) -- (3) node[midway, left] {$(x_{3} - x_{2})$};
+			\draw[->] (2) -- (4) node[midway, above right] {$(x_{4} - x_{2})$};
+			\draw[->] (4) -- (3) node[midway, below right] {$(x_{3} - x_{4})$};
+		\end{tikzpicture}
+		\caption{The original graph $\overrightarrow{G}$.}
+		\label{orientation-original}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[node distance={35mm}, thick, main/.style = {draw, circle}]
+			\node[main] (1) {$v_{1}$};
+			\node[main] (2) [above right of=1] {$v_{2}$};
+			\node[main] (3) [below right of=1] {$v_{3}$};
+			\node[main] (4) [above right of=3] {$v_{4}$};
+			\draw[->] (1) -- (2) node[midway, above left] {$(x_{2} -$\textcolor{red}{$x_{1}$}$)$};
+			\draw[->] (3) -- (1) node[midway, below left] {$(x_{1} -$\textcolor{red}{$x_{3}$}$)$};
+			\draw[->] (2) -- (3) node[midway, left] {$($\textcolor{red}{$x_{3}$}$ - x_{2})$};
+			\draw[->] (2) -- (4) node[midway, above right] {$($\textcolor{red}{$x_{4}$}$ - x_{2})$};
+			\draw[->] (4) -- (3) node[midway, below right] {$($\textcolor{red}{$x_{3}$}$ - x_{4})$};
+			\draw[->, bend left=20, color=cyan] (2) edge (1);
+			\draw[->, bend right=20, color=cyan] (2) edge (4);
+			\draw[->, bend right=20, color=cyan] (4) edge (3);
+			\draw[->, bend left=20, color=cyan] (2) edge (3);
+			\draw[->, bend left=20, color=cyan] (1) edge (3);
+		\end{tikzpicture}
+		\caption{The \textcolor{red}{choice} and \textcolor{cyan}{new orientation $\overrightsimarrow{G}$}.}
+		\label{orientation-choice}
+	\end{subfigure}
+	\caption{Example for computing polynomial by orientation, the original graph $\overrightarrow{G}$.}
+	\label{orientation}
+\end{figure}
+
+Thus altogether we get this result:
+
+$$
+[x_{1}^{d_{1}} x_{2}^{d_{2}} \dots x_{n}^{d_{n}}]P_{\overrightarrow{G}} = \sum_{\overrightsimarrow{G} \text{ orientation of }G : \deg^{-}_{\overrightsimarrow{G}}(v_{i}) = d_{i} \forall i} (-1)^{\text{\# of different direction in } \overrightsimarrow{G} \text{ from } \overrightarrow{G}}
+$$
+
+When we show another example where we have a vertex with in degree 3. See picture \ref{eulerian-orientation}. For the indegree to be same it must be that for all changed edge to the vertex there must be some changed edge out of the vertex.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
+		\node (R1) {};
+		\node [below of=R1] (R2) {};
+		\node [below of=R2] (R3) {};
+		\node [below of=R3] (R4) {};
+		\node[main, fill] [below left of=R2] [above left of=R3] (1) {};
+		\node [above left of=1] (L1) {};
+		\node [left of=1] (L2) {};
+		\node [below left of=1] (L3) {};
+		\draw[->] (L1) edge (1);
+		\draw[->] (L2) edge (1);
+		\draw[->] (L3) edge (1);
+		\draw[->] (1) edge (R1);
+		\draw[->] (1) edge (R2);
+		\draw[->] (1) edge (R3);
+		\draw[->] (1) edge (R4);
+		\draw[->, bend left=15, color=cyan] (L1) edge (1);
+		\draw[->, bend right=15, color=cyan] (1) edge (L2);
+		\draw[->, bend right=15, color=cyan] (1) edge (L3);
+		\draw[->, bend left=15, color=cyan] (R1) edge (1);
+		\draw[->, bend left=15, color=cyan] (R2) edge (1);
+		\draw[->, bend right=15, color=cyan] (1) edge (R3);
+		\draw[->, bend right=15, color=cyan] (1) edge (R4);
+		\draw[->, bend left=10, color=red] (1) edge (R1);
+		\draw[->, bend left=10, color=red] (1) edge (R2);
+		\draw[->, bend right=10, color=red] (L3) edge (1);
+		\draw[->, bend right=10, color=red] (L2) edge (1);
+	\end{tikzpicture}
+	\caption{Example for Eulerian subgraph orientations.}
+	\label{eulerian-orientation}
+\end{figure}
+
+
+\begin{observ}
+	If $\overrightarrow{G}$ and $\overrightsimarrow{G}$ are orientations with the same indegrees, the $\overrightarrow{H}$ subgraph of $\overrightarrow{G}$ with edges oriented differently, then $\forall v \in V$ $\deg_{\overrightarrow{H}}^{+} (v) = \deg_{\overrightarrow{H}}^{-} (v)$ or in other words: $\overrightarrow{H}$ is Eulerian subgraph of $\overrightarrow{G}$.
+\end{observ}
+
+\begin{lemma}
+	Suppose $\overrightarrow{G}$ is an orientation of $G$ such that $\forall i$ $d_{i} = \deg^{-}(v_{i})$ in $\overrightarrow{G}$. Then
+	
+	$$
+	[x_{1}^{d_{1}} x_{2}^{d_{2}} \dots x_{n}^{d_{n}}] P_{\overrightarrow{G}} = \sum_{\overrightarrow{H} \text{ Eulerian subgraph of } \overrightarrow{G}} (-1)^{\left| E \left( \overrightarrow{H} \right) \right|}
+	$$
+	
+	which is also equivalent to the \textbf{number of Eulerian paths of $\overrightarrow{G}$ with even number of edges} minus \textbf{number of Eulerian paths of $\overrightarrow{G}$ with odd number of edges}.
+\end{lemma}
+
+\begin{cor}
+	Suppose $\overrightarrow{G}$ is an orientation of $G$ where $(\forall i) \deg^{-}(v_{i}) = d_{i}$. Let $L$ be a list assignment for $G$ s.t. $(\forall i) |L(v_{i})| > d_{i}$. If $\overrightarrow{G}$ has different number of Eulerian subgraphs with even and odd number of edges then it is $L$-colorable.
+\end{cor}
+
+Lets see this result on an example on pictures \ref{euler-list}. Where the sizes of lists are written in the nodes. We may see there are visualized two Eulerian paths with \textcolor{blue}{3} edges and \textcolor{orange}{4} edges. Also there is an empty Eulerian subgraph. Altogether we have two even subgraphs and one odd, so that means there exists $L$-coloring. But this theory only show the existence, not the construction.
+
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{0.30\textwidth}\centering
+		\begin{tikzpicture}[node distance={25mm}, thick, main/.style = {draw, circle}]
+			\node[main] (1) {2};
+			\node[main] (2) [above right of=1] {3};
+			\node[main] (3) [below right of=1] {2};
+			\node[main] (4) [above right of=3] {2};
+			\draw (1) -- (2);
+			\draw (3) -- (1);
+			\draw (2) -- (3);
+			\draw (2) -- (4);
+			\draw (4) -- (3);
+		\end{tikzpicture}
+		\caption{The original graph $G$.}
+	\end{subfigure}
+	\begin{subfigure}{0.30\textwidth}\centering
+		\begin{tikzpicture}[node distance={25mm}, thick, main/.style = {draw, circle}]
+			\node[main] (1) {2};
+			\node[main] (2) [above right of=1] {3};
+			\node[main] (3) [below right of=1] {2};
+			\node[main] (4) [above right of=3] {2};
+			\draw[->, color=cyan] (1) -- (2);
+			\draw[->, color=cyan] (3) -- (1);
+			\draw[->, color=cyan] (3) -- (2);
+			\draw[->, color=cyan] (2) -- (4);
+			\draw[->, color=cyan] (4) -- (3);
+		\end{tikzpicture}
+		\caption{The orientation $\overrightarrow{G}$.}
+	\end{subfigure}
+	\begin{subfigure}{0.30\textwidth}\centering
+		\begin{tikzpicture}[node distance={25mm}, thick, main/.style = {draw, circle}]
+			\node[main] (1) {2};
+			\node[main] (2) [above right of=1] {3};
+			\node[main] (3) [below right of=1] {2};
+			\node[main] (4) [above right of=3] {2};
+			\draw[->, color=cyan] (1) -- (2);
+			\draw[->, color=cyan] (3) -- (1);
+			\draw[->, color=cyan] (3) -- (2);
+			\draw[->, color=cyan] (2) -- (4);
+			\draw[->, color=cyan] (4) -- (3);
+			% First eulerian path.
+			\draw[->, bend left=20, color=orange] (1) edge (2);
+			\draw[->, bend left=20, color=orange] (3) edge (1);
+			\draw[->, bend left=20, color=orange] (2) edge (4);
+			\draw[->, bend left=20, color=orange] (4) edge (3);
+			% Eulerian path second.
+			\draw[->, bend left=20, color=blue] (3) edge (2);
+			\draw[->, bend right=20, color=blue] (2) edge (4);
+			\draw[->, bend right=20, color=blue] (4) edge (3);
+		\end{tikzpicture}
+		\caption{Euler subgraphs.}
+	\end{subfigure}
+	\caption{Usage of shown corollary for a list assignment.}
+	\label{euler-list}
+\end{figure}
+
+Now lets take $G$ a bipartite graph. We may see an observation that every Eulerian subgraph is edge-disjoint union of cycles. Therefore if $G$ is bipertite, then it has even number of edges in all Eulerian subgraphs.
+
+\begin{cor}
+	If $G$ is bipartite, $\overrightarrow{G}$ has indegrees $d_{1}, \dots, d_{n}$ then $G$ is $L$-colorable for every list assignments $L$ s.t. $(\forall i) |L(v_{i})| > d_{i}$.
+\end{cor}
+
+\begin{observ}
+	Every planar bipartite graph has an orientation with maximal indegree $\leq 2$ therefore it has list chromatic number at most 3.
+\end{observ}
+
+But it does not apply for all bipartite graphs since it is possible to create such bipartite graph such that $\chi_{l}$ is arbitrarily large.
