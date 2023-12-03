@@ -1,0 +1,125 @@
+\chapter{Interval, permutation and function graphs}
+
+\section{Interval graphs}
+
+\begin{defn}
+	A graph is an \textbf{interval graph} if it is isomorphic to the intersection graph of a collection of intervals on a line.
+\end{defn}
+
+\begin{observ}
+	Every interval graph has an interval representation in which all of the intervals are closed.
+\end{observ}
+
+\begin{defn}[Clique-path decomposition]
+	A \textbf{clique-path decomposition} of a graph is a clique-tree decomposition in which the underlying tree is a path.
+\end{defn}
+
+\begin{thm}
+	For any graph $G$, the following statements are equivalent:
+	
+	\begin{enumerate}
+		\item $G$ is an interval graph,
+		\item $G$ has a clique-path decomposition, and
+		\item $G$ is an intersection graph of subpaths of a path.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	"$1. \Leftrightarrow 3.$" is obvious.
+	
+	"$1. \Rightarrow 2.$" Assume $I_u , u \in V(G$ is an interval representation of $G$. Use the fact that intervals on a line have the Helly property, i.e., if any two of a collection of intervals have a nonempty intersection, then all of them have a nonempty intersection. In other words, if $Q_i \in \mathcal{Q}$ is a maximal clique of $G$, then there exists a point $P_i$ which belongs to $\bigcap_{u \in Q_i} I_u$ . Moreover, for every $v \notin Q_i , P_i \notin I_v$, since $Q_i$ is a maximal clique. (E.g., the rightmost of the left endpoints of the intervals $I_u , u \in Q_i$ is a good candidate for $P_i$.) Order the cliques of $Q$ as $Q_1, Q_2, \dots, Q_k$ so that $P_1 < P_2 < \dots < P_k$. Then the path
+	$Q_1 Q_2 \dots Q_k$ is a clique-path decomposition of $G$.
+	
+	"$2. \Rightarrow 3.$" Given a clique-path decomposition $P = (\mathcal{Q}, F)$, define $P_u = P [\{Q : u \in Q \in \mathcal{Q}\}]$ for $u \in V(G)$. Clearly $V(P_u) \cap V(P_v) \neq \emptyset$ iff $u$ and $v$ belong to the same maximal clique of $G$, which happens if and only $u$ and $v$ are adjacent in $G$.
+\end{proof}
+
+\section{Comparability graphs}
+
+\begin{defn}
+	A graph $G$ is a \textbf{comparability graph} if there exists a partial order $P = (V(G), \leq)$ on the vertex set of $G$ (i.e., an \textbf{antireflexive}, \textbf{antisymmetric} and \textbf{transitive binary relation}) such that for any two vertices $u, v \in V(G)$, $uv \in E(G)$ if and only if $u \leq v$ or $v \leq u$ (i.e., if $u$ and $v$ are comparable in $P$). The class of comparability graphs will be denoted by CO.
+\end{defn}
+
+\begin{observ}
+	A graph is a comparability graph if and only if its edges can be transitively oriented.
+\end{observ}
+
+\begin{notation}
+	If $\mathcal{A}$ is a graph class, the symbol $\text{co}-\mathcal{A}$ is used to denote the class containing the complements of the graphs in $\mathcal{A}$.
+\end{notation}
+
+\begin{observ}
+	If $A \subseteq B$, then $\text{co}-A \subseteq \text{co}-B$.
+\end{observ}
+
+\begin{thm}
+	All equivalencies hold:
+	
+	\begin{enumerate}
+		\item $\text{FUN} = \text{co}-\text{CO}$
+		\item $\text{PER} = \text{CO} \cap \text{co}-\text{CO}$
+		\item $\text{INT} = \text{CHOR} \cap \text{co}-\text{CO}$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	\begin{enumerate}
+		\item ”FUN $\subseteq$ co-CO”: Given a collection of curves joining two vertical parallel lines (and lying in the stripe between them), for any two non-crossing curves, it is uniquely determined which one lies above the other one (this follows from the Jordan curve theorem), and this gives a transitive orientation of the complement of the intersection graph of this collection.
+		
+		”co-CO $\subseteq$ FUN”: Let $G = (V, E)$ be a graph and let $P = (V, \leq)$ be a partial order which corresponds to a transitive orientation of the complement of $G$. If $d$ is the dimension of $P$, $P$ is the intersection of $d$ linear orders $L_1, L_2 , \dots, L_d$ of $V$. In the plane, draw d distinct parallel (vertical) lines $l_1, l_2, \dots, l_d$, and on each $l_i$ , mark distinct points $P_{iu}, u \in V$ bottom up in the order $L_i$. Consider piece-wise linear curves $c(u) = P_{1u} P_{2u} \dots P_{du}$, for $u \in V$. If $uv \in E$, $u$ and $v$ are incomparable in $P$,	and hence there are indices $i$ and $j$ such that $u <_{L_i} v$ and $v <_{L_j} u$, in other words $P_{iu}$ is below $P_{iv}$, while $P_{ju}$ is above $P_{jv}$. Hence the curves $c(u)$ and $c(v)$ cross somewhere between $l_i$ and $l_j$. If, on the other hand, $uv \notin E$, $uv$ is an edge of the complement of $G$ and hence $u$ and $v$ are comparable in $P$, say, $u \leq v$. But then $u <_{L_i} v$ for every $i = 1, 2, \dots, d$, and for each $i = 1, 2, \dots, d - 1$, the curve $c(u)$	lies below the curve $c(v)$ in the stripe between $l_i$ and $l_{i+1}$. Thus $c(u)$ and $c(v)$ are disjoint.
+		
+		\item Note first that co-PER $\subseteq$ PER. Indeed, given a permutation representation of a graph, swap	the order of the endpoints on one of the bounding lines to obtain a representation of the complement of the given graph. Then PER $=$ co-(co-PER) $\subseteq$ co-PER, and hence PER $=$ co-PER.
+		
+		”PER $\subseteq$ CO $\cap$ co-CO”: Obviously PER $\subseteq$ FUN $=$ co-CO. Then the above small observation implies PER $=$ co-PER $\subseteq$ co-(co-CO) $=$ CO as well.
+
+		”CO $\cap$ co-CO $\subseteq$ PER”: Suppose both $G$ and its complement can be transitively oriented, say $\overrightarrow{E_1}$ be a transitive orientation of $G$ and $\overrightarrow{E_2}$ a transitive orientation of the complement $-G$ of $G$. Then $\overrightarrow{E_1} \cup \overrightarrow{E_2}$ is a transitive orientation of the complete graph $K_{V(G)}$ on the vertex set of $G$, i.e., a linear ordering of the vertices of $G$. And so is $\overrightarrow{E_1}^{-1} \cup \overrightarrow{E_2}$. Place the vertices of $G$ on two parallel lines, on one of them in the linear order given by $\overrightarrow{E_1} \cup \overrightarrow{E_2}$, on the other one in the order given by $\overrightarrow{E_1}^{-1} \cup \overrightarrow{E_2}$, and connect the two occurrences of a vertex $u$ by a straight-line segment called $s(u)$, for every vertex $u \in V(G)$. If $uv \in E(G)$, then the pair $u, v$ is ordered differently on the two lines (by $\overrightarrow{E_1}$ on one of them and by $\overrightarrow{E_1}^{-1}$ on the other one) and the segments $s(u), s(v)$ cross each other somewhere between	the two lines. If $uv \notin E(G)$, the pair $u, v$ is ordered the same way (by $\overrightarrow{E_2}$) on both of the lines, and thus the segments $s(u)$ and $s(v)$ are disjoint. So $\{s(u)\}_{u \in V(G)}$ is a permutation representation of $G$.
+		
+		\item ”INT $\subseteq$ CHOR $'cap$ co-CO”: Let $\{I(u)\}_{u \in V(G)}$ be an interval representation of a graph $G$. Define a transitive orientation $\overrightarrow{E_2}$ of the non-edges of $G$ by setting $uv \in \overrightarrow{E_2}$ if $\max I(u) < \min I(v)$. Thus $G \in$ co-CO. The fact that $G \in$ CHOR follows from the fact that
+		
+		$$
+		\text{INT} = \mathcal{IG}(\{\text{connected subgraphs of paths}\}) \subseteq
+		$$
+		
+		$$
+		\subseteq \mathcal{IG}(\{\text{connected subgraphs of trees}\}) = \text{CHOR}.
+		$$
+		
+		”CHOR $\cap$ co-CO $\subseteq$ INT”: Let $G$ be a chordal graph which allows a transitive orientation $\overrightarrow{E_2}$ of its non-edges. Define a binary relation $<$ on the set $\mathcal{Q}$ of maximal cliques of $G$ by setting
+		
+		$$
+		Q < Q' \Leftrightarrow \exists u \in Q \exists v \in Q' : uv \in \overrightarrow{E_2}.
+		$$
+		
+		\begin{claim}
+			The relation $<$ is a partial order on $\mathcal{Q}$.
+		\end{claim}
+		
+		\begin{proof}[Proof of claim]
+			We will show all properties of partial order.
+			\begin{itemize}
+				\item Antireflexivity: Each $Q \in \mathcal{Q}$ is a clique, so there are no two vertices $u, v \in Q$ that would form a	non-edge of $G$. Hence $Q \not< Q$.
+				
+				\item Antisymmetry: Suppose for the contrary that there are $u \in Q, v \in Q'$ s.t. $uv \in \overrightarrow{E_2}$, and another pair $x \in Q, y \in Q'$ s.t. $yx \in \overrightarrow{E_2}$. First observe that $u \neq x$ and $v \neq y$ (if $u = x$, the transitivity of $\overrightarrow{E_2}$ would imply $yv \in \overrightarrow{E_2}$, which is impossible; if $v = y$, the transitivity of $\overrightarrow{E_2}$ would imply $ux \in \overrightarrow{E_2}$, which is again impossible). Next observe that both $uy$ and $xv$ must be edges of $G$ (if $uy \notin E(G)$, then either $uy \in \overrightarrow{E_2}$, or $yu \in \overrightarrow{E_2}$, yielding $ux \in \overrightarrow{E_2}$ in the former case and $yv \in \overrightarrow{E_2}$ in the letter one, both contradicting the fact that $Q$ and $Q'$ are cliques of $G$; the case of $xv \notin E(G)$ is analogous). Lastly, we conclude that $G[\{u, v, x, y\}] \simeq C_4$ , contradicting the assumption that $G$ is chordal.
+				
+				\item Transitivity: Suppose $Q < Q' < Q''$ and let $u \in Q, v, x \in Q'$ and $y \in Q''$ be vertices such that $uv, xy \in \overrightarrow{E_2}$. If $v = x$, the transitivity of $\overrightarrow{E_2}$ implies $uy \in \overrightarrow{E_2}$, hence $Q < Q''$. If $v \neq x$, one of $ux$, $vy$
+				must be a non-edge (otherwise $G[\{u, v, x, y\}]$ would be an induced cycle of length 4, contradicting the assumption that $G$ is chordal). If $ux \notin E(G)$, $ux \in \overrightarrow{E_2}$ and the transitivity of $\overrightarrow{E_2}$ implies $uy \in \overrightarrow{E_2}$. If $vy \notin E(G)$, $vy \in \overrightarrow{E_2}$ and the transitivity of $\overrightarrow{E_2}$ implies $uy \in \overrightarrow{E_2}$. In either case, $Q < Q''$.
+			\end{itemize}
+		\end{proof}
+		
+		\begin{claim}
+			The relation $<$ is a linear ordering of $\mathcal{Q}$.
+		\end{claim}
+		
+		\begin{proof}[Proof of claim]
+			Let $Q \neq Q'$ be two different maximal cliques of $G$. Their maximality implies that none of them is a subset of the other one. Hence there is a vertex $u \in Q$ which does not belong to $Q'$ . If $u$ were adjacent to all vertices of $Q'$, $Q' \cup \{u\}$ would be a clique of $G$, contradicting the maximality of $Q'$ . Hence there is a $v \in Q'$ such that $uv \notin E(G)$. Then either $uv \in \overrightarrow{E_2}$ or $vu \overrightarrow{E_2}$, thus $Q < Q'$ or $Q' < Q$.
+		\end{proof}
+		
+		\begin{claim}
+			Let $\mathcal{Q} = \{Q_1 < Q_2 < \dots < Q_k\}$ be the maximal cliques of $G$ ordered by $<$. Then $P_G = (\mathcal{Q}, \{Q_i Q_{i+1}: i = 1, 2, \dots, k - 1\})$ is a clique-path decomposition of $G$, and hence $G \in$ INT.
+		\end{claim}
+		
+		\begin{proof}[Proof of claim]
+			Indeed $P_G$ is a path whose nodes are the maximal cliques of $G$. It remains to show that vertices of $G$ appear in these cliques consecutively. Suppose $Q < Q' < Q''$ and $u \in Q \cap Q''$. If there were a vertex $v \in Q'$ nonadjacent to $u$, we would have $uv \in \overrightarrow{E_2}$ because of $Q < Q'$ and $vu \in \overrightarrow{E_2}$ because of $Q' < Q''$, contradicting the antisymmetry of $\overrightarrow{E_2}$. Hence $u$ is adjacent to all vertices of $Q'$ , and thus
+			$u \in Q'$ follows from the maximality of $Q'$.
+		\end{proof}
+	\end{enumerate}
+\end{proof}
