@@ -12,16 +12,18 @@
 *.cb2
 .*.lb
 
-kg/kg.pdf
-past-ii/past-ii.pdf
-teorie-mnozin/temno.pdf
-toky-cesty-a-rezy/flows-paths-cuts.pdf
-kg/res/tree.pdf
-toky-cesty-a-rezy/res/flow.pdf
-past-ii/res/past-ii.pdf
-teorie-mnozin/res/venn.pdf
-geometricka reprezentace grafu/grg.pdf
-geometricka reprezentace grafu/res/filament.pdf
+# kg/kg.pdf
+# past-ii/past-ii.pdf
+# teorie-mnozin/temno.pdf
+# toky-cesty-a-rezy/flows-paths-cuts.pdf
+# kg/res/tree.pdf
+# toky-cesty-a-rezy/res/flow.pdf
+# past-ii/res/past-ii.pdf
+# teorie-mnozin/res/venn.pdf
+# geometricka reprezentace grafu/grg.pdf
+# geometricka reprezentace grafu/res/filament.pdf
+# Only .pdf is enough.
+*.pdf
 
 ## Intermediate documents:
 *.dvi
