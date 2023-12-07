@@ -12,24 +12,13 @@ Lets see for ourselves an example, which is on picture \ref{broken-x}. For $\mat
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
-		\node (p1) {};
-		\node[main] (b) [above right of=p1] {b};
-		\node (p2) [below right of=b] {};
-		\node[main] (a) [below of=p1] {a};
-		\node (p3) [right of=a] {};
-		\node[main] (c) [right of=p3] {c};
-		\node (1) [left of=p1] {};
-		\node (2) [right of=p2] {};
-		\node (3) [above right of=p2] {};
-		\node (4) [below left of=p3] {};
-		\node (5) [above left of=p1] {};
-		\node (6) [below right of=p3] {};
-		\node (7) [left of=4] {};
-		\node (8) [right of=6] {};
-		\draw[color=black] (7) -- (8);
-		\draw[color=blue] (1) -- (2);
-		\draw[color=orange] (5) -- (6);
-		\draw[color=cyan] (3) -- (4);
+		\draw[color=cyan] (0,5) -- (5,0);
+		\draw[color=orange] (1, 0) -- (5, 5);
+		\draw[color=teal] (0,4) -- (5,3);
+		\draw[color=gray] (0,0) -- (5, 1);
+		\node[main] at (1, 2) {$a$};
+		\node[main] at (4, 2) {$b$};
+		\node[main] at (3, 4) {$c$};		
 	\end{tikzpicture}
 	\caption{Example of $\mathcal{F}$ and set $X$ which is broken.}
 	\label{broken-x}
@@ -48,17 +37,17 @@ All these examples are geometrical ones. Lets see some for graph theory. Lets ha
 Now we will be considering sub-systems. That is $\mathcal{F} \subseteq 2^{Y}$ for some $Y$. There will be defined a measurement $\mu$ on $Y$. As an example can be the half-planes but only inside the square of size 1.
 
 \begin{defn}
-	$N$ is an $\epsilon$-net if
+	$N \subseteq Y$ is an $\epsilon$-net if
 	
 	$$
-	(\forall A \in \mathcal{F}) : \mu(A) \geq \epsilon \mu(Y) \land N \cap A \neq \emptyset
+	(\forall A \in \mathcal{F}) : \mu(A) \geq \epsilon \mu(Y) \Rightarrow N \cap A \neq \emptyset
 	$$
 \end{defn}
 
 For an example consider $\mathcal{F} = \{\text{axis aligned rectangles in }Y\}$ and $\mu$ be the area of the rectangle. Then the $\epsilon$-net must hit all rectangles. We can easily create a grid of points which are $\epsilon$ apart. This will create $\frac{1}{\epsilon^2}$ points in net.
 
 \begin{thm}
-	There $\exists c$ s.t. if $\mathcal{F} \subseteq 2^Y$ has $VC-\dim(\mathcal{F})$ $k$ then
+	There $\exists c$ s.t. if $\mathcal{F} \subseteq 2^Y$ has $VC-\dim(\mathcal{F}) \leq k$ then
 	
 	$$
 	(\forall \epsilon > 0) c \frac{k}{\epsilon} \log \left( \frac{k}{\epsilon} \right)
@@ -71,4 +60,32 @@ For an example consider $\mathcal{F} = \{\text{axis aligned rectangles in }Y\}$ 
 	$\tau (\mathcal{F}) = \min \left( |Z| : (\forall A \in \mathcal{F}) Z \cap A \neq \emptyset \right)$.
 \end{defn}
 
-As an example we may see that for $\mathcal{F}$ closed neighborhood in $G$ the $\tau(\mathcal{F})$ is for the minimal size of dominating set in the given graph $G$.
+As an example we may see that for $\mathcal{F}$ closed neighborhood in $G$ the $\tau(\mathcal{F})$ is for the minimal size of dominating set in the given graph $G$. Also we have shown that if $K_{k} \nleq_{t} G \Rightarrow VC-\dim(\mathcal{F}) \leq k - 1$.
+
+Now we will introduce an integer program that will be able to solve this problem. Note that we will assume that $\mathcal{F}$ and $Y$ are finite. Otherwise it would not make any sense.
+
+$$
+\begin{aligned}
+	&\min \sum_{v} x_{v} \\
+	\forall v \in Y: \quad & x_{v} \in \{0,1\} \\
+	\forall F \in \mathcal{F}: \quad & \sum_{v \in F} x_{v} \geq 1
+\end{aligned}
+$$
+
+This problem will output such $X = \{x_{v} \mid v \in Y : x_{v} = 1\}$ and $|X| = \tau(\mathcal{F})$. We can use this to create an LP relaxation.
+
+$$
+\begin{aligned}
+	&\min \sum_{v} x_{v} \\
+	\forall v \in Y: \quad & x_{v} \geq 0 \\
+	\forall F \in \mathcal{F}: \quad & \sum_{v \in F} x_{v} \geq 1
+\end{aligned}
+$$
+
+We will denote this fraction optimum as $\tau^{\ast}(\mathcal{F})$. Easily seen it is $\leq \tau(\mathcal{F})$. And it is also solvable in polynomial time, due to the properties of linear programs. Now consider $\mathcal{F}$ which has $VC-\dim(\mathcal{F}) \leq k$. We then have $x_{v} : v \in Y$ from the optimal solution of LP. Lets put the measurement for all $A \subseteq Y: \mu(A) = \sum_{v \in A} x_{v}$. By the given solution we have that $F \in \mathcal{F}: \mu(F) \geq 1$. Also $\mu(Y) = \tau^{\ast}(\mathcal{F})$. Let $N$ be an $\epsilon$-net for $\epsilon = 1/\tau^{\ast}(\mathcal{F})$. That is because $N \cap F \neq 0$ for all $F \in \mathcal{F}$ s.t. $\mu(F) \geq \epsilon \mu(Y) = 1$. Therefore
+
+$$
+\tau(\mathcal{F}) \leq |N| = \Theta (k \tau^{\ast}(\mathcal{F}) \log(k \tau^{\ast}(\mathcal{F})))
+$$
+
+so it is $(k \log(k \tau^{\ast}(\mathcal{F})))$-approximation.
