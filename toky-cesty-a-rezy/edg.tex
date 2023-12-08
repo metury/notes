@@ -747,3 +747,163 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 	\end{subfigure}
 	\caption{Example of optimalization problems.}
 \end{figure}
+
+\section{Edge disjoint path problem and flow number}
+
+We will be again considering undirected graph $G=(V,E)$. And also a concurrent multi-commodity flow problem (or CMFP for short) with $(s_{i}, t_{i})$ commodities for $i = 1, \dots, k$ and their demands $d_{i} \in \R^{+}$. We will denote $S$ as a feasible solution for such problem.
+
+\begin{defn}
+	\textbf{Flow value} is the value of the objective function for $S$.
+\end{defn}
+
+\begin{defn}
+	\textbf{Balanced instance} of the CMFP such that
+	
+	$$
+	\forall v \in V(G) : \sum_{i: s_{i} = v} d_{i} = \deg(v) = \sum_{i: t_{i} = v} d_{i}.
+	$$
+\end{defn}
+
+It may also be defined with inequalities. We will be calling this \textbf{balanced multi-commodity flow problem} (or BMFP for short).
+
+\begin{defn}
+	\textbf{Product multi-commodity flow} (PMFP for short) is an instance where
+	
+	\begin{itemize}
+		\item There is a value $\pi(v) \in \R^+$ associated with every vertex $v \in V$.
+		\item There is a commodity for every ordered pair of vertices $(u,v)$ of demand $\pi(u) \cdot \pi(v)$.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}
+	\textbf{Dilation}$(S)$ denoted as $D(S)$ is the length of the longest path in $S$.
+\end{defn}
+
+\begin{defn}
+	\textbf{Congestion}$(S)$ denoted as $C(S)$ is the inverse of the flow value in $S$.
+\end{defn}
+
+As a side-note when there was a problem for a networks in a computers to find best paths for sending packets it can be shown that the upper bound for the time is somewhat connected to similiar terms, particularly $O(C + D)$.
+
+Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\pi(u) = \frac{\deg(u)}{\sqrt{2|E|}}$. \textit{Note that $2|E| = \sum_{v \in V} \deg(v)$.}
+
+\begin{defn}
+	\textbf{FLow number} of a graph $G$ denoted as $F(G)$ is
+	
+	$$
+	\min_{\text{feasible solution } S \text{ for } I_{0}} \{ \max \{ C(S), D(S) \} \}
+	$$
+\end{defn}
+
+\begin{claim}
+	There is a polynomial time algorithm that computes $F(G)$ for every graph $G$.
+\end{claim}
+
+\begin{proof}
+	Lets assume $V = \{v_{1}, v_{2}, \dots, v_{n}\}$. For $L \in \N$ we define graph $G_{L} = (V', E')$. This is a layered graph with $L+1$ layers. To be precise it is defined as follows
+	
+	$$
+	\begin{aligned}
+		V_{i} &= \{v_{i1}, v_{i2}, \dots, v_{in}\}, \quad \forall i \in 0, 1, \dots, L \\
+		E_{i} &= \{(v_{(i-1)j}, v_{ik}) \mid \{v_{j}, v_{k}\} \in E \} \cup \{(v_{(i-1)j}, v_{ij}) \mid v_{j} \in V\}, \quad \forall i \in 1,2, \dots, L \\
+	\end{aligned}
+	$$
+	
+	$$
+	\text{then } V' = \bigcup_{i = 0}^{L} V_{i} \text{ and } E' = \bigcup_{i=1}^{L} E_{i}.
+	$$
+	
+	Note that we do not keep $V$ and $E$ from the original graph.
+	
+	Now consider the following instance of CMFP. $\forall (v_{i}, v_{j}) \in V^2$ we set commodity between $v_{0i}$ and $v_{Lj}$ of demand $\pi(v_{i}) \cdot \pi(v_{j})$ (where $\pi$ is taken from $I_{0}$). We also define a special request. $\forall \{v_{i}, v_{j}\} \in E$ the sum of flows over all edges in
+	
+	$$
+	\bigcup_{k = 1}^{L} \{ (v_{(k-1)i}, v_{kj}), (v_{(k-1)j}, v_{ki}) \}
+	$$
+	
+	has to be at most 1. This is just a linear constrained so we are able to solve this in polynomial time. With this requirement we are able to map the solution to the original graph $G$. Also the dilation is $L$ and to compute the congestion is easy to do from the result of LP. In other words $\forall L \in \{1, \dots, |V|\}$ find opt of this LP in $G_{L}$ and denote it as $S_{L}$. Then let $S_{L}'$ be the corresponding flow in $G$. Hence the following holds.
+	
+	$$
+	F(G) = \min_{L = 1, \dots, |V|} \{ \max \{ C(S_{L}'), D(S_{L}')\} \}
+	$$
+\end{proof}
+
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[node distance={13mm}, main/.style = {draw, thick, circle}]
+			\node[main] (a) [] {$a$};
+			\node[main] (b) [below of=a] {$b$};
+			\node[main] (c) [right of=a] {$c$};
+			\node[main] (d) [right of=b] {$d$};
+			\draw[color=blue, thick] (a) edge (d);
+			\draw[color=red, thick] (b) edge (d);
+			\draw[color=violet, thick] (c) edge (d);
+		\end{tikzpicture}
+		\caption{Original graph $G$.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[node distance={20mm}, main/.style = {draw, thick, circle}]
+			\node[main] (a1) [] {$a_{1}$};
+			\node[main] (b1) [right of=a1] {$b_{1}$};
+			\node[main] (c1) [right of=b1] {$c_{1}$};
+			\node[main] (d1) [right of=c1] {$d_{1}$};
+			
+			\node[main] (a2) [below of=a1] {$a_{2}$};
+			\node[main] (b2) [right of=a2] {$b_{2}$};
+			\node[main] (c2) [right of=b2] {$c_{2}$};
+			\node[main] (d2) [right of=c2] {$d_{2}$};
+			
+			\node[main] (a3) [below of=a2] {$a_{3}$};
+			\node[main] (b3) [right of=a3] {$b_{3}$};
+			\node[main] (c3) [right of=b3] {$c_{3}$};
+			\node[main] (d3) [right of=c3] {$d_{3}$};
+			
+			\path[->, color=gray, thick] (a1) edge (a2) (a2) edge (a3);
+			\path[->, color=gray, thick] (b1) edge (b2) (b2) edge (b3);
+			\path[->, color=gray, thick] (c1) edge (c2) (c2) edge (c3);
+			\path[->, color=gray, thick] (d1) edge (d2) (d2) edge (d3);
+			
+			\path[->, color=blue, thick] (a1) edge (d2) (d1) edge (a2)
+			                             (a2) edge (d3) (d2) edge (a3);
+			                               
+			\path[->, color=red, thick] (b1) edge (d2) (d1) edge (b2)
+			                            (b2) edge (d3) (d2) edge (b3);
+			
+			\path[->, color=violet, thick] (c1) edge (d2) (d1) edge (c2)
+			                               (c2) edge (d3) (d2) edge (c3);
+			
+		\end{tikzpicture}
+		\caption{Layered graph $G_{L}$ for $L = 3$.}
+	\end{subfigure}
+	\caption{Shown a visualization of a graph $G$ and its layered version $G_{L}$.}
+\end{figure}
+
+\begin{claim}
+	For any graph $G$ with flow number $F = F(G)$ and an instance $I$ of the BMFP in $G$, there is a feasible solution for $I$ with congestion and dilation at most $2F$.
+\end{claim}
+
+\begin{proof}
+	For every $(s_{i}, t_{i}) \in I$ we define two instances:
+	
+	$$
+	\begin{aligned}
+		I_{1} &: \forall u \in V \text{ add commodity } (s_{i}, u) \text{ of demand } \frac{d_{i} \deg(u)}{2|E|} \\
+		I_{2} &: \forall u \in V \text{ add commodity } (u, t_{i}) \text{ of demand } \frac{d_{i} \deg(u)}{2|E|} \\
+	\end{aligned}
+	$$
+	
+	Note that $\sum_{v \in V} \frac{d_{i} \deg(v)}{2|E|} = d_{i}$. For $v,w$ what is the sum of demands between $v$ and $w$ in $I_{1}$?
+	
+	$$
+	\sum_{i: s_{i} = v} \frac{d_{i} \deg(w)}{2|E|} = \frac{\deg(w)}{2|E|} \sum_{i: s_{i} = v} d_{i} = \frac{\deg(w)}{2|E|} \deg(v) = \frac{\deg(w) \deg(v)}{2|E|}
+	$$
+	
+	This means that $I_{1}$ is actually $I_{0}$. Similarly it can be shown that $I_{2} = I_{0}$. Hence the $F$ will be doubled for both $I_{1}$ and $I_{2}$ thus getting at most $2F$.
+\end{proof}
+
+\begin{lemma}[Flow shortening]
+	Let $G = (V,E)$ be a graph and $F = F(G)$ be its flow number. For any $\epsilon \in [0,1]$ and any feasible flow $S$ in $G$ of flow value $f$, for an instance of CMFP. There exists a feasible flow of flow value $\geq \frac{f}{1+\epsilon}$ that uses paths of lengths $\leq 2F(1+\frac{1}{\epsilon})$.
+\end{lemma}
+
+Before we properly show the proof we show the idea behind it. We set $L = \frac{2F}{\epsilon}$ and for every path we find the first $L$ vertices and last $L$ vertices. In some paths they may overlap. We will connect the opposite vertices and scale demands and flows, so it will eventually work.
+
