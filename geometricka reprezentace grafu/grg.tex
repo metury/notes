@@ -1,52 +1,7 @@
-% Parameters of the paper.
-\documentclass[12pt,a4paper]{report}
-\setlength\textwidth{160mm}
-\setlength\textheight{247mm}
-\setlength\oddsidemargin{0mm}
-\setlength\evensidemargin{0mm}
-\setlength\topmargin{0mm}
-\setlength\headsep{0mm}
-\setlength\headheight{0mm}
-\let\openright=\clearpage
-
-%\usepackage[czech]{babel}  % Czech
-\usepackage{babel}          % English
-\usepackage{lmodern}        %
-\usepackage[T1]{fontenc}    % Change the font
-\usepackage{textcomp}       %
-
-\usepackage[utf8]{inputenc} % Coding.
-
-%%% Další užitečné balíčky (jsou součástí běžných distribucí LaTeXu)
-\usepackage{amsmath}        % rozšíření pro sazbu matematiky
-\usepackage{amsfonts}       % matematické fonty
-\usepackage{amsthm}         % sazba vět, definic apod.
-\usepackage{bbding}         % balíček s~nejrůznějšími symboly
-\usepackage{bm}             % tučné symboly (příkaz \bm)
-\usepackage{graphicx}       % vkládání obrázků
-\usepackage{fancyvrb}       % vylepšené prostředí pro strojové písmo
-\usepackage{indentfirst}    % zavede odsazení 1. odstavce kapitoly
-\usepackage{natbib}         % zajištuje možnost odkazovat na~literaturu
-\usepackage[nottoc]{tocbibind} % zajistí přidání seznamu literatury,
-                            % obrázků a tabulek do~obsahu
-\usepackage{icomma}         % inteligetní čárka v~matematickém módu
-\usepackage{dcolumn}        % lepší zarovnání sloupců v~tabulkách
-\usepackage{booktabs}       % lepší vodorovné linky v~tabulkách
-\usepackage{paralist}       % lepší enumerate a itemize
-\usepackage[dvipsnames]{xcolor}         % barevná sazba
-                            %
-\usepackage{caption}        % Packages pro subfigures.
-\usepackage{subcaption}     %
-\usepackage{pdfpages}       % Vkladani pdfka.
-\usepackage{hyperref}       % Odkazy.
-\usepackage{tikz}           % Grafy a obrázky.
-\usetikzlibrary{positioning}
-\usepackage{algpseudocode}  % Pseudokód
-\usepackage{algorithm}
-\usepackage{titling}
-\usepackage{amssymb}
-
+\include{../libraries} % Use the same header and libraries.
 \include{../makra} % Use global macros.
+
+\usepackage{babel}
 
 \title{Geometrická reprezentace grafů}
 \author{Tomáš Turek}
