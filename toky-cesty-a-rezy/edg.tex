@@ -907,3 +907,109 @@ Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\
 
 Before we properly show the proof we show the idea behind it. We set $L = \frac{2F}{\epsilon}$ and for every path we find the first $L$ vertices and last $L$ vertices. In some paths they may overlap. We will connect the opposite vertices and scale demands and flows, so it will eventually work.
 
+\begin{proof}
+	Denote $\mathcal{O}$ the set of the paths in $S$. For $p \in \mathcal{O}$ denote $f_{p}$ as the amount of flow on path $p$. Now let $\mathcal{O}' = \{p \in \mathcal{O} \mid |p| > L\}$ for $L = \frac{2F}{\epsilon}$. For a path $p \in \mathcal{O}'$ let $a_{p,1}, \dots, a_{p,L}$ be the \textcolor{violet}{first} $L$ vertices on path $p$. And let $b_{p,L}, \dots, b_{p,1}$ be the \textcolor{orange}{last} $L$ vertices on path $p$. (As you may see on picture \ref{shortening-path}). Now we define
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
+			\node[right of = 2] (3) {};
+			\node[right of = 3] (4) {};
+			\node[right of = 4] (5) {};
+			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
+			\node[main, below of = 1, color=orange] (7) {$b_{p,L}$};
+			\node[right of = 7] (8) {};
+			\node[right of = 8] (9) {};
+			\node[right of = 9] (10) {};
+			\node[main, right of = 10, color=orange] (11) {$b_{p,2}$};
+			\node[main, right of = 11, color=orange] (12) {$b_{p,1}$};
+			\draw[color=violet] (1) edge (2);
+			\draw[color=orange] (12) edge (11);
+			\draw[color=violet, dashed] (2) edge (6);
+			\draw[color=orange, dashed] (7) edge (11);
+			\draw[color=black, bend right = 110] (12) edge (6);
+		\end{tikzpicture}
+		\caption{Illustration of the point in the path $p$.}
+		\label{shortening-path}
+	\end{figure}
+	
+	$$
+	\mathcal{U} = \bigcup_{p \in \mathcal{O}'} \bigcup_{i = 1}^{L} (a_{p,i}, b_{p,i}, f_{p})
+	$$
+	
+	which will be a new instance CMFP with demands $f_{p}$. Also denote $\mathcal{P}$ as the set of paths of $\mathcal{U}$. We can make an observation that $\mathcal{U}$ is actually a (subset) of a BMFP. Note that subset means there are inequalities. This observation is made because $S$ was a feasible solution and making a subset will lead to having BMFP.
+	
+	For every path $p \in \mathcal{O}'$ we replace it by flow systems $S_{p,i}$ for $i = 1, \dots, L$. Each system consists of two parts. (Also on the picture \ref{shortening})
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
+			\node[right of = 2] (3) {};
+			\node[main, right of = 3, color=cyan] (4) {$a_{p,i}$};
+			\node[right of = 4] (5) {};
+			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
+			\node[main, below of = 1, color=orange] (7) {$b_{p,L}$};
+			\node[right of = 7] (8) {};
+			\node[main, right of = 8, color=cyan] (9) {$b_{p,i}$};
+			\node[right of = 9] (10) {};
+			\node[main, right of = 10, color=orange] (11) {$b_{p,2}$};
+			\node[main, right of = 11, color=orange] (12) {$b_{p,1}$};
+			\draw[color=violet] (1) edge (2);
+			\draw[color=orange] (12) edge (11);
+			\draw[color=violet, dashed] (2) edge (6);
+			\draw[color=orange, dashed] (7) edge (11);
+			\draw[color=black, bend right = 110] (12) edge (6);
+		\end{tikzpicture}
+		\caption{Illustration of the shortening system for $S_{p,i}$.}
+		\label{shortening}
+	\end{figure}
+	
+	\begin{enumerate}
+		\item An initial segment between $a_{p,1}$ and $a_{p,i}$ of $p$ plus the final segment between $b_{p,L}$ and $b_{p,i}$. Also we will scale these down by $(1 + \epsilon) L$.
+		\item We use the flow for the commodity $(a_{p,i}, b_{p,i}, f_{p}) \in \mathcal{U}$ with flow of a size $\frac{f_{p}}{L(1 + \epsilon)}$.
+	\end{enumerate}
+	
+	Now the sum of flow between $a_{p,i}$ and $b_{p,i}$ over all flow systems $S_{p,i}$ is equal to $L \frac{f_{p}}{(1+\epsilon)L} = \frac{f_{p}}{(1+\epsilon)}$. Also for every $p \in \mathcal{O} \setminus \mathcal{O}'$ we scale down the flow by $(1 + \epsilon)$.
+	
+	Think about the optimal feasible flow for $\mathcal{U}$. It has these properties:
+	
+	\begin{itemize}
+		\item $\forall e \in E$ the flow in $e$ is $\leq 1$. (It is feasible solution.)
+		\item $\forall (a, b, f) \in \mathcal{U}$ the flow between $a$ and $b$ is $\geq \frac{f}{2F}$. (Due to the claim for BMFP instance.)
+	\end{itemize}
+	
+	Therefore by scaling these down by $\frac{\epsilon}{1 + \epsilon}$ we get the amount we need for all $S_{p,i}$'s. Simply if we rewrite $\frac{f_{p}}{L(1 + \epsilon)} = \frac{f_{p}}{2F(1 + \epsilon)}\epsilon$. Hence for an edge $e \in E$ the amount of flow on $e$ due to the "shortcuts" is $\leq \frac{\epsilon}{1+\epsilon}$. Thus $\forall e \in E$ the total flow is $\leq \frac{1}{1 + \epsilon} = \frac{\epsilon}{1+\epsilon} = 1$. Note that these are really shortcuts, because we have used the previous claim to obtain such solution for BMFP.
+\end{proof}
+
+\section{Bounded greedy algorithm}
+
+Lets take a graph $G = (V,E)$ its flow number $F = F(G)$ and consider edge disjoint path problem on such $G$ with commodities $(s_{i}, t_{i})$ for $i \in [k]$. We will use the Greedy algorithm already mentioned, but with the parameter $2F$ instead.
+
+Now we will analyze how the algorithm goes. Let $\mathcal{B}$ be the paths of Greedy($4F$) and $\mathcal{O}$ the paths in optimal solution. We may look at the optimal paths as a instance of a flow problem. Therefore we will use shortening lemma with $\epsilon = 1$ on the flow system $\mathcal{O}$. So let $\mathcal{O}'$ be the resulting flow system. We may see that both $\mathcal{O}'$ and $\mathcal{B}$ uses paths with lengths at most $4F$.
+
+For $(s_{i}, t_{i}) \in \mathcal{O}' \setminus \mathcal{B}$ consider a path $p$ connecting $s_{i}$ and $t_{i}$. Because it was not used by the algorithm there must $\exists q \in \mathcal{B}$ such that $q \cap p \neq \emptyset$. We may say that \textit{"$q$ is a witness of $(s_{i},t_{i})$ of weight $f_{p}$"}.
+
+\begin{observ}
+	For every $(s_{i}, t_{i}) \in \mathcal{O}' \setminus \mathcal{B}$ there exists witnesses for $(s_{i}, t_{i})$ in $\mathcal{B}$ of total weight $\geq 1/2$.
+\end{observ}
+
+\begin{observ}
+	Any path in $\mathcal{B}$ serves as a witness of weight $\leq 4F$.
+\end{observ}
+
+Therefore altogether we get the following:
+
+$$
+\begin{aligned}
+	|\mathcal{O}| &\leq |\mathcal{O}' \setminus \mathcal{B}| + |\mathcal{B}| \\
+	 &\leq *F |\mathcal{B}| + |\mathcal{B}| \\
+	 & = O(F) |\mathcal{B}|
+\end{aligned}
+$$
+
+\begin{thm}
+	The approximation ratio of the BGA($4F$) is $O(F)$.
+\end{thm}
+
