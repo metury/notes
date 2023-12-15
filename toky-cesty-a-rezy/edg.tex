@@ -913,12 +913,13 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
 			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[below of = 1] (phantom) {};
 			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
 			\node[right of = 2] (3) {};
 			\node[right of = 3] (4) {};
 			\node[right of = 4] (5) {};
 			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
-			\node[main, below of = 1, color=orange] (7) {$b_{p,L}$};
+			\node[main, below of = phantom, color=orange] (7) {$b_{p,L}$};
 			\node[right of = 7] (8) {};
 			\node[right of = 8] (9) {};
 			\node[right of = 9] (10) {};
@@ -945,12 +946,13 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
 			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[below of = 1] (phantom) {};
 			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
 			\node[right of = 2] (3) {};
 			\node[main, right of = 3, color=cyan] (4) {$a_{p,i}$};
 			\node[right of = 4] (5) {};
 			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
-			\node[main, below of = 1, color=orange] (7) {$b_{p,L}$};
+			\node[main, below of = phantom, color=orange] (7) {$b_{p,L}$};
 			\node[right of = 7] (8) {};
 			\node[main, right of = 8, color=cyan] (9) {$b_{p,i}$};
 			\node[right of = 9] (10) {};
@@ -958,9 +960,16 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 			\node[main, right of = 11, color=orange] (12) {$b_{p,1}$};
 			\draw[color=violet] (1) edge (2);
 			\draw[color=orange] (12) edge (11);
-			\draw[color=violet, dashed] (2) edge (6);
-			\draw[color=orange, dashed] (7) edge (11);
+			\draw[color=violet, dashed] (2) edge (4);
+			\draw[color=violet, dashed] (4) edge (6);
+			\draw[color=orange, dashed] (7) edge (9);
+			\draw[color=orange, dashed] (9) edge (11);
 			\draw[color=black, bend right = 110] (12) edge (6);
+			\draw[color=cyan] (4) edge (9);
+			\draw[color=cyan, bend right = 15] (4) edge (9);
+			\draw[color=cyan, bend left = 15] (4) edge (9);
+			\draw[color=cyan, bend right = 30] (4) edge (9);
+			\draw[color=cyan, bend left = 30] (4) edge (9);
 		\end{tikzpicture}
 		\caption{Illustration of the shortening system for $S_{p,i}$.}
 		\label{shortening}

@@ -1,0 +1,57 @@
+\chapter{Regularity of graphs and Ramsey's extremal theory}
+
+As one can already met the random graphs which are denoted as $G = (n,p)$ where we have $n$ vertices and every edge between each pair of a vertices is there with a probability $p$. This notation si usually used for proving some properties that graphs tend to have for more vertices.
+
+Example could be computing the number of triangles in the graph. To be exact we want to compute the expected number, so $\E [\text{number of triangle}] = p^3 \binom{n}{3}$. And also then we may use Chernoff's bound to get that $\Pr [|\text{number of triangles } - p^3 \binom{n}{3}| > \epsilon n^3] = e^{-\Theta(n^3)}$. In other words the probability that the number being way different is small.
+
+In the next example and for further reading we will denote $e(A,B)$ as the number of edges between two subset of vertices $A, B \subseteq V$. In the probability case it is somewhat similiar to $p |A| |B|$. Which leads to the fact that $\Pr [|e(A,B) - p|A||B|| \geq \epsilon |A||B|] < e^{-\Theta(|A||B|)}$. If we would take $A, B$ such that $|A|, |B| \geq \delta n$ then there may be $\leq 4^n$ number of subsets.
+
+Well the real graphs we may encounter do not have this nice property. So we will build a theory around that in fact it is not that bad and can be somewhat similiar to the probability case.
+
+\begin{defn}
+	Lets denote $d(A,B) = \frac{e(A,B)}{|A| \cdot |B|}$ or so called density of a graph. Sometimes we will denote $d(A,B)$ as $p$, because it will behave somewhat similarly as the probability.
+\end{defn}
+
+\begin{defn}
+	For some $\delta, \epsilon > 0$. Let $A, B \subseteq V$ for some graph $G = (V,E)$. Then we say that $(A,B)$ is $(\delta, \epsilon)$-\textbf{regular pair} if following holds
+	
+	\begin{itemize}
+		\item $\forall A' \subseteq A : |A'| \geq \delta |A|$,
+		\item $\forall B' \subseteq B : |B'| \geq \delta |B|$ and
+		\item $|d(A'B') - d(A,B)| \leq \epsilon$.
+	\end{itemize}
+	
+	Sometimes we will shorten the notation to just $\epsilon$-regular pair.
+\end{defn}
+
+Now we will look at how many neighbors can be for some $v \in A$. To be exact we will denote $B_{0}$ the neighbors and we want to count these vertices for which $|B_{0}| \geq \delta |B|$. But we may see there are some degenerate vertices, but we will show it is not that many.
+
+\begin{lemma}
+	The number of vertices in $A$ such that $\deg_{B_{0}}v > (p + \epsilon |B_{0}|)$ is at most $\delta |A|$. And also the number of vertices in $B$ such that $\deg_{A_{0}}v < (p + \epsilon |A_{0}|)$ is at most $\delta |B|$.
+\end{lemma}
+
+\begin{proof}
+	For contradiction denote $A_{0}$ as all such vertices in $A$ which have low number of neighbors. For the contradiction suppose $|A_{0}| \geq \delta |A|$. This result in the following.
+	
+	$$
+	\begin{aligned}
+		|d(A_{0}, B_{0}) - p| &\leq \epsilon \\
+		 &= \left| \frac{e(A_{0},B_{0})}{|A_{0}| |B_{0}|} - p \right| \\
+		 &= \left| \frac{\sum_{v \in A_{0}} \deg_{b_{0}}(v)}{|A_{0}| |B_{0}|} - p \right| \\
+		 &= \left| \frac{|A_{0} (p+ \epsilon |B_{0}|)}{|A_{0}| |B_{0}|} - p \right| \\
+		 &= \frac{|A_{0} (p+ \epsilon |B_{0}|)}{|A_{0}| |B_{0}|} - p = \epsilon
+	\end{aligned}
+	$$
+	
+	Which is a contradiction.
+\end{proof}
+
+Now we will denote $q(A,B)$ as the number of vertices $(v_1, v_2, v_3, v_4)$ forming a 4-cycle and $v_1 \neq v_3 \in A$ and $v_2 \neq v_4 \in B$. In the probability case we see that 
+
+$$
+\E [q(A,B)] = p^4 \binom{|A|}{2} \binom{|B|}{2} \cdot 4 \approx p^4 |A|^2 |B|^2 - O(n^3)
+$$
+
+One can be confused by the $4$ in there. That is because the way we defined it we count every 4-cycle four times.
+
+\TODO{The rest of the pages.}
