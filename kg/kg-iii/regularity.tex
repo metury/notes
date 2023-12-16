@@ -54,4 +54,63 @@ $$
 
 One can be confused by the $4$ in there. That is because the way we defined it we count every 4-cycle four times.
 
-\TODO{The rest of the pages.}
+\begin{lemma}
+	For a graph $G$ and $A, B \subseteq V$ as an $(A, B)$ $\epsilon$-regular pair and $|A| = |B|$ we have following inequalities.
+	
+	$$
+	(p^4 - 6 \epsilon)n^4 - 2n^3 \leq q(A,B) \leq (p^4 + 16 \epsilon) n^4
+	$$
+\end{lemma}
+
+The exact constants are not that necessary, so they are picked somewhat randomly. We will prove only the lower bound. The other one is similiar.
+
+\begin{proof}
+	Lets put $A_{0} = \{ v \in A : \deg_{B} v < (p - \epsilon) n\}$. Which by the lemma we get $|A_{0}| \leq \epsilon n$. Now lets take $v_1 \in A \setminus A_{0}$. Now lets consider such $B_{v_1}$ (neighbors of $v_1$) for which $|B_{v_1}| \geq (p - \epsilon) n$. WLOG we may assume it is $\ge \epsilon n$, otherwise the lower bound is negative. Denote $A_{v_1} = \{v \in A  : \deg_{B_{v_1}} v < (p - \epsilon) |B_{v_1}|\}$. Also by the lemma $|A_{v_1}| \leq \epsilon n$. Now we choose $v_3 \in A \setminus A_{v_1}$.
+	
+	Now we may say that the number of 4-cycles is $\geq (1-\epsilon)n (1 - \epsilon)n ((p - \epsilon) |B_{v_1}|)62 - 2n^3$. Where the first $(1-\epsilon)n$ is for $v_1$ and the second for $v_3$, we multiply it by the choices from $B$ and subtract all wrong choices (choosing the same vertex more than once). Now this can be calculated.
+	
+	$$
+	\begin{aligned}
+		\text{number of 4-cycles} & = (1- \epsilon)^2 (p - \epsilon)^4 n^4 - 2n^3 \\
+		&\geq (1-2\epsilon) (p^4 - 4\epsilon) n^4 - 2n^3 \\
+		&\geq (p^4 - 6\epsilon) n^4 - 2n^3
+	\end{aligned}
+	$$
+\end{proof}
+
+Now we will try to use this even more for computing the number of triangles from $A,B,C$ which are all $\epsilon$-regular pairs. Also denote the number as $t(A,B,C)$ then the densities will be denoted as $p_{AB}, p_{BC}, p_{AC}$. Also we are interested only in those triangles $v_1, v_2, v_3$ where $v_1 \in A, v_2 \in B, v_3 \in C$. In the random graph it would be $p_{AB} p_{BC} p_{AC} n^3$. But we will show it is also similiar with regular pairs.
+
+\begin{lemma}
+	\TODO{LEMMA}
+\end{lemma}
+
+\begin{proof}
+	\TODO{PROOF of lemma}
+\end{proof}
+
+Now with all of that we would like to see if we are able to partition the vertices of graph $G$ into such sets which are $\epsilon$-regular. At least we would like to try bounding the number of partitions for some $m$ and larger $M_\epsilon$ which will be bounded to $\epsilon$. Well we may see that it won't work this way, like for the graph known as \textbf{Half graph} which is shown in the picture \ref{half-graph}.
+
+\begin{figure}
+	\caption{Counterexample of a graph $G$ as a half graph with $n$ vertices.}
+	\label{half-graph}
+\end{figure}
+
+\begin{defn}
+	We will denote $\epsilon$-regular partitioning of graph $G$ with $n = |V(G)|$ are disjoint parts $A_{1}, A_{2}, \dots, A_{k}$ of $V(G)$. When all properties are satisfied.
+	
+	\begin{enumerate}
+		\item $|A_1| = |A_2| = \dots = |A_k|$,
+		\item $|A_0| \leq \epsilon n$ and
+		\item for $1 \leq i \leq j \leq m$, $(A_i, A_j)$ are $\epsilon$-regular with at most $\leq \epsilon m^2$ exceptions.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Szemerédi, regularity lemma]
+	$\forall \epsilon > 0, \forall m_0 \geq 1$ there exists $M$ such that $\forall G : |V(G)| \geq m_0$ there exists $\epsilon$-regular partitioning of $G$ $A_0, \dots, A_m$ that $m_0 \leq m \leq M$.
+\end{thm}
+
+This theorem may actually be useful in some other theoretical results but as we will show us later on the number $M$ is approximately
+
+$$
+2^{2{^{2^{2^{\reflectbox{$\ddots$}^{m_0}}}}}} \quad \text{where there is } \frac{1}{\epsilon^4} \text{ number of twos.}
+$$
