@@ -81,17 +81,94 @@ The exact constants are not that necessary, so they are picked somewhat randomly
 Now we will try to use this even more for computing the number of triangles from $A,B,C$ which are all $\epsilon$-regular pairs. Also denote the number as $t(A,B,C)$ then the densities will be denoted as $p_{AB}, p_{BC}, p_{AC}$. Also we are interested only in those triangles $v_1, v_2, v_3$ where $v_1 \in A, v_2 \in B, v_3 \in C$. In the random graph it would be $p_{AB} p_{BC} p_{AC} n^3$. But we will show it is also similiar with regular pairs.
 
 \begin{lemma}
-	\TODO{LEMMA}
+	For $\epsilon$-regular pairs $(A,B), (B,C), (A,C)$ which are the same size $|A| = |B| = |C| = n$ where the densities $d(X,Y)$ are denoted by $p_{XY}$ (as before). The following bounds hold.
+	
+	$$
+	p_{AB} p_{BC} p_{AC} n^3 - 10 n^3 \leq t(A,B,C) \leq p_{AB} p_{BC} p_{AC} n^3 + 10 \epsilon n^3
+	$$
 \end{lemma}
 
 \begin{proof}
-	\TODO{PROOF of lemma}
+	Now we will show us the upper bound. Lets consider these sets:
+	
+	$$
+	\begin{aligned}
+		A_1 &= \{ v \in A : \deg_B v \geq (p_{AB} + \epsilon) n\} \quad |A_1| \leq \epsilon n \\
+		A_2 &= \{ v \in A : \deg_C v \geq (p_{AC} + \epsilon) n\} \quad |A_2| \leq \epsilon n
+	\end{aligned}
+	$$
+	
+	Now we consider three separate cases for which set is used for the $v_1 \in A$.
+	
+	\begin{enumerate}[(i)]
+		\item $v_1 \in A_1$ then $\epsilon |A_1| n^2 \leq \epsilon n^3$.
+		\item $v_2 \in A_2$ similarly $\epsilon |A_2| n^2 \leq \epsilon n^3$.
+		\item Last case is if $v_1 \in A \setminus (A_1 \cup A_2)$. We denote as $B_{v_1}$ and $C_{v_1}$ the neighbors of $v_1$ in $B$ and $C$ respectively. By the definition $|B_{v_1}| \leq (p_{AB} + \epsilon) n$ and  $|C_{v_1}| \leq (p_{AC} + \epsilon) n$. Therefore altogether $e(B_{v_1}, C_{v_1}) \leq (P_{BC} +\epsilon) |B_{v_1}| |C_{v_1}| \leq (p_{AB} p_{BC} p_{AC} + 7\epsilon) n^2$. So we may have at most $\epsilon n^2$ choices for $B_{v_1}$ and $C_{v_1}$.
+	\end{enumerate}
+	
+	If we sum it all then the $t(A,B,C) \leq 2\epsilon n63 + n (\epsilon n^2 + \epsilon n^2 + (p  + 7\epsilon)n^2) = (p + 9 \epsilon)n^3$.
 \end{proof}
 
 Now with all of that we would like to see if we are able to partition the vertices of graph $G$ into such sets which are $\epsilon$-regular. At least we would like to try bounding the number of partitions for some $m$ and larger $M_\epsilon$ which will be bounded to $\epsilon$. Well we may see that it won't work this way, like for the graph known as \textbf{Half graph} which is shown in the picture \ref{half-graph}.
 
-\begin{figure}
-	\caption{Counterexample of a graph $G$ as a half graph with $n$ vertices.}
+\begin{figure}[!ht] \centering
+	\begin{tikzpicture}[node distance={16mm}, main/.style = {draw, circle, fill}]
+		\node[main, color=violet] (1) {};
+		\node[main, right of = 1, color=violet] (2) {};
+		\node[main, right of = 2, color=violet] (3) {};
+		\node[main, right of = 3, color=violet] (4) {};
+		\node[main, right of = 4, color=violet] (5) {};
+		\node[main, right of = 5, color=violet] (6) {};
+		\node[main, right of = 6, color=violet] (7) {};
+		\node[main, right of = 7, color=violet] (8) {};
+		\node[main, right of = 8, color=violet] (9) {};
+		
+		\node[below of = 1] (phantom) {};
+		
+		\node[main, below of = phantom, color=cyan] (11) {};
+		\node[main, right of = 11, color=cyan] (12) {};
+		\node[main, right of = 12, color=cyan] (13) {};
+		\node[main, right of = 13, color=cyan] (14) {};
+		\node[main, right of = 14, color=cyan] (15) {};
+		\node[main, right of = 15, color=cyan] (16) {};
+		\node[main, right of = 16, color=cyan] (17) {};
+		\node[main, right of = 17, color=cyan] (18) {};
+		\node[main, right of = 18, color=cyan] (19) {};
+		
+		\draw (1) edge (11) (1) edge (12)
+			(1) edge (13) (1) edge (14)
+			(1) edge (15) (1) edge (17)
+			(1) edge (16) (1) edge (19)
+			(1) edge (18);
+			
+		\draw (2) edge (12) (2) edge (13)
+		    (2) edge (14) (2) edge (15)
+		    (2) edge (17) (2) edge (16)
+			(2) edge (19) (2) edge (18);
+		
+		\draw (3) edge (13) (3) edge (14)
+			(3) edge (15) (3) edge (17)
+			(3) edge (16) (3) edge (19)
+			(3) edge (18);
+			
+		\draw (4) edge (14) (4) edge (15)
+			(4) edge (17) (4) edge (16)
+			(4) edge (19) (4) edge (18);
+			
+		\draw (5) edge (15) (5) edge (17)
+			(5) edge (16) (5) edge (19)
+			(5) edge (18);
+			
+		\draw (6) edge (17) (6) edge (16)
+			(6) edge (19) (6) edge (18);
+			
+		\draw (1) (7) edge (17) (7) edge (19) (7) edge (18);
+			
+		\draw (8) edge (18) (8) edge (19);
+			
+		\draw  (9) edge (19);
+	\end{tikzpicture}
+	\caption{Counterexample of a graph $G$ as a half graph with $18$ vertices.}
 	\label{half-graph}
 \end{figure}
 
