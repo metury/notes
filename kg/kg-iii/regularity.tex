@@ -280,5 +280,25 @@ This won't be proven since it is more of a reminder. Also note that this is tigh
 This theorem actually somewhat answers our question. Because $\lim_{n \to \infty} \frac{f_H (n)}{\binom{n}{2}} = 1 - \frac{1}{k-1}$. But this does not actually work that well for bipartite graphs, because the content in the parentheses goes to 0. So it gives only rough estimate.
 
 \begin{proof}
+	Similarly as before we will from $\beta$ get to $p = \beta/8$ and by the use of lemma for subgraph $H$ we get $0 < \epsilon < p$ and $n_1$. Lets put $m_0 = 1/\epsilon$ and use RL to get $M$ and then $n_0 = \max \left(m_0, \frac{M}{1-\epsilon} n_1 \right)$.
 	
+	For given graph $G$ create partition $V_0, V_1, \dots, V_m$ for $m_0 \leq m \leq M$ by the RL. We define $X_1,X_2,X_3,X_4$ and $X$ as before. So
+	
+	$$
+	|X| \leq (p + 3\epsilon) n^2 < 4pn^2 = \frac{\beta}{2}n^2
+	$$
+	
+	Therefore we may compute the size of edges as:
+	
+	$$
+	|E(G-X)| > |E(G)| - \beta \frac{n^2}{2} \geq \left( 1 - \frac{1}{k-1} + \beta \right) \frac{n^2}{2} - \beta \frac{n^2}{2} \geq \left( 1 - \frac{1}{k-1} \right) \frac{n^2}{2}
+	$$
+	
+	Lets define an auxiliary graph $F$. Which has $V(F) = \{1, \dots, m\}$ and $ij \in E(F)$ iff $(V_i,V_j)$ is an $\epsilon$-regular pair of density $\geq p$ iff $G-X$ has an edge between $V_i$ and $V_j$.
+	
+	$$
+	\left( 1 - \frac{1}{k-1} \right) \frac{n^2}{2} < |E(G-X)| \leq |E(F)| \left(\frac{n}{m}\right)^2
+	$$
+	
+	Hence altogether $|E(F)| > \left(1-\frac{1}{k-1}\right) \frac{m^2}{2}$ and by Túrán $K_k \subseteq F$ and therefore $k$ parts are $\epsilon$-regular.Each part has $\frac{n(1-\epsilon)}{m} \geq \frac{n(1-\epsilon)}{M} \geq n_1$ so by the lemma mentioned before we get that $H \subseteq G$.
 \end{proof}
