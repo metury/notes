@@ -1,4 +1,4 @@
-\chapter{Regularity of graphs and Ramsey's extremal theory}
+\chapter{Regularity of graphs}
 
 As one can already met the random graphs which are denoted as $G = (n,p)$ where we have $n$ vertices and every edge between each pair of a vertices is there with a probability $p$. This notation si usually used for proving some properties that graphs tend to have for more vertices.
 
@@ -27,7 +27,7 @@ Well the real graphs we may encounter do not have this nice property. So we will
 Now we will look at how many neighbors can be for some $v \in A$. To be exact we will denote $B_{0}$ the neighbors and we want to count these vertices for which $|B_{0}| \geq \delta |B|$. But we may see there are some degenerate vertices, but we will show it is not that many.
 
 \begin{lemma}
-	The number of vertices in $A$ such that $\deg_{B_{0}}v > (p + \epsilon |B_{0}|)$ is at most $\delta |A|$. And also the number of vertices in $B$ such that $\deg_{A_{0}}v < (p + \epsilon |A_{0}|)$ is at most $\delta |B|$.
+	The number of vertices in $A$ such that $\deg_{B_{0}}v > (p + \epsilon |B_{0}|)$ is at most $\delta |A|$. And also the number of vertices in $B$ such that $\deg_{A_{0}}v < (p - \epsilon |A_{0}|)$ is at most $\delta |B|$.
 \end{lemma}
 
 \begin{proof}
@@ -84,7 +84,7 @@ Now we will try to use this even more for computing the number of triangles from
 	For $\epsilon$-regular pairs $(A,B), (B,C), (A,C)$ which are the same size $|A| = |B| = |C| = n$ where the densities $d(X,Y)$ are denoted by $p_{XY}$ (as before). The following bounds hold.
 	
 	$$
-	p_{AB} p_{BC} p_{AC} n^3 - 10 n^3 \leq t(A,B,C) \leq p_{AB} p_{BC} p_{AC} n^3 + 10 \epsilon n^3
+	p_{AB} p_{BC} p_{AC} n^3 - 10 \epsilon n^3 \leq t(A,B,C) \leq p_{AB} p_{BC} p_{AC} n^3 + 10 \epsilon n^3
 	$$
 \end{lemma}
 
@@ -173,7 +173,7 @@ Now with all of that we would like to see if we are able to partition the vertic
 \end{figure}
 
 \begin{defn}
-	We will denote $\epsilon$-regular partitioning of graph $G$ with $n = |V(G)|$ are disjoint parts $A_{1}, A_{2}, \dots, A_{k}$ of $V(G)$. When all properties are satisfied.
+	We will denote $\epsilon$-regular partition of graph $G$ with $n = |V(G)|$ such disjoint parts $A_{1}, A_{2}, \dots, A_{k}$ of $V(G)$ for which all properties are satisfied.
 	
 	\begin{enumerate}
 		\item $|A_1| = |A_2| = \dots = |A_k|$,
@@ -182,7 +182,7 @@ Now with all of that we would like to see if we are able to partition the vertic
 	\end{enumerate}
 \end{defn}
 
-\begin{thm}[Szemerédi, regularity lemma]
+\begin{thm}[Szemerédi, Regularity lemma (RL)]
 	$\forall \epsilon > 0, \forall m_0 \geq 1$ there exists $M$ such that $\forall G : |V(G)| \geq m_0$ there exists $\epsilon$-regular partitioning of $G$ $A_0, \dots, A_m$ that $m_0 \leq m \leq M$.
 \end{thm}
 
@@ -191,3 +191,94 @@ This theorem may actually be useful in some other theoretical results but as we 
 $$
 2^{2{^{2^{2^{\reflectbox{$\ddots$}^{m_0}}}}}} \quad \text{where there is } \frac{1}{\epsilon^4} \text{ number of twos.}
 $$
+
+\section{Applications}
+
+\begin{lemma}[Removal lemma for triangle]
+	$(\forall \alpha >0) \ (\exists n_0, \beta > 0) \ (\forall G : |V(G)| = n \geq n_0)$ then either
+	
+	\begin{itemize}
+		\item $G$ contains $\beta n^3$ triangles, or
+		\item $(\exists X \subseteq E(G): |X| \leq \alpha n^2)$ and $G-X$ is triangle free.
+	\end{itemize}
+\end{lemma}
+
+This application and many others may be used for huge graphs that typically cannot fit into RAM or even is way to large to have the date (like a friendship graph for the whole world). Thus we use only sampling for some portion of the data and then we can be somewhat certain of the correctness.
+
+\begin{proof}
+	Firstly we will transform $\alpha$ into $\epsilon$ and $m_0$ (which will be $m_0 = 1/\epsilon$). Then we will use regularity lemma to obtain $M$ and lastly transform this into $n_0$ and $\beta$ where $n_0 = m_0$.
+	
+	Given graph $G$ we use RL which gives us $\epsilon$-regular partition $V_0, \dots, V_m$ for $m_0 \leq m \leq M$. Now let denote
+	
+	$$
+	\begin{aligned}
+		X_1 &= \text{all edges incident to vertices in } V_0 \\
+		X_2 &= \bigcup_{i \in 1, \dots, m} E(G[V_{i}]) \quad (\text{all edges connected in one part})\\
+		X_3 &= \text{edges between } V_i \text{ and } V_j \text{, where } (V_i, V_j) \text{ is not } \epsilon-\text{regular} \\
+		X_4 &= \text{edges between } V_i \text{ and } V_j \text{, where } d(V_i, V_j) \leq p \\
+		X &= X_1 \cup X_2 \cup X_3 \cup X_4
+	\end{aligned}
+	$$
+	
+	Now lets compute the sizes of all sets.
+	
+	$$
+	\begin{aligned}
+		|X_1| &\leq |V_0| \cdot n \leq \epsilon n^2 \\
+		|X_2| &\leq m \left( \frac{n}{m} \right)^2 \leq \frac{n^2}{m} \leq \frac{n^2}{m_0} = \epsilon n^2 \\
+		|X_3| &\leq \epsilon m^2 \left( \frac{n}{m} \right)^2 \leq \epsilon n^2 \\
+		|X_4| &\leq m^2 \cdot p \left( \frac{n}{m} \right)^2 = p n^2\\
+		|X| &\leq (p + 3\epsilon) n^2
+	\end{aligned}
+	$$
+	
+	And we want $(p + 3\epsilon) n^2$ to be at most $\alpha n^2$. Thus $(p + 3\epsilon)$ to be at most $\alpha$. We will consider few cases.
+	
+	\begin{enumerate}[(a)]
+		\item $G-X$ is triangle-free, therefore we are done.
+		\item $G-X$ contains a triangle. None of the vertices are from $V_0$. All vertices are from different parts and also all of these parts are $\epsilon$-regular with density $> p$. This all comes from the definition of $X$. And now we may use the triangle lemma stated before. Hence the number of triangles in $G$ is $\geq (p^3 - 10\epsilon) t^3$ for $t$ as a number of vertices in those parts.
+		
+		$$
+		t = \frac{n - |V_0|}{m} \geq \frac{(1-\epsilon)n}{m} \geq \frac{(1 - \epsilon)n}{M}
+		$$
+		
+		So the number of triangles is
+		
+		$$
+		\geq (p^3 - 10\epsilon) \left( \frac{1-\epsilon}{M} \right)^3 n^3
+		$$
+		
+		Therefore $\beta = (p^3 - 10\epsilon) \left( \frac{1-\epsilon}{M} \right)^3$. Because $\beta$ has to be positive so $p \geq \sqrt[3]{10 \epsilon}$ so we put $p = \sqrt[3]{11\epsilon}$. We need to choose $\epsilon$ so that $\sqrt[3]{11\epsilon} + 3\epsilon = p + 3\epsilon \leq \alpha$.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+	Let $H$ be a graph with $\chi(G) = k$ and $(\forall p > 0) \ (\exists \epsilon > 0, n_1)$ such that if in $G$ there are disjoint sets $V_1, \dots, V_k$ s.t.
+	
+	\begin{enumerate}
+		\item $|V_1| = \dots = |v_{k}| = n$
+		\item $\forall 1 \leq i \leq j \leq k$ $(V_i, V_j)$ is an $\epsilon$-regular and $d(V_i, V_j) \geq p$
+	\end{enumerate}
+	
+	then $H \subseteq G$.
+\end{lemma}
+
+\begin{proof}
+	Actually this proof is fairly similiar to the one before. We may divide the vertices to sets with the same color. Then we fix some vertices in $G$ for a color in the same part. After that we must choose huge subsets of other parts and fix other vertices from these. Because they are $\epsilon$-regular such subsets exists. Further proof is left as an exercise.
+\end{proof}
+
+\begin{thm}[Túrán]
+	For a graph $G$ which has $|V(G)| = n$ and $|E(G)| > \left(1 - \frac{1}{k-1}\right) \frac{n^2}{2}$ then $K_k \subseteq G$.
+\end{thm}
+
+This won't be proven since it is more of a reminder. Also note that this is tight since we can create a graph with this many vertices and edges which does not contain $K_k$. That is the Túrán's graph. Now we can ask ourselves a question. If we have a graph $H$ what is the maximum number of edges of an $n$-vertex graph that does not contain $H$ as a subgraph. This is typical problem for extremal theory, so we can denote this number as a function $f_H(n)$.
+
+\begin{thm}[Erdos-Stone]
+	Suppose $k = \chi(H) \geq 2$ then $(\forall \beta > 0) \ (\exists n_0)$ if $|V(G)| = n \geq n_0$ and $|E(G)| \geq \left(1 - \frac{1}{k-1} + \beta \right) \frac{n^2}{2}$, then $H \subseteq G$.
+\end{thm}
+
+This theorem actually somewhat answers our question. Because $\lim_{n \to \infty} \frac{f_H (n)}{\binom{n}{2}} = 1 - \frac{1}{k-1}$. But this does not actually work that well for bipartite graphs, because the content in the parentheses goes to 0. So it gives only rough estimate.
+
+\begin{proof}
+	
+\end{proof}
