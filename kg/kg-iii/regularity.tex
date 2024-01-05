@@ -106,7 +106,7 @@ Now we will try to use this even more for computing the number of triangles from
 		\item Last case is if $v_1 \in A \setminus (A_1 \cup A_2)$. We denote as $B_{v_1}$ and $C_{v_1}$ the neighbors of $v_1$ in $B$ and $C$ respectively. By the definition $|B_{v_1}| \leq (p_{AB} + \epsilon) n$ and  $|C_{v_1}| \leq (p_{AC} + \epsilon) n$. Therefore altogether $e(B_{v_1}, C_{v_1}) \leq (P_{BC} +\epsilon) |B_{v_1}| |C_{v_1}| \leq (p_{AB} p_{BC} p_{AC} + 7\epsilon) n^2$. So we may have at most $\epsilon n^2$ choices for $B_{v_1}$ and $C_{v_1}$.
 	\end{enumerate}
 	
-	If we sum it all then the $t(A,B,C) \leq 2\epsilon n63 + n (\epsilon n^2 + \epsilon n^2 + (p  + 7\epsilon)n^2) = (p + 9 \epsilon)n^3$.
+	If we sum it all then the $t(A,B,C) \leq 2\epsilon n^3 + n (\epsilon n^2 + \epsilon n^2 + (p  + 7\epsilon)n^2) = (p + 9 \epsilon)n^3$.
 \end{proof}
 
 Now with all of that we would like to see if we are able to partition the vertices of graph $G$ into such sets which are $\epsilon$-regular. At least we would like to try bounding the number of partitions for some $m$ and larger $M_\epsilon$ which will be bounded to $\epsilon$. Well we may see that it won't work this way, like for the graph known as \textbf{Half graph} which is shown in the picture \ref{half-graph}.
@@ -302,3 +302,59 @@ This theorem actually somewhat answers our question. Because $\lim_{n \to \infty
 	
 	Hence altogether $|E(F)| > \left(1-\frac{1}{k-1}\right) \frac{m^2}{2}$ and by Túrán $K_k \subseteq F$ and therefore $k$ parts are $\epsilon$-regular.Each part has $\frac{n(1-\epsilon)}{m} \geq \frac{n(1-\epsilon)}{M} \geq n_1$ so by the lemma mentioned before we get that $H \subseteq G$.
 \end{proof}
+
+\subsection{Arithmetic Ramsey theory}
+
+Firstly we will show a theorem that one could already encounter.
+
+\begin{thm}[Van der Warden]
+	$(\forall c) (\forall l) \forall \text{ coloring } \varphi : \N \to \{1, \dots, c\}$ there exists $k \in \{1, \dots, c\}, a, d > 0$ such that $\varphi(a) = \varphi(a + d) = \dots = \varphi(a + d(l -1))$.
+\end{thm}
+
+This is called a arithmetic progression or AP for short. Now the question may be if we could somewhat limit it and not use all numbers from $\N$. In particular if it is true that $(\forall c \geq 1) (\forall l) (\exists N_0) (\forall N \geq N_0) (\forall B \subseteq \{1, \dots, N\} : |B| \geq \frac{N}{c}) (\exists a, d> 0)$ such that $a, a+d, \dots, a+d(l-1) \in B$.
+
+Actually Róth showed that it is indeed true for $l = 3$ and later on also Szemerédi showed that it holds for arbitrary $l$. Now we will show use the Róth theorem.
+
+\begin{defn}
+	Given $A \subseteq {1, \dots, N}^2$ the \textbf{corner} in $A$ is a triplet $(x,y), (x+d,y), (x, y+d) \in A$ for $d \neq 0$.
+\end{defn}
+
+\begin{lemma}[Corner lemma]
+	$(\forall \delta > 0) (\exists N_1)(\forall N \geq N_1) (\forall A \subseteq \{1, \dots, N\}^2)$ if $|A| \geq \delta N^2$, then $A$ contains a corner.
+\end{lemma}
+
+\begin{proof}
+	That is we obtain $\delta$ and by setting $\alpha = \delta/40$ we may use the triangle removal lemma and get $n_0, \beta$. After that we would get our $N_1$. (This will be $N_1 = \max \{\frac{n_0}{6}, \frac{1}{\beta}\}$.)
+	
+	Firstly we will create 3-partite graph. Three parts will be $X,Y$ and $Z$. Now we define when there are edges.
+	
+	\begin{itemize}
+		\item $x \in X, y \in Y$ forms an edge $xy$ if $(x,y) \in A$,
+		\item $x \in X, z \in Z$ forms an edge $xz$ if $(x,z-x) \in A$ and
+		\item $z \in Z, y \in Y$ forms an edge $zy$ if $(z-y,y) \in A$.
+	\end{itemize}
+	
+	One can already see that the triangles in this graph corresponds to corners. That is for a triplet $(x,y), (x, y +d), (x+d,y) \in A$ then $x,y,z=x+y+d$ forms a triangle. And the other way we have $xyz$ triangle. Then $(x,y), (x, y+d), (x+d,y) \in A$ for $d = z -x-y$.
+	
+	Now we can observe that $\forall (x,y) \in A$, $x,y, x+y$ is also a triangle and we will call these the \textbf{bad} triangles. We may see that $\delta N^2 \leq$ the number of bad triangles $= |A| \leq N^2$. Now we have two cases by the removing triangles lemma.
+	
+	\begin{enumerate}
+		\item Either there is $\geq \beta (6N)^3$ triangles and we need to show that this is $> N^2 \geq$ bad triangles. So $216 \beta N > 1$ that is for the choice of $N_1$ previously mentioned.
+		\item Or there $\exists X \in E: X \leq \alpha(6N)^2$ intersecting all triangles. $X = \frac{36}{40} \delta N^2$, but we may see because of the estimate on the number of bad triangles and also by the observation that bad triangles are edge-disjoint that $X$ is not possible.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{thm}[Róth]
+	$(\forall c \geq 1) (\exists N_0) (\forall N \geq N_0) (\forall B \subseteq \{1, \dots, N\})$ if $|B| \geq \frac{N}{c}$, then $B$ contains 3-AP.
+\end{thm}
+
+\begin{proof}
+	The scheme is: we obtain $c$ and create $\delta$ with which we use the corner lemma and get $N_1$ and create $N_0$ from it.
+	
+	Let $A = \{(x,y) : y-x in B\}$ and $x,y \in \{1, \dots, 2N\}$. So for $k \in B$ there is $(1,k+1), (2,k+2), \dots, (N, k+N)$. $|A| = N \cdot |B| \geq \frac{N^2}{c} - \frac{(2N)^2}{4c}$ so we put $\delta = \frac{1}{4c}$ and $N_0 = N_1$. By the corner lemma $\exists x,y,d \neq 0$ s.t. $(x,y), (x,y+d), (x+d,y) \in A$. Now it means that $y-x \in B, y-x -d \in B$ and $y-x+d \in B$ which forms the 3-arithmetic progression.
+\end{proof}
+
+Now for arbitrary $l$ we could rewrite corner lemma for $l-1$ dimension case then use hypergraphs with $l-1$ tuples and so on. But the thing is that this is not that easy, since the regularity lemma wouldn't be enough. Everything would have to be redefined and proved again. %Example with K_4.
+
+Now we will show that $\exists B \subseteq \{0, \dots, N-1\}$ and $|B| \geq \frac{N}{16^{\sqrt{\log_e N}}}$ without 3-AP. Firstly we will put $S \subseteq \Z^n$ without 3-AP. We will set $d = 2^{n-1}$ and $N = (2d)^n$ so actually $S \subseteq \{0, \dots, d-1\}^n$ then let $S_k = \{(x_1, \dots, x_n) \in \{0, \dots, d-1\}^n, x_1^2 + \dots + x_n^2 = k\}$ which is a sphere. This does not contain 3-AP. Because if we intersect two points on the sphere then the line does not intersect any other point. We will use this for $0 \leq k leq (d-1)^2n$ and also $\exists k: |S_k| \geq \frac{d^n}{(d-1)^2n+1} \geq \frac{d^n}{d^2n} = \frac{d^{n-2}}{n}$ and lets fix such $k$. Now we ap $(x_1, \dots, x_n)$ to the $f = \sum_{i = 1}^n x_i (2d)^{i-1}$. (Or in other words the number in base $2d$.) Let $B = f(S_k)$. And also $0 \leq f \leq (2d)^n - 1 = N +1$. $f$ is injective and $|B|$ is large enough. If we sum two digits then there will be no carries because we used base $2d$. If there would be 3-AP then $f(x) + f(y) = 2f(z)$ but $f(x) + f(y) = f(x + y)$ and $2f(z) = f(2z)$. And $x + y = 2z$ would mean there was 3-AP in $S_k$, which is a contradiction.
