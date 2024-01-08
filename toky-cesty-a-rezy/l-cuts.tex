@@ -1,0 +1,69 @@
+\chapter{$L$-bounded cuts}
+
+In this chapter we will consider a new problem which is length bounded cuts. This problem is NP-hard.
+
+\begin{itemize}[]
+	\item \textbf{INPUT} $G = (V,E)$, $s,t \in V$, $L \in \N$.
+	\item \textbf{OUTPUT} $F \subseteq E$ such that $d_{G \setminus F}(s,t) > L$.
+	\item \textbf{OBJECTIVE} $\min (|F|)$.
+\end{itemize}
+
+Lets see an easy example of a graph $G$ as shown on the picture \ref{l-bounded cut} and for $L = 4$. There can actually be two minimal $L$-bounded cuts. The \textcolor{black}{first} one is actually not a "real" cut, but the \textcolor{black}{second} one is.
+
+\begin{figure}[!ht]\centering
+	\caption{Global scheme of the 3-SAT.}
+	\label{l-bounded cut}
+\end{figure}
+
+
+\section{$L$-bounded flow}
+
+For $L$-bounded cut there is also the opposite problem which is in P and it is the $L$-bounded flow.
+
+\begin{itemize}[]
+	\item \textbf{INPUT} $G = (V,E)$, $s,t \in V$, $L \in \N$.
+	\item \textbf{OUTPUT} Flow between $s-t$ that can be decomposed into paths of length $\leq L$.
+	\item \textbf{OBJECTIVE} $\max$ the flow.
+\end{itemize}
+
+We will also show us an example for a graph $G$ depicted on the picture \ref{l-bounded flow} for $L = 3k$. We may see that $L$-cut is $k+1$ since we may delete \textcolor{black}{these edges} but also \textcolor{black}{the bottom ones}. On the other hand $L$-flow is at most 2.
+
+\begin{figure}[!ht]\centering
+	\caption{Global scheme of the 3-SAT.}
+	\label{l-bounded flow}
+\end{figure}
+
+\begin{observ}
+	Every $L$-bounded $s-t$ path uses at least $k$-edges from the bottom so max $L$-flow is at most 2.
+\end{observ}
+
+Therefore the difference between $L$-cut and $L$-flow can be at least $\sqrt{n}$.
+
+\section{Approximation for $L$-cut}
+
+Consider the following LP relaxation. Alternatively the ILP will surely solve the problem. Lets denote $\mathcal{P}_L$ as the set of all $L$-bounded $s-t$ paths.
+
+$$
+\begin{aligned}
+	\min \sum_{e \in E} x_e & \\
+	\sum_{x \in p} x_e \geq 1 & \quad \forall p \in \mathcal{P}_L \\
+	x_e \geq 0 & \quad \forall e \in E
+\end{aligned}
+$$
+
+We may ask ourselves what is the integrality gap? We can create one simple algorithm for solving such problem.
+
+\begin{algorithm}
+	\caption{$L$-bounded approximation}
+	\begin{algorithmic}[1]
+		\Require $G = (V,E)$
+		\Ensure $L$-bounded cut.
+		\While{$\exists L$-bounded $s-t$ path in $G$}
+			\State Remove all edges of $p$.
+		\EndWhile
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{observ}
+	While the OPT $\geq k$ therefore it is $L$-approximation. Since the $k$ is the number of $L$-paths.
+\end{observ}

@@ -1179,3 +1179,24 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 	\caption{Switch scheme.}
 	\label{switch scheme}
 \end{figure}
+
+
+We may see that the switch is a small graph with 4 "inputs" and $B, C, 8, 8'$ and 4 "outputs" $A, D, 11, 11'$. It can be shown that this graph has two following properties.
+
+\begin{enumerate}
+	\item If there are 2 edge disjoint paths one leaving at $A$ and the other entering at $B$, then the former is entering at $C$ and the later leaving at $D$.
+	\item And exactly one more edge-disjoint path through the graph exists and it is either $8 \to 11$ or $8' \to 11'$.
+\end{enumerate}
+
+These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices $W, X, Y, Z$ as shown on the global picture \ref{global scheme}.
+
+\begin{figure}[!ht]\centering
+	\caption{Global scheme of the 3-SAT.}
+	\label{global scheme}
+\end{figure}
+
+\begin{claim}
+	$F$ is satisfiable $\Leftrightarrow$ there are edge disjoint paths from $W$ to $X$ and from $Y$ to $Z$.
+\end{claim}
+
+That can be seen on the global scheme. Important note is that for example if $x_i$ is set to true then the variable gadget uses $\bar{x_i}$ in the subgraph of $G$. Generally it uses the other path so it enforces the correct values in the clauses and also the other way around.
