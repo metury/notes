@@ -8,10 +8,40 @@ In this chapter we will consider a new problem which is length bounded cuts. Thi
 	\item \textbf{OBJECTIVE} $\min (|F|)$.
 \end{itemize}
 
-Lets see an easy example of a graph $G$ as shown on the picture \ref{l-bounded cut} and for $L = 4$. There can actually be two minimal $L$-bounded cuts. The \textcolor{black}{first} one is actually not a "real" cut, but the \textcolor{black}{second} one is.
+Lets see an easy example of a graph $G$ as shown on the picture \ref{l-bounded cut} and for $L = 4$. There can actually be two minimal $L$-bounded cuts. The \textcolor{orange}{first} one is actually not a "real" cut, but the \textcolor{cyan}{second} one is.
 
 \begin{figure}[!ht]\centering
-	\caption{Global scheme of the 3-SAT.}
+	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, fill, circle}]
+		\node[main] (1) {};
+		\node[right of = 1] (1a) {};
+		\node[main, above of = 1a] (1b) {};
+		\node[main, right of = 1a] (2) {};
+		\node[right of = 2] (2a) {};
+		\node[main, above of = 2a] (2b) {};
+		\node[main, right of = 2a] (3) {};
+		\node[right of = 3] (3a) {};
+		\node[main, above of = 3a] (3b) {};
+		\node[main, right of = 3a] (4) {};
+		
+		\draw (1) edge (2);
+		\draw (1) edge (1b);
+		\draw (1b) edge (2);
+		
+		\draw (2) edge (3);
+		\draw (2) edge (2b);
+		\draw (2b) edge (3);
+		
+		\draw (3) edge (4);
+		\draw (3) edge (3b);
+		\draw (3b) edge (4);
+		
+		\draw[color = orange, bend left = 20, dashed] (1) edge (2);
+		\draw[color = orange, bend left = 20, dashed] (2) edge (3);
+		
+		\draw[color = cyan, bend left = 20, dashed] (3) edge (4);
+		\draw[color = cyan, bend left = 20, dashed] (3b) edge (4);
+	\end{tikzpicture}
+	\caption{Example of $L$-bounded cut. The cut is drawn by a multiple dashed edge.}
 	\label{l-bounded cut}
 \end{figure}
 
@@ -26,10 +56,96 @@ For $L$-bounded cut there is also the opposite problem which is in P and it is t
 	\item \textbf{OBJECTIVE} $\max$ the flow.
 \end{itemize}
 
-We will also show us an example for a graph $G$ depicted on the picture \ref{l-bounded flow} for $L = 3k$. We may see that $L$-cut is $k+1$ since we may delete \textcolor{black}{these edges} but also \textcolor{black}{the bottom ones}. On the other hand $L$-flow is at most 2.
+We will also show us an example for a graph $G$ depicted on the picture \ref{l-bounded flow} for $L = 3k$. We may see that $L$-cut is $k+1$ since we may delete \textcolor{cyan}{these edges} but also \textcolor{orange}{the bottom ones}. On the other hand $L$-flow is at most 2.
 
 \begin{figure}[!ht]\centering
-	\caption{Global scheme of the 3-SAT.}
+	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, fill, circle}]
+		\node[main] (1) {};
+		\node[right of = 1] (1a) {};
+		\node[main, above of = 1a] (1b) {};
+		
+		\node[main, above of = 1b] (1c) {};
+		\node[above of = 1c] (1d) {};
+		\node[main, above of = 1d] (1e) {};
+		
+		\node[main, right of = 1a] (2) {};
+		\node[right of = 2] (2a) {};
+		\node[main, above of = 2a] (2b) {};
+		
+		\node[main, above of = 2b] (2c) {};
+		\node[above of = 2c] (2d) {};
+		\node[main, above of = 2d] (2e) {};
+		
+		\node[main, right of = 2a] (3) {};
+		\node[right of = 3] (3a) {};
+		\node[main, above of = 3a] (3b) {};
+		
+		\node[main, above of = 3b] (3c) {};
+		\node[above of = 3c] (3d) {};
+		\node[main, above of = 3d] (3e) {};
+		
+		\node[main, right of = 3a] (4) {};
+		
+		\node[right of = 4] (phantom) {};
+		
+		\node[main, right of = phantom] (k) {};
+		\node[right of = k] (ka) {};
+		\node[main, above of = ka] (kb) {};
+		
+		\node[main, above of = kb] (kc) {};
+		\node[above of = kc] (kd) {};
+		\node[main, above of = kd] (ke) {};
+		
+		\node[main, right of = ka] (k+1) {};
+		
+		\draw (1) edge (2);
+		\draw (1) edge (1b);
+		\draw (1b) edge (2);
+		\draw (1) edge (1c);
+		\draw (1c) edge (2);
+		\draw (1) edge (1e);
+		\draw (1e) edge (2);
+		\draw[dotted] (1c) edge (1e);
+		
+		\draw (2) edge (3);
+		\draw (2) edge (2b);
+		\draw (2b) edge (3);
+		\draw (2) edge (2c);
+		\draw (2c) edge (3);
+		\draw (2) edge (2e);
+		\draw (2e) edge (3);
+		\draw[dotted] (2c) edge (2e);
+		
+		\draw (3) edge (4);
+		\draw (3) edge (3b);
+		\draw (3b) edge (4);
+		\draw (3) edge (3c);
+		\draw (3c) edge (4);
+		\draw (3) edge (3e);
+		\draw (3e) edge (4);
+		\draw[dotted] (3c) edge (3e);
+		
+		\draw[dotted] (4) edge (k);
+		
+		\draw (k) edge (k+1);
+		\draw (k) edge (kb);
+		\draw (kb) edge (k+1);
+		\draw (k) edge (kc);
+		\draw (kc) edge (k+1);
+		\draw (k) edge (ke);
+		\draw (ke) edge (k+1);
+		\draw[dotted] (kc) edge (ke);
+		
+		\draw[dashed, color = cyan, bend left = 10] (k) edge (k+1);
+		\draw[dashed, color = cyan, bend left = 10] (kb) edge (k+1);
+		\draw[dashed, color = cyan, bend left = 10] (kc) edge (k+1);
+		\draw[dashed, color = cyan, bend left = 10] (ke) edge (k+1);
+		
+		\draw[dashed, color = orange, bend right = 20] (1) edge (2);
+		\draw[dashed, color = orange, bend right = 20] (2) edge (3);
+		\draw[dashed, color = orange, bend right = 20] (3) edge (4);
+	\end{tikzpicture}
+	\caption{Example of $L$-bounded flow. Where there is $2k$ bottom vertices and $k$ upwards in each triangle. Cuts are represented by multi edges that are dashed.}
 	\label{l-bounded flow}
 \end{figure}
 

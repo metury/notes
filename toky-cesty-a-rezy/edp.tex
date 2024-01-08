@@ -1157,13 +1157,84 @@ As we have shown te NP-hardness of general DIR-EDP to 2-DIR-EDP we will now show
 We have $k$ variables $x_1, x_2, \dots, x_k$ and $l$ clauses $t_1, t_2, \dots, t_l$. And we will show how the graph will be constructed. Firstly for every variable we will construct a gadget that has one entering and one leaving vertex and two separate paths, where on these paths are represented negative and positive occurrences of this variable. This can be seen on the picture \ref{variable gadget}. These gadgets will be connected sequentially by exactly one edge.
 
 \begin{figure}[!ht]\centering
-	\caption{Gadget for variables.}
+	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+		\node (x-1) {$x_{i - 1}$};
+		\node[main, below of = x-1] (e) {};
+		\node[main, below left of = e] (x) {$x_i$};
+		\node[main, below right of = e] (notx) {$\bar{x_i}$};
+		\node[main, below of = x] (phx) {$x_i$};
+		\node[main, below of = notx] (phnotx) {$\bar{x_i}$};
+		\node[main, below right of = phx] (end) {};
+		\node[below of = end] (x+1) {$x_{i + 1}$};
+		\draw[->] (x-1) edge (e);
+		\draw[->] (end) edge (x+1);
+		\draw[->] (e) edge (x);
+		\draw[->] (e) edge (notx);
+		\draw[->, dotted] (x) edge (phx);
+		\draw[->, dotted] (notx) edge (phnotx);
+		\draw[->] (phx) edge (end);
+		\draw[->] (phnotx) edge (end);
+	\end{tikzpicture}
+	\caption{Gadget for variables $x_i$.}
 	\label{variable gadget}
 \end{figure}
 
 And then for every clause we will have one vertex and every two consequent clauses will be connected by 3 edges. These will represent the given literals. Also the last variable will be connected to the first clause. The scheme can be seen on the picture \ref{clause var scheme}. Now we only need to connect these gadgets together.
 
 \begin{figure}[!ht]\centering
+	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+		\node[main] (startx0) {};
+		\node[below of = startx0] (labelx0) {$x_0$};
+		\node[main, below left of = startx0] (x0) {};
+		\node[main, below right of = startx0] (notx0) {};
+		\node[main, below of = x0] (phx0) {};
+		\node[main, below of = notx0] (phnotx0) {};
+		\node[main, below right of = phx0] (endx0) {};
+		
+		\node[below of = endx0] (gap) {};
+		
+		\node[main, below of = gap] (startxk) {};
+		\node[below of = startxk] (labelxk) {$x_k$};
+		\node[main, below left of = startxk] (xk) {};
+		\node[main, below right of = startxk] (notxk) {};
+		\node[main, below of = xk] (phxk) {};
+		\node[main, below of = notxk] (phnotxk) {};
+		\node[main, below right of = phxk] (endxk) {};
+		
+		\node[left of = endxk] (phantom0) {};
+		\node[left of = phantom0] (phantom1) {};
+		\node[left of = phantom1] (phantom2) {};
+		\node[main, left of = phantom2] (c0) {$c_0$};
+		\node[main, above of = c0] (c1) {$c_1$};
+		\node[main, above of = c1] (c2) {$c_2$};
+		\node[above of = c2] (gapc) {};
+		\node[main, above of = gapc] (cl) {$c_l$};
+		
+		\draw[->] (startx0) edge (x0);
+		\draw[->] (startx0) edge (notx0);
+		\draw[->] (x0) edge (phx0);
+		\draw[->] (notx0) edge (phnotx0);
+		\draw[->] (phx0) edge (endx0);
+		\draw[->] (phnotx0) edge (endx0);
+		
+		\draw[->, dotted] (endx0) edge (startxk);
+		
+		\draw[->] (startxk) edge (xk);
+		\draw[->] (startxk) edge (notxk);
+		\draw[->] (xk) edge (phxk);
+		\draw[->] (notxk) edge (phnotxk);
+		\draw[->] (phxk) edge (endxk);
+		\draw[->] (phnotxk) edge (endxk);
+		
+		\draw[->, bend left = 60] (endxk) edge (c0);
+		\draw[->] (c0) edge (c1);
+		\draw[->, bend right = 50] (c0) edge (c1);
+		\draw[->, bend left = 50] (c0) edge (c1);
+		\draw[->] (c1) edge (c2);
+		\draw[->, bend right = 50] (c1) edge (c2);
+		\draw[->, bend left = 50] (c1) edge (c2);
+		\draw[->, dotted] (c2) edge (cl);
+	\end{tikzpicture}
 	\caption{Scheme of variables and clauses.}
 	\label{clause var scheme}
 \end{figure}
@@ -1176,6 +1247,12 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 \end{figure}
 
 \begin{figure}[!ht]\centering
+	\begin{subfigure}{0.45\textwidth}\centering
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		\caption{}
+	\end{subfigure}
 	\caption{Switch scheme.}
 	\label{switch scheme}
 \end{figure}
