@@ -1248,32 +1248,77 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.45\textwidth}\centering
-		\caption{}
+		\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+			\node[main] (O1) {};
+			\node[main, right of = O1] (O2) {};
+			\node[main, right of = O2] (O3) {};
+			\node[main, right of = O3] (O4) {};
+			\node[main, right of = O4] (O5) {};
+			\node[main, right of = O5] (O6) {};
+			\node[main, below of = O1] (O7) {};
+			\node[main, right of = O7] (O8) {};
+			\node[main, right of = O8] (O9) {};
+			\node[main, right of = O9] (O10) {};
+			\node[main, right of = O10] (O11) {};
+			\node[main, right of = O11] (O12) {};
+			
+			\node[above of = O2] (8) {$8$};
+			\node[above of = O3, color = orange] (C) {$C$};
+			\node[above of = O4, color = cyan] (D) {$D$};
+			\node[above of = O5] (8') {$8'$};
+			\node[below of = O8] (11) {$11$};
+			\node[below of = O9, color = orange] (A) {$A$};
+			\node[below of = O10, color = cyan] (B) {$B$};
+			\node[below of = O11] (11') {$11'$};
+			
+			\path[thick] (O1) edge (O2)
+				(O2) edge (O3)
+				(O3) edge (O4)
+				(O4) edge (O5)
+				(O5) edge (O6)
+				(O7) edge (O8)
+				(O7) edge (O1)
+				(O8) edge (O9)
+				(O9) edge (O10)
+				(O10) edge (O11)
+				(O11) edge (O12)
+				(O12) edge (O6);
+			\draw[->] (8) edge (O2);
+			\draw[->, color = orange] (C) edge (O3);
+			\draw[->, color = cyan] (O4) edge (D);
+			\draw[->] (8') edge (O5);
+			\draw[->] (O8) edge (11);
+			\draw[->, color = orange] (O9) edge (A);
+			\draw[->, color = cyan] (B) edge (O10);
+			\draw[->] (O11) edge (11');
+		\end{tikzpicture}
+		\caption{Scheme for analyzing.}
+		\label{scheme analyse}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
-		\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
-			\node[main] (11) {11};
-			\node[main, fill, above of = 11] (phantom) {};
-			\node[main, above of = phantom] (8) {};
+		\begin{tikzpicture}[node distance={20mm}, main/.style = {draw, thick, circle}]
+			\node[main] (8) {$8$};
+			\node[main, fill, above of = 8] (phantom) {};
+			\node[main, above of = phantom] (11) {$11$};
 			\node[main, right of = phantom] (mid) {};
 			\node[main, fill, right of = mid] (phantom') {};
-			\node[main, below of = phantom'] (11') {};
-			\node[main, above of = phantom'] (8') {};
-			\node[main, above right of = mid] (A) {};
-			\node[main, above left of = mid] (B) {};
-			\node[main, below right of = mid] (C) {};
-			\node[main, below left of = mid] (D) {};
+			\node[main, below of = phantom'] (8') {$8'$};
+			\node[main, above of = phantom'] (11') {$11'$};
+			\node[above right of = mid, color = red] (D) {$D$};
+			\node[above left of = mid, color = blue] (C) {$C$};
+			\node[below right of = mid, color = red] (B) {$B$};
+			\node[below left of = mid, color = blue] (A) {$A$};
 			
 			\draw[->] (8) edge (11);
 			\draw[->] (8') edge (11');
-			\draw (phantom) edge (mid);
-			\draw (mid) edge (phantom');
-			\draw[->, bend left = 20] (A) edge (mid);
-			\draw[->, bend left = 20] (B) edge (mid);
-			\draw[->, bend left = 20] (C) edge (mid);
-			\draw[->, bend left = 20] (D) edge (mid);
+			\draw[dashed] (phantom) edge (mid);
+			\draw[dashed] (mid) edge (phantom');
+			\draw[->, bend right = 20, color = blue] (mid) edge (A);
+			\draw[->, bend left = 20, color = red] (B) edge (mid);
+			\draw[->, bend left = 20, color = blue] (C) edge (mid);
+			\draw[->, bend right = 20, color = red] (mid) edge (D);
 		\end{tikzpicture}
-		\caption{}
+		\caption{Drawn switch scheme.}
 	\end{subfigure}
 	\caption{Switch scheme.}
 	\label{switch scheme}
@@ -1283,7 +1328,7 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 We may see that the switch is a small graph with 4 "inputs" and $B, C, 8, 8'$ and 4 "outputs" $A, D, 11, 11'$. It can be shown that this graph has two following properties.
 
 \begin{enumerate}
-	\item If there are 2 edge disjoint paths one leaving at $A$ and the other entering at $B$, then the former is entering at $C$ and the later leaving at $D$.
+	\item If there are 2 edge disjoint paths one leaving at \textcolor{orange}{$A$} and the other entering at \textcolor{orange}{$B$}, then the former is entering at \textcolor{cyan}{$C$} and the later leaving at \textcolor{cyan}{$D$}. Look at the picture \ref{scheme analyse}.
 	\item And exactly one more edge-disjoint path through the graph exists and it is either $8 \to 11$ or $8' \to 11'$.
 \end{enumerate}
 
