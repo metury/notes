@@ -1251,6 +1251,28 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 		\caption{}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+			\node[main] (11) {11};
+			\node[main, fill, above of = 11] (phantom) {};
+			\node[main, above of = phantom] (8) {};
+			\node[main, right of = phantom] (mid) {};
+			\node[main, fill, right of = mid] (phantom') {};
+			\node[main, below of = phantom'] (11') {};
+			\node[main, above of = phantom'] (8') {};
+			\node[main, above right of = mid] (A) {};
+			\node[main, above left of = mid] (B) {};
+			\node[main, below right of = mid] (C) {};
+			\node[main, below left of = mid] (D) {};
+			
+			\draw[->] (8) edge (11);
+			\draw[->] (8') edge (11');
+			\draw (phantom) edge (mid);
+			\draw (mid) edge (phantom');
+			\draw[->, bend left = 20] (A) edge (mid);
+			\draw[->, bend left = 20] (B) edge (mid);
+			\draw[->, bend left = 20] (C) edge (mid);
+			\draw[->, bend left = 20] (D) edge (mid);
+		\end{tikzpicture}
 		\caption{}
 	\end{subfigure}
 	\caption{Switch scheme.}
