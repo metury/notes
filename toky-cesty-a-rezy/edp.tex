@@ -1242,6 +1242,68 @@ And then for every clause we will have one vertex and every two consequent claus
 For that we will introduce \textbf{switch} gadget which connects the two previously mentioned gadgets. The exact construction of the switch is shown on the picture \ref{switch}. But it is enough to see the scheme of the switch on the picture \ref{switch scheme}.
 
 \begin{figure}[!ht]\centering
+	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+		%% NODES
+		% Start
+		\node (1) {}; % Invisible start.
+		\node[main, below of = 1] (2) {};
+		% Left path
+		\node[main, below left of = 2] (3) {};
+		\node[main, below of = 3] (4) {};
+		\node[main, below of = 4] (5) {};
+		\node[main, below of = 5] (6) {};
+		% Right path
+		\node[main, below right of = 2] (3') {};
+		\node[main, below of = 3'] (4') {};
+		\node[main, below of = 4'] (5') {};
+		\node[main, below of = 5'] (6') {};
+		% End
+		\node[main, below right of = 6] (7) {};
+		\node[below of = 7] (8) {}; % Invisible end
+		 % Left wing		
+		\node[main, above left of = 3] (9) {};
+		\node[main, above left of = 9] (10) {};
+		\node[main, above left of = 10] (11) {};
+		% Right wing
+		\node[main, above right of = 3'] (9') {};
+		\node[main, above right of = 9'] (10') {};
+		\node[main, above right of = 10'] (11') {};
+		% Left arm
+		\node[main, left of = 4] (12) {};
+		% Right arm
+		\node[main, right of = 4'] (12') {};
+		% Rest of the graph.
+		\node[main, above of = 10'] (upper) {};
+		\node[above of = upper] (ph-upper) {}; % Invisible upper
+		\node[main, below right of = 6'] (lower) {};
+		\node[below of = lower] (ph-lower) {}; % Invisible lower
+		%% EDGES
+		% Main two paths.
+		\draw[->] (1) edge (2);
+		\draw[->] (7) edge (8);
+		\path[->] (2) edge (3) (3) edge (4)
+			(4) edge (5) (5) edge (6)
+			(6) edge (7);
+		\path[->] (2) edge (3') (3') edge (4')
+			(4') edge (5') (5') edge (6')
+			(6') edge (7');
+		% Wings.
+		\path[->] (11) edge (10) (10) edge (9) (9) edge (3);
+		\path[->] (11') edge (10') (10') edge (9') (9') edge (3');
+		% Arms
+		\draw[->] (4) edge (12);
+		\draw[->] (4') edge (12');
+		% Rest of the graph.
+		\draw[->] (ph-lower) edge (lower);
+		\draw[->] (lower) edge (5);
+		\draw[->] (lower) edge (5');
+		\draw[->] (upper) edge (ph-upper]);
+		%\draw[->] (lower) edge (5);
+		%\draw[->] (lower) edge (5');
+		% The remaining two edges.
+		\draw[->] (6) edge (10');
+		\draw[->] (6') edge (10);
+	\end{tikzpicture}
 	\caption{Switch construction.}
 	\label{switch}
 \end{figure}
