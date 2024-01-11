@@ -173,13 +173,15 @@ Now with all of that we would like to see if we are able to partition the vertic
 \end{figure}
 
 \begin{defn}
-	We will denote $\epsilon$-regular partition of graph $G$ with $n = |V(G)|$ such disjoint parts $A_{1}, A_{2}, \dots, A_{k}$ of $V(G)$ for which all properties are satisfied.
+	We will denote $\epsilon$-regular partition of graph $G$ with $n = |V(G)|$ such disjoint parts $\mathcal{P} = \{A_{1}, A_{2}, \dots, A_{m}\}$ of $V(G)$ for which all properties are satisfied.
 	
 	\begin{enumerate}
-		\item $|A_1| = |A_2| = \dots = |A_k|$,
+		\item $|A_1| = |A_2| = \dots = |A_m|$,
 		\item $|A_0| \leq \epsilon n$ and
 		\item for $1 \leq i \leq j \leq m$, $(A_i, A_j)$ are $\epsilon$-regular with at most $\leq \epsilon m^2$ exceptions.
 	\end{enumerate}
+	
+	Also $m$ is the \textbf{order} of partition $\mathcal{P}$.
 \end{defn}
 
 \begin{thm}[Szemerédi, Regularity lemma (RL)]
@@ -358,3 +360,167 @@ Actually Róth showed that it is indeed true for $l = 3$ and later on also Szeme
 Now for arbitrary $l$ we could rewrite corner lemma for $l-1$ dimension case then use hypergraphs with $l-1$ tuples and so on. But the thing is that this is not that easy, since the regularity lemma wouldn't be enough. Everything would have to be redefined and proved again. %Example with K_4.
 
 Now we will show that $\exists B \subseteq \{0, \dots, N-1\}$ and $|B| \geq \frac{N}{16^{\sqrt{\log_e N}}}$ without 3-AP. Firstly we will put $S \subseteq \Z^n$ without 3-AP. We will set $d = 2^{n-1}$ and $N = (2d)^n$ so actually $S \subseteq \{0, \dots, d-1\}^n$ then let $S_k = \{(x_1, \dots, x_n) \in \{0, \dots, d-1\}^n, x_1^2 + \dots + x_n^2 = k\}$ which is a sphere. This does not contain 3-AP. Because if we intersect two points on the sphere then the line does not intersect any other point. We will use this for $0 \leq k leq (d-1)^2n$ and also $\exists k: |S_k| \geq \frac{d^n}{(d-1)^2n+1} \geq \frac{d^n}{d^2n} = \frac{d^{n-2}}{n}$ and lets fix such $k$. Now we ap $(x_1, \dots, x_n)$ to the $f = \sum_{i = 1}^n x_i (2d)^{i-1}$. (Or in other words the number in base $2d$.) Let $B = f(S_k)$. And also $0 \leq f \leq (2d)^n - 1 = N +1$. $f$ is injective and $|B|$ is large enough. If we sum two digits then there will be no carries because we used base $2d$. If there would be 3-AP then $f(x) + f(y) = 2f(z)$ but $f(x) + f(y) = f(x + y)$ and $2f(z) = f(2z)$. And $x + y = 2z$ would mean there was 3-AP in $S_k$, which is a contradiction.
+
+\section{Proof of regularity lemma}
+
+To make the proof easier we will slightly change the definition of $\epsilon$-regular partition. So that it will be $\mathcal{P} = \{A_1, \dots, A_m, A_{m+1}, \dots, A_{m+t}\}$ where we have replaced $A_0$ by singleton parts. So $t \leq \epsilon n$ and $|V_{m+1}| = \dots = |V_{m+t}|$.
+
+The overall sketch of the proof is that we will create a partition $\mathcal{P}_{0}$ and then step by step we will replace the partition by $\mathcal{P}_{1}, \dots, \mathcal{P}_{k}$ where $\mathcal{P}_{k}$ will be $\epsilon$-regular. We will also introduce a "quality" function $q$.
+
+\begin{enumerate}
+	\item In each iteration, the order of the partition increases at most exponentially.
+	\item $(\forall i) q(\mathcal{P}_{i}) \geq q(\mathcal{P}_{i-1}) + \frac{\epsilon^5}{4}n^2$.
+\end{enumerate}
+
+Therefore $k \leq \frac{4}{\epsilon^5}$ and ahence $M = \exp(\exp(\dots \exp(m_0)))$ which is iterated $k$ times. That is all to the outline of the proof.
+
+\begin{defn}
+	The quality function $q : \text{ partition of } V(G) \to [0, n^2]$ is defined firstly by $q : A, B \to [0,n^2]$ for $A,B \subseteq V(G)$ disjoint subsets.
+	
+	$$
+	q(A,B) = |A| \cdot |B| \cdot d^2(A,B) = \frac{e^2(A,B)}{|A| \cdot |B|}
+	$$
+	
+	Then for partition $\mathcal{P} = \{V_1, \dots, V_p\}$ is defined as
+	
+	$$
+	q(\mathcal{P}) = \sum_{1 \leq i < j \leq p} q(V_i, V_j).
+	$$
+\end{defn}
+
+Firstly we will show us that if we subdivide the parts or refine them the quality can only rise.
+
+\begin{lemma}
+	If $\mathcal{A} = \{A_1, \dots, A_s\}$ is a partition of $A$ and $\mathcal{B} = \{B_1, \dots, B_t\}$ is a partition of $B$. Then
+	
+	$$
+	\sum_{i = 1}^{s} \sum_{j = 1}^{t} q(A_i, B_j) \geq q(A,B).
+	$$
+\end{lemma}
+
+\begin{proof}
+	For the proof we will use \href{https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality}{Cauchy-Schwarz inequality}. That is $\left( \sum_i u_i^2 \right) \left( \sum_i v_i^2 \right) \geq \left| \sum_i u_i v_i \right|$. Lets define $u$ and $v$ and then sum it.
+	
+	$$
+	\begin{aligned}
+		u_{ij} &= \sqrt{|A_i| \cdot |B_j|} d(A_i, B_j) \\
+		v_{ij} &= \sqrt{|A_i| \cdot |B_j|} \\
+		\sum_{i,j} u_{ij}^2 &= \sum_{i,j} |A_i| \cdot |B_j| d^2(A_i, B_j) = \sum_{i,j} q(A_i, B_j) \\
+		\sum_{i,j} v_{ij}^2 &= \sum_{i,j} |A_i| \cdot |B_i| = \left( \sum_i |A_i| \right) \left( \sum_i |B_i| \right) = |A| \cdot |B| \\
+		\sum_{i,j} u_{ij} v_{ij} &= |A_i| \cdot |B_j| d(A_i, B_j) = \sum_{i,j} e(A_i, B_j) = e(A,B)
+	\end{aligned}
+	$$
+	
+	So witch Cauchy Schwarz inequality we get.
+	
+	$$
+	\begin{aligned}
+		\sum_{i,j} q(A_i, B_j) |A| \cdot |B| & \geq e(A,B)^2 \\
+		\sum_{i,j} q(A_i, B_j) \geq \frac{e(A,B)^2}{|A| \cdot |B|} &= q(A,B)
+	\end{aligned}
+	$$
+\end{proof}
+
+\begin{lemma}
+	If $\mathcal{P}'$ is a refinement of $\mathcal{P}$ then $q(\mathcal{P}') \geq q(\mathcal{P})$.
+\end{lemma}
+
+\begin{proof}
+	Let $\mathcal{P} = \{V_1, \dots, V_m\}$ then subdivision of each part is $\mathcal{P}' = \mathcal{V}_1 \dot{\cup} \mathcal{V}_2 \dot{\cup} \dots \dot{\cup} \mathcal{V}_m$. To be precise $\mathcal{V}_i$ is a partition of $V_i$.
+	
+	$$
+	\begin{aligned}
+		q(\mathcal{P}') &\geq \sum_{1 \leq i < j \leq m} \sum_{P \in \mathcal{V}_i} \sum_{Q \in \mathcal{V}_j} q(P,Q) \\
+		 &\geq \sum_{1 \leq i < j \leq m} q(V_i, V_j) \quad \text{(by the lemma)} \\
+		 &= q(\mathcal{P})
+	\end{aligned}
+	$$
+\end{proof}
+
+\begin{lemma}
+	Suppose $(A,B)$ is not $\epsilon$-regular. This means that $\exists A_1 \subseteq A, B_1 \subseteq B : |A_1| \geq \epsilon |A|, |B_1| \geq \epsilon |B|$ such that $|d(A_1, B_1) - d(A,B)| \geq \epsilon$. Lets denote $A_2 = A \setminus A_1, B_2 = B \setminus B_1$ then
+	
+	$$
+	\sum_{i,j = 1}^2 q(A_i,B_j) \geq q(A,B) + \epsilon^4 |A| \cdot |B|.
+	$$
+\end{lemma}
+
+\begin{proof}
+	Firstly some simplification for $u \in A_i, v \in B_j$ $d(u,v) = d(A_i, B_j)$ also $d = d(A,B)$ and $\delta (u,v) = d(u,v) - d$. Now we will show us that the sum of deltas is zero.
+	
+	$$
+	\begin{aligned}
+		d \cdot |A| \cdot |B| &= e(A,B) = \sum_{i,j = 1}^2 e(A_i, B_j) = \sum_{i,j = 1}^2 d(A_i, B_j) |A_i| \cdot |B_j| \\
+		&= \sum_{i,j = 1}^2 \sum_{u \in A_i} \sum_{v \in B_j} d(u,v) = \sum_{u \in A} \sum_{v \in B} d(u,v) \\
+		&= \sum_{u \in A} \sum_{v \in B} \delta(u,v) + d = d \cdot |A| \cdot |B| + \sum_{u \in A} \sum_{v \in B} \delta(u,v)\\
+		\sum_{u \in A} \sum_{v \in B} \delta(u,v) &= 0
+	\end{aligned}
+	$$
+	
+	With that and similiar process we will prove the lemma.
+	
+	$$
+	\begin{aligned}
+		\sum_{i,j = 1}^2 q(A_i, B_j) &= \sum_{i,j = 1}^2 |A_i| \cdot |B_i| \cdot d^2(A_i, B_j) \\
+		&= \sum_{i,j = 1}^2 \sum_{u \in A_i} \sum_{v \in B_j} d^2(u,v) \\
+		&= \sum_{u \in A} \sum_{v \in B} d^2(u,v)\\
+		&= \sum_{u \in A} \sum_{v \in B} (d + \delta(u,v))^2\\
+		&= \sum_{u \in A} \sum_{v \in B} (d^2 + 2d \delta(u,v) + \delta^2(u,v))\\
+		&= |A| \cdot |B| \cdot d^2 + 2d \sum_{u \in A, v \in B} \delta(u,v) + \sum_{u \in A, v \in B} \delta^2(u,v)\\
+		&\geq q(A,B) + 0 + \sum_{u \in A_1, v \in B_1} \delta^2(u,v)
+	\end{aligned}
+	$$
+	
+	Now because $|d(A_1, B_1) - d(A,B)| > \epsilon$ and $\delta^2(u,v) > \epsilon^2$ we get that
+	
+	$$
+	\begin{aligned}
+		\sum_{i,j = 1}^2 q(A_i, B_j) &> q(A,B) + \epsilon^2 |A_1| \cdot |B_1|\\
+		&\geq q(A,B) + \epsilon^4 |A| \cdot |B|
+	\end{aligned}
+	$$
+\end{proof}
+
+Now suppose $\mathcal{P} = \{V_1, \dots, V_s, V_{s+1}, \dots, V_{s+t}\}$ where $V_{s+1}, \dots, V_{s+t}$ are singletons. Suppose it is not $\epsilon$-regular and $N = |V_1| = \dots = |V_s|$ and also $t \leq \epsilon n$. So lets denote $X = \{(i,j) : i < j \leq s, (V_i, V_j) \text{ is not } \epsilon\text{-regular}\}$. It means that $|X| \geq \epsilon s^2$. Look at $(i,j)$ if it is not $\epsilon$-regular than we can use the very last lemma and get four parts which we will denote $V_{ij1}, V_{ij2}$ and $V_{ji1}, V_{ji2}$. We get that $\sum_{a,b = 1}^2 q(V_{ija}, V_{jib}) > q(V_i, V_j) + \epsilon^4 N^2$. This will be for all pairs. These partitions will be denoted as $\mathcal{P}_{ij}$.
+
+Altogether we will create new partitions by these refinements and putting it together with $\mathcal{P}$. So formally $\mathcal{P}'$ will ve common subdivision of $\mathcal{P}$ and $\mathcal{P}_{ij}$ for $(i,j) \in X$.
+
+Now the number of non-singleton parts in $\mathcal{P}'$ is at most $s2^s$ since we split up to $s$ parts and each one $2^s$ times (doubling every time). Now we can compute the following.
+
+$$
+q(\mathcal{P}') \geq \sum_{1 \leq i < j \leq s + t} \sum_{P \text{ subpart of } V_i} \sum_{Q \text{ subpart of } V_j} q(P,Q)\\
+$$
+
+Now the part $\sum_{P \text{ subpart of } V_i} \sum_{Q \text{ subpart of } V_j} q(P,Q)$ is either $\geq q(V_i, V_j)$ by the first lemma or if $(i,j) \in X$ then $\geq q(V_i, V_j) + \epsilon^4 N^2$ by the first and last lemma. Therefore we may continue in the computation.
+
+$$
+\begin{aligned}
+	q(\mathcal{P}') &\geq \sum_{1 \leq i < j \leq s + t} \sum_{P \text{ subpart of } V_i} \sum_{Q \text{ subpart of } V_j} q(P,Q)\\
+	&\geq \sum_{1 \leq i < j \leq s +t} q(V_i, V_j) + |X| \epsilon^4 N^2\\
+	&\geq q(\mathcal{P}) + \epsilon^5 (sN)^2\\
+	&\geq q(\mathcal{P}) + \epsilon^5 ((1-\epsilon)n)^2\\
+	&\geq q(\mathcal{P}) + \epsilon^5 (n/2)^2\\
+	&\geq q(\mathcal{P}) + \frac{\epsilon^5}{4} n^2\\
+\end{aligned}
+$$
+
+Which is the increase of quality we were aiming for. Therefore we will repeat this process. But we are not guaranteed to have same-sized parts. Thus we transform $\mathcal{P}'$ and we will try to round it to $N' = \left\lceil \frac{N}{4^2} \right\rceil$. We will greedily split those parts to obtain $N'$ parts. All the leftovers will proceed to be as a singletons. Hence we obtain $\mathcal{P}''$.
+
+\begin{itemize}
+	\item Non-singleton parts have size $N'$.
+	\item $q(\mathcal{P}'') \geq q(\mathcal{P}') \geq q(\mathcal{P}) + \frac{\epsilon^5 n^2}{4}$.
+	\item Number of non-singleton parts is at most $\frac{Ns}{N/4^s} = s4^s$.
+	\item Number of new singleton parts is at most $s2^s(N' - 1) \leq s2^s \frac{N}{4^s} = s \frac{N}{2^s} \leq \frac{n}{2^s}$ for large $s$ it is small.
+	\item Number of non-singleton parts is at least $S_0 / 2$.
+\end{itemize}
+
+Lastly we need to set up the parameters.
+
+$$
+\begin{aligned}
+	s_0 &:= \max (2m_0, \left\lceil 2\log_2 \frac{8}{\epsilon^6} \right\rceil)\\
+	M &:= \max( \left\lceil \frac{2}{\epsilon} s_0 \right\rceil, f(f(f(\dots f(s_0))))) \quad \text{(repeated } \lceil 4/\epsilon^5 \rceil \text{ times)}
+\end{aligned}
+$$
+
+Lastly it is necessary to show that it actually works and that there is not too many of singletons. The exact details are omitted.
