@@ -1370,7 +1370,7 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 			\node[main] (8) {$8$};
 			\node[main, fill, above of = 8] (phantom) {};
 			\node[main, above of = phantom] (11) {$11$};
-			\node[main, right of = phantom] (mid) {};
+			\node[main, dashed, right of = phantom] (mid) {};
 			\node[main, fill, right of = mid] (phantom') {};
 			\node[main, below of = phantom'] (8') {$8'$};
 			\node[main, above of = phantom'] (11') {$11'$};
@@ -1381,8 +1381,7 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 			
 			\draw[->] (8) edge (11);
 			\draw[->] (8') edge (11');
-			\draw[dashed] (phantom) edge (mid);
-			\draw[dashed] (mid) edge (phantom');
+			\draw[dashed] (phantom) edge (phantom');
 			\draw[->, bend right = 20, color = blue] (mid) edge (A);
 			\draw[->, bend left = 20, color = red] (B) edge (mid);
 			\draw[->, bend left = 20, color = blue] (C) edge (mid);
@@ -1402,9 +1401,107 @@ We may see that the switch is a small graph with 4 "inputs" and $B, C, 8, 8'$ an
 	\item And exactly one more edge-disjoint path through the graph exists and it is either $8 \to 11$ or $8' \to 11'$.
 \end{enumerate}
 
-These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices $W, X, Y, Z$ as shown on the global picture \ref{global scheme}.
+These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices \textcolor{violet}{$W, X, Y, Z$} as shown on the global picture \ref{global scheme}.
 
 \begin{figure}[!ht]\centering
+		\begin{tikzpicture}[node distance={20mm}, main/.style = {draw, thick, circle}]
+		\node[main] (startx0) {};
+		\node[below of = startx0] (labelx0) {$x_0$};
+		\node[main, below left of = startx0] (x0) {};
+		\node[main, below right of = startx0] (notx0) {};
+		\node[main, fill, below of = notx0] (dotx0) {};
+		\node[below of = x0] (invdotx0) {};
+		\node[main, below of = dotx0] (phnotx0) {};
+		\node[main, below of = invdotx0] (phx0) {};
+		\node[main, below right of = phx0] (endx0) {};
+		
+		\node[below of = endx0] (gap) {};
+		
+		\node[main, below of = gap] (startxk) {};
+		\node[below of = startxk] (labelxk) {$x_k$};
+		\node[main, below left of = startxk] (xk) {};
+		\node[main, below right of = startxk] (notxk) {};
+		\node[main, fill, below of = xk] (dotxk) {};
+		\node[below of = notxk] (invdotxk) {};
+		\node[main, below of = dotxk] (phxk) {};
+		\node[main, below of = invdotxk] (phnotxk) {};
+		\node[main, below right of = phxk] (endxk) {};
+		
+		\node[left of = endxk] (phantom0) {};
+		\node[left of = phantom0] (phantom1) {};
+		\node[left of = phantom1] (phantom2) {};
+		\node[main, left of = phantom2] (c0) {$c_0$};
+		\node[main, fill, above right of = c0] (dotc0) {};
+		\node[main, above left of = dotc0] (c1) {$c_1$};
+		\node[main, fill, above of = c1] (dotc1) {};
+		\node[main, above of = dotc1] (c2) {$c_2$};
+		\node[above of = c2] (gapc) {};
+		\node[above of = gapc] (gapcc) {};
+		\node[main, above of = gapcc] (cl) {$c_l$};
+		
+		\draw[->] (startx0) edge (x0);
+		\draw[->] (startx0) edge (notx0);
+		\draw[->] (x0) edge (phx0);
+		\draw[->] (notx0) edge (phnotx0);
+		\draw[->] (phx0) edge (endx0);
+		\draw[->] (phnotx0) edge (endx0);
+		
+		\draw[->, dotted] (endx0) edge (startxk);
+		
+		\draw[->] (startxk) edge (xk);
+		\draw[->] (startxk) edge (notxk);
+		\draw[->] (xk) edge (phxk);
+		\draw[->] (notxk) edge (phnotxk);
+		\draw[->] (phxk) edge (endxk);
+		\draw[->] (phnotxk) edge (endxk);
+		
+		\draw[->, bend left = 60] (endxk) edge (c0);
+		\draw[->] (c0) edge (c1);
+		\draw[bend right = 30] (c0) edge (dotc0);
+		\draw[->, bend right = 30] (dotc0) edge (c1);
+		\draw[->, bend left = 50] (c0) edge (c1);
+		\draw[->] (c1) edge (c2);
+		\draw[->, bend right = 50] (c1) edge (c2);
+		\draw[->, bend left = 50] (c1) edge (c2);
+		\draw[->, dotted] (c2) edge (cl);
+		
+		\draw[dashed] (dotc0) -- (dotxk) node[main, midway] (mid0) {};
+		\draw[dashed] (dotc1) -- (dotx0) node[main, midway] (mid1) {};
+		
+		\node[above left of = mid0, color = blue] (C0) {$C$};
+		\node[above of = mid0, color = red] (D0) {$D$};
+		\node[below right of = mid0, color = red] (B0) {$B$};
+		\node[below of = mid0, color = blue] (A0) {$A$};
+		
+		\node[above left of = mid1, color = blue] (C1) {$C$};
+		\node[above of = mid1, color = red] (D1) {$D$};
+		\node[below right of = mid1, color = red] (B1) {$B$};
+		\node[below of = mid1, color = blue] (A1) {$A$};
+		
+		\draw[->, bend left = 20, color = blue] (C0) edge (mid0);
+		\draw[->, bend left = 20, color = red] (B0) edge (mid0);
+		\draw[->, bend right = 20, color = blue] (mid0) edge (A0);
+		\draw[->, bend right = 20, color = red] (mid0) edge (D0);
+		
+		\draw[->, bend left = 20, color = blue] (C1) edge (mid1);
+		\draw[->, bend left = 20, color = red] (B1) edge (mid1);
+		\draw[->, bend right = 20, color = blue] (mid1) edge (A1);
+		\draw[->, bend right = 20, color = red] (mid1) edge (D1);
+		
+		\draw[->, dashed, bend right = 20, color = red] (D0) edge (B1);
+		\draw[->, dashed, bend right = 20, color = blue] (A1) edge (C0);
+		
+		\node[below of = A0, color = violet] (X) {$X$};
+		\node[below of = B0, color = violet] (Y) {$Y$};
+		\node[above of = cl, color = violet] (Z) {$Z$};
+		\node[above of = C1, color = violet] (W) {$W$};
+		
+		\draw[->] (A0) edge (X);
+		\draw[->] (Y) edge (B0);
+		\draw[->] (W) edge (C1);
+		\draw[->] (cl) edge (Z);
+		\draw[->, bend left = 70] (D1) edge (startx0);
+	\end{tikzpicture}
 	\caption{Global scheme of the 3-SAT.}
 	\label{global scheme}
 \end{figure}
