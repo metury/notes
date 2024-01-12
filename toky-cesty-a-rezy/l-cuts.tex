@@ -183,3 +183,13 @@ We may ask ourselves what is the integrality gap? We can create one simple algor
 \begin{observ}
 	While the OPT $\geq k$ therefore it is $L$-approximation. Since the $k$ is the number of $L$-paths.
 \end{observ}
+
+Also we can see what is the is the dual to this LP. Which will indeed solve $L$-flows.
+% TODO This may be changed.
+$$
+\begin{aligned}
+	\max \sum_{p \in \mathcal{P}_L} f_p &\\
+	\sum_{p \in \mathcal{P}_L, e \in p} f_p & \forall e \in E\\
+	f_p \geq 0 & \forall p \in \mathcal{P}_L
+\end{aligned}
+$$
