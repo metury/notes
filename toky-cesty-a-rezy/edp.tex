@@ -1027,115 +1027,117 @@ $$
 
 In this section we will take a look at the hardness of this problem. That is $\forall \epsilon > 0$ it is NP-hard to approximate DIR-EDP (directed edge disjoint problem) within $n^{1/2 - \epsilon}$. We may show this by the hardness of the 2-DIR-EDP. Firstly we construct a $l \times l$ mash as depicted on the picture \ref{l_by_l_mesh}. Now we will replace each vertex inside the mesh with a special graph $H$ that is shown on the picture \ref{h subgraph}.
 
-\begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
-		\node[main] (11) {1};
-		\node[main, right of = 11] (21) {2};
-		\node[main, right of = 21] (31) {3};
-		\node[right of = 31] (i1) {};
-		\node[main, right of = i1] (l1) {$l$};
-		
-		\node[main, below of = 11] (12) {2};
-		\node[main, right of = 12] (22) {};
-		\node[main, right of = 22] (32) {};
-		\node[right of = 32] (i2) {};
-		\node[main, right of = i2] (l2) {};
-		
-		\node[main, below of = 12] (13) {3};
-		\node[main, right of = 13] (23) {};
-		\node[main, right of = 23] (33) {};
-		\node[right of = 33] (i3) {};
-		\node[main, right of = i3] (l3) {};
-		
-		\node[below of = 13] (1i) {};
-		\node[right of = 1i] (2i) {};
-		\node[right of = 2i] (3i) {};
-		\node[right of = 3i] (ii) {};
-		\node[right of = ii] (li) {};
-		
-		\node[main, below of = 1i] (1l) {$l$};
-		\node[main, right of = 1l] (2l) {};
-		\node[main, right of = 2l] (3l) {};
-		\node[right of = 3l] (il) {};
-		\node[main, right of = il] (ll) {};
-	 	
-		\draw[->] (11) edge (21);
-		\draw[->] (21) edge (31);
-		\draw[->, dotted] (31) edge (l1);
-		
-		\draw[->] (12) edge (22);
-		\draw[->] (22) edge (32);
-		\draw[->, dotted] (32) edge (l2);
-		
-		\draw[->] (13) edge (23);
-		\draw[->] (23) edge (33);
-		\draw[->, dotted] (33) edge (l3);
-		
-		\draw[->] (1l) edge (2l);
-		\draw[->] (2l) edge (3l);
-		\draw[->, dotted] (3l) edge (ll);
-		
-		\draw[->] (11) edge (12);
-		\draw[->] (12) edge (13);
-		\draw[->, dotted] (13) edge (1l);
-		
-		\draw[->] (21) edge (22);
-		\draw[->] (22) edge (23);
-		\draw[->, dotted] (23) edge (2l);
-		
-		\draw[->] (31) edge (32);
-		\draw[->] (32) edge (33);
-		\draw[->, dotted] (33) edge (3l);
-		
-		\draw[->] (l1) edge (l2);
-		\draw[->] (l2) edge (l3);
-		\draw[->, dotted] (l3) edge (ll);
-		
-		\node[left of = 11] (s1) {\textcolor{cyan}{$s_1$}};
-		\node[left of = 12] (s2) {\textcolor{cyan}{$s_2$}};
-		\node[left of = 13] (s3) {\textcolor{cyan}{$s_3$}};
-		\node[left of = 1l] (sl) {\textcolor{cyan}{$s_l$}};
-		\draw[->, color=cyan, dashed] (s1) edge (11);
-		\draw[->, color=cyan, dashed] (s2) edge (12);
-		\draw[->, color=cyan, dashed] (s3) edge (13);
-		\draw[->, color=cyan, dashed] (sl) edge (1l);
-		
-		\node[below of = 1l] (t1) {\textcolor{orange}{$t_1$}};
-		\node[below of = 2l] (t2) {\textcolor{orange}{$t_2$}};
-		\node[below of = 3l] (t3) {\textcolor{orange}{$t_3$}};
-		\node[below of = ll] (tl) {\textcolor{orange}{$t_l$}};
-		\draw[->, color=orange, dashed] (1l) edge (t1);
-		\draw[->, color=orange, dashed] (2l) edge (t2);
-		\draw[->, color=orange, dashed] (3l) edge (t3);
-		\draw[->, color=orange, dashed] (ll) edge (tl);
-	\end{tikzpicture}
-	\caption{$l \times l$ mesh.}
-	\label{l_by_l_mesh}
-\end{figure}
-
-\begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
-		\node (h) {$H$};
-		\node[main, left of = h] (2) {};
-		\node[main, above of = h] (3) {};
-		\node[main, right of = h] (4) {};
-		\node[main, below of = h] (5) {};
-		\node[left of = 2] (1) {};
-		\node[above of = 3] (6) {};
-		\node[right of = 4] (7) {};
-		\node[below of = 5] (8) {};
-		
-		\draw[->] (1) edge (2);
-		\draw[->] (6) edge (3);
-		\draw[->] (4) edge (7);
-		\draw[->] (5) edge (8);
-		\draw[bend left = 40] (2) edge (3);
-		\draw[bend left = 40] (3) edge (4);
-		\draw[bend left = 40] (4) edge (5);
-		\draw[bend left = 40] (5) edge (2);
-	\end{tikzpicture}
-	\caption{Graph $H$ as a replacement.}
-	\label{h subgraph}
+\begin{figure}[!ht]
+	\begin{subfigure}{0.6\textwidth}\centering
+		\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+			\node[main] (11) {1};
+			\node[main, right of = 11] (21) {2};
+			\node[main, right of = 21] (31) {3};
+			\node[right of = 31] (i1) {};
+			\node[main, right of = i1] (l1) {$l$};
+			
+			\node[main, below of = 11] (12) {2};
+			\node[main, right of = 12] (22) {};
+			\node[main, right of = 22] (32) {};
+			\node[right of = 32] (i2) {};
+			\node[main, right of = i2] (l2) {};
+			
+			\node[main, below of = 12] (13) {3};
+			\node[main, right of = 13] (23) {};
+			\node[main, right of = 23] (33) {};
+			\node[right of = 33] (i3) {};
+			\node[main, right of = i3] (l3) {};
+			
+			\node[below of = 13] (1i) {};
+			\node[right of = 1i] (2i) {};
+			\node[right of = 2i] (3i) {};
+			\node[right of = 3i] (ii) {};
+			\node[right of = ii] (li) {};
+			
+			\node[main, below of = 1i] (1l) {$l$};
+			\node[main, right of = 1l] (2l) {};
+			\node[main, right of = 2l] (3l) {};
+			\node[right of = 3l] (il) {};
+			\node[main, right of = il] (ll) {};
+		 	
+			\draw[->] (11) edge (21);
+			\draw[->] (21) edge (31);
+			\draw[->, dotted] (31) edge (l1);
+			
+			\draw[->] (12) edge (22);
+			\draw[->] (22) edge (32);
+			\draw[->, dotted] (32) edge (l2);
+			
+			\draw[->] (13) edge (23);
+			\draw[->] (23) edge (33);
+			\draw[->, dotted] (33) edge (l3);
+			
+			\draw[->] (1l) edge (2l);
+			\draw[->] (2l) edge (3l);
+			\draw[->, dotted] (3l) edge (ll);
+			
+			\draw[->] (11) edge (12);
+			\draw[->] (12) edge (13);
+			\draw[->, dotted] (13) edge (1l);
+			
+			\draw[->] (21) edge (22);
+			\draw[->] (22) edge (23);
+			\draw[->, dotted] (23) edge (2l);
+			
+			\draw[->] (31) edge (32);
+			\draw[->] (32) edge (33);
+			\draw[->, dotted] (33) edge (3l);
+			
+			\draw[->] (l1) edge (l2);
+			\draw[->] (l2) edge (l3);
+			\draw[->, dotted] (l3) edge (ll);
+			
+			\node[left of = 11] (s1) {\textcolor{cyan}{$s_1$}};
+			\node[left of = 12] (s2) {\textcolor{cyan}{$s_2$}};
+			\node[left of = 13] (s3) {\textcolor{cyan}{$s_3$}};
+			\node[left of = 1l] (sl) {\textcolor{cyan}{$s_l$}};
+			\draw[->, color=cyan, dashed] (s1) edge (11);
+			\draw[->, color=cyan, dashed] (s2) edge (12);
+			\draw[->, color=cyan, dashed] (s3) edge (13);
+			\draw[->, color=cyan, dashed] (sl) edge (1l);
+			
+			\node[below of = 1l] (t1) {\textcolor{orange}{$t_1$}};
+			\node[below of = 2l] (t2) {\textcolor{orange}{$t_2$}};
+			\node[below of = 3l] (t3) {\textcolor{orange}{$t_3$}};
+			\node[below of = ll] (tl) {\textcolor{orange}{$t_l$}};
+			\draw[->, color=orange, dashed] (1l) edge (t1);
+			\draw[->, color=orange, dashed] (2l) edge (t2);
+			\draw[->, color=orange, dashed] (3l) edge (t3);
+			\draw[->, color=orange, dashed] (ll) edge (tl);
+		\end{tikzpicture}
+		\caption{$l \times l$ original mesh.}
+		\label{l_by_l_mesh}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}\centering
+		\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+			\node (h) {$H$};
+			\node[main, left of = h] (2) {};
+			\node[main, above of = h] (3) {};
+			\node[main, right of = h] (4) {};
+			\node[main, below of = h] (5) {};
+			\node[left of = 2] (1) {};
+			\node[above of = 3] (6) {};
+			\node[right of = 4] (7) {};
+			\node[below of = 5] (8) {};
+			
+			\draw[->] (1) edge (2);
+			\draw[->] (6) edge (3);
+			\draw[->] (4) edge (7);
+			\draw[->] (5) edge (8);
+			\draw[bend left = 40] (2) edge (3);
+			\draw[bend left = 40] (3) edge (4);
+			\draw[bend left = 40] (4) edge (5);
+			\draw[bend left = 40] (5) edge (2);
+		\end{tikzpicture}
+		\caption{Replacement graph $H$.}
+		\label{h subgraph}
+	\end{subfigure}
+	\caption{Separate parts to create graph $G$.}
 \end{figure}
 
 With this construction the graph $G$ contains $|V(G)| = l \times l \times k$ and let $K = |V(H)|$ then set $n = k^{1/2 \epsilon}$ and $l = n$. With this $|V(G)|$ is asymptotically $n$ (we were not counting sources and targets).
@@ -1157,7 +1159,7 @@ As we have shown te NP-hardness of general DIR-EDP to 2-DIR-EDP we will now show
 We have $k$ variables $x_1, x_2, \dots, x_k$ and $l$ clauses $t_1, t_2, \dots, t_l$. And we will show how the graph will be constructed. Firstly for every variable we will construct a gadget that has one entering and one leaving vertex and two separate paths, where on these paths are represented negative and positive occurrences of this variable. This can be seen on the picture \ref{variable gadget}. These gadgets will be connected sequentially by exactly one edge.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+	\begin{tikzpicture}[node distance={14mm}, main/.style = {draw, thick, circle}]
 		\node (x-1) {$x_{i - 1}$};
 		\node[main, below of = x-1] (e) {};
 		\node[main, below left of = e] (x) {$x_i$};
@@ -1182,7 +1184,7 @@ We have $k$ variables $x_1, x_2, \dots, x_k$ and $l$ clauses $t_1, t_2, \dots, t
 And then for every clause we will have one vertex and every two consequent clauses will be connected by 3 edges. These will represent the given literals. Also the last variable will be connected to the first clause. The scheme can be seen on the picture \ref{clause var scheme}. Now we only need to connect these gadgets together.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
+	\begin{tikzpicture}[node distance={13mm}, main/.style = {draw, thick, circle}]
 		\node[main] (startx0) {};
 		\node[below of = startx0] (labelx0) {$x_0$};
 		\node[main, below left of = startx0] (x0) {};
@@ -1239,10 +1241,10 @@ And then for every clause we will have one vertex and every two consequent claus
 	\label{clause var scheme}
 \end{figure}
 
-For that we will introduce \textbf{switch} gadget which connects the two previously mentioned gadgets. The exact construction of the switch is shown on the picture \ref{switch}. But it is enough to see the scheme of the switch on the picture \ref{switch scheme}.
+For that we will introduce \textbf{switch} gadget which connects the two previously mentioned gadgets. The exact construction of the switch is shown on the picture \ref{switch}. But it is enough to see the scheme of the switch on the picture \ref{scheme analyse}.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={20mm}, main/.style = {draw, thick, circle, fill}]
+	\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle, fill}]
 		%% NODES
 		% Start
 		\node (1) {}; % Invisible start.
@@ -1281,12 +1283,12 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 		% Main two paths.
 		\draw[->] (1) -- (2) node[midway, right] {$C$};
 		\draw[->] (7) -- (8) node[midway, left] {$A$};
-		\draw[->] (2) -- (3) node[midway, above left] {$5'$};
+		\draw[->] (2) -- (3) node[midway, below right] {$5'$};
 		\draw[->] (3) -- (4) node[midway, right] {$4'$};
 		\draw[->] (4) -- (5) node[midway, right] {$3'$};
 		\draw[->] (5) -- (6) node[midway, right] {$2'$};
 		\draw[->] (6) -- (7) node[midway, right] {$1'$};
-		\draw[->] (2) -- (3') node[midway, above right] {$5$};
+		\draw[->] (2) -- (3') node[midway, below left] {$5$};
 		\draw[->] (3') -- (4') node[midway, left] {$4$};
 		\draw[->] (4') -- (5') node[midway, left] {$3$};
 		\draw[->] (5') -- (6') node[midway, left] {$2$};
@@ -1404,7 +1406,7 @@ We may see that the switch is a small graph with 4 "inputs" and $B, C, 8, 8'$ an
 These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices \textcolor{violet}{$W, X, Y, Z$} as shown on the global picture \ref{global scheme}.
 
 \begin{figure}[!ht]\centering
-		\begin{tikzpicture}[node distance={20mm}, main/.style = {draw, thick, circle}]
+		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
 		\node[main] (startx0) {};
 		\node[below of = startx0] (labelx0) {$x_0$};
 		\node[main, below left of = startx0] (x0) {};
