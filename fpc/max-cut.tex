@@ -35,31 +35,31 @@ $$
 Altogether we can define a \textbf{quadratic formulation} for max-cut problem. Every part was already mentioned, but just to gather it on one place.
 
 $$
-\begin{array}{c}
+\begin{aligned}
 	\forall i \in V: y_{i}^2 = -1 \\
 	\max \frac{1}{2} \sum_{\{i,j\} \in E} (1 - y_i y_j) \\
 	y_{i} \in \R
-\end{array}
+\end{aligned}
 $$
 
 We may see that this program is not very good for solving. This means we will relax it to a \textbf{vector program} and we will denote it as VP for future usage.
 
 $$
-\begin{array}{c}
+\begin{aligned}
 	\max \frac{1}{2} \sum_{\{i,j\} \in E} (1 - y_i^T y_j) \\
 	y_i^T y_i = 1 \\ 
 	\forall i : y_{i} \in \R
-\end{array}
+\end{aligned}
 $$
 
 The intuition behind it is that we start with 1 dimensional ball (which are line segments $[-1,1]$) and then we will continue to higher dimensions. In the VP we use vectors instead of usual numbers. We will continue with changing the program. Now it will be to semi-positive programming or SPD for short. This formulation is as follows.
 
 $$
-\begin{array}{c}
+\begin{aligned}
 	\max \frac{1}{2} \sum_{\{i,j\} \in E} (1 - Y_{ij}) \\
 	\forall i : Y_{ij} = 1 \\
 	Y \text{ is positive semi-definite}
-\end{array}
+\end{aligned}
 $$
 
 When it is written in this form it can be solved in polynomial time. Just for a reminder we introduce a definition of PSD.
@@ -172,7 +172,7 @@ The meaning of it is shown on the picture \ref{meaning}.
 		\E [W] & =    & \sum_{\{i,j\} \in E} \frac{\theta_{ij}}{\pi} & \quad \text{(by linearity of expectation)} \\
 		       & \geq & \alpha \sum_{\{i,j\} \in E} \frac{1 - \cos (\theta_{ij})}{2} & \quad \text{(by the first lemma)} \\
 		       & =    & \alpha \sum_{\{i,j\} \in E} \frac{1 - v_{i}^T v_{j}}{2} & \quad \textbf{(this is our objective functions of VP)} \\
-		       & \geq & \alpha OPT & \quad \text{(because VP is a relaxation)}
+		       & \geq & \alpha \cdot OPT & \quad \text{(because VP is a relaxation)}
 	\end{aligned}
 	$$
 \end{proof}

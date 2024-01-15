@@ -5,12 +5,12 @@ Same as before we have an undirected graph $G = (V,E)$ and $k$-pairs of sources 
 Firstly we will take a look at linear program for solving this problem for $k = 1$.
 
 $$
-\begin{array}{r c}
-	& \max f \\
-	& \sum_{p \in \mathcal{P}_{st}} x_{p} \geq f \cdot d_{1} \\
-	\forall e \in E & \sum_{e \in \in \mathcal{P}_{st}} x_{p} \leq c(e) \\
-	& x \geq 0
-\end{array}
+\begin{aligned}
+	\max f \\
+	\sum_{p \in \mathcal{P}_{st}} x_{p} \geq f \cdot d_{1} \\
+	\sum_{e \in \in \mathcal{P}_{st}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	x \geq 0
+\end{aligned}
 $$
 
 Where $\mathcal{P}_{st}$ are all paths between $s$ and $t$. We may see that the optimum of the max flow is the same as this optimum just divided by $d_{1}$. We will denote $\mathcal{P}_{i} = \mathcal{P}_{s_{i}, t_{i}}$.
@@ -20,12 +20,12 @@ Where $\mathcal{P}_{st}$ are all paths between $s$ and $t$. We may see that the 
 Thus we are getting this LP for all $k$ commodities and $k$ demands.
 
 $$
-\begin{array}{r c}
-	& \max f \\
-	\forall i \in [k] & \sum_{p \in \mathcal{P}_{i}} x_{p} \geq f \cdot d_{i} \\
-	\forall e \in E & \sum_{i = 0}^{k} \sum_{e \in \in \mathcal{P}_{i}} x_{p} \leq c(e) \\
-	& x \geq 0
-\end{array}
+\begin{aligned}
+	\max f \\
+	\sum_{p \in \mathcal{P}_{i}} x_{p} \geq f \cdot d_{i} & \quad \forall i \in [k]\\
+	\sum_{i = 0}^{k} \sum_{e \in \in \mathcal{P}_{i}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	x \geq 0
+\end{aligned}
 $$
 
 We will take a look at the matrix of this LP and after that find a dual program. But firstly we modify $\sum_{p \in \mathcal{P}_{i}} x_{p} \geq f \cdot d_{i}$ to $f \cdot d_{i} - \sum_{p \in \mathcal{P}_{i}} x_{p} \leq 0$. Then the matrix is as follows:
@@ -46,12 +46,12 @@ $$
 Where for the first $k$ lines are $\leq 0$ and for edges it is $\leq c(e)$. We visualized the matrix and thus we can make the dual. We will have variables $x_{e}$ for edges and $y_{i}$ for $i \in [k]$. Thus the dual is:
 
 $$
-\begin{array}{r c}
-	& \min \sum_{e \in E} x_{e}c(e) \\
-	& \sum_{i = 0}^{k} y_{i}d_{i} \geq 1 \\
-	\forall i \in [k] \forall p \in \mathcal{P}_{i} & \sum_{e \in p} x_{e} -y_{i} \geq 0 \\
-	& x,y \geq 0
-\end{array}
+\begin{aligned}
+	\min \sum_{e \in E} x_{e}c(e) \\
+	\sum_{i = 0}^{k} y_{i}d_{i} \geq 1 \\
+	\sum_{e \in p} x_{e} -y_{i} \geq 0 & \quad \forall i \in [k] \forall p \in \mathcal{P}_{i}\\
+	x,y \geq 0
+\end{aligned}
 $$
 
 \begin{defn}
@@ -110,11 +110,10 @@ $$
 	The $\geq$ inequality can be easily seen if we set $F$ to be $\delta(S)$. Now we need to show the other inequality. For given $F \subseteq E$, let $s_{1}, \dots s_{l}$ be the components of connectivity of $(V, E \setminus F)$. For that we will proof that $\min_{i \in [l]} \rho(s_{i}) \leq \rho(F)$. This will bw shown by a contradiction. Assume $\forall i$:
 	
 	$$
-	\frac{\sum_{e \in \delta(s_{i})}c(e)}{\sum_{j \in I(s_{i})} d_{j}} > \frac{\sum_{e \in F}c(e)}{\sum_{j \in I(F)} d_{j}}
-	$$
-	
-	$$
-	\sum_{e \in \delta(s_{i})}c(e) > \rho(F) \cdot \sum_{j \in I(s_{i})} d_{j}
+	\begin{aligned}
+		\frac{\sum_{e \in \delta(s_{i})}c(e)}{\sum_{j \in I(s_{i})} d_{j}} &> \frac{\sum_{e \in F}c(e)}{\sum_{j \in I(F)} d_{j}}\\
+		\sum_{e \in \delta(s_{i})}c(e) &> \rho(F) \cdot \sum_{j \in I(s_{i})} d_{j}
+	\end{aligned}
 	$$
 	
 	Now we sum all $i$ inequalities.
@@ -135,25 +134,25 @@ $$
 Now we can use this for integer program and then use relaxation. The program will look like this:
 
 $$
-\begin{array}{r c}
-	& \min \frac{\sum_{e \in E} c(e) x_{e}}{\sum_{i = 1}^{k}d_{i}y_{i}} \\
-	\forall i \in [k] \forall p \in \mathcal{P}_{i} & \sum_{e \in p} x_{e} \geq y_{i} \\
-	& \sum_{i = 1}^{k} d_{i}y_{i} \geq 1 \\
-	\forall e \in E & x_{e} \in \{0,1\} \\
-	\forall i \in [k] & y_{i} \in \{0,1\}
-\end{array}
+\begin{aligned}
+	\min \frac{\sum_{e \in E} c(e) x_{e}}{\sum_{i = 1}^{k}d_{i}y_{i}} \\
+	\sum_{e \in p} x_{e} \geq y_{i} & \quad \forall i \in [k] \forall p \in \mathcal{P}_{i}\\
+	\sum_{i = 1}^{k} d_{i}y_{i} \geq 1 \\
+	x_{e} \in \{0,1\} &\quad \forall e \in E\\
+	y_{i} \in \{0,1\} &\quad \forall i \in [k]
+\end{aligned}
 $$
 
 At least one edge has to be removed from each path. Plus we assume that $d_{i} \geq 1$. Now we could just put $x_{e} \geq 0$ and $y_{i} \geq 0$. But the thing is that we don't have a linear function in the objective function. What if we have a vector $(x,y) \to (\alpha x, \alpha y)$ for $\alpha > 0$. You can see that the feasible solution don't change and also the objective is the same. So we could put $\alpha = \frac{1}{\sum_{i = 1}^{k} d_{i}y_{i}}$ and we know that the $\sum_{i = 1}^{k} d_{i}y_{i} = 1$. Thus the linear program will be:
 
 $$
-\begin{array}{r c}
-	& \min \sum_{e \in E} c(e) x_{e} \\
-	\forall i \in [k] \forall p \in \mathcal{P}_{i} & \sum_{e \in p} x_{e} \geq y_{i} \\
-	& \sum_{i = 1}^{k} d_{i}y_{i} = 1 \\
-	\forall e \in E & x_{e} \geq 0 \\
-	\forall i \in [k] & y_{i} \geq 0
-\end{array}
+\begin{aligned}
+	\min \sum_{e \in E} c(e) x_{e} \\
+	\sum_{e \in p} x_{e} \geq y_{i} &\quad \forall i \in [k] \forall p \in \mathcal{P}_{i}\\
+	\sum_{i = 1}^{k} d_{i}y_{i} = 1 \\
+	x_{e} \geq 0 &\quad \forall e \in E\\
+	 y_{i} \geq 0 &\quad \forall i \in [k]
+\end{aligned}
 $$
 
 Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_{j=1}^{k} |z_{j}|$. This is indeed a metric, which means that it is non-negative, symmetric and triangular inequality holds.
@@ -162,7 +161,7 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	Let $f$ be a mapping $f: V \to \R^{d}$ for some $d > 0$ and let
 	
 	$$
-	\begin{array}{l r c l}
+	\begin{array}{r r c l}
 		\forall \{u,v\} \in E: & \hat{x}(\{u,v\}) & = & ||f(u) - f(v)||_{1} \\
 		\forall i \in [k]: & \hat{y}(i) & = & ||f(s_{i}) - f(t_{i})||_{1} \\
 		& \beta & = & \sum_{i = 1}^{k} d(i) \hat{y}(i).
@@ -251,15 +250,11 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 		By a contradiciton assume $\forall j:$
 		
 		$$
-		\frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} < \frac{a_{j}}{b_{j}}
-		$$
-		
-		$$
-		b_{j} \frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} < a_{j}
-		$$
-		
-		$$
-		\sum_{j} b_{j} \frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} < \sum_{j} a_{j} 
+		\begin{aligned}
+			\frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} &< \frac{a_{j}}{b_{j}}\\
+			b_{j} \frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} &< a_{j}\\
+			\sum_{j} b_{j} \frac{\sum_{i = 1}^{n} a_{i}}{\sum_{i = 1}^{n} b_{i}} &< \sum_{j} a_{j}
+		\end{aligned}
 		$$
 		
 		Where the last line is summing all the inequalities together. We get a contradiction. \textit{Note that geometricaly that can be represent as vectors and values of the $\tan$ function and it would state that there is a $\tan$ smaller of one of the vectors than the sum of them.}
@@ -274,11 +269,11 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	Which is just a division by $1$ from the conditions in LP. Then by lemma:
 	
 	$$
-	= \frac{\sum_{e \in E} c(e) \sum_{S \subseteq V} \lambda_{S} \mu_{S}(e)}{\sum_{i =1}^{k} d(i) \sum_{S \subseteq V} \lambda_{S} \mu_{S}(s_{i},t_{i})} =
-	$$
-	
-	$$
-	= \frac{\sum_{S \subseteq V} \lambda_{S} \sum_{e \in E} c(e) \mu_{S}(e)}{\sum_{S \subseteq V} \lambda_{S} \sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i})} \geq \min_{S \subseteq V} \rho(S)
+	\begin{aligned}
+		& = \frac{\sum_{e \in E} c(e) \sum_{S \subseteq V} \lambda_{S} \mu_{S}(e)}{\sum_{i =1}^{k} d(i) \sum_{S \subseteq V} \lambda_{S} \mu_{S}(s_{i},t_{i})}\\
+		&= \frac{\sum_{S \subseteq V} \lambda_{S} \sum_{e \in E} c(e) \mu_{S}(e)}{\sum_{S \subseteq V} \lambda_{S} \sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i})}\\
+		&\geq \min_{S \subseteq V} \rho(S)
+	\end{aligned}
 	$$
 	
 	The last part is due to the previous observation and the fact that $\sum_{e \in E} c(e) \mu_{S}(e) = a_{S}$ and $\sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i}) = b_{S}$ taken means $\frac{a_{S}}{b_{S}} = \rho(S)$.
@@ -344,11 +339,10 @@ Before proving this lemma we will take a look, how useful it is. $\beta = \sum_{
 	We can easily see that for doing this for all $i \in [k]$ the lemma will follow. To prove this we will define few more things.
 	
 	$$
-	\forall v \in \{s_{i}, t_{i}\}: B_{x}(v, r) = \{w \in T | d_{x}(v,w) \leq r\}
-	$$
-	
-	$$
-	\forall v \in \{s_{i}, t_{i}\}: B_{x}^{\circ}(v, r) = \{w \in T | d_{x}(v,w) < r\}
+	\begin{aligned}
+		\forall v \in \{s_{i}, t_{i}\}: &\ B_{x}(v, r) = \{w \in T | d_{x}(v,w) \leq r\}\\
+		\forall v \in \{s_{i}, t_{i}\}: &\ B_{x}^{\circ}(v, r) = \{w \in T | d_{x}(v,w) < r\}
+	\end{aligned}
 	$$
 	
 	Now we will look at this sequence of radii. $r_{0} = 0$,
@@ -368,10 +362,10 @@ Before proving this lemma we will take a look, how useful it is. $\beta = \sum_{
 	We may observe that if $E_{tl}$ happens then $|f_{tl}(s_{i}) - f_{tl}(t_{i})| = |d_{x}(s_{i}, A_{tl}) - d_{x}(t_{i}, A_{tl})| \geq r_{t} - r_{t -1}$. We will look at the  probability of happening this.
 	
 	$$
-	\begin{array}{r c l}
-		\Pr[E_{tl}] & = & \Pr[A_{tl} \cap G \neq \emptyset | A_{tl} \cap B = \emptyset] \Pr[A_{tl} \cap B = \emptyset] \\
-		            & \geq & \Pr[A_{tl} \cap G \neq \emptyset] \Pr[A_{tl} \cap B = \emptyset]
-	\end{array}
+	\begin{aligned}
+		\Pr[E_{tl}] & = \Pr[A_{tl} \cap G \neq \emptyset | A_{tl} \cap B = \emptyset] \Pr[A_{tl} \cap B = \emptyset] \\
+		            & \geq \Pr[A_{tl} \cap G \neq \emptyset] \Pr[A_{tl} \cap B = \emptyset]
+	\end{aligned}
 	$$
 	
 	Let us assume wlog $s_{i}$ defines $r_{t}$.

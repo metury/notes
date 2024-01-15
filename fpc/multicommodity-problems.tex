@@ -1,27 +1,27 @@
 \chapter{Multi-commodity problem}
 
-On a graph $G = (V,E)$ and $k$ tuples $(s_{1}, t_{1}), (s_{2}, t_{2}), \dots, (s_{k}, t_{k}) \ in V^{2}$ known as \textbf{commodities} we can also define a network and a flow. Same as before we have a capacity $c: E \to \R_{0}^{+}$. These commodities are shared on the same resources.
+On a graph $G = (V,E)$ and $k$ tuples $(s_{1}, t_{1}), (s_{2}, t_{2}), \dots, (s_{k}, t_{k}) \in V^{2}$ known as \textbf{commodities} we can also define a network and a flow. Same as before we have a capacity $c: E \to \R_{0}^{+}$. These commodities are shared on the same resources.
 
 We may define $\mathcal{P}_{i}$ as all paths between $s_{i}$ and $t_{i}$. And also $\mathcal{P} := \bigcup_{i = 1}^{k} \mathcal{P}_{i}$.
 
 For a single commodity flow problem we could define an \textit{linear program} (LP):
 
 $$
-\begin{array}{rl}
-	& \max \sum_{p \in \mathcal{P}_{st}} f_{p} \\
-	\forall e \in E & \sum_{p: e \in p \in \mathcal{P}_{st}} f_{p} \leq c(e) \\
-	& f \geq 0
-\end{array}
+\begin{aligned}
+	\max \sum_{p \in \mathcal{P}_{st}} f_{p} \\
+	\sum_{p: e \in p \in \mathcal{P}_{st}} f_{p} \leq c(e) &\quad \forall e \in E\\
+	f_p \geq 0 &\quad \forall p \in \mathcal{P}_{st}
+\end{aligned}
 $$
 
 From this we may define an linear program denoted as \textbf{LP1} for multi commodity problem.
 
 $$
-\begin{array}{rl}
-	& \max \sum_{p \in \mathcal{P}} f_{p} = \sum_{i = 1}^{k} \sum_{p \in \mathcal{P}_{i}} f_{p} \\
-	\forall e \in E & \sum_{j = 1}^{k} \sum_{p: e \in p \in \mathcal{P}_{j}} f_{p} \leq c(e) \\
-	& f \geq 0
-\end{array}
+\begin{aligned}
+	\max \sum_{p \in \mathcal{P}} f_{p} = \sum_{i = 1}^{k} \sum_{p \in \mathcal{P}_{i}} f_{p} \\
+	\sum_{j = 1}^{k} \sum_{p: e \in p \in \mathcal{P}_{j}} f_{p} \leq c(e) & \quad \forall e \in E\\
+	f_p \geq 0 & \quad \forall p \in \mathcal{P}
+\end{aligned}
 $$
 
 Alternatively we could define it by a single variables for flows on each edge. For multi commodity problem we would have $k$ flows which adds up to one single flow. Thus we can see that the problem is in $P$ (polynomial).
@@ -41,12 +41,12 @@ $$
 $$
 
 $$
-\begin{array}{rl}
-	\Phi := & \min \sum_{e \in E} x(e) c(e) \\
-	\forall i \in [k] \forall p \in \mathcal{P}_{i} & \sum_{e \in p \in \mathcal{P}_{i}} x(e) \geq 1 \\
-	\text{(ILP)} & x(e) \in \{0, 1\} \\
-	\text{(LP)} & x(e) \geq 0
-\end{array}
+\begin{aligned}
+	\min \sum_{e \in E} x(e) c(e) & \quad := \Phi \\
+	\sum_{e \in p \in \mathcal{P}_{i}} x(e) \geq 1 &\quad \forall i \in [k] \forall p \in \mathcal{P}_{i}\\
+	x(e) \in \{0, 1\} & \quad \text{(ILP)}\\
+	x(e) \geq 0 & \quad \text{(LP)} 
+\end{aligned}
 $$
 
 First ILP is integer linear program which is generally NP hard. Thus we will look on the relaxation of LP program. We may observe that we don't need to specify that $x(e) \geq 1$.
@@ -109,7 +109,7 @@ This will be denoted as a function $g(r)$. We may see some really nice propertie
 	$$
 \end{lemma}
 
-\begin{myproof}
+\begin{proof}
 	By contradiction. For fixed $i$ $\forall r \in (0, 1/2)$, $\frac{f'(r)}{f(r)} > 2 \ln 2k$. We will have $r_{0} = 0 < r_{1} < r_{2} < \dots < r_{l-1} < 1/2 = r_{l}$ which are the values where $f(r)$ is not continuous (there are these "jumps"). First we consider $(r_{j}, r_{j+1})$ for some $j$.
 	
 	$$
@@ -131,31 +131,18 @@ This will be denoted as a function $g(r)$. We may see some really nice propertie
 	Now we sum our inequality over all intervals $(r_{j}, r_{j+1}), j = 0, \dots, l$. We will only have the very ends because the rest will be once added and once removed.
 	
 	$$
-	\sum_{j = 0}^{l-1} \left( \ln f(r_{j+1}) - \ln f(r_{j}) \right) > \sum_{j = 0}^{l-1} (r_{j+1} - r_{j}) 2 \ln 2k
-	$$
-	
-	$$
-	\ln f(r_{l}) - \ln f(r_{0}) > (r_{l} - r_{0}) 2 \ln 2k
-	$$
-	
-	$$
-	\ln f(1/2) - \ln (0) > \ln 2k
-	$$
-	
-	$$
-	\ln \frac{f(1/2)}{\frac{\Phi}{k}} > \ln 2k
-	$$
-	
-	$$
-	\frac{f(1/2)}{\frac{\Phi}{k}} > 2k
-	$$
-	
-	$$
-	f(1/2) > 2 \Phi
+	\begin{aligned}
+		\sum_{j = 0}^{l-1} \left( \ln f(r_{j+1}) - \ln f(r_{j}) \right) &> \sum_{j = 0}^{l-1} (r_{j+1} - r_{j}) 2 \ln 2k\\
+		\ln f(r_{l}) - \ln f(r_{0}) &> (r_{l} - r_{0}) 2 \ln 2k\\
+		\ln f(1/2) - \ln (0) &> \ln 2k\\
+		\ln \frac{f(1/2)}{\frac{\Phi}{k}} &> \ln 2k\\
+		\frac{f(1/2)}{\frac{\Phi}{k}} &> 2k\\
+		f(1/2) &> 2 \Phi
+	\end{aligned}
 	$$
 	
 	As the volume of the entire pipe system is at most $2 \Phi$ it means that we have a contradiction.
-\end{myproof}
+\end{proof}
 
 Note that choosing $1/2$ is not necessary for the proof, but for the algorithm to work. Because if we choose $1/2$ it means that no $s_{j}, t_{j}$ will both be in a ball for the index $i$. That is because the length w.r.t $x$ of paths from $s_{j}$ to $t_{j}$ need to be at least $1$.
 
@@ -186,13 +173,13 @@ There are few things to talk about. To get $r$ we will check all "almost ends" o
 	Approximation ratio of the Pipe cut algorithm is $O(\log k)$.
 \end{thm}
 
-\begin{myproof}
+\begin{proof}
 	Lets define $C_{i}$ as the cost of the cut of the ball from iteration $i$ and $V_{i}$ as the volume of it. We know that $C_{i} \leq 2 \ln 2k \cdot V_{i}$.
 	
 	$$
 	\sum_{i} C_{i} \leq 2 \ln 2k \sum_{i}V_{i} \leq 2 \ln 2k \cdot 2 \Phi = 4 \ln 2k \cdot \Phi = O (\log k) \Phi
 	$$
-\end{myproof}
+\end{proof}
 
 For a single commodity we know that max flow $=$ min cut. Where $\leq$ is trivial and $\geq$ is a little harder. This is a case of \textbf{exact duality}. On the other hand we already shown that this doesn't hold for multi-commodity, but what if we can define \textbf{approximate duality}.
 
@@ -200,9 +187,9 @@ For a single commodity we know that max flow $=$ min cut. Where $\leq$ is trivia
 	Max flow $\leq$ min cut $\leq O(\log k)$ max flow. For multi-commodity.
 \end{cor}
 
-\begin{myproof}
+\begin{proof}
 	Because of the duality of LP1 and LP2 we know that max flow is the same as min fractional multi-cut. And because of the algorithm we know that the fractional multi-cut is in $O(\log k)$.
-\end{myproof}
+\end{proof}
 
 \section{How to solve LP}
 
