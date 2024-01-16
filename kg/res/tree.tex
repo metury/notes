@@ -20,23 +20,23 @@
 		\node[main] (14) [below left of=13] [color=purple] {};
 		\node[main] (15) [below right of=13] [color=purple] {};
 		\path[color=blue] (9) edge (10)
-		(9) edge (12)
-		(10) edge (11)
-		(11) edge (12);
+			(9) edge (12)
+			(10) edge (11)
+			(11) edge (12);
 		\path[color=cyan] (1) edge (2)
-		(1) edge (3)
-		(1) edge (4)
-		(1) edge (5)
-		(1) edge (6)
-		(6) edge (7);
+			(1) edge (3)
+			(1) edge (4)
+			(1) edge (5)
+			(1) edge (6)
+			(6) edge (7);
 		\path[color=purple] (13) edge (14)
-		(13) edge (15)
-		(14) edge (15);
-		\path (8) edge (15)
-		(8) edge (6)
-		(8) edge (12)
-		(13) edge (4)
-		(14) edge (12)
-		(10) edge (5);
+			(13) edge (15)
+			(14) edge (15);
+		\path (8) edge [bend left = 40] (15)
+			(8) edge [bend right = 20] (6)
+			(8) edge [bend left = 20] (12)
+			(13) edge [bend right = 20] (4)
+			(14) edge [bend left = 20] (12)
+			(10) edge [bend left = 20] (5);
 	\end{tikzpicture}
 \end{document}
