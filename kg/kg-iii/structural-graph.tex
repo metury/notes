@@ -1,5 +1,7 @@
 \chapter{Structural graph theory}
 
+\section{Minors and subgraphs}
+
 \begin{defn}
 	$H \leq_{t} G$ means that subdivision of $H$ is a subgraph of $G$, also known as \textbf{topological minor}.
 \end{defn}
@@ -75,7 +77,7 @@ If $\mathcal{G}$ is $\leq_{m}$-closed, then there exists a \textbf{finite} $\mat
 \end{thm}
 
 \begin{defn}
-	For graph $G = (V,E)$ we define $|G| = |V|$ and $||G|| = |E|$. Also for some $U \subseteq V$ $G[U]$ is a induced subgraph of $G$ that has only vertices from $U$. Then $N_{G}(v)$ stands for the neighborhood of vertex $v$ in graph $G$.
+	For graph $G = (V,E)$ we define $|G| := |V|$ and $||G|| := |E|$. Also for some $U \subseteq V$ $G[U]$ is a induced subgraph of $G$ that has only vertices from $U$. Then $N_{G}(v)$ stands for the neighborhood of vertex $v$ in graph $G$.
 \end{defn}
 
 \begin{defn}
@@ -196,8 +198,10 @@ $$
 \end{array}
 $$
 
+\section{Clique sums}
+
 \begin{defn}
-	Graph $G$ can be obtained from $G_{1}$ and $G_{2}$ by \textbf{clique-sum} if the inter-\newline section that these graphs have in $G$ form a clique. In other way it is that we bind together two graphs by identifying their vertices and edges in the same size clique. Sometimes we may denote it as $G_{1} \bigoplus G_{2} = G$.
+	Graph $G$ can be obtained from $G_{1}$ and $G_{2}$ by \textbf{clique-sum} if the inter-\newline section that these graphs have in $G$ form a clique. In other way it is that we bind together two graphs by identifying their vertices and edges in the same size clique. Sometimes we may denote it as $G_{1} \bigoplus G_{2} = G$. Or even $G_{1} \bigoplus_k G_{2} = G$ to explicitly state the size of the clique is $k$.
 \end{defn}
 
 \begin{observ}
@@ -300,7 +304,11 @@ $$
 	$\exists f$ every $K_{t}$-minor-free graph $G$ has $\delta(G) \leq f(t)$.
 \end{thm}
 
-The function is somewhere near $f(t) = (1,6\dots + O(1)) t \sqrt{\log t}$. But we won't show this result. Instead we will show $f(t) = O(t^{2})$. Before we continue it is better to remind ourselves \textbf{chordal graph} and \textbf{elimination ordering} (known as PES).
+The function is somewhere near $f(t) = (1,6\dots + O(1)) t \sqrt{\log t}$. But we won't show this result. Instead we will show $f(t) = O(t^{2})$.
+
+\section{Chordal decomposition}
+
+Before we continue it is better to remind ourselves \textbf{chordal graph} and \textbf{elimination ordering} (known as PES).
 
 \begin{defn}[Chordal decomposition of $G$]
 	$V(G) = \mathcal{P}_{1} \dot{\cup} \mathcal{P}_{2} \dot{\cup} \dots \dot{\cup} \mathcal{P}_{n}$ and
@@ -319,15 +327,16 @@ The function is somewhere near $f(t) = (1,6\dots + O(1)) t \sqrt{\log t}$. But w
 
 \begin{thm}
 	Every graph has a geodesic chordal partition.
+	\label{geodesic-thm}
 \end{thm}
 
-Before we show us a proof we will take a look at a simple application. If $G$ is $K_{k}$-minor-free last part has neighbours in $t \leq k-2$ parts (otherwise it will have $K_{k}$ as a minor). Then we may take a look at a $\deg(v) \leq (k-2) + (k-2)(k-2)3 \leq 3k^{2}$. Thus getting the upper bound $\delta(G) \leq 3k^{2}$.
+Before we show us the proof we will take a look at a simple application. If $G$ is $K_{k}$-minor-free last part has neighbours in $t \leq k-2$ parts (otherwise it will have $K_{k}$ as a minor). Then we may take a look at a $\deg(v) \leq (k-2) + (k-2)(k-2)3 \leq 3k^{2}$. Thus getting the upper bound $\delta(G) \leq 3k^{2}$.
 
 \begin{defn}
 	Part is called \textbf{terminal} if there is no edge from any vertex in that part going to some vertex in one of the parts on the right.
 \end{defn}
 
-\begin{proof}
+\begin{proof}[Proof of theorem \ref{geodesic-thm}]
 	Let $\mathcal{P}$ be a chordal decomposition of $G$ into parts satisfying both properties of definition of chordal decomposition (i) and (ii) and geodesity (iii) for all non-terminal parts.
 	
 	This can be easily done by creating parts based on the components of connectivity. For them all properties hold, since they are all connected and "chordal" property is also satisfied since there are no edges. Also all of them are terminal (iii) doesn't have to be satisfied.
@@ -387,7 +396,7 @@ Well technically $K_{5} \nleq_{t} G \Rightarrow K_{5} \nleq_{m} G$ but the other
 
 \section{Hájos conjecture}
 
-If we remember Headwiger's conjecture then Hájos conjecture is the same only with topological minors. Thus it is that $K_{t} \leq_{t} G \Rightarrow \chi(G) \leq t-1$. This is actually true for $t < 4$ but it is false for $t \geq 7$ and $5,6$ are open questions.
+If we remember Headwiger's conjecture then Hájos conjecture is the same only with topological minors. Thus it is that $K_{t} \nleq_{t} G \Rightarrow \chi(G) \leq t-1$. This is actually true for $t < 4$ but it is false for $t \geq 7$ and $5,6$ are open questions.
 
 \begin{thm}
 	$\exists f_{m}(k) = O(k \sqrt{\log k})$ Every $K_{k}$-minor-free graph $G$ satisfies $\delta(k) \leq f_{m}(k)$.
@@ -402,6 +411,8 @@ We won't prove this, but we will prove something similiar, that is for topologic
 The corollary to this is that $\chi(G) \leq f_{t}(k) +1$. We will proof this theorem, but to do that we need to do some steps beforehand.
 
 Firstly imagine that the enemy gives you a graph and you need to prove that. But the enemy is kind enough to give you a graph $H$ with connectivity $>> k^2$. We could apply Merger's theorem. Though this will only give certain number of vertex disjoint paths from one vertex to another. We would more likely have this many paths between more pairs of sources and targets.
+
+\section{$k$-linked, model, separation}
 
 \begin{defn}
 	Graph $G$ is \textbf{$k$-linked} if $|V(G)| \geq 2k$ and $\forall s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, t_{k}$ distinct vertices of $G$. $G$ contains pairwise vertex-disjoint paths $P_{1}, P_{2}, \dots, P_{k}$. When $P_{i}$ has ends $s_{i}$ and $t_{i}$.
@@ -452,7 +463,7 @@ We may see that there exist a graph that is 2-connected and yet not 2-linked. Yo
 \end{observ}
 
 \begin{proof}
-	That is simply because we put all the $s_{i}, t_{i}$ for $i \in [k-1]$ to the edge cut and then choose $s_{k}$ in the left part and $t_{k}$ in the right part then we can see that it is indeed $(2k-1)$-connected.
+	That is simply because we put all the $s_{i}, t_{i}$ for $i \in [k-1]$ to the vertex cut and then choose $s_{k}$ in the left part and $t_{k}$ in the right part then we can see that it is indeed $(2k-1)$-connected.
 \end{proof}
 
 \begin{thm}\label{2-linked-thm}
@@ -602,7 +613,7 @@ On picture \ref{separation} we may see an example of $(A,B)$-separation. Where t
 \end{defn}
 
 \begin{thm}
-	$\forall G, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ model of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
+	$\forall G, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ model of $K_{4k}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
 \end{thm}
 
 We can see that this is somewhat reformulation of theorem before (\ref{2-linked-thm}). Thus if we prove this we will also prove the previous theorem. But we will introduce another similiar theorem which will imply this theorem.
@@ -611,7 +622,7 @@ We can see that this is somewhat reformulation of theorem before (\ref{2-linked-
 	$G, S \subseteq V(G)$ and $M_{1}, M_{2}, \dots, M_{m} \subseteq V(G)$ pairwise distinct is an \textbf{$S$-relaxed model} of $K_{m}$ in $G$ if
 	
 	\begin{enumerate}
-		\item $(\forall i) G[M_{i}]$ is connected \underline{or} every componnet of $G[M_{i}]$ intersects $S$.
+		\item $(\forall i) G[M_{i}]$ is connected \underline{or} every component of $G[M_{i}]$ intersects $S$.
 		\item $(\forall i \neq j) \exists uv \in E(G)$ s.t. $u \in M_{i}, v \in M_{j}$ \underline{or} $M_{i} \cap S \neq \emptyset \neq M_{j} \cap S$.
 	\end{enumerate}
 \end{defn}

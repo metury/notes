@@ -1,5 +1,7 @@
 \chapter{Polynomials for graph theory}
 
+\section{Basics}
+
 We will introduce polynomials representing the graphs. Then we will look at what properties these polynoms have. But firstly we will look at some basics. Let $p(x_{1}, \dots, x_{n})$ be a polynomial on $n$ variables. One term $ax_{i}^{l} x_{j}^k \dots$ is called a \textbf{monomial}.
 
 \begin{defn}
@@ -33,6 +35,8 @@ Where $\deg_{x_{i}}(f)$ is the largest degree of $x_{i}$ in $f$. Example of appl
 	
 	Now we create a subgraph $H$ as follows. $E(H) = \{e \in E(G) : a_{e} \neq 0\}$ and $V(H)$ are all vertices incident to $E(H)$. If we look at vertex $v$ then $f_{v}(\overrightarrow{a}) = \sum_{e \ni_{G} v} a_{e}^{2} = \sum_{e \ni_{H} v} a_{e}^{2}$ which is equivalent to $\deg_{H}(v) \mod 3$. Also $f_{v} = 0$. So every vertex has a degree 3.
 \end{proof}
+
+\section{List coloring polynomial}
 
 Now we will use polynomials for coloring, but not the usual one we may find. We will be talking about a coloring which is obtained by choosing one color from a list assigned to each vertex. Then it must have the same property as a normal coloring. This is called \textbf{list coloring}. When all vertices have the same size lists $k$, than it can be also called that it is \textbf{$k$-choosable}.
 

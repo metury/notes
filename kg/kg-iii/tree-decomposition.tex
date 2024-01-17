@@ -21,6 +21,8 @@ Firstly we may recall that: $K_{5} \nleq_{m} G$ iff $G$ is obtained from planar 
 	For contradiction suppose it is not true. Thus $(\forall x \in V(T)) (\exists v_{x} \in K) : v_{x} \notin \beta(x)$. We define "arrows" for each vertex which points to the set $\{y : v_{x}' \notin \beta(x)\}$. Thus there is $|V(T)|$ of "arrows" but because it is a tree there is $|E(T)| = |V(T)| - 1 < |V(T)|$. So at least one edge must have two "arrows". Therefore there is no $y \in V(T)$ with $v_{x}, v_{x'} \in \beta(x)$ so $K$ clique implies that $v_{x}$ and $v_{x'}$ are adjacent. This is contradiction with (1) from definition.
 \end{proof}
 
+\section{Torso}
+
 \begin{defn}
 	$(T, \beta)$ is tree decomposition of $G$ and let $x \in V(T)$ then the \textbf{torso} of $x$. is $G[\beta(x)] + $ cliques on $\beta(x) \cap \beta(y)$ for every $xy \in E(T)$.
 \end{defn}
@@ -373,7 +375,7 @@ When we examine a tree decomposition we may easily find one such with tree width
 	\label{treewidthnbyn}
 \end{figure}
 
-So we can say that $\text{tw}(n \times n \text{grid}) \leq n$. Can we construct some with even lower width? We can use the previous lemma and construct a bramble which can be seen on picture \ref{bramblenbyn}. So there are two special setts on the sides and then we have all the crosses in the rest of the grid. This will lead to bramble $\mathcal{B}$ of order $\geq n+1$. We must select two points for two special sets and points on the diagonal for example. Therefore with the use of the lemma we also have that $\text{tw}(n \times n \text{grid}) \geq n$ thus it has to be equal.
+So we can say that $\text{tw}(n \times n \text{grid}) \leq n$. Can we construct some with even lower width? We can use the previous lemma and construct a bramble which can be seen on picture \ref{bramblenbyn}. So there are two special sets on the sides and then we have all the crosses in the rest of the grid. This will lead to bramble $\mathcal{B}$ of order $\geq n+1$. We must select two points for two special sets and points on the diagonal for example. Therefore with the use of the lemma we also have that $\text{tw}(n \times n \text{grid}) \geq n$ thus it has to be equal.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
