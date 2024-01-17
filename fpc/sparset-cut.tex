@@ -466,7 +466,7 @@ Some of basic definitions are for metric spaces which reader may already know, b
 We may already know some examples. One is for $G = (V,E)$ and for $x : E \to \mathbb{R}^{+}$ the metric is $d(z,y) = \min_{z-y \text{ paths}} \sum_{e \in P} x(e)$. This means that $(V,d)$ is a metric system.
 
 \begin{defn}
-	Let $(X,d)$ and $(Y,\bar{y})$ be metric spaces. An injective function $f : X \to Y$ is $D$-embedding for some $D \geq 1$, if $\exists r > 0$ such that $\forall x,y \in X$ the following holds
+	Let $(X,d)$ and $(Y,\bar{d})$ be metric spaces. An injective function $f : X \to Y$ is $D$-embedding for some $D \geq 1$, if $\exists r > 0$ such that $\forall x,y \in X$ the following holds
 	
 	$$
 	r \cdot d(x,y) \leq \bar{d}(f(x), f(y)) \leq D \cdot r \cdot d(x,y).
@@ -541,7 +541,7 @@ $1/2$-balanced is called \textbf{bisection}. Also there is a problem for finding
 			\State find an approximation of the sparsest cut in $G_{i}$ and denote it as $S_{i} \subseteq V(G_{i})$
 			\State let $G_{i+1} = G_{i}[V(G_{i}) \setminus S_{i}]$, $S = S \cup S_{i}$, $i = i+1$
 			\EndWhile
-			\Return S
+			\State \Return S
 		\end{algorithmic}
 	\end{algorithm}
 	

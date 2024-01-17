@@ -39,8 +39,8 @@ Now one can see where the catch in the algorithm is. Consider that there are no 
 		\While{$\exists i \notin I$ and $\exists s_{i}-t_{i}$ path in $G$, s.t. $|P_{i}| \leq \sqrt{m}$}
 		\State $I = I \cup \{i\}$, keep $P_{i}$, $G = G \setminus P_{i}$
 		\EndWhile
-		\If{\textcolor{purple}{$I = \emptyset$}}
-			\State \textcolor{purple}{Connect any $s_{i}-t_{i}$ path if possible.}
+		\If{\textcolor{Green}{$I = \emptyset$}}
+			\State \textcolor{Green}{Connect any $s_{i}-t_{i}$ path if possible.}
 		\EndIf
 	\end{algorithmic}
 \end{algorithm}
@@ -789,7 +789,7 @@ As a side-note when there was a problem for a networks in a computers to find be
 Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\pi(u) = \frac{\deg(u)}{\sqrt{2|E|}}$. \textit{Note that $2|E| = \sum_{v \in V} \deg(v)$.}
 
 \begin{defn}
-	\textbf{FLow number} of a graph $G$ denoted as $F(G)$ is
+	\textbf{Flow number} of a graph $G$ denoted as $F(G)$ is
 	
 	$$
 	\min_{\text{feasible solution } S \text{ for } I_{0}} \{ \max \{ C(S), D(S) \} \}
@@ -805,8 +805,8 @@ Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\
 	
 	$$
 	\begin{aligned}
-		V_{i} &= \{v_{i1}, v_{i2}, \dots, v_{in}\}, \quad \forall i \in 0, 1, \dots, L \\
-		E_{i} &= \{(v_{(i-1)j}, v_{ik}) \mid \{v_{j}, v_{k}\} \in E \} \cup \{(v_{(i-1)j}, v_{ij}) \mid v_{j} \in V\}, \quad \forall i \in 1,2, \dots, L \\
+		V_{i} &= \{v_{i1}, v_{i2}, \dots, v_{in}\}, &\quad \forall i \in 0, 1, \dots, L \\
+		E_{i} &= \{(v_{(i-1)j}, v_{ik}) \mid \{v_{j}, v_{k}\} \in E \} \cup \{(v_{(i-1)j}, v_{ij}) \mid v_{j} \in V\}, &\quad \forall i \in 1,2, \dots, L \\
 	\end{aligned}
 	$$
 	
@@ -1160,87 +1160,89 @@ As we have shown te NP-hardness of general DIR-EDP to 2-DIR-EDP we will now show
 We have $k$ variables $x_1, x_2, \dots, x_k$ and $l$ clauses $t_1, t_2, \dots, t_l$. And we will show how the graph will be constructed. Firstly for every variable we will construct a gadget that has one entering and one leaving vertex and two separate paths, where on these paths are represented negative and positive occurrences of this variable. This can be seen on the picture \ref{variable gadget}. These gadgets will be connected sequentially by exactly one edge.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={14mm}, main/.style = {draw, thick, circle}]
-		\node (x-1) {$x_{i - 1}$};
-		\node[main, below of = x-1] (e) {};
-		\node[main, below left of = e] (x) {$x_i$};
-		\node[main, below right of = e] (notx) {$\bar{x_i}$};
-		\node[main, below of = x] (phx) {$x_i$};
-		\node[main, below of = notx] (phnotx) {$\bar{x_i}$};
-		\node[main, below right of = phx] (end) {};
-		\node[below of = end] (x+1) {$x_{i + 1}$};
-		\draw[->] (x-1) edge (e);
-		\draw[->] (end) edge (x+1);
-		\draw[->] (e) edge (x);
-		\draw[->] (e) edge (notx);
-		\draw[->, dotted] (x) edge (phx);
-		\draw[->, dotted] (notx) edge (phnotx);
-		\draw[->] (phx) edge (end);
-		\draw[->] (phnotx) edge (end);
-	\end{tikzpicture}
-	\caption{Gadget for variables $x_i$.}
-	\label{variable gadget}
+	\begin{subfigure}{0.3\textwidth}\centering
+		\begin{tikzpicture}[node distance={14mm}, main/.style = {draw, thick, circle}]
+			\node (x-1) {$x_{i - 1}$};
+			\node[main, below of = x-1] (e) {};
+			\node[main, below left of = e] (x) {$x_i$};
+			\node[main, below right of = e] (notx) {$\bar{x_i}$};
+			\node[main, below of = x] (phx) {$x_i$};
+			\node[main, below of = notx] (phnotx) {$\bar{x_i}$};
+			\node[main, below right of = phx] (end) {};
+			\node[below of = end] (x+1) {$x_{i + 1}$};
+			\draw[->] (x-1) edge (e);
+			\draw[->] (end) edge (x+1);
+			\draw[->] (e) edge (x);
+			\draw[->] (e) edge (notx);
+			\draw[->, dotted] (x) edge (phx);
+			\draw[->, dotted] (notx) edge (phnotx);
+			\draw[->] (phx) edge (end);
+			\draw[->] (phnotx) edge (end);
+		\end{tikzpicture}
+		\caption{Gadget for variables $x_i$.}
+		\label{variable gadget}
+	\end{subfigure}
+	\begin{subfigure}{0.68\textwidth}\centering
+		\begin{tikzpicture}[node distance={13mm}, main/.style = {draw, thick, circle}]
+			\node[main] (startx0) {};
+			\node[below of = startx0] (labelx0) {$x_0$};
+			\node[main, below left of = startx0] (x0) {};
+			\node[main, below right of = startx0] (notx0) {};
+			\node[main, below of = x0] (phx0) {};
+			\node[main, below of = notx0] (phnotx0) {};
+			\node[main, below right of = phx0] (endx0) {};
+			
+			\node[below of = endx0] (gap) {};
+			
+			\node[main, below of = gap] (startxk) {};
+			\node[below of = startxk] (labelxk) {$x_k$};
+			\node[main, below left of = startxk] (xk) {};
+			\node[main, below right of = startxk] (notxk) {};
+			\node[main, below of = xk] (phxk) {};
+			\node[main, below of = notxk] (phnotxk) {};
+			\node[main, below right of = phxk] (endxk) {};
+			
+			\node[left of = endxk] (phantom0) {};
+			\node[left of = phantom0] (phantom1) {};
+			\node[left of = phantom1] (phantom2) {};
+			\node[main, left of = phantom2] (c0) {$c_0$};
+			\node[main, above of = c0] (c1) {$c_1$};
+			\node[main, above of = c1] (c2) {$c_2$};
+			\node[above of = c2] (gapc) {};
+			\node[main, above of = gapc] (cl) {$c_l$};
+			
+			\draw[->] (startx0) edge (x0);
+			\draw[->] (startx0) edge (notx0);
+			\draw[->] (x0) edge (phx0);
+			\draw[->] (notx0) edge (phnotx0);
+			\draw[->] (phx0) edge (endx0);
+			\draw[->] (phnotx0) edge (endx0);
+			
+			\draw[->, dotted] (endx0) edge (startxk);
+			
+			\draw[->] (startxk) edge (xk);
+			\draw[->] (startxk) edge (notxk);
+			\draw[->] (xk) edge (phxk);
+			\draw[->] (notxk) edge (phnotxk);
+			\draw[->] (phxk) edge (endxk);
+			\draw[->] (phnotxk) edge (endxk);
+			
+			\draw[->, bend left = 60] (endxk) edge (c0);
+			\draw[->] (c0) edge (c1);
+			\draw[->, bend right = 50] (c0) edge (c1);
+			\draw[->, bend left = 50] (c0) edge (c1);
+			\draw[->] (c1) edge (c2);
+			\draw[->, bend right = 50] (c1) edge (c2);
+			\draw[->, bend left = 50] (c1) edge (c2);
+			\draw[->, dotted] (c2) edge (cl);
+		\end{tikzpicture}
+		\caption{Scheme of variables and clauses.}
+		\label{clause var scheme}
+	\end{subfigure}
+	\caption{Gadgets for variables and for clauses.}
 \end{figure}
 
 And then for every clause we will have one vertex and every two consequent clauses will be connected by 3 edges. These will represent the given literals. Also the last variable will be connected to the first clause. The scheme can be seen on the picture \ref{clause var scheme}. Now we only need to connect these gadgets together.
-
-\begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={13mm}, main/.style = {draw, thick, circle}]
-		\node[main] (startx0) {};
-		\node[below of = startx0] (labelx0) {$x_0$};
-		\node[main, below left of = startx0] (x0) {};
-		\node[main, below right of = startx0] (notx0) {};
-		\node[main, below of = x0] (phx0) {};
-		\node[main, below of = notx0] (phnotx0) {};
-		\node[main, below right of = phx0] (endx0) {};
-		
-		\node[below of = endx0] (gap) {};
-		
-		\node[main, below of = gap] (startxk) {};
-		\node[below of = startxk] (labelxk) {$x_k$};
-		\node[main, below left of = startxk] (xk) {};
-		\node[main, below right of = startxk] (notxk) {};
-		\node[main, below of = xk] (phxk) {};
-		\node[main, below of = notxk] (phnotxk) {};
-		\node[main, below right of = phxk] (endxk) {};
-		
-		\node[left of = endxk] (phantom0) {};
-		\node[left of = phantom0] (phantom1) {};
-		\node[left of = phantom1] (phantom2) {};
-		\node[main, left of = phantom2] (c0) {$c_0$};
-		\node[main, above of = c0] (c1) {$c_1$};
-		\node[main, above of = c1] (c2) {$c_2$};
-		\node[above of = c2] (gapc) {};
-		\node[main, above of = gapc] (cl) {$c_l$};
-		
-		\draw[->] (startx0) edge (x0);
-		\draw[->] (startx0) edge (notx0);
-		\draw[->] (x0) edge (phx0);
-		\draw[->] (notx0) edge (phnotx0);
-		\draw[->] (phx0) edge (endx0);
-		\draw[->] (phnotx0) edge (endx0);
-		
-		\draw[->, dotted] (endx0) edge (startxk);
-		
-		\draw[->] (startxk) edge (xk);
-		\draw[->] (startxk) edge (notxk);
-		\draw[->] (xk) edge (phxk);
-		\draw[->] (notxk) edge (phnotxk);
-		\draw[->] (phxk) edge (endxk);
-		\draw[->] (phnotxk) edge (endxk);
-		
-		\draw[->, bend left = 60] (endxk) edge (c0);
-		\draw[->] (c0) edge (c1);
-		\draw[->, bend right = 50] (c0) edge (c1);
-		\draw[->, bend left = 50] (c0) edge (c1);
-		\draw[->] (c1) edge (c2);
-		\draw[->, bend right = 50] (c1) edge (c2);
-		\draw[->, bend left = 50] (c1) edge (c2);
-		\draw[->, dotted] (c2) edge (cl);
-	\end{tikzpicture}
-	\caption{Scheme of variables and clauses.}
-	\label{clause var scheme}
-\end{figure}
 
 For that we will introduce \textbf{switch} gadget which connects the two previously mentioned gadgets. The exact construction of the switch is shown on the picture \ref{switch}. But it is enough to see the scheme of the switch on the picture \ref{scheme analyse}.
 

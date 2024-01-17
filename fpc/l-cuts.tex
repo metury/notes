@@ -11,7 +11,7 @@ In this chapter we will consider a new problem which is length bounded cuts. Thi
 Lets see an easy example of a graph $G$ as shown on the picture \ref{l-bounded cut} and for $L = 4$. There can actually be two minimal $L$-bounded cuts. The \textcolor{orange}{first} one is actually not a "real" cut, but the \textcolor{cyan}{second} one is.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, fill, circle}]
+	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, fill, circle}]
 		\node[main] (1) {};
 		\node[right of = 1] (1a) {};
 		\node[main, above of = 1a] (1b) {};
@@ -35,11 +35,11 @@ Lets see an easy example of a graph $G$ as shown on the picture \ref{l-bounded c
 		\draw (3) edge (3b);
 		\draw (3b) edge (4);
 		
-		\draw[color = orange, bend left = 20, dashed] (1) edge (2);
-		\draw[color = orange, bend left = 20, dashed] (2) edge (3);
+		\draw[color = orange, thick, bend left = 20, dashed] (1) edge (2);
+		\draw[color = orange, thick, bend left = 20, dashed] (2) edge (3);
 		
-		\draw[color = cyan, bend left = 20, dashed] (3) edge (4);
-		\draw[color = cyan, bend left = 20, dashed] (3b) edge (4);
+		\draw[color = cyan, thick, bend left = 20, dashed] (3) edge (4);
+		\draw[color = cyan, thick, bend left = 20, dashed] (3b) edge (4);
 	\end{tikzpicture}
 	\caption{Example of $L$-bounded cut. The cut is drawn by a multiple dashed edge.}
 	\label{l-bounded cut}
@@ -136,14 +136,14 @@ We will also show us an example for a graph $G$ depicted on the picture \ref{l-b
 		\draw (ke) edge (k+1);
 		\draw[dotted] (kc) edge (ke);
 		
-		\draw[dashed, color = cyan, bend left = 10] (k) edge (k+1);
-		\draw[dashed, color = cyan, bend left = 10] (kb) edge (k+1);
-		\draw[dashed, color = cyan, bend left = 10] (kc) edge (k+1);
-		\draw[dashed, color = cyan, bend left = 10] (ke) edge (k+1);
+		\draw[dashed, thick, color = cyan, bend left = 10] (k) edge (k+1);
+		\draw[dashed, thick, color = cyan, bend left = 10] (kb) edge (k+1);
+		\draw[dashed, thick, color = cyan, bend left = 10] (kc) edge (k+1);
+		\draw[dashed, thick, color = cyan, bend left = 10] (ke) edge (k+1);
 		
-		\draw[dashed, color = orange, bend right = 20] (1) edge (2);
-		\draw[dashed, color = orange, bend right = 20] (2) edge (3);
-		\draw[dashed, color = orange, bend right = 20] (3) edge (4);
+		\draw[dashed, thick, color = orange, bend right = 20] (1) edge (2);
+		\draw[dashed, thick, color = orange, bend right = 20] (2) edge (3);
+		\draw[dashed, thick, color = orange, bend right = 20] (3) edge (4);
 	\end{tikzpicture}
 	\caption{Example of $L$-bounded flow. Where there is $2k$ bottom vertices and $k$ upwards in each triangle. Cuts are represented by multi edges that are dashed.}
 	\label{l-bounded flow}
@@ -255,7 +255,7 @@ We will now create an instance for $L$-cut that has an integrality gap $n^{2/3}$
 This is the underline structure where we add a \textcolor{orange}{shortcut} that skips every second layer. And lets say that there is $2k$ of the shortcuts.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, main/.style = {draw, thick, circle}]
+	\begin{tikzpicture}[node distance={13mm}, main/.style = {draw, thick, circle}]
 		%% Nodes
 		\node[main] (s) {$s$};
 		% First layer.
