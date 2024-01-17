@@ -4,7 +4,7 @@ On a graph $G = (V,E)$ and $k$ tuples $(s_{1}, t_{1}), (s_{2}, t_{2}), \dots, (s
 
 We may define $\mathcal{P}_{i}$ as all paths between $s_{i}$ and $t_{i}$. And also $\mathcal{P} := \bigcup_{i = 1}^{k} \mathcal{P}_{i}$.
 
-For a single commodity flow problem we could define an \textit{linear program} (LP):
+For a single commodity flow problem we could define a \textit{linear program} (LP):
 
 $$
 \begin{aligned}
@@ -14,7 +14,7 @@ $$
 \end{aligned}
 $$
 
-From this we may define an linear program denoted as \textbf{LP1} for multi commodity problem.
+From this we may define a linear program denoted as \textbf{LP1} for multi commodity problem.
 
 $$
 \begin{aligned}
@@ -167,7 +167,7 @@ Note that choosing $1/2$ is not necessary for the proof, but for the algorithm t
 
 
 
-There are few things to talk about. To get $r$ we will check all "almost ends" of all intervals. The time complexity is polynomial since everything that is inside the code is polynomial. Correctness of the algorithm is easily observable since no pair $p_{i},t_{i}$ is inside some other ball and all balls will separate pairs $s_{j}, t_{j}$. Other thing to consider is what is the approximation ratio?
+There are few things to talk about. To get $r$ we will check all "almost ends" of all intervals. The time complexity is polynomial since everything that is inside the code is polynomial. Correctness of the algorithm is easily observable since no pair $s_{i},t_{i}$ is inside some other ball and all balls will separate pairs $s_{j}, t_{j}$. Other thing to consider is what is the approximation ratio?
 
 \begin{thm}
 	Approximation ratio of the Pipe cut algorithm is $O(\log k)$.
@@ -193,7 +193,7 @@ For a single commodity we know that max flow $=$ min cut. Where $\leq$ is trivia
 
 \section{How to solve LP}
 
-There is still a problem with our LP which can have up to exponential many of constraints. But this can be solved fast by using \textbf{Ellipsoid algorithm} on $A x \leq b$. Only think it needs is an so called \textbf{ORACLE} which is that for given $\bar{x}$, check whether $A\bar{x} \leq b$ and if not return a violated constraint.
+There is still a problem with our LP which can have up to exponential many of constraints. But this can be solved fast by using \textbf{Ellipsoid algorithm} on $A x \leq b$. Only thing it needs is an so called \textbf{ORACLE} which is that for given $\bar{x}$, check whether $A\bar{x} \leq b$ and if not return a violated constraint.
 
 In our case \textbf{ORACLE} is for each $i$ find the shortest $s_{i}-t_{i}$ path w.r.t $\bar{x}$. This can be either $1$ and we are happy or $< 1$ then this constraint is violated.
 
@@ -231,4 +231,4 @@ We take as granted that it holds: $3$-regular $\alpha$-expanders exist for $\alp
 	\label{3-regular}
 \end{figure}
 
-If we take $l = \log_{2} \frac{n-2}{6} + 1$ so with the upper bound we get $1 + 3\frac{n-2}{6} = 1 + \frac{n-2}{2} = \frac{n}{2}$. And also we define an instance of multi-commodity problem: $T = \{\{u,v\} | \delta(u,v) > l\}$. A unit of flow consumes $\geq l$ units of volume of the entire system. Thus $|E| = O(n)$. Therefore max flow $\leq O(\frac{n}{l}) = O(\frac{n}{\log n})$. But for min cut we take the optimum $F \subseteq E$. Every path in $G = (V, E \setminus F)$ is $\leq \frac{n}{2}$ so min cut os $\Theta(n)$. Thus it is indeed tight.
+If we take $l = \log_{2} \frac{n-2}{6} + 1$ so with the upper bound we get $1 + 3\frac{n-2}{6} = 1 + \frac{n-2}{2} = \frac{n}{2}$. And also we define an instance of multi-commodity problem: $T = \{\{u,v\} | \delta(u,v) > l\}$. A unit of flow consumes $\geq l$ units of volume of the entire system. Thus $|E| = O(n)$. Therefore max flow $\leq O(\frac{n}{l}) = O(\frac{n}{\log n})$. But for min cut we take the optimum $F \subseteq E$. Every path in $G = (V, E \setminus F)$ is $\leq \frac{n}{2}$ so min cut is $\Theta(n)$. Thus it is indeed tight.
