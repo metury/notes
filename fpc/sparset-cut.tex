@@ -8,7 +8,7 @@ $$
 \begin{aligned}
 	\max f \\
 	\sum_{p \in \mathcal{P}_{st}} x_{p} \geq f \cdot d_{1} \\
-	\sum_{e \in \in \mathcal{P}_{st}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	\sum_{e \in \mathcal{P}_{st}} x_{p} \leq c(e) & \quad \forall e \in E\\
 	x \geq 0
 \end{aligned}
 $$
@@ -23,7 +23,7 @@ $$
 \begin{aligned}
 	\max f \\
 	\sum_{p \in \mathcal{P}_{i}} x_{p} \geq f \cdot d_{i} & \quad \forall i \in [k]\\
-	\sum_{i = 0}^{k} \sum_{e \in \in \mathcal{P}_{i}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	\sum_{i = 0}^{k} \sum_{e \in \mathcal{P}_{i}} x_{p} \leq c(e) & \quad \forall e \in E\\
 	x \geq 0
 \end{aligned}
 $$
@@ -63,7 +63,7 @@ $$
 \end{defn}
 
 \begin{example}
-	We will have a simple example where all capacities are 1 and all demands are 1. So we have the graph \ref{example-sparse}.
+	We will have a simple example where all capacities are 1 and all demands are 1. So we have the graph \ref{example-sparse}. Note that there are 4 pairs of $s_i, t_i$ which can be seen by their demands.
 	
 	\begin{figure}[!h]\centering
 		\begin{tikzpicture}[node distance={20mm}, thick, main/.style = {draw, circle}]
@@ -83,15 +83,52 @@ $$
 			\draw [red] (2) -- (4);
 			\path (1) edge [bend right, red] (5);
 		\end{tikzpicture}
-		\label{example-sparse}
 		\caption{Sparse cut example.}
+		\label{example-sparse}
 	\end{figure}
 	
 	The demands are the red edges. We may see that if we choose $S = \{c, e\}$ then $\sum_{e \in \delta(S)} c(e) = 3$ and $\sum_{i \in I(S)} d_{i} = 3$ therefore $\rho(S) = 1$.
 	
-	We may see that each pair $s_{i}$ $t_{i}$ consumes at least 2 units of a flow of the network for a single unit of the flow. Then we set $f$ as a max flow and see what we get. For example for paths $\mathcal{P}_{1} = \{(d,a,e) = p_{1}, (d,b,e) = p_{2}, (d,c,e) = p_{3}\}$. $x_{p_{1}} + x_{p_{2}} + x_{p_{3}} \geq f \cdot d-{1} = f$. Thus the total volume consumed by a flow with objective value $f$ is $\geq k 2 f = 8f$. Total volume of $G$ is 6. Therefore $f \leq \frac{6}{8} = \frac{3}{4}$.
+	We may see that each pair $s_{i}$ $t_{i}$ consumes at least 2 units of a flow of the network for a single unit of the flow. Then we set $f$ as a max flow and see what we get. For example for paths $\mathcal{P}_{1} = \{(d,a,e) = p_{1}, (d,b,e) = p_{2}, (d,c,e) = p_{3}\}$. $x_{p_{1}} + x_{p_{2}} + x_{p_{3}} \geq f \cdot d_{1} = f$. Thus the total volume consumed by a flow with objective value $f$ is $\geq k 2 f = 8f$. Total volume of $G$ is 6. Therefore $f \leq \frac{6}{8} = \frac{3}{4}$.
 	
-	Maybe we can ask if there exist such a flow with this volume. We can obtain it by pushing $\frac{1}{4}$ from $d$ to $c$ on each path and $\frac{3}{8}$ between all other pairs on all paths. All edges are not over their capacities and we get $\frac{3}{4}$ for all demands.
+	Maybe we can ask if there exist such a flow with this volume. We can obtain it by pushing $\frac{1}{4}$ from $d$ to $e$ on each path. And $\frac{3}{8}$ between all other pairs on all paths. All edges are not over their capacities and we get $\frac{3}{4}$ for all demands. Therefore we obtain following graph on picture \ref{max sparsest cut}. Hence there are 3 paths from $d$ to $e$ so in total it is $3/4$ and there two paths from $a$ to $b$ (and other pairs are same) therefore in total $6/8 = 3/4$.
+	
+	\begin{figure}[!h]\centering
+		\begin{subfigure}{0.45\textwidth}\centering
+			\begin{tikzpicture}[node distance={20mm}, thick, main/.style = {draw, circle}]
+				\node[main] (1) {$a$};
+				\node[main, color = red] (2) [below right of=1] {$d$};
+				\node[main] (3) [below left of=2] {$b$};
+				\node[main, color = red] (4) [below right of=3] {$e$};
+				\node[main] (5) [below left of=4] {$c$};
+				\draw (1) -- (2) node[midway, above right] {$\frac{1}{4}$};
+				\draw (1) -- (4) node[near start, right] {$\frac{1}{4}$};
+				\draw (3) -- (2) node[near start, above left] {$\frac{1}{4}$};
+				\draw (3) -- (4) node[near start, below left] {$\frac{1}{4}$};
+				\draw (5) -- (2) node[near start, right] {$\frac{1}{4}$};
+				\draw (5) -- (4) node[midway, below right] {$\frac{1}{4}$};
+			\end{tikzpicture}
+			\caption{Paths from $d$ to $e$.}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}\centering
+			\begin{tikzpicture}[node distance={20mm}, thick, main/.style = {draw, circle}]
+				\node[main, color = Green] (1) {$a$};
+				\node[main] (2) [below right of=1] {$d$};
+				\node[main, color = Green] (3) [below left of=2] {$b$};
+				\node[main] (4) [below right of=3] {$e$};
+				\node[main, color = Green] (5) [below left of=4] {$c$};
+				\draw (1) -- (2) node[midway, above right] {$\frac{3}{8}$};
+				\draw (1) -- (4) node[near start, right] {$\frac{3}{8}$};
+				\draw (3) -- (2) node[near start, above left] {$\frac{3}{8}$};
+				\draw (3) -- (4) node[near start, below left] {$\frac{3}{8}$};
+				\draw (5) -- (2) node[near start, right] {$\frac{3}{8}$};
+				\draw (5) -- (4) node[midway, below right] {$\frac{3}{8}$};
+			\end{tikzpicture}
+			\caption{The second part of the flows.}
+		\end{subfigure}
+		\caption{Maximal sparsest flow $f$ in $G$.}
+		\label{max sparsest cut}
+	\end{figure}
 \end{example}
 
 \begin{defn}
