@@ -29,9 +29,9 @@ Where $\deg_{x_{i}}(f)$ is the largest degree of $x_{i}$ in $f$. Example of appl
 \end{thm}
 
 \begin{proof}
-	We will consider the following polynomials over $\Z_{3}$, for $v \in V(G)$ we define $f_{v} = \sum_{e \ni v} x_{e}^{2}$. Now we will take a look at such system of equations. We have this many variables: $|E(G)| = \frac{\sum_{v} \deg(v)}{2} > 2|V(G)|$. (Remember $G$ is not 4-regular.) And $\sum_{v} \text{total degree}(f_v) = 2|V(G)| < |E(G)|$. This implies that we can use the first theorem. Therefore $|\{a_{e} \in \Z_{3} : e \in E(G)\}|$ such that $f_{v}(\overrightarrow{a}) =0$ for all $v \ in V(G)$ is divisible by 3. There exists at least one solution (since $x_{e} = 0$ for $e \in E(G)$) which means there exists another solution $\{a_{e} : e \in E(G)\}$ such that $\exists e : a_{e} \neq 0$.
+	We will consider the following polynomials over $\Z_{3}$, for $v \in V(G)$ we define $f_{v} = \sum_{e \ni v} x_{e}^{2}$. Now we will take a look at such system of equations. We have this many variables: $|E(G)| = \frac{\sum_{v} \deg(v)}{2} > 2|V(G)|$. (Remember $G$ is not 4-regular.) And $\sum_{v} \text{total degree}(f_v) = 2|V(G)| < |E(G)|$. This implies that we can use the first theorem. Therefore $|\{a_{e} \in \Z_{3} : e \in E(G)\}|$ such that $f_{v}(\overrightarrow{a}) =0$ for all $v \in V(G)$ is divisible by 3. There exists at least one solution (since $x_{e} = 0$ for $e \in E(G)$) which means there exists another solution $\{a_{e} : e \in E(G)\}$ such that $\exists e : a_{e} \neq 0$.
 	
-	Now we create a subgraph $H$ as follows. $E(H) = \{e \in E(G) : a_{e} \neq 0\}$ and $V(H)$ are all vertices indices to $E(H)$. If we look at vertex $v$ then $f_{v}(\overrightarrow{a}) = \sum_{e \ni_{G} v} a_{e}^{2} = \sum_{e \ni_{H} v} a_{e}^{2}$ which is equivalent to $\deg_{H}(v) \mod 3$. Also $f_{v} = 0$. So every vertex has a degree 3.
+	Now we create a subgraph $H$ as follows. $E(H) = \{e \in E(G) : a_{e} \neq 0\}$ and $V(H)$ are all vertices incident to $E(H)$. If we look at vertex $v$ then $f_{v}(\overrightarrow{a}) = \sum_{e \ni_{G} v} a_{e}^{2} = \sum_{e \ni_{H} v} a_{e}^{2}$ which is equivalent to $\deg_{H}(v) \mod 3$. Also $f_{v} = 0$. So every vertex has a degree 3.
 \end{proof}
 
 Now we will use polynomials for coloring, but not the usual one we may find. We will be talking about a coloring which is obtained by choosing one color from a list assigned to each vertex. Then it must have the same property as a normal coloring. This is called \textbf{list coloring}. When all vertices have the same size lists $k$, than it can be also called that it is \textbf{$k$-choosable}.
@@ -46,7 +46,7 @@ $$
 P_{\overrightarrow{G}} (x_{1}, \dots, x_{n}) = \prod_{(v_{i},v_{j}) \in E(\overrightarrow{G})} x_{i} - x_{j}
 $$
 
-To get a better understanding lets see a simple example of a graph $G$ which can be seen on a picture \ref{pol-ex}. This the polynomial would be $P_{\overrightarrow{G}} = (x_{2} - x_{1}) (x_{3} - x_{2}) (x_{1} - x_{3}) = x_1 x_2 x_3 - x_2 x_3 - x_1 x_2^2 + x_2^2 x_3 - x_1^2 x_3 + x_1 x_3^2 + x_1^2 x_2 - x_1x_2x_3$.
+To get a better understanding lets see a simple example of a graph $G$ which can be seen on a picture \ref{pol-ex}. Here the polynomial would be $P_{\overrightarrow{G}} = (x_{2} - x_{1}) (x_{3} - x_{2}) (x_{1} - x_{3}) = x_1 x_2 x_3 - x_2 x_3 - x_1 x_2^2 + x_2^2 x_3 - x_1^2 x_3 + x_1 x_3^2 + x_1^2 x_2 - x_1x_2x_3$.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={20mm}, thick, main/.style = {draw, circle}]
@@ -61,7 +61,7 @@ To get a better understanding lets see a simple example of a graph $G$ which can
 	\label{pol-ex}
 \end{figure}
 
-Now if we take $V(G) = \{v_{1}, \dots, v_{n}\}$ which map each one of them $v_{i} \to x_{i}$. Then for a assignment $\overrightarrow{c}$ as for each $i$ $v_i \to c_i$ we know that $G$ has a proper coloring iff $P_{\overrightarrow{G}}(\overrightarrow{c}) \neq 0$. That is if $S_{1}, \dots, S_{n}$ are lists of allowed colors for $v_{1}, \dots, v_{n}$ then $G$ is colorable from $S_{1}, \dots, S_{n}$ iff $(\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n}) P_{\overrightarrow{G}}(c_{1}, \dots, c_{n}) \neq 0$. To prove this we could use some theorem, but we will need a stronger version.
+Now if we take $V(G) = \{v_{1}, \dots, v_{n}\}$ which map each one of them $v_{i} \to x_{i}$. Then for an assignment $\overrightarrow{c}$ as for each $i$ $v_i \to c_i$ we know that $G$ has a proper coloring iff $P_{\overrightarrow{G}}(\overrightarrow{c}) \neq 0$. That is if $S_{1}, \dots, S_{n}$ are lists of allowed colors for $v_{1}, \dots, v_{n}$ then $G$ is colorable from $S_{1}, \dots, S_{n}$ iff $(\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n}) P_{\overrightarrow{G}}(c_{1}, \dots, c_{n}) \neq 0$. To prove this we could use some theorem, but we will need a stronger version.
 
 \begin{thm}[Combinatorial Nullstellensatz 2nd version]
 	Let $f$ be a polynomial in $x_{1}, \dots, x_{n}$ and $S_{1}, \dots, S_{n} \subseteq \R$. If $(\exists d_{1}, \dots, d_{n})$ total degree $(f) \leq d_{1} + \dots + d_{n}$ and $[x_{1}^{d_{1}}\dots x_{n}^{d_{n}}]f \neq 0$ and $(\forall i) |S_{i}| > d_{i}$. Then $\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n} : f(c_{1}, \dots, c_{n}) \neq 0$.
@@ -73,7 +73,7 @@ $$
 x_{i}^{d_{i}+1} = b_{d_{i}}x_{i}^{d_{i}} + \dots + b_{1}x_{1} + b_{0}
 $$
 
-Now we may take a polynomial $f$ from the 2nd theorem. The polynomial $f'$ has the same values on $S_{1}, \dots, S_{n}$ but $\deg_{v_{i}}(f') \leq d_{i}$. So now the condition $(\forall i) |S_{i}| > \deg_{v_{i}} (f')$ holds. Only think is to see that $f' \not\equiv 0$.
+Now we may take a polynomial $f$ from the 2nd theorem. The polynomial $f'$ has the same values on $S_{1}, \dots, S_{n}$ but $\deg_{v_{i}}(f') \leq d_{i}$. So now the condition $(\forall i) |S_{i}| > \deg_{v_{i}} (f')$ holds. Only thing is to see that $f' \not\equiv 0$.
 
 We have already shown this theorem.
 

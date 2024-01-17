@@ -52,7 +52,7 @@ Now to observe that if $G$ has $k$ pairwise edge-disjoint spanning trees then fo
 	If $G$ is $2k$-edge-connected graph and then $G/\mathcal{P}$ is also $2k$-edge-connected then the minimal degree $\delta(G/\mathcal{P}) \geq 2k$ which implies that
 	
 	$$
-	e(\mathcal{P}) = |E(G/\mathcal{P})| \geq \frac{1}{2} |\mathcal{P}| 2k = k |\mathcal{P}| > k (|\mathcal{P}| - 1)
+	e(\mathcal{P}) = |E(G/\mathcal{P})| \geq \frac{1}{2} \cdot |\mathcal{P}| \cdot 2k = k \cdot |\mathcal{P}| > k (|\mathcal{P}| - 1)
 	$$
 \end{observ}
 
@@ -74,7 +74,7 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 	For two jungles $J,J'$ in a graph $G$ and a subgraph $A \subseteq G$ we define a relation $J \cong_{A} J'$ if
 	
 	$$
-	(\forall i) \ E(F_{i}) \setminus E(A) = E(F_{i}') \setminus F(A)
+	(\forall i) \ E(F_{i}) \setminus E(A) = E(F_{i}') \setminus E(A)
 	$$
 	
 	and components of $F_{i} \cap A$ must be the same as in $F_{i}' \cap A$.
@@ -123,7 +123,7 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 	For a graph $G$, subgraph $A \subseteq G$ and a jungle $J$. $A$ is $J$-free if $(\forall e \in E(A))$ there exists a jungle $J' \cong J$ such that $e \notin E(\bigcup J')$. 
 \end{defn}
 
-\begin{proof}
+\begin{proof} [Proof of theorem]
 	Lets take a jungle $J = (F_{1}, F_{2}, \dots, F_{k})$ in $G$ with $|E (\bigcup J)|$ largest possible. Before we continue we state a lemma.
 	
 	\begin{lemma}

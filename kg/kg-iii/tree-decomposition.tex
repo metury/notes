@@ -18,14 +18,14 @@ Firstly we may recall that: $K_{5} \nleq_{m} G$ iff $G$ is obtained from planar 
 \end{lemma}
 
 \begin{proof}
-	For contradiction suppose it is not true. Thus $(\forall x \in V(T)) (\exists v_{x} \in K) : v_{x} \notin \beta(x)$. We define "arrows" for each vertex which points to the set $\{y : v_{x} \notin \beta(x)\}$. Thus there is $|V(T)|$ of "arrows" but because it is a tree there is $|E(T)| = |V(T)| - 1 < |V(T)|$. So at least one edge must have two "arrows". Therefore there is no $y \ in V(T)$ with $v_{x}, v_{x'} \in \beta(x)$ so $K$ clique implies that $v_{x}$ and $v_{x'}$ are adjacent. This is contradiction with (1) from definition.
+	For contradiction suppose it is not true. Thus $(\forall x \in V(T)) (\exists v_{x} \in K) : v_{x} \notin \beta(x)$. We define "arrows" for each vertex which points to the set $\{y : v_{x} \notin \beta(x)\}$. Thus there is $|V(T)|$ of "arrows" but because it is a tree there is $|E(T)| = |V(T)| - 1 < |V(T)|$. So at least one edge must have two "arrows". Therefore there is no $y \in V(T)$ with $v_{x}, v_{x'} \in \beta(x)$ so $K$ clique implies that $v_{x}$ and $v_{x'}$ are adjacent. This is contradiction with (1) from definition.
 \end{proof}
 
 \begin{defn}
 	$(T, \beta)$ is tree decomposition of $G$ and let $x \in V(T)$ then the \textbf{torso} of $x$. is $G[\beta(x)] + $ cliques on $\beta(x) \cap \beta(y)$ for every $xy \in E(T)$.
 \end{defn}
 
-This definition may not be clear to everybody so lets take a look at an example. On picture \ref{example-torso} we may see the original graph \ref{g-torso} and on picture \ref{t-torso} we may see the tree decomposition. Now we set $x$ to be \texttt{BGE}. Now for the torso itself we create a three vertices \texttt{B}, \texttt{G} and \texttt{F} where there is no induced edge. Then for the neighbors \texttt{ABG} we add a edge between \texttt{B} and \texttt{G}. For \texttt{BED} we add an edge between \texttt{B} and \texttt{E} and lastly for \texttt{EGF} we add \texttt{E}--\texttt{G} edge. And finally we get what is drawn on picture \ref{torso}.
+This definition may not be clear to everybody so lets take a look at an example. On picture \ref{example-torso} we may see the original graph \ref{g-torso} and on picture \ref{t-torso} we may see the tree decomposition. Now we set $x$ to be \texttt{BGE}. Now for the torso itself we create a three vertices \texttt{B}, \texttt{G} and \texttt{E} where there is no induced edge. Then for the neighbors \texttt{ABG} we add a edge between \texttt{B} and \texttt{G}. For \texttt{BED} we add an edge between \texttt{B} and \texttt{E} and lastly for \texttt{EGF} we add \texttt{E}--\texttt{G} edge. And finally we get what is drawn on picture \ref{torso}.
 
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.4\textwidth}\centering
@@ -130,10 +130,10 @@ We would now need $\{G : \text{tw}(G) \leq k\}$ is minor-closed.
 
 From that we get that $\exists \mathcal{F}_{k}$ $\text{tw}(G) \leq k$ iff $(\forall F \in \mathcal{F}_{k}) F \nleq_{m} G$. Also for some simple values we know $\mathcal{F}_{1} = \{K_{3}\}$ also $\mathcal{F}_{2} = \{K_{4}\}$ and for $\mathcal{F}_{3} = \{K_{5, \dots }\}$ where it is known but not that important.
 
-\section{Brumble}
+\section{Bramble}
 
 \begin{defn}
-	Brumble $\mathcal{B} \subseteq 2^{V(G)}$ such that
+	Bramble $\mathcal{B} \subseteq 2^{V(G)}$ such that
 	
 	\begin{enumerate}[(1)]
 		\item $(\forall B \in \mathcal{B}) B \neq \emptyset$ and $G[B]$ is connected.
@@ -141,7 +141,7 @@ From that we get that $\exists \mathcal{F}_{k}$ $\text{tw}(G) \leq k$ iff $(\for
 	\end{enumerate}
 \end{defn}
 
-As previously we will take a look at an example of a rumble so that a reader gets a better grasp of this definition. On picture \ref{rumble-example} we may see a graph $G$ where there is Rumble $\mathcal{B} = \{B_{1}, B_{2}, B_{3}, B_{4}\}$.
+As previously we will take a look at an example of a bramble so that a reader gets a better grasp on this definition. On the picture \ref{rumble-example} we may see a graph $G$ where there is Bramble $\mathcal{B} = \{B_{1}, B_{2}, B_{3}, B_{4}\}$.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
@@ -162,12 +162,12 @@ As previously we will take a look at an example of a rumble so that a reader get
 			(4) edge (5) (5) edge (6)
 			(7) edge (8) (8) edge (9);
 	\end{tikzpicture}
-	\caption{Rumble of a graph $G$.}
+	\caption{Bramble of a graph $G$.}
 	\label{rumble-example}
 \end{figure}
 
 \begin{defn}
-	Set $X$ \textbf{hits} the Rumble $\mathcal{B}$ if $(\forall B \in \mathcal{B}) B \cap X \neq \emptyset$.
+	Set $X$ \textbf{hits} the Bramble $\mathcal{B}$ if $(\forall B \in \mathcal{B}) B \cap X \neq \emptyset$.
 \end{defn}
 
 For the previous example a hit could be all these vertices highlighted on the picture \ref{hit}.
@@ -196,7 +196,7 @@ For the previous example a hit could be all these vertices highlighted on the pi
 \end{figure}
 
 \begin{lemma}[duality]
-	If $(T, \beta)$ is a tree decomposition of $G$ and $\mathcal{B}$ is a brumble then $(\exists x \in V(T)) \beta(x)$ hits the brumble.
+	If $(T, \beta)$ is a tree decomposition of $G$ and $\mathcal{B}$ is a bramble then $(\exists x \in V(T)) \beta(x)$ hits the bramble.
 \end{lemma}
 
 \begin{observ}
@@ -216,10 +216,10 @@ For the previous example a hit could be all these vertices highlighted on the pi
 	For contradiction suppose it is false. So $(\forall x \in V(T)) \beta (x)$ does not hit $\mathcal{B}$ so we have $B_{x} \in \mathcal{B}$ disjoint from $\beta(x)$. By lemma $B_{x}$ forms in $(T, \beta)$ a connected subtree. Again we assign "arrows" to vertices pointing to $x$--$B_{x}$. Also there are more arrows than edges so at least one edge has two "arrows". We can find $B_{x}$ and $B_{x'}$ not in the same bag so they are disjoint. This is a contradiction by the definition.
 \end{proof}
 
-Note that on $K$ clique the rumble is $\mathcal{B} = \{\{u\}: u \in K\}$.
+Note that on $K$ clique the bramble is $\mathcal{B} = \{\{u\}: u \in K\}$.
 
 \begin{defn}
-	\textbf{Order} of rumble $\text{order}(\mathcal{B}) = \min (|X|): X \text{ hits } \mathcal{B}$.
+	\textbf{Order} of rumble is defined as $\text{order}(\mathcal{B}) = \min (|X|): X \text{ hits } \mathcal{B}$.
 \end{defn} 
 
 \begin{cor}
@@ -438,7 +438,7 @@ $n$-ladder is graph that looks like a $2 \times n$ grid. Or just like it is on t
 		(4) edge (5) (5) edge (6)
 		(6) edge (14) (3) edge (13);
 	\end{tikzpicture}
-	\caption{First three bags of tree decomposition.}
+	\caption{Example of an $n$-ladder.}
 	\label{nladder}
 \end{figure}
 

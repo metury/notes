@@ -2,32 +2,36 @@
 
 As one can already met the random graphs which are denoted as $G = (n,p)$ where we have $n$ vertices and every edge between each pair of a vertices is there with a probability $p$. This notation si usually used for proving some properties that graphs tend to have for more vertices.
 
-Example could be computing the number of triangles in the graph. To be exact we want to compute the expected number, so $\E [\text{number of triangle}] = p^3 \binom{n}{3}$. And also then we may use Chernoff's bound to get that $\Pr [|\text{number of triangles } - p^3 \binom{n}{3}| > \epsilon n^3] = e^{-\Theta(n^3)}$. In other words the probability that the number being way different is small.
+Example could be computing the number of triangles in the graph. To be exact we want to compute the expected number, so $\E [\text{number of triangle}] = p^3 \binom{n}{3}$. And also then we may use Chernoff's bound to get that $\Pr \left[|\text{number of triangles } - p^3 \binom{n}{3}| > \epsilon n^3\right] = e^{-\Theta(n^3)}$. In other words the probability that the number being way different is small.
 
-In the next example and for further reading we will denote $e(A,B)$ as the number of edges between two subset of vertices $A, B \subseteq V$. In the probability case it is somewhat similiar to $p |A| |B|$. Which leads to the fact that $\Pr [|e(A,B) - p|A||B|| \geq \epsilon |A||B|] < e^{-\Theta(|A||B|)}$. If we would take $A, B$ such that $|A|, |B| \geq \delta n$ then there may be $\leq 4^n$ number of subsets.
+In the next example and for further reading we will denote $e(A,B)$ as the number of edges between two subset of vertices $A, B \subseteq V$. In the probability case it is somewhat similiar to $p \cdot |A| \cdot |B|$. Which leads to the fact that
+
+$$
+\Pr \left[\left|e(A,B) - p \cdot |A| \cdot |B|\right| \geq \epsilon \cdot |A|\cdot |B| \right] < e^{-\Theta(|A||B|)}.
+$$
+
+If we would take $A, B$ such that $|A|, |B| \geq \delta n$ then there may be $\leq 4^n$ number of subsets.
 
 Well the real graphs we may encounter do not have this nice property. So we will build a theory around that in fact it is not that bad and can be somewhat similiar to the probability case.
 
 \begin{defn}
-	Lets denote $d(A,B) = \frac{e(A,B)}{|A| \cdot |B|}$ or so called density of a graph. Sometimes we will denote $d(A,B)$ as $p$, because it will behave somewhat similarly as the probability.
+	Lets denote $d(A,B) = \frac{e(A,B)}{|A| \cdot |B|}$ or so called \textbf{density} of a graph. Sometimes we will denote $d(A,B)$ as $p$, because it will behave somewhat similarly as the probability.
 \end{defn}
 
 \begin{defn}
 	For some $\delta, \epsilon > 0$. Let $A, B \subseteq V$ for some graph $G = (V,E)$. Then we say that $(A,B)$ is $(\delta, \epsilon)$-\textbf{regular pair} if following holds
 	
-	\begin{itemize}
-		\item $\forall A' \subseteq A : |A'| \geq \delta |A|$,
-		\item $\forall B' \subseteq B : |B'| \geq \delta |B|$ and
-		\item $|d(A'B') - d(A,B)| \leq \epsilon$.
-	\end{itemize}
+	$$
+	\forall A' \subseteq A : |A'| \geq \delta |A|, \forall B' \subseteq B : |B'| \geq \delta |B| : |d(A'B') - d(A,B)| \leq \epsilon.
+	$$
 	
-	Sometimes we will shorten the notation to just $\epsilon$-regular pair.
+	Sometimes we will shorten the notation to just $\epsilon$-regular pair. For $\delta = \epsilon$.
 \end{defn}
 
 Now we will look at how many neighbors can be for some $v \in A$. To be exact we will denote $B_{0}$ the neighbors and we want to count these vertices for which $|B_{0}| \geq \delta |B|$. But we may see there are some degenerate vertices, but we will show it is not that many.
 
 \begin{lemma}
-	The number of vertices in $A$ such that $\deg_{B_{0}}v > (p + \epsilon |B_{0}|)$ is at most $\delta |A|$. And also the number of vertices in $B$ such that $\deg_{A_{0}}v < (p - \epsilon |A_{0}|)$ is at most $\delta |B|$.
+	The number of vertices in $A$ such that $\deg_{B_{0}}v > (p + \epsilon |B_{0}|)$ is at most $\delta |A|$. And also the number of vertices in $A$ such that $\deg_{B_{0}}v < (p - \epsilon |B_{0}|)$ is at most $\delta |A|$. And also vice versa for $B$.
 \end{lemma}
 
 \begin{proof}
@@ -102,8 +106,8 @@ Now we will try to use this even more for computing the number of triangles from
 	
 	\begin{enumerate}[(i)]
 		\item $v_1 \in A_1$ then $\epsilon |A_1| n^2 \leq \epsilon n^3$.
-		\item $v_2 \in A_2$ similarly $\epsilon |A_2| n^2 \leq \epsilon n^3$.
-		\item Last case is if $v_1 \in A \setminus (A_1 \cup A_2)$. We denote as $B_{v_1}$ and $C_{v_1}$ the neighbors of $v_1$ in $B$ and $C$ respectively. By the definition $|B_{v_1}| \leq (p_{AB} + \epsilon) n$ and  $|C_{v_1}| \leq (p_{AC} + \epsilon) n$. Therefore altogether $e(B_{v_1}, C_{v_1}) \leq (P_{BC} +\epsilon) |B_{v_1}| |C_{v_1}| \leq (p_{AB} p_{BC} p_{AC} + 7\epsilon) n^2$. So we may have at most $\epsilon n^2$ choices for $B_{v_1}$ and $C_{v_1}$.
+		\item $v_1 \in A_2$ similarly $\epsilon |A_2| n^2 \leq \epsilon n^3$.
+		\item Last case is if $v_1 \in A \setminus (A_1 \cup A_2)$. We denote as $B_{v_1}$ and $C_{v_1}$ the neighbors of $v_1$ in $B$ and $C$ respectively. By the definition $|B_{v_1}| \leq (p_{AB} + \epsilon) n$ and  $|C_{v_1}| \leq (p_{AC} + \epsilon) n$. Therefore altogether $e(B_{v_1}, C_{v_1}) \leq (p_{BC} +\epsilon) \cdot |B_{v_1}| \cdot |C_{v_1}| \leq (p_{AB} p_{BC} p_{AC} + 7\epsilon) n^2$. So we may have at most $\epsilon n^2$ choices for $B_{v_1}$ and $C_{v_1}$.
 	\end{enumerate}
 	
 	If we sum it all then the $t(A,B,C) \leq 2\epsilon n^3 + n (\epsilon n^2 + \epsilon n^2 + (p  + 7\epsilon)n^2) = (p + 9 \epsilon)n^3$.
@@ -210,7 +214,7 @@ This application and many others may be used for huge graphs that typically cann
 \begin{proof}
 	Firstly we will transform $\alpha$ into $\epsilon$ and $m_0$ (which will be $m_0 = 1/\epsilon$). Then we will use regularity lemma to obtain $M$ and lastly transform this into $n_0$ and $\beta$ where $n_0 = m_0$.
 	
-	Given graph $G$ we use RL which gives us $\epsilon$-regular partition $V_0, \dots, V_m$ for $m_0 \leq m \leq M$. Now let denote
+	Given graph $G$ we use RL which gives us $\epsilon$-regular partition $V_0, \dots, V_m$ for $m_0 \leq m \leq M$. Now lets denote
 	
 	$$
 	\begin{aligned}
@@ -258,8 +262,8 @@ This application and many others may be used for huge graphs that typically cann
 	Let $H$ be a graph with $\chi(G) = k$ and $(\forall p > 0) \ (\exists \epsilon > 0, n_1)$ such that if in $G$ there are disjoint sets $V_1, \dots, V_k$ s.t.
 	
 	\begin{enumerate}
-		\item $|V_1| = \dots = |v_{k}| = n$
-		\item $\forall 1 \leq i \leq j \leq k$ $(V_i, V_j)$ is an $\epsilon$-regular and $d(V_i, V_j) \geq p$
+		\item $|V_1| = \dots = |V_{k}| = n$
+		\item $\forall 1 \leq i < j \leq k$ $(V_i, V_j)$ is an $\epsilon$-regular and $d(V_i, V_j) \geq p$
 	\end{enumerate}
 	
 	then $H \subseteq G$.
@@ -315,7 +319,7 @@ Firstly we will show a theorem that one could already encounter.
 
 This is called a arithmetic progression or AP for short. Now the question may be if we could somewhat limit it and not use all numbers from $\N$. In particular if it is true that $(\forall c \geq 1) (\forall l) (\exists N_0) (\forall N \geq N_0) (\forall B \subseteq \{1, \dots, N\} : |B| \geq \frac{N}{c}) (\exists a, d> 0)$ such that $a, a+d, \dots, a+d(l-1) \in B$.
 
-Actually Róth showed that it is indeed true for $l = 3$ and later on also Szemerédi showed that it holds for arbitrary $l$. Now we will show use the Róth theorem.
+Actually Róth showed that it is indeed true for $l = 3$ and later on also Szemerédi showed that it holds for arbitrary $l$. Now we will show us the Róth theorem.
 
 \begin{defn}
 	Given $A \subseteq {1, \dots, N}^2$ the \textbf{corner} in $A$ is a triplet $(x,y), (x+d,y), (x, y+d) \in A$ for $d \neq 0$.
@@ -354,7 +358,7 @@ Actually Róth showed that it is indeed true for $l = 3$ and later on also Szeme
 \begin{proof}
 	The scheme is: we obtain $c$ and create $\delta$ with which we use the corner lemma and get $N_1$ and create $N_0$ from it.
 	
-	Let $A = \{(x,y) : y-x in B\}$ and $x,y \in \{1, \dots, 2N\}$. So for $k \in B$ there is $(1,k+1), (2,k+2), \dots, (N, k+N)$. $|A| = N \cdot |B| \geq \frac{N^2}{c} - \frac{(2N)^2}{4c}$ so we put $\delta = \frac{1}{4c}$ and $N_0 = N_1$. By the corner lemma $\exists x,y,d \neq 0$ s.t. $(x,y), (x,y+d), (x+d,y) \in A$. Now it means that $y-x \in B, y-x -d \in B$ and $y-x+d \in B$ which forms the 3-arithmetic progression.
+	Let $A = \{(x,y) : y-x \in B\}$ and $x,y \in \{1, \dots, 2N\}$. So for $k \in B$ there is $(1,k+1), (2,k+2), \dots, (N, k+N)$. $|A| = N \cdot |B| \geq \frac{N^2}{c} - \frac{(2N)^2}{4c}$ so we put $\delta = \frac{1}{4c}$ and $N_0 = N_1$. By the corner lemma $\exists x,y,d \neq 0$ s.t. $(x,y), (x,y+d), (x+d,y) \in A$. Now it means that $y-x \in B, y-x -d \in B$ and $y-x+d \in B$ which forms the 3-arithmetic progression.
 \end{proof}
 
 Now for arbitrary $l$ we could rewrite corner lemma for $l-1$ dimension case then use hypergraphs with $l-1$ tuples and so on. But the thing is that this is not that easy, since the regularity lemma wouldn't be enough. Everything would have to be redefined and proved again. %Example with K_4.

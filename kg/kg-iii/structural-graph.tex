@@ -61,11 +61,11 @@ We will try to show $\mathcal{G} = Forb_{\leq_{m}} (\mathcal{F})$. If $G \in \ma
 \end{defn}
 
 \begin{lemma}
-	Let $\leq$ be an ordering og graphs \textbf{without infinite decreasing chains}. If $\mathcal{F}$ is $\leq$-closed, then $\mathcal{G} = Forb_{\leq}(\{F : F \text{ is a minimal } \leq\text{-obstruction for } \mathcal{G}\})$.
+	Let $\leq$ be an ordering of graphs \textbf{without infinite decreasing chains}. If $\mathcal{G}$ is $\leq$-closed, then $\mathcal{G} = Forb_{\leq}(\{F : F \text{ is a minimal } \leq\text{-obstruction for } \mathcal{G}\})$.
 \end{lemma}
 
 \begin{proof}
-	$G \notin \mathcal{G}$ is min $\leq$-obstruction or $\exists G' \lneq G : G \notin \mathcal{G} \Rightarrow G'$ is obstruction or we continue and because we don't have \textbf{without infinite decreasing chains} we will eventually end.
+	$G \notin \mathcal{G}$ is min $\leq$-obstruction or $\exists G' \lneq G : G \notin \mathcal{G} \Rightarrow G'$ is obstruction or we continue and because we don't have \textbf{infinite decreasing chains} we will eventually end.
 \end{proof}
 
 If $\mathcal{G}$ is $\leq_{m}$-closed, then there exists a \textbf{finite} $\mathcal{F}$ such that $\mathcal{G} = Forb_{\leq_{m}}(\mathcal{F})$.
@@ -154,7 +154,7 @@ $$
 \end{array}
 $$
 
-Contrary we take $\mathcal{G} = \{G : (\forall uv \in V(G) U \neq v, \deg(u) \geq 5, \deg(v) \geq 5) (\exists X \subseteq E(G) : |X| \leq 1) u \text{ and } v \text{ are in different component of } G - X\}$ which is $\leq_{t}$-closed. But take these graphs:
+Contrary we take $\mathcal{G} = \{G : (\forall uv \in V(G) \ u \neq v, \deg(u) \geq 5, \deg(v) \geq 5) (\exists X \subseteq E(G) : |X| \leq 1) \ u \text{ and } v \text{ are in different component of } G - X\}$ which is $\leq_{t}$-closed. But take these graphs:
 
 \begin{figure}[!h]\centering
 	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
@@ -233,7 +233,7 @@ $$
 	
 	\begin{enumerate}[(a)]
 		\item If $G$ is not 3-connected. $G$ is a clique-sum of $G_{1},G_{2} \lneq_{m} G$. Since $K_{4} \nleq_{m} G_{1}$ and $K_{4} \nleq_{m} G_{2}$ we use induction hypothesis and we are done.
-		\item If $G$ is 3-connected. If $|V(G)| \leq 3$, then $G = K_{\leq 3}$, wlog $|V(G)| \geq 4$. $\delta(G) > 1 \Rightarrow G$ contains a cycle. Let $C$ be a shortest cycle in $G$. $C$ is induced in $G$ 3-connected $\Rightarrow G \neq C$ so $\exists v \in V(G) \setminus V(C)$. By Merger's theorem there exists three paths from $v$ to $C$ intersecting only in $v$. That gives us $K_{4}$ as a minor of the graph. Which is contradiction.
+		\item If $G$ is 3-connected. If $|V(G)| \leq 3$, then $G = K_{\leq 3}$, wlog $|V(G)| \geq 4$. $\delta(G) > 1 \Rightarrow G$ contains a cycle. Let $C$ be the shortest cycle in $G$. $C$ is induced in $G$ 3-connected $\Rightarrow G \neq C$ so $\exists v \in V(G) \setminus V(C)$. By Merger's theorem there exists three paths from $v$ to $C$ intersecting only in $v$. That gives us $K_{4}$ as a minor of the graph. Which is contradiction.
 	\end{enumerate}
 \end{proof}
 
@@ -303,11 +303,11 @@ $$
 The function is somewhere near $f(t) = (1,6\dots + O(1)) t \sqrt{\log t}$. But we won't show this result. Instead we will show $f(t) = O(t^{2})$. Before we continue it is better to remind ourselves \textbf{chordal graph} and \textbf{elimination ordering} (known as PES).
 
 \begin{defn}[Chordal decomposition of $G$]
-	$V(G) = \mathcal{P}_{1} \dot{\cup} \mathcal{P}_{2} \dot{\cup} \dots \dot{\cup} \mathcal{P}_{n} \dot{\cup}$ and
+	$V(G) = \mathcal{P}_{1} \dot{\cup} \mathcal{P}_{2} \dot{\cup} \dots \dot{\cup} \mathcal{P}_{n}$ and
 	
 	\begin{enumerate}
 		\item $(\forall i) G[\mathcal{P}_{i}]$ is connected.
-		\item "$\mathcal{P}_{i}$'s form elimination ordering" Precisely: $(\forall i \in [n])(forall j_{1},j_{2} < i)$ if $G$ has an edge between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{1}}$ and also between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{2}}$ then it also has an edge between $\mathcal{P}_{j_{1}}$ and $\mathcal{P}_{j_{2}}$.
+		\item "$\mathcal{P}_{i}$'s form elimination ordering" Precisely: $(\forall i \in [n])(\forall j_{1},j_{2} < i)$ if $G$ has an edge between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{1}}$ and also between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{2}}$ then it also has an edge between $\mathcal{P}_{j_{1}}$ and $\mathcal{P}_{j_{2}}$.
 	\end{enumerate}
 \end{defn}
 
@@ -328,11 +328,11 @@ Before we show us a proof we will take a look at a simple application. If $G$ is
 \end{defn}
 
 \begin{proof}
-	Let $\mathcal{P}$ be a chordal decomposition of $G$ into parts satisfying both properties of definition of chordal decomposition (i) abd (ii) and geodesity (iii) for all non-terminal parts.
+	Let $\mathcal{P}$ be a chordal decomposition of $G$ into parts satisfying both properties of definition of chordal decomposition (i) and (ii) and geodesity (iii) for all non-terminal parts.
 	
 	This can be easily done by creating parts based on the components of connectivity. For them all properties hold, since they are all connected and "chordal" property is also satisfied since there are no edges. Also all of them are terminal (iii) doesn't have to be satisfied.
 	
-	Now we proof by that by choosing $\mathcal{P}$ with largest number of parts. Lets say that there is a part that does not satisfy (iii). This means that it is terminal part. Lets take vertex from the part and find the shortest paths to the vertices that are connected to some of the parts to the left. Now we put vertices to separate components and these components will make a new parts. We will also remove all these vertices from the origin part. Note that all properties are satisfied. (i) is trivial. (ii) If there are any vertices from the new parts to other parts then they are to the ones which are already connected to the origin part, which satisfied (ii) before so it is fine. Also (iii) is satisfied.
+	Now we proof that by choosing $\mathcal{P}$ with largest number of parts. Lets say that there is a part that does not satisfy (iii). This means that it is terminal part. Lets take vertex from the part and find the shortest paths to the vertices that are connected to some of the parts to the left. Now we put vertices to separate components and these components will make a new parts. We will also remove all these vertices from the origin part. Note that all properties are satisfied. (i) is trivial. (ii) If there are any vertices from the new parts to other parts then they are to the ones which are already connected to the origin part, which satisfied (ii) before so it is fine. Also (iii) is satisfied.
 	
 	The thing is that we created $\mathcal{P}$ with larger number of parts which is contradiction.
 \end{proof}
@@ -345,7 +345,7 @@ Before we show us a proof we will take a look at a simple application. If $G$ is
 	$\Delta (H) \leq 3 : H \leq_{m} G \Rightarrow H \leq_{t} G$
 \end{observ}
 
-Lets remind ourselves a table and add some new thinks.
+Lets remind ourselves a table and add some new properties.
 
 $$
 \begin{array}{ r c l}
@@ -399,7 +399,7 @@ We won't proof this, but we will proof something similiar, that is for topologic
 	$\exists f_{t}(k) = O(k^{2})$ Every $G$ s.t. $K_{k} \lneq_{t} G$ satisfies $\delta(G) \leq f_{t}(k)$.
 \end{thm}
 
-The corollary to this is that $\chi)G_ \leq f_{t}(k) +1$. We will proof this theorem, but to do that we need to do some steps beforehand.
+The corollary to this is that $\chi(G) \leq f_{t}(k) +1$. We will proof this theorem, but to do that we need to do some steps beforehand.
 
 Firstly imagine that the enemy gives you a graph and you need to prove that. But the enemy is kind enough to give you a graph $H$ with connectivity $>> k^2$. We could apply Merger's theorem. Though this will only give certain number of vertex disjoint paths from one vertex to another. We would more likely have this many paths between more pairs of sources and targets.
 
@@ -462,7 +462,7 @@ We may see that there exist a graph that is 2-connected and yet not 2-linked. Yo
 We won't prove this directly. Instead we will later on introduce another theorem that is actually pretty much the same and prove that.
 
 \begin{cor}
-	If $G$ is $\max(2k, f_{m}(4k)+1)$-connected then $G$ is $K$-linked.
+	If $G$ is $\max(2k, f_{m}(4k)+1)$-connected then $G$ is $k$-linked.
 \end{cor}
 
 \begin{proof}
@@ -602,13 +602,13 @@ On picture \ref{separation} we may see an example of $(A,B)$-separation. Where t
 \end{defn}
 
 \begin{thm}
-	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ mdel of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
+	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ model of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
 \end{thm}
 
-We can see that this is somewhat refolmulation of theorem before (\ref{2-linked-thm}). Thus if we prove this we will also prove the previous theorem. But we will introduce another similiar theorem which will imply this theorem.
+We can see that this is somewhat reformulation of theorem before (\ref{2-linked-thm}). Thus if we prove this we will also prove the previous theorem. But we will introduce another similiar theorem which will imply this theorem.
 
 \begin{defn}
-	$G, S\ subseteq V(G)$ and $M_{1}, M_{2}, \dots, M_{m} \subseteq V(G)$ pairwise distinct is an \textbf{$S$-relaxed model} of $K_{m}$ in $G$ if
+	$G, S \subseteq V(G)$ and $M_{1}, M_{2}, \dots, M_{m} \subseteq V(G)$ pairwise distinct is an \textbf{$S$-relaxed model} of $K_{m}$ in $G$ if
 	
 	\begin{enumerate}
 		\item $(\forall i) G[M_{i}]$ is connected \underline{or} every componnet of $G[M_{i}]$ intersects $S$.
