@@ -61,7 +61,7 @@ To get a better understanding lets see a simple example of a graph $G$ which can
 	\label{pol-ex}
 \end{figure}
 
-Now if we take $V(G) = \{v_{1}, \dots, v_{n}\}$ which map each one of them $v_{i} \to x_{i}$. Then for an assignment $\overrightarrow{c}$ as for each $i$ $v_i \to c_i$ we know that $G$ has a proper coloring iff $P_{\overrightarrow{G}}(\overrightarrow{c}) \neq 0$. That is if $S_{1}, \dots, S_{n}$ are lists of allowed colors for $v_{1}, \dots, v_{n}$ then $G$ is colorable from $S_{1}, \dots, S_{n}$ iff $(\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n}) P_{\overrightarrow{G}}(c_{1}, \dots, c_{n}) \neq 0$. To prove this we could use some theorem, but we will need a stronger version.
+Now if we take $V(G) = \{v_{1}, \dots, v_{n}\}$ which map each one of them $v_{i} \to x_{i}$. Then for an assignment $\overrightarrow{c}$ as for each $i$ $v_i \to c_i$ we know that $G$ has a proper coloring iff $P_{\overrightarrow{G}}(\overrightarrow{c}) \neq 0$. That is if $S_{1}, \dots, S_{n}$ are lists of allowed colors for $v_{1}, \dots, v_{n}$ then $G$ is colorable from $S_{1}, \dots, S_{n}$ iff $(\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n}) P_{\overrightarrow{G}}(c_{1}, \dots, c_{n}) \neq 0$. To prove this we could use the same theorem, but we will need a stronger version.
 
 \begin{thm}[Combinatorial Nullstellensatz 2nd version]
 	Let $f$ be a polynomial in $x_{1}, \dots, x_{n}$ and $S_{1}, \dots, S_{n} \subseteq \R$. If $(\exists d_{1}, \dots, d_{n})$ total degree $(f) \leq d_{1} + \dots + d_{n}$ and $[x_{1}^{d_{1}}\dots x_{n}^{d_{n}}]f \neq 0$ and $(\forall i) |S_{i}| > d_{i}$. Then $\exists c_{1} \in S_{1}, \dots, c_{n} \in S_{n} : f(c_{1}, \dots, c_{n}) \neq 0$.
@@ -146,7 +146,7 @@ $$
 When we show another example where we have a vertex with in degree 3. See picture \ref{eulerian-orientation}. For the indegree to be same it must be that for all changed edge to the vertex there must be some changed edge out of the vertex.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
+	\begin{tikzpicture}[node distance={17mm}, thick, main/.style = {draw, circle}]
 		\node (R1) {};
 		\node [below of=R1] (R2) {};
 		\node [below of=R2] (R3) {};
@@ -162,13 +162,13 @@ When we show another example where we have a vertex with in degree 3. See pictur
 		\draw[->] (1) edge (R2);
 		\draw[->] (1) edge (R3);
 		\draw[->] (1) edge (R4);
-		\draw[->, bend left=15, color=cyan] (L1) edge (1);
-		\draw[->, bend right=15, color=cyan] (1) edge (L2);
-		\draw[->, bend right=15, color=cyan] (1) edge (L3);
-		\draw[->, bend left=15, color=cyan] (R1) edge (1);
-		\draw[->, bend left=15, color=cyan] (R2) edge (1);
-		\draw[->, bend right=15, color=cyan] (1) edge (R3);
-		\draw[->, bend right=15, color=cyan] (1) edge (R4);
+		\draw[->, bend left=10, color=cyan] (L1) edge (1);
+		\draw[->, bend right=10, color=cyan] (1) edge (L2);
+		\draw[->, bend right=10, color=cyan] (1) edge (L3);
+		\draw[->, bend left=10, color=cyan] (R1) edge (1);
+		\draw[->, bend left=10, color=cyan] (R2) edge (1);
+		\draw[->, bend right=10, color=cyan] (1) edge (R3);
+		\draw[->, bend right=10, color=cyan] (1) edge (R4);
 		\draw[->, bend left=10, color=red] (1) edge (R1);
 		\draw[->, bend left=10, color=red] (1) edge (R2);
 		\draw[->, bend right=10, color=red] (L3) edge (1);

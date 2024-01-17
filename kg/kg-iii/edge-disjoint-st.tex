@@ -59,7 +59,7 @@ Now to observe that if $G$ has $k$ pairwise edge-disjoint spanning trees then fo
 Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may see that this proves the former theorem. Now we will state and prove the theorem.
 
 \begin{thm}
-	$(\forall \mathcal{P} : \text{ partition of } V(G)) \ e(\mathcal{P}) \geq l (|\mathcal{P}| - 1)$ then there is $k$ pairwise edge-disjoint spanning trees.
+	$(\forall \mathcal{P} : \text{ partition of } V(G)) \ e(\mathcal{P}) \geq k (|\mathcal{P}| - 1)$ then there is $k$ pairwise edge-disjoint spanning trees.
 \end{thm}
 
 \begin{defn}
@@ -73,11 +73,10 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 \begin{defn}
 	For two jungles $J,J'$ in a graph $G$ and a subgraph $A \subseteq G$ we define a relation $J \cong_{A} J'$ if
 	
-	$$
-	(\forall i) \ E(F_{i}) \setminus E(A) = E(F_{i}') \setminus E(A)
-	$$
-	
-	and components of $F_{i} \cap A$ must be the same as in $F_{i}' \cap A$.
+	\begin{enumerate}
+		\item $(\forall i) \ E(F_{i}) \setminus E(A) = E(F_{i}') \setminus E(A)$ and
+		\item components of $F_{i} \cap A$ must be the same as in $F_{i}' \cap A$.
+	\end{enumerate}
 \end{defn}
 
 \begin{figure}[!ht]\centering
@@ -120,7 +119,7 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 \end{figure}
 
 \begin{defn}
-	For a graph $G$, subgraph $A \subseteq G$ and a jungle $J$. $A$ is $J$-free if $(\forall e \in E(A))$ there exists a jungle $J' \cong J$ such that $e \notin E(\bigcup J')$. 
+	For a graph $G$, subgraph $A \subseteq G$ and a jungle $J$. $A$ is $J$-free if $(\forall e \in E(A))$ there exists a jungle $J' \cong_A J$ such that $e \notin E(\bigcup J')$. 
 \end{defn}
 
 \begin{proof} [Proof of theorem]
@@ -133,7 +132,7 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 	\begin{proof}[Proof of lemma]
 		We will take $A \subseteq G$ and two jungles $J = (F_{1}, \dots, F_{k}), J' = (F_{1}', \dots, F_{k}')$ in $G$. Let us choose $H \subseteq G$ connected which is $J$-free and maximal. We take $\mathcal{P}$ that $|\mathcal{P}| = |V(G)|$ and $e(\mathcal{P}) \geq k(|\mathcal{P}| - 1)$ and $|E(G)| \geq k (|V(G)| -1)$. If $E(\bigcup J) = E(G)$ then $J$ consists of $k$-spanning trees. And we are done.
 		
-		So suppose $\exists e_{o} \in E(G) \setminus E(\bigcup J)$ then there exists $H$ with only this edge. Now suppose there is some $F_{i}$ which is not connected on $H$. Which means there is some edge $e$ disconnecting these graphs. Now we have two options.
+		So suppose $\exists e_{o} \in E(G) \setminus E(\bigcup J)$ then there exists $H$ with only this edge. Now suppose there is some $F_{i}$ which is not connected in $H$. Which means there is some edge $e$ disconnecting these graphs. Now we have two options.
 		
 		\begin{enumerate}[(a)]
 			\item $e$ joins different components of $F_{i}$ because $H$ is $J$-free $J' \cong_{H} J$, $e \notin E(\bigcup J')$ we create $J' + e$ and then we are getting a larger jungle which is a contradiction.
@@ -142,6 +141,6 @@ Where notation $G / \mathcal{P}$ is for contracting the partitions. Also we may 
 		\end{enumerate}
 	\end{proof}
 	
-	We can now continue by induction on the number of vertices $|V(G)|$. Lets take such $H$ from the lemma and $G / V(H)$. By the induction hypothesis $G / V(H)$ has $k$ pairwise edge-disjoint spanning trees $T_{1}, T_{2}, \dots, T_{k}$. Lets take $T_{i}' := T_{i}$ with $h$ replaced is a spanning tree in $G$ by $F_{i} \cap H$ so $T_{i}$ for all $i \in [k]$ are $k$ pairwise edge-disjoint spanning trees.
+	We can now continue by induction on the number of vertices $|V(G)|$. Lets take such $H$ from the lemma and $G / V(H)$. By the induction hypothesis $G / V(H)$ has $k$ pairwise edge-disjoint spanning trees $T_{1}, T_{2}, \dots, T_{k}$. Lets take $T_{i}' := T_{i}$ with $H$ replaced is a spanning tree in $G$ by $F_{i} \cap H$ so $T_{i}$ for all $i \in [k]$ are $k$ pairwise edge-disjoint spanning trees.
 	
 \end{proof}

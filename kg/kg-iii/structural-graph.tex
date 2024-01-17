@@ -312,7 +312,7 @@ The function is somewhere near $f(t) = (1,6\dots + O(1)) t \sqrt{\log t}$. But w
 \end{defn}
 
 \begin{defn}
-	Chordal partition is \textbf{geodesic} if $(\forall i) (\exists v_{i} \in \mathcal{P}_{i})$ s.t. if $v_{1}, \dots, v_{t} < i$ are the indices s.t. $G$ has an edge between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{1}}, \mathcal{P}_{j_{2}}, \dots, \mathcal{P}_{j_{t}}$ then $v_{1}, \dots, v_{t} \in \mathcal{P}_{i}$ s.t. $v_{i}$ has a neighbor in $\mathcal{P}_{j_{1}}, \mathcal{P}_{j_{2}}, \dots, \mathcal{P}_{j_{t}}$ and $G - \bigcup_{j < i} \mathcal{P}_{j}$ contains shortest paths from $v_{i}$ to $v_{1}, \dots, v_{t}$ which cover all vertices in $\mathcal{P}_{i}$.
+	Chordal partition is \textbf{geodesic} if $(\forall i) (\exists v_{i} \in \mathcal{P}_{i})$ s.t. if $j_{1}, \dots, j_{t} < i$ are the indices s.t. $G$ has an edge between $\mathcal{P}_{i}$ and $\mathcal{P}_{j_{1}}, \mathcal{P}_{j_{2}}, \dots, \mathcal{P}_{j_{t}}$ then $u_{1}, \dots, u_{t} \in \mathcal{P}_{i}$ s.t. $u_{i}$ has a neighbor in $\mathcal{P}_{j_{1}}, \mathcal{P}_{j_{2}}, \dots, \mathcal{P}_{j_{t}}$ and $G - \bigcup_{j < i} \mathcal{P}_{j}$ contains shortest paths from $v_{i}$ to $u_{1}, \dots, u_{t}$ which cover all vertices in $\mathcal{P}_{i}$.
 \end{defn}
 
 % TODO perhaps add an image
@@ -393,10 +393,10 @@ If we remember Headwiger's conjecture then Hájos conjecture is the same only wi
 	$\exists f_{m}(k) = O(k \sqrt{\log k})$ Every $K_{k}$-minor-free graph $G$ satisfies $\delta(k) \leq f_{m}(k)$.
 \end{thm}
 
-We won't proof this, but we will proof something similiar, that is for topological minors.
+We won't prove this, but we will prove something similiar, that is for topological minors.
 
 \begin{thm}
-	$\exists f_{t}(k) = O(k^{2})$ Every $G$ s.t. $K_{k} \lneq_{t} G$ satisfies $\delta(G) \leq f_{t}(k)$.
+	$\exists f_{t}(k) = O(k^{2})$ Every $G$ s.t. $K_{k} \nleq_{t} G$ satisfies $\delta(G) \leq f_{t}(k)$.
 \end{thm}
 
 The corollary to this is that $\chi(G) \leq f_{t}(k) +1$. We will proof this theorem, but to do that we need to do some steps beforehand.
@@ -497,7 +497,7 @@ Also we can say $\exists f_{l}(k) = O(k \sqrt{\log k})$. If $G$ is $f_{l}(k)$-co
 	$$
 	\begin{array}{r l}
 		|E(G)| & \leq |E(A)| + |E(B)| \\
-		(1) & \leq 2d(|V(A)| - d) + 2d(|V(A)| - d) \\
+		(1) & \leq 2d(|V(A)| - d) + 2d(|V(B)| - d) \\
 		& = 2d(|V(A)| + |V(B)| - 2d) \\
 		& = 2d(|V(H)| - |V(A \cap B)| - 2d) \\
 		|E(G)| & > 2d(|V(H)| - d)
@@ -572,12 +572,12 @@ On picture \ref{separation} we may see an example of $(A,B)$-separation. Where t
 	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
 		\node[main] (1) [color=orange] {};
 		\node[main] (2) [color=orange] [below of=1] {};
-		\node[main] (3) [right of=1] [color=cyan] {};
-		\node[main] (4) [right of=2] [color=cyan] {};
-		\node[main] (5) [left of=2] [color=cyan] {};
-		\node[main] (6) [below left of=5] [color=cyan] {};
-		\node[main] (7) [above left of=5] [color=cyan] {};
-		\path [color=cyan, thick] (1) edge (2)
+		\node[main] (3) [right of=1] {};
+		\node[main] (4) [right of=2] {};
+		\node[main] (5) [left of=2] {};
+		\node[main] (6) [below left of=5] {};
+		\node[main] (7) [above left of=5] {};
+		\path [thick] (1) edge (2)
 		(1) edge (3)
 		(1) edge (4)
 		(1) edge (7)
@@ -598,11 +598,11 @@ On picture \ref{separation} we may see an example of $(A,B)$-separation. Where t
 \end{defn}
 
 \begin{defn}
-	$S$ is \textbf{well-linked} to a model $M_{1}, M_{2}, \dots, M_{m}$ if every separation $(A,B)$ with $S \subseteq A_{i}$ $(\exists i) M_{i} \subseteq B \setminus A$ has order $\geq |S|$.
+	$S$ is \textbf{well-linked} to a model $M_{1}, M_{2}, \dots, M_{m}$ if every separation $(A,B)$ with $S \subseteq A$ $(\exists i) M_{i} \subseteq B \setminus A$ has order $\geq |S|$.
 \end{defn}
 
 \begin{thm}
-	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ model of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
+	$\forall G, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ model of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
 \end{thm}
 
 We can see that this is somewhat reformulation of theorem before (\ref{2-linked-thm}). Thus if we prove this we will also prove the previous theorem. But we will introduce another similiar theorem which will imply this theorem.
@@ -616,8 +616,8 @@ We can see that this is somewhat reformulation of theorem before (\ref{2-linked-
 	\end{enumerate}
 \end{defn}
 
-\begin{thm}[\textcolor{blue}{Slightly changed}]
-	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ \textcolor{blue}{$S$-relaxed mdel} of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
+\begin{thm}[\textcolor{Green}{Slightly changed}]
+	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ \textcolor{Green}{$S$-relaxed mdel} of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
 \end{thm}
 
 \begin{proof}

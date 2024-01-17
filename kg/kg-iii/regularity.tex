@@ -41,7 +41,7 @@ Now we will look at how many neighbors can be for some $v \in A$. To be exact we
 	\begin{aligned}
 		|d(A_{0}, B_{0}) - p| &\leq \epsilon \\
 		 &= \left| \frac{e(A_{0},B_{0})}{|A_{0}| |B_{0}|} - p \right| \\
-		 &= \left| \frac{\sum_{v \in A_{0}} \deg_{b_{0}}(v)}{|A_{0}| |B_{0}|} - p \right| \\
+		 &= \left| \frac{\sum_{v \in A_{0}} \deg_{B_{0}}(v)}{|A_{0}| |B_{0}|} - p \right| \\
 		 &= \left| \frac{|A_{0} (p+ \epsilon |B_{0}|)}{|A_{0}| |B_{0}|} - p \right| \\
 		 &= \frac{|A_{0} (p+ \epsilon |B_{0}|)}{|A_{0}| |B_{0}|} - p = \epsilon
 	\end{aligned}
@@ -59,7 +59,7 @@ $$
 One can be confused by the $4$ in there. That is because the way we defined it we count every 4-cycle four times.
 
 \begin{lemma}
-	For a graph $G$ and $A, B \subseteq V$ as an $(A, B)$ $\epsilon$-regular pair and $|A| = |B|$ we have following inequalities.
+	For a graph $G$ and $A, B \subseteq V$ as an $(A, B)$ $\epsilon$-regular pair and $|A| = |B| = n$ we have following inequalities.
 	
 	$$
 	(p^4 - 6 \epsilon)n^4 - 2n^3 \leq q(A,B) \leq (p^4 + 16 \epsilon) n^4
@@ -322,7 +322,7 @@ This is called a arithmetic progression or AP for short. Now the question may be
 Actually Róth showed that it is indeed true for $l = 3$ and later on also Szemerédi showed that it holds for arbitrary $l$. Now we will show us the Róth theorem.
 
 \begin{defn}
-	Given $A \subseteq {1, \dots, N}^2$ the \textbf{corner} in $A$ is a triplet $(x,y), (x+d,y), (x, y+d) \in A$ for $d \neq 0$.
+	Given $A \subseteq \{1, \dots, N\}^2$ the \textbf{corner} in $A$ is a triplet $(x,y), (x+d,y), (x, y+d) \in A$ for $d \neq 0$.
 \end{defn}
 
 \begin{lemma}[Corner lemma]
