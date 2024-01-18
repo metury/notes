@@ -73,7 +73,7 @@ The exact constants are not that necessary, so they are picked somewhat randomly
 \begin{proof}
 	Lets put $A_{0} = \{ v \in A : \deg_{B} v < (p - \epsilon) n\}$. Which by the lemma we get $|A_{0}| \leq \epsilon n$. Now lets take $v_1 \in A \setminus A_{0}$. Now lets consider such $B_{v_1}$ (neighbors of $v_1$) for which $|B_{v_1}| \geq (p - \epsilon) n$. WLOG we may assume it is $\ge \epsilon n$, otherwise the lower bound is negative. Denote $A_{v_1} = \{v \in A  : \deg_{B_{v_1}} v < (p - \epsilon) |B_{v_1}|\}$. Also by the lemma $|A_{v_1}| \leq \epsilon n$. Now we choose $v_3 \in A \setminus A_{v_1}$.
 	
-	Now we may say that the number of 4-cycles is $\geq (1-\epsilon)n (1 - \epsilon)n ((p - \epsilon) |B_{v_1}|)62 - 2n^3$. Where the first $(1-\epsilon)n$ is for $v_1$ and the second for $v_3$, we multiply it by the choices from $B$ and subtract all wrong choices (choosing the same vertex more than once). Now this can be calculated.
+	Now we may say that the number of 4-cycles is $\geq (1-\epsilon)n (1 - \epsilon)n ((p - \epsilon) |B_{v_1}|)^2 - 2n^3$. Where the first $(1-\epsilon)n$ is for $v_1$ and the second for $v_3$, we multiply it by the choices from $B$ and subtract all wrong choices (choosing the same vertex more than once). Now this can be calculated.
 	
 	$$
 	\begin{aligned}
