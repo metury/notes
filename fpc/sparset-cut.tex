@@ -8,7 +8,7 @@ $$
 \begin{aligned}
 	\max f \\
 	\sum_{p \in \mathcal{P}_{st}} x_{p} \geq f \cdot d_{1} \\
-	\sum_{e \in \mathcal{P}_{st}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	\sum_{p : e \in p \in \mathcal{P}_{st}} x_{p} \leq c(e) & \quad \forall e \in E\\
 	x \geq 0
 \end{aligned}
 $$
@@ -23,7 +23,7 @@ $$
 \begin{aligned}
 	\max f \\
 	\sum_{p \in \mathcal{P}_{i}} x_{p} \geq f \cdot d_{i} & \quad \forall i \in [k]\\
-	\sum_{i = 0}^{k} \sum_{e \in \mathcal{P}_{i}} x_{p} \leq c(e) & \quad \forall e \in E\\
+	\sum_{i = 0}^{k} \sum_{p: e \in p \in \mathcal{P}_{i}} x_{p} \leq c(e) & \quad \forall e \in E\\
 	x \geq 0
 \end{aligned}
 $$
@@ -132,7 +132,7 @@ $$
 \end{example}
 
 \begin{defn}
-	Now $F \subseteq E : I(F) = \{i \in [k] : s_{i}, t_{i} \text{ are in different components in } (V, E \setminus F)\}$. And \textbf{sparsity} of $F$ be
+	Now $F \subseteq E : I(F) = \{i \in [k] : s_{i}, t_{i} \text{ are in different components in } (V, E \setminus F)\}$. And \textbf{sparsity} of $F$ is defined as
 	
 	$$
 	\rho(F) = \frac{\sum_{e \in F}c(e)}{\sum_{i \in I(F)} d_{i}}
@@ -266,7 +266,7 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	\end{lemma}
 	
 	\begin{proof}[Proof of lemma \ref{lemma}]
-		Consider the contribution of the first coordinate to $\mu(u,v)$: order the vertices according to $f_{1}$ where $f = (f_{1}, f_{2}, \dots, f_{d})$, s.t. $f_{1}(v_{1}) \leq f_{1}(v_{2}) \leq \dots \leq f_{1}v_{n}$. Now let $S(l) = \{v_{1}, \dots, v_{l}\}$ for $l \in [n]$. Consider any two vertices $v_{i},v_{j}$ s.t. $i > j$.
+		Consider the contribution of the first coordinate to $\mu(u,v)$: order the vertices according to $f_{1}$ where $f = (f_{1}, f_{2}, \dots, f_{d})$, s.t. $f_{1}(v_{1}) \leq f_{1}(v_{2}) \leq \dots \leq f_{1}(v_{n})$. Now let $S(l) = \{v_{1}, \dots, v_{l}\}$ for $l \in [n]$. Consider any two vertices $v_{i},v_{j}$ s.t. $i > j$.
 		
 		$$
 		f_{1}(v_{i}) - f_{1}(v_{j}) = \sum_{l=j}^{i-1} (f_{1}(v_{l+1}) - f_{1}(v_{l})) = \sum_{l = 1}^{n-1} (f_{1}(v_{l+1}) - f_{1}(v_{l})) \mu_{S(l)} (v_{i}, v_{j}) 
@@ -297,7 +297,7 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 		Where the last line is summing all the inequalities together. We get a contradiction. \textit{Note that geometricaly that can be represent as vectors and values of the $\tan$ function and it would state that there is a $\tan$ smaller of one of the vectors than the sum of them.}
 	\end{proof}
 	
-	Now we continue to proof the Lemma A.
+	Now we continue to prove the Lemma A.
 	
 	$$
 	\sum_{e \in E} c(e) x'(e) = \frac{\sum_{e \in E}c(e) x'(e))}{\sum_{i = 1}^{k}y'(i) d(i)}
@@ -316,7 +316,7 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	The last part is due to the previous observation and the fact that $\sum_{e \in E} c(e) \mu_{S}(e) = a_{S}$ and $\sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i}) = b_{S}$ taken means $\frac{a_{S}}{b_{S}} = \rho(S)$.
 \end{proof}
 
-Now we will be proving the Lemma A \ref{B}. For that we denote $T = \{s_{i} | i \in [k]\} \cap \{t_{i}| i \in [k]\}$ and without loss of generality assume that $|T| = 2^{\tau}$ (we can add arbitrary sources and targets that are essentially the same). Let us denote $d_{x} (u,v)$ the length of the $x$-shortest $u-v$ path. Where $x$ is the result of our LP. For $A \subseteq V: d_{x}(A,u) = \min_{v \in A} d_{x}(v,u)$.
+Now we will be proving the Lemma A \ref{B}. For that we denote $T = \{s_{i} | i \in [k]\} \cup \{t_{i}| i \in [k]\}$ and without loss of generality assume that $|T| = 2^{\tau}$ (we can add arbitrary sources and targets that are essentially the same). Let us denote $d_{x} (u,v)$ the length of the $x$-shortest $u-v$ path. Where $x$ is the result of our LP. For $A \subseteq V: d_{x}(A,u) = \min_{v \in A} d_{x}(v,u)$.
 
 Also we put $L = q \log (k)$ where $q$ is some constant to be decided later on and $k$ is for number of commodities. Also $d = L \cdot \tau = O (\log^{2}(k))$. For $t = 1, \dots, \tau$ and $l = 1, \dots, L$: let $A_{tl}$ be a set that is constructed by $2^{\tau - t}$-times selecting uniformely at random $v \in V$.
 
@@ -364,7 +364,7 @@ Also we put $L = q \log (k)$ where $q$ is some constant to be decided later on a
 	$$
 \end{lemma}
 
-Before proving this lemma we will take a look, how useful it is. $\beta = \sum_{i = 1}^{k} d(i) \cdot ||f(s_{i}) - f(t_{i})||_{1} = \Omega(\log k) \cdot \sum_{i = 1}^{k} d(i) y_{i} = \Omega(\log k)$ where $y_{i}$ is from our LP and thus $\sum_{i = 1}^{k} d(i) y_{i}$ is equal to 1. The second equality is from the lemma before. And now from the lemma even before that we get $\leq \sum_{e \in E} c(e) \cdot d \cdot x(e) = d \sum_{e \in E} c(e) x(e)$ which is the objective function result of our LP. Thus $= O(\log^{2}(k)) \sum_{e \in E} x(e) c(e)$. But that is scaled by $\beta$ thus the objective value of the solution induced by $f$ is $\leq O(\frac{\log^{2}(k)}{\log(k)} \sum_{e \in E} c(e) x(e) = O(\log k) \sum_{e \in E} x(e) c(e)$ and so we have $O(\log k)$-approximation. So this proves the Lemma B \ref{B}.
+Before proving this lemma we will take a look, how useful it is. $\beta = \sum_{i = 1}^{k} d(i) \cdot ||f(s_{i}) - f(t_{i})||_{1} = \Omega(\log k) \cdot \sum_{i = 1}^{k} d(i) y_{i} = \Omega(\log k)$ where $y_{i}$ is from our LP and thus $\sum_{i = 1}^{k} d(i) y_{i}$ is equal to 1. The second equality is from the lemma before. And now from the lemma even before that we get $\leq \sum_{e \in E} c(e) \cdot d \cdot x(e) = d \sum_{e \in E} c(e) x(e)$ which is the objective function result of our LP. Thus $= O(\log^{2}(k)) \sum_{e \in E} x(e) c(e)$. But that is scaled by $\beta$ thus the objective value of the solution induced by $f$ is $\leq O \left(\frac{\log^{2}(k)}{\log(k)}\right) \sum_{e \in E} c(e) x(e) = O(\log k) \sum_{e \in E} x(e) c(e)$ and so we have $O(\log k)$-approximation. So this proves the Lemma B \ref{B}.
 
 \begin{proof}
 	To prove the lemma we will prove a simple version that for fixed $i \in [k]$ with probability $\geq 1 - 1/2k$ it holds that
@@ -385,14 +385,14 @@ Before proving this lemma we will take a look, how useful it is. $\beta = \sum_{
 	Now we will look at this sequence of radii. $r_{0} = 0$,
 	
 	$$
-	r_{t} = \min \{r > 0 : |B_{x}(s_{i},r)| \geq 2^{t} \land |B_{x}(t_{i},r)| \geq 2^{t}\}
+	r_{t} = \min \left\{r > 0 : |B_{x}(s_{i},r)| \geq 2^{t} \land |B_{x}(t_{i},r)| \geq 2^{t}\right\}
 	$$
 	
 	$$
 	\hat{t} = \min \left\{t | r_{t} \geq \frac{y(i)}{4}\right\}
 	$$
 	
-	and also redefine $r_{\hat{t}} = \frac{y(i)}{4}$. This is define with respect to LP. And also it means that $B_{x}(s_{i}, r_{\hat{t}}) \cap B_{x}(t_{i}, r_{\hat{t}}) = \emptyset$.
+	and also redefine $r_{\hat{t}} = \frac{y(i)}{4}$. This is defined with respect to LP. And also it means that $B_{x}(s_{i}, r_{\hat{t}}) \cap B_{x}(t_{i}, r_{\hat{t}}) = \emptyset$.
 	
 	Now we observe that for $A_{tl} \subseteq V:$ $A_{tl} \cap B_{x}^{\circ}(s_{i}, r_{t}) = \emptyset \Leftrightarrow d_{x}(s_{i}, A_{tl}) \geq r_{t}$. And also $A_{tl} \cap B_{x}(t_{i}, r_{t - 1}) \neq \emptyset \Leftrightarrow d_{x}(t_{i}, A_{tl}) \leq r_{t - 1}$. Let $E_{tl}$ be the event such that $A \cap B = \emptyset$ and $A \cap G \neq \emptyset$ where $B = B_{x}^{\circ}(s_{i}, r_{t})$ and $G = B_{x}(t_{i}, r_{t - 1})$.
 	
@@ -466,7 +466,7 @@ Some of basic definitions are for metric spaces which reader may already know, b
 We may already know some examples. One is for $G = (V,E)$ and for $x : E \to \mathbb{R}^{+}$ the metric is $d(z,y) = \min_{z-y \text{ paths}} \sum_{e \in P} x(e)$. This means that $(V,d)$ is a metric system.
 
 \begin{defn}
-	Let $(X,d)$ and $(Y,\bar{d})$ be metric spaces. An injective function $f : X \to Y$ is $D$-embedding for some $D \geq 1$, if $\exists r > 0$ such that $\forall x,y \in X$ the following holds
+	Let $(X,d)$ and $\left(Y,\bar{d}\right)$ be metric spaces. An injective function $f : X \to Y$ is $D$-embedding for some $D \geq 1$, if $\exists r > 0$ such that $\forall x,y \in X$ the following holds
 	
 	$$
 	r \cdot d(x,y) \leq \bar{d}(f(x), f(y)) \leq D \cdot r \cdot d(x,y).
@@ -558,7 +558,7 @@ $1/2$-balanced is called \textbf{bisection}. Also there is a problem for finding
 	Approximation of the cost:	Consider an optimal $b$-balanced cut $(T, V \setminus T)$. In each iteration $|T \setminus S| \geq (b - b') n$. What is the sparsity of the cut $T \setminus S$? Lets denote $\text{opt} = E(T, V \setminus V)$. The sparsity is
 	
 	$$
-	\leq \frac{\text{opt}}{b - b')n(1-b)n} \leq \frac{2 \text{opt}}{(b-b')n^{2}}
+	\leq \frac{\text{opt}}{(b - b')n(1-b)n} \leq \frac{2 \text{opt}}{(b-b')n^{2}}
 	$$
 	
 	so the sparsity of the $O(\log n)$-approximation $S_{i}$ found by the algorithm is
@@ -570,7 +570,7 @@ $1/2$-balanced is called \textbf{bisection}. Also there is a problem for finding
 	which means that $E(S_{i}, V_{i} \setminus S_{i}) \leq O(\log n) \frac{\text{opt}}{(b-b')n^{2}} |S_{i}|$. Now we sum it up.
 	
 	$$
-	E(S, V \setminus S) \leq \sum_{i} E(s_{i}, V_{i} \setminus S_{i}) \leq O(\log n) \frac{\text{opt}}{(b-b')n^{2}} \sum_{i} |S_{i}| = O(\log n) \frac{\text{opt}}{b - b'}
+	E(S, V \setminus S) \leq \sum_{i} E(S_{i}, V_{i} \setminus S_{i}) \leq O(\log n) \frac{\text{opt}}{(b-b')n^{2}} \sum_{i} |S_{i}| = O(\log n) \frac{\text{opt}}{b - b'}
 	$$
 \end{proof}
 

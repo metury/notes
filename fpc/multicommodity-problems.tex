@@ -28,7 +28,7 @@ Alternatively we could define it by a single variables for flows on each edge. F
 
 \section{Multi cut problem}
 
-As a cuts for single flow we may define somewhat similiar definition. Such that between every tuple of $s_{i}$ and $t_{i}$ there is no such path. We will also look at a linear program which will be denoted as \textbf{LP2}.
+As cuts for single flow we may define somewhat similiar definition. Such that for every $i$ the pair $s_{i}$ and $t_{i}$ are not connected by any path. We will also look at a linear program which will be denoted as \textbf{LP2}.
 
 $$
 \forall e : x_{e} =
@@ -42,14 +42,14 @@ $$
 
 $$
 \begin{aligned}
-	\min \sum_{e \in E} x(e) c(e) & \quad := \Phi \\
-	\sum_{e \in p \in \mathcal{P}_{i}} x(e) \geq 1 &\quad \forall i \in [k] \forall p \in \mathcal{P}_{i}\\
-	x(e) \in \{0, 1\} & \quad \text{(ILP)}\\
-	x(e) \geq 0 & \quad \text{(LP)} 
+	\min \sum_{e \in E} x(e) c(e) & \quad =: \Phi \quad \text{(notation for further use)}\\
+	\sum_{e \in p} x(e) \geq 1 &\quad \forall i \in [k] \ \forall p \in \mathcal{P}_{i}\\
+	x(e) \in \{0, 1\} &\quad \forall e \in E(G)  \quad \text{(ILP)}\\
+	x(e) \geq 0 &\quad \forall e \in E(G) \quad \text{(LP)} 
 \end{aligned}
 $$
 
-First ILP is integer linear program which is generally NP hard. Thus we will look on the relaxation of LP program. We may observe that we don't need to specify that $x(e) \geq 1$.
+First ILP is integer linear program which is generally NP hard. Thus we will look on the relaxation of LP program. We may observe that we don't need to specify that $x(e) \leq 1$ due to the minimality.
 
 Now we may see that indeed \textbf{LP1} and \textbf{LP2} are dual programs. Thus resulting in knowing that the maximum flow is the same as minimum fractional cut.
 
@@ -66,8 +66,11 @@ Before we continue we will take a look at a simple example (\ref{example}). The 
 		\draw (1) -- (4);
 		\draw (4) -- (2);
 		\draw (4) -- (3);
+		\draw[dashed, bend left = 20, color = Green, ->] (1) edge (2);
+		\draw[dashed, bend left = 20, color = Green, ->] (2) edge (3);
+		\draw[dashed, bend left = 20, color = Green, ->] (3) edge (1);
 	\end{tikzpicture}
-	\caption{Example graph.}
+	\caption{Example graph. With \textcolor{Green}{visualized commodities}.}
 	\label{example}
 \end{figure}
 
@@ -77,29 +80,29 @@ We may observe that the max flow is $|f| = \frac{3}{2}$ because we can put $\fra
 
 We will show an algorithm which will give an approximate result of a multi-cut problem. We may look at it like we would cut off some parts of the graph which are close to the sources and continue.
 
-Given $\bar{G} = (\bar{V}, \bar{E}), (s_{i}, t_{i}), k, c: E \to \R_{0}^{+}$ and solution $x$ of \textbf{LP2}. We define:
+Given $\bar{G} = \left(\bar{V}, \bar{E}\right), (s_{i}, t_{i}), k, c: E \to \R_{0}^{+}$ and solution $x$ of \textbf{LP2}. We define:
 
 $$
-B_{x}(s_{i}, r) := \{u \in \bar{V} | d_{x} (s_{i}, u) \leq r\}
+B_{x}(s_{i}, r) := \left\{u \in \bar{V} | d_{x} (s_{i}, u) \leq r\right\}
 $$
 
 As a ball around $s_{i}$ with diameter w.r.t $x$. $d_{x} (s_{i}, u) :=$ the length of the shortest $s_{i}u$ path in $\bar{G}$ w.r.t. the edge length $x(e)$.
 
 $$
-\delta (B_{x}(s_{i}, r)) = \{\{u,v\} \in \bar{E} : |\{u,v\} \cap B_{x}(s_{i}, r)| = 1\}
+\delta (B_{x}(s_{i}, r)) = \left\{\{u,v\} \in \bar{E} : |\{u,v\} \cap B_{x}(s_{i}, r)| = 1\right\}
 $$
 
 $$
 V_{x}(s_{i}, r) = \frac{\Phi}{k} + \sum_{\{u,v\} \in \bar{E}, u,v \in B_{x}(s_{i},r)} c(e)x(e) + \sum_{\{u,v\} \in \delta(B_{x}(s_{i},r)): u \in B_{x}(s_{i},r)} c(e) (r - d_{x}(s_{i}, u))
 $$
 
-This we call a volume of a ball. We will denoted as a function of $r$ $f(r)$. The last sum is of all edges which are only partly inside the ball. Next we also define the following.
+This we call a volume of a ball. We will denoted as a function $f(r)$ for $r$. The last sum is of all edges which are only partly inside the ball. Next we also define the following.
 
 $$
 C_{x}(s_{i}, r) = \sum_{\{u,v\} \in \delta(B_{x}(s_{i},r))} c(u,v)
 $$
 
-This will be denoted as a function $g(r)$. We may see some really nice properties these functions have. For instance $f(r)$ is a growing function which is increasing linearly and then it jumps to another point. On the other hand $g(r)$ is constant at some parts and then it jumps to a certain point, these jumps are for both function in the exact same spots. Next we can see that for some nice points it holds that $f'(r) = g(r)$.
+This will be denoted as a function $g(r)$. We may see some really nice properties these functions have. For instance $f(r)$ is a growing function which is increasing linearly and then it jumps to another point. On the other hand $g(r)$ is constant on some parts and then it jumps to a certain point, these jumps are for both function in the exact same spots. Next we can see that for some nice points it holds that $f'(r) = g(r)$. These nice points are all but the jumps.
 
 \begin{lemma}
 	For each $i \in [n]$ s.t. $s_{i}, t_{i} \in \bar{V}$ there exist $r \in (0, 1/2)$ s.t.
@@ -107,16 +110,17 @@ This will be denoted as a function $g(r)$. We may see some really nice propertie
 	$$
 	\frac{C_{x}(s_{i}, r)}{V_{x}(s_{i},r)} \leq 2 \ln 2k.
 	$$
+	\label{multi cut lemma}
 \end{lemma}
 
 \begin{proof}
-	By contradiction. For fixed $i$ $\forall r \in (0, 1/2)$, $\frac{f'(r)}{f(r)} > 2 \ln 2k$. We will have $r_{0} = 0 < r_{1} < r_{2} < \dots < r_{l-1} < 1/2 = r_{l}$ which are the values where $f(r)$ is not continuous (there are these "jumps"). First we consider $(r_{j}, r_{j+1})$ for some $j$.
+	By contradiction. For fixed $i$ $\forall r \in (0, 1/2)$, $\frac{f'(r)}{f(r)} > 2 \ln 2k$. We will have $r_{0} = 0 < r_{1} < r_{2} < \dots < r_{l-1} < 1/2 = r_{l}$ which are the values where $f(r)$ is not continuous (there are these "jumps"). First we consider $r \in (r_{j}, r_{j+1})$ for some $j$.
 	
 	$$
 	\frac{f'(r)}{f(r)} = \left( \ln f(r)\right)'
 	$$
 	
-	So $\forall r \in (r_{j}, r_{j+1})$, $\left( \ln f(r)\right)' > 2 \ln 2k$. We will compute the integral over all of these values. We may see that the right side is just a constant so we get
+	So for the contradiction $\forall r \in (r_{j}, r_{j+1})$, $\left( \ln f(r)\right)' > 2 \ln 2k$. We will compute the integral over all of these values. We may see that the right side is just a constant so we get
 	
 	$$
 	\int_{r_{j}}^{r_{j+1}} \left( \ln f(r)\right)' > (r_{j+1} - r_{j}) 2 \ln 2k.
@@ -134,7 +138,7 @@ This will be denoted as a function $g(r)$. We may see some really nice propertie
 	\begin{aligned}
 		\sum_{j = 0}^{l-1} \left( \ln f(r_{j+1}) - \ln f(r_{j}) \right) &> \sum_{j = 0}^{l-1} (r_{j+1} - r_{j}) 2 \ln 2k\\
 		\ln f(r_{l}) - \ln f(r_{0}) &> (r_{l} - r_{0}) 2 \ln 2k\\
-		\ln f(1/2) - \ln (0) &> \ln 2k\\
+		\ln f(1/2) - \ln f(0) &> \ln 2k\\
 		\ln \frac{f(1/2)}{\frac{\Phi}{k}} &> \ln 2k\\
 		\frac{f(1/2)}{\frac{\Phi}{k}} &> 2k\\
 		f(1/2) &> 2 \Phi
@@ -155,8 +159,8 @@ Note that choosing $1/2$ is not necessary for the proof, but for the algorithm t
 		\Ensure $F$ multi cut.
 		\State $F \gets \emptyset$
 		\For{$i = 1 \dots k$}
-			\If{$s_{i}-t_{i}$ are still connected in $(\bar{V}, \bar{E} \setminus F)$}
-				\State Choose $r \in (0, 1/2)$ by Lemma.
+			\If{$s_{i}-t_{i}$ are still connected in $\left(\bar{V}, \bar{E} \setminus F\right)$}
+				\State Choose $r \in (0, 1/2)$ by Lemma \ref{multi cut lemma}.
 				\State $F \gets F \cup \delta(B_{x}(s_{i}, r))$
 				\State Remove edges inside $B_{x}(s_{i}, r)$ and $\delta(B_{x}(s_{i}, r))$.
 			\EndIf
@@ -184,7 +188,7 @@ There are few things to talk about. To get $r$ we will check all "almost ends" o
 For a single commodity we know that max flow $=$ min cut. Where $\leq$ is trivial and $\geq$ is a little harder. This is a case of \textbf{exact duality}. On the other hand we already shown that this doesn't hold for multi-commodity, but what if we can define \textbf{approximate duality}.
 
 \begin{cor}
-	Max flow $\leq$ min cut $\leq O(\log k)$ max flow. For multi-commodity.
+	Max flow $\leq$ min cut $\leq O(\log k)$ max flow. For multi-commodity case.
 \end{cor}
 
 \begin{proof}
@@ -193,17 +197,19 @@ For a single commodity we know that max flow $=$ min cut. Where $\leq$ is trivia
 
 \section{How to solve LP}
 
-There is still a problem with our LP which can have up to exponential many of constraints. But this can be solved fast by using \textbf{Ellipsoid algorithm} on $A x \leq b$. Only thing it needs is an so called \textbf{ORACLE} which is that for given $\bar{x}$, check whether $A\bar{x} \leq b$ and if not return a violated constraint.
+There is still a problem with our LP which can have up to exponential many of constraints. But this can be solved fast by using \textbf{Ellipsoid algorithm} on $A x \leq b$. Only thing it needs is an \textbf{ORACLE} which is that for given $\bar{x}$, check whether $A\bar{x} \leq b$ and if not return a particular violated constraint.
 
-In our case \textbf{ORACLE} is for each $i$ find the shortest $s_{i}-t_{i}$ path w.r.t $\bar{x}$. This can be either $1$ and we are happy or $< 1$ then this constraint is violated.
+In our case \textbf{ORACLE} is for each $i$ find the shortest $s_{i}-t_{i}$ path w.r.t $\bar{x}$. This can be either $\geq 1$ and we are happy or $< 1$ then this constraint is violated.
 
 \section{Is there any better approximation?}
 
 We will show that indeed this approximation is the best we can get. Firstly we will define a new property of graphs.
 
-A graph $G = (V,E)$ is an \textbf{$\alpha$-expander} if $\forall S \subseteq V, |S| \leq \frac{n}{2}, \delta(S) \leq \alpha |S|$.
+\begin{defn}
+	A graph $G = (V,E)$ is an \textbf{$\alpha$-expander} if $\forall S \subseteq V, |S| \leq \frac{n}{2}, \delta(S) \leq \alpha |S|$.
+\end{defn}
 
-We take as granted that it holds: $3$-regular $\alpha$-expanders exist for $\alpha > 0$. Now lets observe (\ref{3-regular})that at most $1 + 3 \cdot 2^{l-1}$ vertices are reachable by a path of length $\leq l$.
+We take as granted that it holds: $3$-regular $\alpha$-expanders exist for $\alpha > 0$. Now lets observe an example on the picture \ref{3-regular} that at most $1 + 3 \cdot 2^{l-1}$ vertices are reachable by a path of length $\leq l$.
 
 \begin{figure}[!h] \centering
 	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle}]
@@ -227,8 +233,8 @@ We take as granted that it holds: $3$-regular $\alpha$-expanders exist for $\alp
 		\draw (4) -- (9);
 		\draw (4) -- (10);
 	\end{tikzpicture}
-	\caption{How to get the upper bound.}
+	\caption{How to get the upper bound. The graph continue and it is 3-regular.}
 	\label{3-regular}
 \end{figure}
 
-If we take $l = \log_{2} \frac{n-2}{6} + 1$ so with the upper bound we get $1 + 3\frac{n-2}{6} = 1 + \frac{n-2}{2} = \frac{n}{2}$. And also we define an instance of multi-commodity problem: $T = \{\{u,v\} | \delta(u,v) > l\}$. A unit of flow consumes $\geq l$ units of volume of the entire system. Thus $|E| = O(n)$. Therefore max flow $\leq O(\frac{n}{l}) = O(\frac{n}{\log n})$. But for min cut we take the optimum $F \subseteq E$. Every path in $G = (V, E \setminus F)$ is $\leq \frac{n}{2}$ so min cut is $\Theta(n)$. Thus it is indeed tight.
+If we take $l = \log_{2} \frac{n-2}{6} + 1$ so with the upper bound we get $1 + 3 \cdot \frac{n-2}{6} = 1 + \frac{n-2}{2} = \frac{n}{2}$. And also we define an instance of multi-commodity problem: $T = \left\{\{u,v\} | d(u,v) > l\right\}$. A unit of flow consumes $\geq l$ units of volume of the entire system. Thus $|E| = O(n)$. Therefore max flow $\leq O(\frac{n}{l}) = O(\frac{n}{\log n})$. But for min cut we take the optimum $F \subseteq E$. Every path in $G = (V, E \setminus F)$ is $\leq \frac{n}{2}$ so min cut is $\Theta(n)$. Thus it is indeed tight.

@@ -172,7 +172,7 @@ Also we can see what is the is the dual to this LP. Which will indeed solve $L$-
 $$
 \begin{aligned}
 	\max \sum_{p \in \mathcal{P}_L} f_p &\\
-	\sum_{p \in \mathcal{P}_L, e \in p} f_p & \quad \forall e \in E\\
+	\sum_{p: e \in p \in \mathcal{P}_L} f_p \leq 1 & \quad \forall e \in E\\
 	f_p \geq 0 & \quad \forall p \in \mathcal{P}_L
 \end{aligned}
 $$
@@ -342,7 +342,7 @@ This is the underline structure where we add a \textcolor{orange}{shortcut} that
 	\label{huge integrality gap}
 \end{figure}
 
-let $L = 3k$. As in the previous instance at least half of (that is $k$) the shortcut must be used for $L$-flow. Hence the max $L$-flow is at most 2. But one can prove that the following holds. Min $L$-cut is at least $n^{2/3}$. That is we can remove edges between two parts that form complete bipartite graph. This is only a sketch and it does not get into a details.
+Let $L = 3k$. As in the previous instance at least half of (that is $k$) the shortcut must be used for $L$-flow. Hence the max $L$-flow is at most 2. But one can prove that the following holds. Min $L$-cut is at least $n^{2/3}$. That is we can remove edges between two parts that form complete bipartite graph. This is only a sketch and it does not get into a details.
 
 All in all this particular instance has integrality gap $O(n^{2/3})$.
 
@@ -356,7 +356,7 @@ In this section we will take a look at an algorithm for $L$-flow that would be f
 		\Require $G = (V,E)$
 		\Ensure $\max L$-bounded flow.
 		\State $\epsilon > 0$ $\forall e \in E$, $\delta = \delta(\epsilon)$ $\forall p \in \mathcal{P}_L$
-		\While{the $y$-shortest part $p \in \mathcal{P}_L$ has length $< 1$}
+		\While{the $y$-shortest path $p \in \mathcal{P}_L$ has length $< 1$}
 			\State $c = \min_{e \in p} c(e)$
 			\State $x(p) = x(p) + \epsilon$
 			\State $y(e) = y(e) \left( 1 + \frac{\epsilon c}{c(e)} \right)$ $\forall e \in p$

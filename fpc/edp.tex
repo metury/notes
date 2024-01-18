@@ -62,14 +62,14 @@ $$
 |OPT| \leq |OPT_{easy}| + |(OPT \setminus OPT_{easy}) \setminus ALG| + |ALG| = O(n^{2/3}) |ALG|
 $$
 
-Now we only need to proof the theorem since it is the base of our arguments for obtaining $O(n^{2/3})$-approximation algorithm.
+Now we only need to prove the theorem since it is the base of our arguments for obtaining $O(n^{2/3})$-approximation algorithm.
 
 \begin{proof}
 	We will split the vertices into two sets:
 	
 	\begin{enumerate}
-		\item \textbf{low degree vertex} are when $\deg(v) \leq \frac{6 n}{l}$
-		\item \textbf{high degree vertex} are when $\deg(v) > \frac{6 n}{l}$
+		\item \textbf{low degree vertex} is when $\deg(v) \leq \frac{6 n}{l}$
+		\item \textbf{high degree vertex} is when $\deg(v) > \frac{6 n}{l}$
 	\end{enumerate}
 	
 	Also we will assume $l$ is a multiple of 6. Otherwise it get lost in the $O$ notation. To finish the proof we will use an observation.
@@ -1014,7 +1014,7 @@ Therefore altogether we get the following:
 $$
 \begin{aligned}
 	|\mathcal{O}| &\leq |\mathcal{O}' \setminus \mathcal{B}| + |\mathcal{B}| \\
-	 &\leq *F |\mathcal{B}| + |\mathcal{B}| \\
+	 &\leq 8F |\mathcal{B}| + |\mathcal{B}| \\
 	 & = O(F) |\mathcal{B}|
 \end{aligned}
 $$
@@ -1399,10 +1399,10 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 \end{figure}
 
 
-We may see that the switch is a small graph with 4 "inputs" and $B, C, 8, 8'$ and 4 "outputs" $A, D, 11, 11'$. It can be shown that this graph has two following properties.
+We may see that the switch is a small graph with 4 "inputs" $B, C, 8, 8'$ and 4 "outputs" $A, D, 11, 11'$. It can be shown that this graph has two following properties.
 
 \begin{enumerate}
-	\item If there are 2 edge disjoint paths one leaving at \textcolor{orange}{$A$} and the other entering at \textcolor{orange}{$B$}, then the former is entering at \textcolor{cyan}{$C$} and the later leaving at \textcolor{cyan}{$D$}. Look at the picture \ref{scheme analyse}.
+	\item If there are 2 edge disjoint paths one leaving at \textcolor{orange}{$A$} and the other entering at \textcolor{cyan}{$B$}, then the former is entering at \textcolor{orange}{$C$} and the later leaving at \textcolor{cyan}{$D$}. Look at the picture \ref{scheme analyse}.
 	\item And exactly one more edge-disjoint path through the graph exists and it is either $8 \to 11$ or $8' \to 11'$.
 \end{enumerate}
 
