@@ -995,9 +995,9 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 
 \section{Bounded greedy algorithm}
 
-Lets take a graph $G = (V,E)$ its flow number $F = F(G)$ and consider edge disjoint path problem on such $G$ with commodities $(s_{i}, t_{i})$ for $i \in [k]$. We will use the Greedy algorithm already mentioned, but with the parameter $2F$ instead.
+Lets take a graph $G = (V,E)$ its flow number $F = F(G)$ and consider edge disjoint path problem on such $G$ with commodities $(s_{i}, t_{i})$ for $i \in [k]$. We will use the Greedy algorithm already mentioned, but with the parameter $4F$ instead.
 
-Now we will analyze how the algorithm goes. Let $\mathcal{B}$ be the paths of Greedy($4F$) and $\mathcal{O}$ the paths in optimal solution. We may look at the optimal paths as a instance of a flow problem. Therefore we will use shortening lemma with $\epsilon = 1$ on the flow system $\mathcal{O}$. So let $\mathcal{O}'$ be the resulting flow system. We may see that both $\mathcal{O}'$ and $\mathcal{B}$ uses paths with lengths at most $4F$.
+Now we will analyze how the algorithm goes. Let $\mathcal{B}$ be the paths of Greedy($4F$) and $\mathcal{O}$ the paths in optimal solution. We may look at the optimal paths as an instance of a flow problem. Therefore we will use shortening lemma with $\epsilon = 1$ on the flow system $\mathcal{O}$. So let $\mathcal{O}'$ be the resulting flow system. We may see that both $\mathcal{O}'$ and $\mathcal{B}$ uses paths with lengths at most $4F$.
 
 For $(s_{i}, t_{i}) \in \mathcal{O}' \setminus \mathcal{B}$ consider a path $p$ connecting $s_{i}$ and $t_{i}$. Because it was not used by the algorithm there must $\exists q \in \mathcal{B}$ such that $q \cap p \neq \emptyset$. We may say that \textit{"$q$ is a witness of $(s_{i},t_{i})$ of weight $f_{p}$"}.
 
@@ -1141,7 +1141,7 @@ In this section we will take a look at the hardness of this problem. That is $\f
 	\caption{Separate parts to create graph $G$.}
 \end{figure}
 
-With this construction the graph $G$ contains $|V(G)| = l \times l \times k$ and let $K = |V(H)|$ then set $n = k^{1/2 \epsilon}$ and $l = n$. With this $|V(G)|$ is asymptotically $n$ (we were not counting sources and targets).
+With this construction the graph $G$ contains $|V(G)| = l \times l \times k$ and let $k = |V(H)|$ then set $n = k^{1/2 \epsilon}$ and $l = n$. With this $|V(G)|$ is asymptotically $n$ (we were not counting sources and targets).
 
 \begin{observ}
 	If this 2-DIR-EDP of instance $H$ is YES-instance, then we can connect all $l$ pairs $s_i t_i$. by edge disjoint paths.	

@@ -144,28 +144,28 @@ $$
 \end{lemma}
 
 \begin{proof}
-	The $\geq$ inequality can be easily seen if we set $F$ to be $\delta(S)$. Now we need to show the other inequality. For given $F \subseteq E$, let $s_{1}, \dots s_{l}$ be the components of connectivity of $(V, E \setminus F)$. For that we will proof that $\min_{i \in [l]} \rho(s_{i}) \leq \rho(F)$. This will bw shown by a contradiction. Assume $\forall i$:
+	The $\geq$ inequality can be easily seen if we set $F$ to be $\delta(S)$. Now we need to show the other inequality. For given $F \subseteq E$, let $S_{1}, \dots S_{l}$ be the components of connectivity of $(V, E \setminus F)$. For that we will proof that $\min_{i \in [l]} \rho(S_{i}) \leq \rho(F)$. This will be shown by a contradiction. Assume $\forall i$:
 	
 	$$
 	\begin{aligned}
-		\frac{\sum_{e \in \delta(s_{i})}c(e)}{\sum_{j \in I(s_{i})} d_{j}} &> \frac{\sum_{e \in F}c(e)}{\sum_{j \in I(F)} d_{j}}\\
-		\sum_{e \in \delta(s_{i})}c(e) &> \rho(F) \cdot \sum_{j \in I(s_{i})} d_{j}
+		\frac{\sum_{e \in \delta(S_{i})}c(e)}{\sum_{j \in I(S_{i})} d_{j}} &> \frac{\sum_{e \in F}c(e)}{\sum_{j \in I(F)} d_{j}}\\
+		\sum_{e \in \delta(S_{i})}c(e) &> \rho(F) \cdot \sum_{j \in I(S_{i})} d_{j}
 	\end{aligned}
 	$$
 	
 	Now we sum all $i$ inequalities.
 	
 	$$
-	\sum_{i = 1}^{l} \sum_{e \in \delta(s_{i})}c(e) > \rho(F) \cdot \sum_{i = 1}^{l} \sum_{j \in I(s_{i})} d_{j}
+	\sum_{i = 1}^{l} \sum_{e \in \delta(S_{i})}c(e) > \rho(F) \cdot \sum_{i = 1}^{l} \sum_{j \in I(S_{i})} d_{j}
 	$$
 
-	We can see that $\sum_{i = 1}^{l} \sum_{e \in \delta(s_{i})}c(e) = 2 \sum_{e \in F} c(e)$ because all edges are counted twice and similarly $\sum_{i = 1}^{l} \sum_{j \in I(s_{i})} d_{j} = 2 \sum_{j \in I(F)} d_{j}$. So we get:
+	We can see that $\sum_{i = 1}^{l} \sum_{e \in \delta(S_{i})}c(e) = 2 \sum_{e \in F} c(e)$ because all edges are counted twice and similarly $\sum_{i = 1}^{l} \sum_{j \in I(S_{i})} d_{j} = 2 \sum_{j \in I(F)} d_{j}$. So we get:
 	
 	$$
 	\sum_{e \in F} c(e) > \rho(F) \cdot \sum_{j \in I(F)} d_{j}
 	$$
 	
-	Which is a contradiction. So for each $F$ we can find $s_{i}$ that satisfies the inequality.
+	Which is a contradiction. So for each $F$ we can find $S_{i}$ that satisfies the inequality.
 \end{proof}
 
 Now we can use this for integer program and then use relaxation. The program will look like this:
@@ -316,7 +316,7 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	The last part is due to the previous observation and the fact that $\sum_{e \in E} c(e) \mu_{S}(e) = a_{S}$ and $\sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i}) = b_{S}$ taken means $\frac{a_{S}}{b_{S}} = \rho(S)$.
 \end{proof}
 
-Now we will be proving the Lemma A \ref{B}. For that we denote $T = \{s_{i} | i \in [k]\} \cup \{t_{i}| i \in [k]\}$ and without loss of generality assume that $|T| = 2^{\tau}$ (we can add arbitrary sources and targets that are essentially the same). Let us denote $d_{x} (u,v)$ the length of the $x$-shortest $u-v$ path. Where $x$ is the result of our LP. For $A \subseteq V: d_{x}(A,u) = \min_{v \in A} d_{x}(v,u)$.
+Now we will be proving the Lemma B \ref{B}. For that we denote $T = \{s_{i} | i \in [k]\} \cup \{t_{i}| i \in [k]\}$ and without loss of generality assume that $|T| = 2^{\tau}$ (we can add arbitrary sources and targets that are essentially the same). Let us denote $d_{x} (u,v)$ the length of the $x$-shortest $u-v$ path. Where $x$ is the result of our LP. For $A \subseteq V: d_{x}(A,u) = \min_{v \in A} d_{x}(v,u)$.
 
 Also we put $L = q \log (k)$ where $q$ is some constant to be decided later on and $k$ is for number of commodities. Also $d = L \cdot \tau = O (\log^{2}(k))$. For $t = 1, \dots, \tau$ and $l = 1, \dots, L$: let $A_{tl}$ be a set that is constructed by $2^{\tau - t}$-times selecting uniformely at random $v \in V$.
 
@@ -583,7 +583,7 @@ $$
 $$
 
 \begin{observ}
-	$OPT \geq \min$ bijection of $G = : \mathcal{B}$.
+	$OPT \geq \min$ bisection of $G = : \mathcal{B}$.
 \end{observ}
 
 \begin{proof}
@@ -608,7 +608,7 @@ $$
 	$E(L,R) \leq O (\log n) \cdot B$.
 \end{observ}
 
-And now we would like to get similiar bound for all the levels of recursion. For that consider $G_{i}$. Lets denote $B_{i}$ the bijection of $G_{i}$ and $OPT_{i}$ the optimum solution for $G_{i}$. Then $B_{i} \leq OPT_{i} \leq OPT$, therefore in our solution
+And now we would like to get similiar bound for all the levels of recursion. For that consider $G_{i}$. Lets denote $B_{i}$ the bisection of $G_{i}$ and $OPT_{i}$ the optimum solution for $G_{i}$. Then $B_{i} \leq OPT_{i} \leq OPT$, therefore in our solution
 
 $$
 \forall i \in [n], E(\{v_{1}, \dots, v_{i}\} \{v_{i+1}, \dots, v_{n}\}) \leq O(\log n) \cdot O(\log n) \cdot OPT
