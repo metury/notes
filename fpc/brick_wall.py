@@ -2,7 +2,7 @@
 
 """ =Initialize=all=values======================== """
 k = 4
-colors = ["orange", "purple", "blue", "green", "cyan"]
+colors = ["orange", "VioletRed", "blue", "Green", "cyan"]
 """ ============================================== """
 
 
