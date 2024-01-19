@@ -49,7 +49,7 @@ Thus we have shown an algorithm that is a $\sqrt{m}$-approximation. Now we consi
 
 \begin{thm}[Khana, Chedari]
 	\label{max flow bounded}
-	Given an instance of the sum multi-commodity flow problem $G =(V,E), (s_{i}, t_{i}) \in V^2$ for all $i \in [k]$ such that $(\forall i) \ d(s_{i}, t_{i}) \leq l$, then the max multi-commodity flow is $O(\frac{n^2}{l^2})$.
+	Given an instance of the sum multi-commodity flow problem $G =(V,E), (s_{i}, t_{i}) \in V^2$ for all $i \in [k]$ such that $(\forall i) \ d(s_{i}, t_{i}) \geq l$, then the max multi-commodity flow is $O(\frac{n^2}{l^2})$.
 \end{thm}
 
 Before proving this we will show the consequences for our problem. Lets use the algorithm Greedy$(n^{2/3})$. Assume there $\exists P_{i} \in ALG, |P_{i}| \leq n^{2/3}$. Otherwise we use the theorem on the network obtained by $G$ and setting all capacities to one. Then all edges are at least $n^{2/3}$ length so we get the max multi-commodity flow is $O(\frac{n^{2}}{n^{4/3}}) = O(n^{2/3})$. Therefore it means if we choose just one path the approximation ratio will still be $O(n^{2/3})$.
