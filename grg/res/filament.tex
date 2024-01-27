@@ -1,33 +1,13 @@
 \documentclass[tikz, border=1mm]{standalone}
 
-\usetikzlibrary{positioning}
-
 \begin{document}
-	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle, fill}]
-		\node (L) {};
-		\node[main, color=cyan] (1) [right of=L] {};
-		\node[main, color=orange] (2) [right of=1] {};
-		\node[main, color=blue] (3) [right of=2] {};
-		\node[main, color=blue] (4) [right of=3] {};
-		\node[main, color=cyan] (5) [right of=4] {};
-		\node[main, color=violet] (6) [right of=5] {};
-		\node[main, color=orange] (7) [right of=6] {};
-		\node[main, color=violet] (8) [right of=7] {};
-		\node (R) [right of=8] {};
-		\draw[main] (L) edge (R);
-		\draw[bend left=80, color=orange] (2) edge (7);
-		\draw[bend left=80, color=violet] (6) edge (8);
-		\draw[bend left=80, color=blue] (3) edge (4);
-		\draw[bend left=80, color=cyan] (1) edge (5);
-		
-		% One more time to beat the colorings.
-		\node[main, color=cyan] (1) [right of=L] {};
-		\node[main, color=orange] (2) [right of=1] {};
-		\node[main, color=blue] (3) [right of=2] {};
-		\node[main, color=blue] (4) [right of=3] {};
-		\node[main, color=cyan] (5) [right of=4] {};
-		\node[main, color=violet] (6) [right of=5] {};
-		\node[main, color=orange] (7) [right of=6] {};
-		\node[main, color=violet] (8) [right of=7] {};
+	\begin{tikzpicture}
+		\draw[thick] (0,0) -- (12,0);
+		\draw[color=red, thick] (2,0) arc (180:0:3);
+		\draw[color=cyan, thick] (1,0) arc (180:0:2);
+		\draw[color=orange, thick] (2.5,0) arc (180:0:1);
+		\draw[color=blue, thick] (6,0) arc (180:0:1.5);
+		\draw[color=green, thick] (3,0) arc (180:0:4);
+		\draw[color=gray, thick] (5.5,0) arc (180:0:2);
 	\end{tikzpicture}
 \end{document}
