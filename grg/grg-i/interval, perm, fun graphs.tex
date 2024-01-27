@@ -27,7 +27,7 @@
 \begin{proof}
 	"$1. \Leftrightarrow 3.$" is obvious.
 	
-	"$1. \Rightarrow 2.$" Assume $I_u , u \in V(G$ is an interval representation of $G$. Use the fact that intervals on a line have the Helly property, i.e., if any two of a collection of intervals have a nonempty intersection, then all of them have a nonempty intersection. In other words, if $Q_i \in \mathcal{Q}$ is a maximal clique of $G$, then there exists a point $P_i$ which belongs to $\bigcap_{u \in Q_i} I_u$ . Moreover, for every $v \notin Q_i , P_i \notin I_v$, since $Q_i$ is a maximal clique. (E.g., the rightmost of the left endpoints of the intervals $I_u , u \in Q_i$ is a good candidate for $P_i$.) Order the cliques of $Q$ as $Q_1, Q_2, \dots, Q_k$ so that $P_1 < P_2 < \dots < P_k$. Then the path
+	"$1. \Rightarrow 2.$" Assume $I_u , u \in V(G)$ is an interval representation of $G$. Use the fact that intervals on a line have the Helly property, i.e., if any two of a collection of intervals have a nonempty intersection, then all of them have a nonempty intersection. In other words, if $Q_i \in \mathcal{Q}$ is a maximal clique of $G$, then there exists a point $P_i$ which belongs to $\bigcap_{u \in Q_i} I_u$ . Moreover, for every $v \notin Q_i , P_i \notin I_v$, since $Q_i$ is a maximal clique. (E.g., the rightmost of the left endpoints of the intervals $I_u , u \in Q_i$ is a good candidate for $P_i$.) Order the cliques of $Q$ as $Q_1, Q_2, \dots, Q_k$ so that $P_1 < P_2 < \dots < P_k$. Then the path
 	$Q_1 Q_2 \dots Q_k$ is a clique-path decomposition of $G$.
 	
 	"$2. \Rightarrow 3.$" Given a clique-path decomposition $P = (\mathcal{Q}, F)$, define $P_u = P [\{Q : u \in Q \in \mathcal{Q}\}]$ for $u \in V(G)$. Clearly $V(P_u) \cap V(P_v) \neq \emptyset$ iff $u$ and $v$ belong to the same maximal clique of $G$, which happens if and only $u$ and $v$ are adjacent in $G$.
@@ -48,7 +48,7 @@
 \end{notation}
 
 \begin{observ}
-	If $A \subseteq B$, then $\text{co}-A \subseteq \text{co}-B$.
+	If $\mathcal{A} \subseteq \mathcal{B}$, then $\text{co}-\mathcal{A} \subseteq \text{co}-\mathcal{B}$.
 \end{observ}
 
 \begin{thm}
@@ -65,7 +65,7 @@
 	\begin{enumerate}
 		\item ”FUN $\subseteq$ co-CO”: Given a collection of curves joining two vertical parallel lines (and lying in the stripe between them), for any two non-crossing curves, it is uniquely determined which one lies above the other one (this follows from the Jordan curve theorem), and this gives a transitive orientation of the complement of the intersection graph of this collection.
 		
-		”co-CO $\subseteq$ FUN”: Let $G = (V, E)$ be a graph and let $P = (V, \leq)$ be a partial order which corresponds to a transitive orientation of the complement of $G$. If $d$ is the dimension of $P$, $P$ is the intersection of $d$ linear orders $L_1, L_2 , \dots, L_d$ of $V$. In the plane, draw d distinct parallel (vertical) lines $l_1, l_2, \dots, l_d$, and on each $l_i$ , mark distinct points $P_{iu}, u \in V$ bottom up in the order $L_i$. Consider piece-wise linear curves $c(u) = P_{1u} P_{2u} \dots P_{du}$, for $u \in V$. If $uv \in E$, $u$ and $v$ are incomparable in $P$,	and hence there are indices $i$ and $j$ such that $u <_{L_i} v$ and $v <_{L_j} u$, in other words $P_{iu}$ is below $P_{iv}$, while $P_{ju}$ is above $P_{jv}$. Hence the curves $c(u)$ and $c(v)$ cross somewhere between $l_i$ and $l_j$. If, on the other hand, $uv \notin E$, $uv$ is an edge of the complement of $G$ and hence $u$ and $v$ are comparable in $P$, say, $u \leq v$. But then $u <_{L_i} v$ for every $i = 1, 2, \dots, d$, and for each $i = 1, 2, \dots, d - 1$, the curve $c(u)$	lies below the curve $c(v)$ in the stripe between $l_i$ and $l_{i+1}$. Thus $c(u)$ and $c(v)$ are disjoint.
+		”co-CO $\subseteq$ FUN”: Let $G = (V, E)$ be a graph and let $P = (V, \leq)$ be a partial order which corresponds to a transitive orientation of the complement of $G$. If $d$ is the dimension of $P$, $P$ is the intersection of $d$ linear orders $L_1, L_2 , \dots, L_d$ of $V$. In the plane, draw d distinct parallel (vertical) lines $l_1, l_2, \dots, l_d$, and on each $l_i$, mark distinct points $P_{iu}, u \in V$ bottom up in the order $L_i$. Consider piece-wise linear curves $c(u) = P_{1u} P_{2u} \dots P_{du}$, for $u \in V$. If $uv \in E$, $u$ and $v$ are incomparable in $P$,	and hence there are indices $i$ and $j$ such that $u <_{L_i} v$ and $v <_{L_j} u$, in other words $P_{iu}$ is below $P_{iv}$, while $P_{ju}$ is above $P_{jv}$. Hence the curves $c(u)$ and $c(v)$ cross somewhere between $l_i$ and $l_j$. If, on the other hand, $uv \notin E$, $uv$ is an edge of the complement of $G$ and hence $u$ and $v$ are comparable in $P$, say, $u \leq v$. But then $u <_{L_i} v$ for every $i = 1, 2, \dots, d$, and for each $i = 1, 2, \dots, d - 1$, the curve $c(u)$	lies below the curve $c(v)$ in the stripe between $l_i$ and $l_{i+1}$. Thus $c(u)$ and $c(v)$ are disjoint.
 		
 		\item Note first that co-PER $\subseteq$ PER. Indeed, given a permutation representation of a graph, swap	the order of the endpoints on one of the bounding lines to obtain a representation of the complement of the given graph. Then PER $=$ co-(co-PER) $\subseteq$ co-PER, and hence PER $=$ co-PER.
 		
