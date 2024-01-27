@@ -1,0 +1,117 @@
+\chapter{Cliques and independent sets}
+
+We will show the computational complexity of the following optimization problems:
+
+\begin{itemize}[]
+	\item \textbf{Clique}
+	\item \textit{Input:} A graph $G$.
+	\item \textit{Output:} $\omega(G)$.
+\end{itemize}
+
+and
+
+\begin{itemize} []
+	\item \textbf{Independent Set}
+	\item \textit{Input:} A graph $G$.
+	\item \textit{Output:} $\alpha(G)$.
+\end{itemize}
+
+and their weighted variants
+
+\begin{itemize}[]
+	\item \textbf{Weighted Clique}
+	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to R_0^+$.
+	\item \textit{Output:} A clique $C \subseteq V(G)$ which maximizes $w(C) = \sum_{u \in C} w(u)$.
+\end{itemize}
+
+and
+
+\begin{itemize}[]
+	\item \textbf{Weighted Independent Set}
+	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to R_0^+$.
+	\item \textit{Output:} An independent set $A \subseteq V(G)$ which maximizes $w(A) = \sum_{u \in A} w(u)$.
+\end{itemize}
+
+Our goal is to show that for many of the intersection-defined graph classes that we have seen so far, these problems can be solved in polynomial time. For the sake of brevity, we denote by $\omega_w(G)$ the maximum possible weight $w(C)$ over all cliques $C$ in $G$, and by $\alpha_w(G)$ the maximum possible weight $w(A)$ over all independent sets $A$ in $G$.
+
+\section{Interval graphs}
+
+\begin{thm}
+	\textbf{Weighted Clique} can be solved in polynomial time for interval graphs.
+\end{thm}
+
+\begin{proof}
+	Interval graphs have only linearly many maximal cliques. We look at all of them and compare
+	their weights.
+\end{proof}
+
+\begin{thm}
+	\textbf{Weighted Independent Set} can be solved in polynomial time for interval graphs.
+\end{thm}
+
+\begin{proof}
+	Suppose we are given an interval intersection representation $\mathcal{R} = \{I_u = [l_u , r_u] : u \in V\}$ of	a graph $G = (V, E)$, equipped with a weight function $w$. We may assume that all endpoints of the intervals are different. Number the endpoints $P_1 , P_2 , \dots , P_{2n}$ so that $P_i < P_{i+1}$ for $i = 1, 2, \dots , 2n - 1$.	Use dynamic programming to compute $w_i$ which is defined as the maximum possible weight of an	independent set $A$ in $G$ such that $r_u < P_i$ for all $u \in A$. This can be computed as follows:
+	
+	\begin{algorithm}[!ht]
+		\begin{algorithmic}[1]
+			\State $w_i := 0$
+			\For{$i := 1$ to $2n$}
+				\If{$P_i$ is the left endpoint of an interval}
+					\State $w_{i+1} := w_i$
+				\Else
+					\State let $u \in V$ be such that $r_u = P_i$ and let $j$ be such that $P_j = l_u$;
+					\State set $w_{i+1} = \max \{w_j + w(u), w_i\}$
+				\EndIf
+			\EndFor
+			\State \Return $w_{2n+1}$
+		\end{algorithmic}
+	\end{algorithm}
+\end{proof}
+
+\begin{cor}
+	\textbf{Weighted Clique} and \textbf{Weighted Independent Set} can both be solved in polynomial	time on co-INT graphs.
+\end{cor}
+
+\section{Comparability graphs}
+
+\begin{thm}
+	\textbf{Weighted Clique} can be solved in polynomial time for comparability graphs.
+\end{thm}
+
+\begin{proof}
+	Given a transitive orientation $\overrightarrow{E}$ of $G = (V, E)$, order the vertices linearly $V = \{v_1 , v_2 , \dots, v_n\}$ in a topological sorting according to $\overrightarrow{E}$ (i.e., $v_i v_j \in \overrightarrow{E}$ implies $i < j$). For each $i$, set $W_i = \{j : v_j v_i \in E\}$ and let $w_i$ be the maximum weight $w(C)$ over all cliques $C \subseteq W_i \cup \{v_i\}$. Note that if $w(v_i) > 0$, each clique attaining the maximum weight contains $v_i$, and we may consider without loss	of generality only the cliques that contain $v_i$ even if $w(v_i) = 0$. The values $w_i , i = 1, 2, \dots , n$ can be computed recursively as follows
+	
+	\begin{algorithm}[!ht]
+		\begin{algorithmic}[1]
+			\For{$i := 1$ to $n$}
+				\State $w_i := \max_{j \in W_i} w_j + w(v_i)$
+			\EndFor
+		\end{algorithmic}
+	\end{algorithm}
+	
+	and clearly $\omega_w(G) = max_{i=1}^n w_i$.
+\end{proof}
+
+\begin{thm}
+	\textbf{Weighted Independent Set} can be solved in polynomial time for \\ comparability graphs.
+\end{thm}
+
+\begin{proof}
+	Given a transitive orientation $\overrightarrow{E}$ of $G = (V, E)$, consider the partial order $P = (V, \overrightarrow{E})$ determined by this orientation. The weighted version of Dilworth theorem yields that $\alpha_w(P)$ is equal to the minimum cost of a flow in the network $N = (V \cup \{s, t\}, E \cup \{su, ut : u \in V\})$ with vertex demands $f(u) \geq w(u)$, and this can be computed in polynomial time by network flow algorithms.
+\end{proof}
+
+\begin{cor}
+	\textbf{Weighted Clique} and \textbf{Weighted Independent Set} can both be solved in polynomial time on function (= co-comparability) graphs.
+\end{cor}
+
+\section{Interval-filament graphs}
+
+In this section we show the strongest results. Note, however, that we need the input graph to be given with an interval-filament representation (or, equivalently, with a partition of its edge set satisfying the mixing property).
+
+\begin{thm}
+	\textbf{Weighted Clique} can be solved in polynomial time for interval-filament graphs, if an interval-filament representation is provided on the input.
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
