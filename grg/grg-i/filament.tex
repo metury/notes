@@ -146,10 +146,46 @@
 	
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{0.45\textwidth}\centering
+			\begin{tikzpicture}
+				%% Lines
+				\draw[line width = 3, color=lightgray] (0,0) -- (6,0);
+				\draw[color=Red, thick] (1,0) arc (180:0:2);
+				\draw[color=Blue, thick] (2,0) arc(180:70:1);
+				\draw[color=Blue, thick] (4,0) arc(-180:-130:-1);
+				\draw[dotted] (3.5, 0) -- (3.5, 3);
+				\draw[color=Blue, thick] (3.35,0.93) -- (3.5, 2.5);
+				\draw[color=Blue, thick] (3.65,0.75) -- (3.5, 2.5);
+				%% Text boxes
+				\node (l) at (.5,.3) {$l$};
+				\node (lu) at (3.7,2.8) {$l_u$};
+				\node (fv) at (4.8,1.5) {$f_v$};
+				\node (fu) at (2.7,.6) {$f_u$};
+			\end{tikzpicture}
 			\caption{Crossing filaments.}
 			\label{left}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}\centering
+			\begin{tikzpicture}
+				%% Lines
+				\draw[line width = 3, color=lightgray] (0,0) -- (6,0);
+				\draw[color=Red, thick] (1,0) arc (180:0:2);
+				
+				\draw[color=Green, thick] (1.2,0) arc (180:0:1.8);
+				
+				\draw[color=Blue, thick] (2,0) arc(180:70:1);
+				\draw[color=Blue, thick] (4,0) arc(-180:-130:-1);
+				\draw[color=Blue, thick] (3.35,0.93) -- (3.5, 2.5);
+				\draw[color=Blue, thick] (3.65,0.75) -- (3.5, 2.5);
+				
+				\draw[color=Green, thick] (1.5,0) arc(180:80:1.5);
+				\draw[color=Green, thick] (4.5,0) arc(-180:-120:-1.5);
+				\draw[color=Green, thick] (3.24,1.47) -- (3.5, 3);
+				\draw[color=Green, thick] (3.76,1.28) -- (3.5, 3);
+				%% Text boxes
+				\node (l) at (.5,.3) {$l$};
+				\node (fv) at (4.8,1.5) {$f_v$};
+				\node (fu) at (2.7,.6) {$f_u$};
+			\end{tikzpicture}
 			\caption{Pushing outwards.}
 			\label{right}
 		\end{subfigure}
