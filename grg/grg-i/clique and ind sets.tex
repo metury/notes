@@ -20,7 +20,7 @@ and their weighted variants
 
 \begin{itemize}[]
 	\item \textbf{Weighted Clique}
-	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to R_0^+$.
+	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to \R_0^+$.
 	\item \textit{Output:} A clique $C \subseteq V(G)$ which maximizes $w(C) = \sum_{u \in C} w(u)$.
 \end{itemize}
 
@@ -28,7 +28,7 @@ and
 
 \begin{itemize}[]
 	\item \textbf{Weighted Independent Set}
-	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to R_0^+$.
+	\item \textit{Input:} A graph $G$ and a non-negative weight function $w : V(G) \to \R_0^+$.
 	\item \textit{Output:} An independent set $A \subseteq V(G)$ which maximizes $w(A) = \sum_{u \in A} w(u)$.
 \end{itemize}
 
@@ -94,6 +94,7 @@ Our goal is to show that for many of the intersection-defined graph classes that
 
 \begin{thm}
 	\textbf{Weighted Independent Set} can be solved in polynomial time for \\ comparability graphs.
+	\label{thm-4}
 \end{thm}
 
 \begin{proof}
@@ -113,5 +114,75 @@ In this section we show the strongest results. Note, however, that we need the i
 \end{thm}
 
 \begin{proof}
+	Suppose $\mathcal{R} = \{f_u : u \in V \}$ is an interval-filament representation of $G$, with $I_u$ being the base	interval of the filament $f_u$ for each $u \in V$, and let $w$ be the input weight function. We may suppose that the endpoints of the base intervals are mutually distinct, and we number them $P_1 , P_2 , \dots , P_{2n}$ from left to right. We further introduce points $Q_1 , Q_2 , \dots , Q_{2n-1}$ so that $Q_i$ lies between $P_i$ and $P_{i+1}$ for $i = 1, 2, \dots, 2n - 1$. Set $V_i = \{u : Q_i \in I_u\}$. If $C \subseteq V$ is a clique in $G$, the intervals $I_u$, $u \in C$ have a non-empty intersection, and hence $C \subseteq V_i$ for some $i$. Thus $\omega_w(G) = max_{i=1}^{2n-1} \omega_w (G[V_i])$ and each $\omega_w (G[V_i])$ can be computed in polynomial time by Theorem \ref{thm-4} since $G[V_i]$ is a co-comparability graph.
+\end{proof}
+
+\begin{thm}
+	Suppose \textbf{Weighted Clique} can be solved in polynomial time for graphs from a	hereditary graph class $\mathcal{A}$. Then it can be solved in polynomial time for $\mathcal{A}$-mixed graphs, provided a partition of the edges of the input graph that satisfies the mixing property is a part of the input.
+	\label{thm-6}
+\end{thm}
+
+\begin{proof}
+	Given a graph $G = (V, E)$, a weight function $w \to \R_0^+$ and a partition $E = E_1 \cup E_2$ such that $(V, E_1) \in A$, together with a transitive orientation $\overrightarrow{E_2}$ of $E_2$ which satisfies the mixing property, order the vertices $V = \{v_1 , v_2 , \dots , v_n\}$ in a topological sorting with respect to $\overrightarrow{E_2}$. For every vertex $v_i \in V$, set $W_i = \{v_j : v_j v_i \in \overrightarrow{E_2}\}$. Let $w_i = \omega_w (G[W_i \cup \{v_i\}])$ and let $C_i$ be a clique in $G[W_i \cup \{v_i\}]$ of weight $w_i$.
 	
+	\begin{claim}
+		Let $M \subseteq W_i$ be a maximum weighted clique in the graph $(W_i , E_1 \cap \binom{W_i}{2})$ with respect to the weight function $\bar{w}(v_j) = w_j$ for $v_j \in W_i$. Then
+		
+		$$
+		C = \bigcup_{v_j \in M} C_j \cup \{v_i\}
+		$$
+		
+		is a maximum weighted clique in $G[W_i \cup \{v_i\}]$ with respect to $w$ and its weight is $w_i = \sum_{j: v_j \in M} w_j + w(v_i)$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		First we show that $C$ is a clique. Due to transitivity of $\overrightarrow{E_2}$, for every $v_j \in M$ and every $x \in C_j$, $xv_i \in \overrightarrow{E_2}$, and hence $xv_i \in E_2 \subseteq E$. Hence $C$ is a clique if $|M| = 1$. If $|M| > 1$, consider $v_j, v_h \in M$ and $x \in C_j$, $y \in C_h$. Suppose $x \neq v_j$. The mixing property, when applied to $x, v_j , v_h$, then implies $xv_h \in E_1$. If $y \neq v_h$, the mixing property, when applied to $y, v_h , x$, implies $yx \in E_1$. These situations cover all pairs of vertices in $C$.
+		
+		Next we show that any two $C_j$, $C_h$ are disjoint. If there were an $x \in C_j \cap C_h$, this $x$ would be different from both $v_j$ and $v_h$. But then $xv_j \in \overrightarrow{E_2}$ and $v_j v_h \in E_1$ imply (via the mixing property) $xv_h \in E1$, contradicting the assumption $x \in C_h$. It further follows that $w(C) = \sum_{j:v_j \in M} \sum_{x \in C_j} w(x) + w(v_i) = \sum_{j:v_j \in M} w_j + w(v_i)$.
+		
+		Finally we show that the weight of $C$ is maximum possible. Suppose $D \subseteq W_i \cup \{v_i\}$ is a clique in $G[W_i \cup \{v_i\}]$ of maximum weight with respect to $w$. Obviously $v_i \in D$. Denote $\bar{D} = D \setminus \{v_i\}$ and consider $\bar{G} = (\bar{D}, \overrightarrow{E_2} \cap \bar{D} \times \bar{D})$. This $\bar{G}$ is an acyclic graph. Denote by $\bar{M}$ the sinks of $\bar{G}$. Every other vertex of $\bar{D}$ is connected to some vertex of $\bar{M}$ by a directed path, and hence, due to transitivity of $\overrightarrow{E_2}$, by a directed edge from $\overrightarrow{E_2}$. Set $\bar{D}_j = \{u : uv_j \in \overrightarrow{E_2} \land u \in \bar{D}\}$ and $D_j = \bar{D}_j \cup \{v_j\}$, for $v_j \in \bar{M}$. The mixing property implies that for $j \neq h$, $D_j \cap D_h = \emptyset$. Since $D_j$ is a clique in $G[W_j \cup \{v_j\}]$, it is $w(D_j) \leq w_j = \bar{w}(v_j)$. All vertices of $\bar{M}$ are sinks of $\bar{G}$, and thus any two of them are connected by an edge of $E_1$. Hence $M$ is a clique in $(W_i , E_1 \cap \binom{W_i}{2})$, and therefore $\bar{w}(\bar{M}) \leq \bar{w}(M)$. Thus
+		
+		$$
+		\begin{aligned}
+			w(D) &= w(v_i) + \sum_{j: v_j \in \bar{M}} \sum_{x \in D_j} w(x) = w(v_i) + \sum_{j:v_j \in \bar{M}} w(D_j) \leq w(v_i) + \sum_{j:v_j \in \bar{M}} \bar{w}(v_j)\\
+			& = w(v_i) + \bar{w}(\bar{M}) \leq w(v_i) + \bar{w}(M) = w(C)
+		\end{aligned}
+		$$
+		
+		and $C$ is indeed a maximum weighted clique with respect to the weight function $w$.
+	\end{proof}
+	
+	Having proved the observations above, we can now summarize the algorithm for finding a maximum weighted clique in an $\mathcal{A}$-mixed graph. Note that the preprocessing trick with adding a dummy vertex $v_{n+1}$ is introduced for the comfort of a more succinct write-up of the algorithm.
+	
+	\begin{algorithm}[!ht]
+		\caption{Weighted Clique in A-mixed graphs}
+		\begin{algorithmic}[1]
+			\Require A graph $G = (V, E)$, a partition $E = E_1 \cup E_2$ such that $(V, E_1) \in \mathcal{A}$, a transitive orientation $\overrightarrow{E_2}$ of $E_2$ such that $E_1 , \overrightarrow{E_2}$ satisfy the mixing property, and a weight function $w : V \to \R_0^+$.
+			\Ensure The weighted clique number $\omega_w(G)$ of $G$ and a maximum weighted clique $C$.
+			\State Order the vertices of $G$ linearly in a topological sorting with respect to $\overrightarrow{E_2}$ as $V = \{v_1 , v_2 , \dots, v_n\}$ and add a dummy vertex $v_{n+1}$ with weight $w(v_{n+1}) = 0$ and edges $v_i v_{n+1} \in E2$, all of them being oriented from $v_i$ to $v_{n+1}$, for $i = 1, 2, \dots, n$.
+			\For{$i = 1 \dots n+1$}
+				\State $w_i := 0$, $C_i := \emptyset$
+			\EndFor
+			\For{$i = 1 \dots n+1$}
+				\State $W_i := \{v_j : v_j v_i \in \overrightarrow{E_2}\}$
+				\For{ $v_j \in W_i$}
+					\State $\bar{w}(v_j) := w_j$
+				\EndFor
+				\State find maximum weighted clique $M$ in $(W_i, E_1 \cap W_i \times W_i)$ w.r.t. $\bar{w}$
+				\State $C_i := \cup_{j:v_j \in M} C_j \cup \{v_i\}$
+				\State $w_i := \sum_{j:v_j \in M} w_j + w(v_i)$
+			\EndFor
+			\State \Return $C = C_{n+1} \setminus \{v_{n+1}\}, \omega_w (G) = w_{n+1}$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	The correctness of the algorithm was proven in the Claim above, it may only be added here that the introduction of the dummy vertex $v_{n+1}$ does not break the mixing property of $E_1$ and $\overrightarrow{E_2}$ and that $v_{n+1}$ belongs to every maximal clique, and hence also to every maximum weighted one, but does not affect its weight. If $F(n)$ is the worst-case running time of the algorithm for maximum weighted clique on $\mathcal{A}$ graphs, the running time of our algorithm is majorized by $nF(n)$.
+\end{proof}
+
+\begin{cor}
+	\textbf{Weighted Independent Set} can be solved in polynomial time for interval-filament graphs, provided a representation is given as part of the input.
+\end{cor}
+
+\begin{proof}
+	We have seen that \textbf{Weighted Clique} is polynomial time solvable for co-INT graphs. Theorem \ref{thm-6} implies that it is polynomial-time solvable for (co-INT)-mixed graphs, alas for co-IFA graphs. Thus \textbf{Weighted Independent Set} is polynomial-time solvable for IFA graphs.
 \end{proof}

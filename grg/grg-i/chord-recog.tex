@@ -1,0 +1,90 @@
+\chapter{Recognition of Chordal graphs}
+
+It is not surprising that chordal graphs can be recognized in polynomial time. Just search for a simplicial vertex, delete it if you find one and proceed recursively, or quit and say that the input graph
+is not chordal if it has no simplicial vertex. Checking a vertex for being simplicial requires checking at most $n^2$ pairs of vertices if they are adjacent, hence a simplicial vertex can be found in $O(n^3)$ steps. Thus chordality can be checked in time $O(n^4)$. However, even if the graph is dense, i.e., if it has $m = \Omega(n^2)$, this naive algorithm still takes $\Omega(m^2)$ time. With more care, one can test chordality in time linear in the number of edges by the following algorithm.
+
+\begin{algorithm}[!ht]
+	\caption{LexBFS}
+	\begin{algorithmic}[1]
+		\Require A graph $G = (V,E)$ with $n$ vertices.
+		\State $T := \emptyset, w(x) := \emptyset$ $\forall x \in V$
+		\For{$i:= n \dots 1$}
+			\State let $u \in V \setminus T$ be a vertex with lexicographicly maximum $w(u)$
+			\State set $\sigma(i) := u$
+			\State $T := T \cup \{u\}$
+			\For{$x \in N_G (u) \cap (V \setminus T)$}
+				\State $w(x) := w(x) \cup \{i\}$
+			\EndFor
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{thm}
+	If $G = (V, E)$ is chordal, then $\sigma(n), \sigma(n - 1), . . . , \sigma(1)$ is a PES \faDog.
+\end{thm}
+
+\begin{proof}
+	Suppose $G$ is chordal but there exist indices $i < j < h$ such that $\sigma(i)\sigma(j) \in E, \sigma(i)\sigma(h) \in E$ while $\sigma(j)\sigma(h) \notin E$. Let $i_0 < i_1 < i_2$ be such a triple and such that $i_2$ is largest possible.
+	
+	Let $u_i = \sigma(i), i = 1, 2, \dots , n$ be the ordering output by the Algorithm. Consider the step of the LexBFS algorithm when $i_1$ was processed. At this moment, $i_2 \in w(u_{i_0})$ while $i_2 \notin w(u_{i_1})$. Thus $u_{i_0}$ and $u_{i_1}$ do not have the same weights, and since $u_{i_1}$ was chosen for $\sigma(i_1)$, we must have $w(u_{i_0}) <_{lex} w(u_{i_1})$. Hence there must be $i_3 > i_2$ such that $u_{i_1} u_{i_3} \in E$ and $u_{i_0} u_{i_3} \notin E$. Let us choose $i_3$ as the largest index with these properties. An edge between $u_{i_2}$ and $u_{i_3}$ would imply that $G[\{u_0 , u_1 , u_2 ,u-3 \}]$ would be isomorphic to $C_4$, which would contradict the assumption that $G$ is chordal, and thus we conclude that $u_{i_2} u_{i_3} \notin E$.
+	
+	The same argument can now be used for $i_2$ and $i_3$ and further on:
+	
+	\begin{claim}
+		For every $k > 3$, there exists a sequence $i_0 < i_1 < \dots < i_k$ such that $\{u_{i_0} u_{u_1}\} \cup \{u_{i_j} u_{i_{j+2}} : j = 0, 1, 2, \dots, k - 2\}$ are the only edges of $G$ among these vertices.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		We proceed by induction on $k$. We have just seen that such a sequence exists for $k = 4$. Since the sequence is constructed recursively, we will further assume that in each step we have chosen $i_k$ largest possible.
+		
+		For the induction step $k \to k + 1$, we observe that at the moment when $i_{k-1}$ was processed, $i_k$ was in $w(u_{k-2})$ but not in $w(u_{k-1})$. Since $u_{i_{k-1}}$ was chosen for $\sigma(i_{k-1})$, it must have been $w(u_{i_{k-1}}) >_{lex} w(u_{i_{k-2}})$, and so there must be an $i_{k+1} > i_k$ such that $u_{i_{k-1}} u_{i_{k+1}} \in E$ while $u_{i_{k-2}} u_{i_{k+1}} \notin E$ (recall that we choose $i_{k+1}$ maximum possible with this property). Suppose there is a $j$, $0 \leq j \leq k - 3$ such that $u_{i_j} u_{i_{k+1}} \in E$, and consider the largest possible such $j$. If $j = k - 3$, then both $u_{i_{k+1}}$ and $u_{i_{k-1}}$ are adjacent to $u_{i_{k-3}}$ and non-adjacent to $u_{i_{k-2}}$ and this contradicts the presumed choice of
+		$i_{k-1} < i_{k+1}$ as the largest possible index of this property. If $j < k - 3$, then $i_j < i_{j+2} < i_{k+1}$ would be	a triple violating the PES condition (since $u_{i_j} u_{i_{j+2}}, u_{i_j} u_{i_{k+1}} \in E$ and $u_{i_{j+2}} u_{i_{k+1}} \notin E$) with $i_{k+1} > i_2$ contradicting the choice of $i_0 < i_1 < i_2$. Thus $u_{i_j} u_{i_{k+1}} \notin E$ for $j = 0, 1, \dots, k - 2$. If $u_{i_k} u_{i_{k+1}}$ were an edge, $G[\{u_{i_h} : h = 0, 1, \dots, k + 1\}]$ would be isomorphic to $C_{k+2}$, which is impossible as $G$ is assumed to be chordal. This concludes the proof of the Claim.
+	\end{proof}
+	
+	Since $G$ is finite, the sequence of the properties guaranteed by the Claim cannot exist, e.g., for $k > n$. So no triple of indices $i < j < h$ violating the PES condition may exist.
+\end{proof}
+
+With a suitable data structure, the LexBFS algorithm can be implemented to run in time linear in the number $m$ of edges of the input graph (the point is that this algorithm processes every edge of the graph only once).
+
+However, this is only one half of testing for chordality. The algorithm LexBFS outputs a linear ordering of the vertices of $G$, but we need to test this ordering if it is a PES or not. This can, fortunately, also be achieved in linear time.
+
+\begin{algorithm}[!ht]
+	\caption{TestPES \faDog}
+	\begin{algorithmic}[1]
+		\Require A graph $G = (V, E)$ with $n$ vertices, a linear ordering $\sigma(i) \in V, i = 1, 2, \dots, n$ of its vertices.
+		\Ensure \textbf{YES} or \textbf{NO} if $\sigma(n), \sigma(n-1), \dots, \sigma(1)$ is a PES.
+		\State $A(x) := \emptyset$ for all $x \in V$
+		\For{$i := 1 \dots n-1$}
+			\State $v:= \sigma(i)$
+			\State $X:= \{x : x \in N_G (v) \land \sigma^{-1}(v) < \sigma^{-1}(x)\}$
+			\If{$X \neq \emptyset$}
+				\State $u := \min \sigma^{-1}(X)$
+				\State $A(u) := A(u) \cup (X \setminus \{u\})$
+			\EndIf
+			\If{$A(v) \setminus N_G (v) \neq \emptyset$}
+				\State \Return \textbf{NO}
+			\EndIf
+		\EndFor
+		\State \Return \textbf{YES} \faDog
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{thm}
+	Algorithm TestPES correctly answers if a linear ordering $\sigma(n), \sigma(n-1), \dots, \sigma(1)$ is a PES for $G$ or not and it can be implemented in time linear in $m$.
+\end{thm}
+
+\begin{proof}
+	For each vertex $u \in V$, the set $A(u)$ contains vertices that should be neighbors of $u$ if the ordering is a PES. The point is that it is not necessary to put in $A(u)$ all neighbors, and thus the running time can be significantly reduced.
+	
+	\begin{claim}
+		If $\sigma(n), \sigma(n-1), \dots, \sigma(1)$ is not a PES, then at least one violation gets detected.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		Let $i < j < h$ be a violation (i.e., $\sigma(i)\sigma(j), \sigma(i)\sigma(h) \in E$, $\sigma(j)\sigma(h) \notin E$) such that the difference $j - i$ is minimum possible. Let $v = \sigma(i)$. Then $\sigma(j), \sigma(h) \in X$ when $v$ is processed by the algorithm. Suppose there is a $j' , i < j' < j$ such that $\sigma(j') \in X$. If $\sigma(j')\sigma(j) \notin E$, $i < j' < j$ is a violation with smaller difference $j' - i < j - i$. If $\sigma(j')\sigma(h) \notin E$, $i < j' < h$ is a violation with smaller difference $j' - i < j - i$. If both $\sigma(j')\sigma(j)$ and $\sigma(j')\sigma(h)$ are edges, $j' < j < h$ is a violation with smaller difference $j - j' < j - i$. Since all possibilities lead to contradictions, we conclude that $j = \min\{l : \sigma(l) \in X\}$ and $\sigma(h)$ is put into $A(\sigma(j))$ when $v$ is being processed. Thus the non-edge $\sigma(j)\sigma(h)$ gets detected when $u = \sigma(j)$ is processed (unless the algorithm quits even sooner).
+	\end{proof}
+\end{proof}
+
+\begin{rem}
+	Note that the correctness of Algorithm LexBFS implies that not only one can leave any simplicial vertex as the last one in a PES, but it is also true that any vertex of a chordal graph can be used as the first vertex in a PES.
+\end{rem}
