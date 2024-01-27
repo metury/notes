@@ -1,0 +1,87 @@
+\chapter{Recognition of Comparability graphs}
+
+Recall that comparability graphs are exactly the transitively orientable graphs. And that a transitive orientation is a binary relation on the vertex set of the graph which is transitive and orients every edge of the graph in exactly one direction. In order to eventually construct such a relation, if it exists, we will examine partial orientations and relations with further useful properties. Throughout
+this handout we assume that we are processing a given simple undirected graph $G = (V, E)$.
+
+\begin{defn}
+	A relation $M \subseteq V \times V$ is called
+	
+	\begin{itemize}
+		\item \textbf{sensitive} if for every three vertices $x, y, z \in V$, it holds true that $(x, y) \in M, xz \in E, yz \notin E$ imply $(x, z) \in M$, and $(x, y) \in M$, $zy \in E$, $xz \notin E$ imply $(z, y) \in M$,
+		\item \textbf{complete} if it is sensitive and transitive,
+		\item \textbf{faithful} if for every two vertices $x, y \in V$, it holds true that $(x, y) \in M$ implies $xy \in E$, and
+		\item \textbf{whole} if for every edge $xy \in E$, at least one of $(x, y), (y, x)$ is in $M$.
+	\end{itemize}
+\end{defn}
+
+\begin{observ}
+	Every faithful, transitive and whole relation is necessarily sensitive.
+\end{observ}
+
+\begin{proof}
+	Suppose $x, y, z$ are such that $(x, y) \in M$, $xz \in E$ and $yz \notin E$. Since $M$ is whole, we have either $(x, z) \in M$ or $(z, x) \in M$. In the case of $(z, x) \in M$, transitivity of $M$ would imply $(z, y) \in M$,	what would be in contradiction with the assumed faithfulness of $M$. Hence it must be $(x, z) \in M$. The symmetric rule is proven analogously.
+\end{proof}
+
+\begin{observ}
+	Every transitive and faithful relation is necessarily antisymmetric (because we only consider simple - and henceforth loopless - graphs). Therefore transitive \\ orientations of $G$ are exactly those relations that are transitive, whole and faithful, and these are exactly those relations that are complete, whole and faithful.
+\end{observ}
+
+\begin{observ}
+	The intersection of sensitive (transitive, complete) relations is a sensitive (transitive, complete, respectively) relation.
+\end{observ}
+
+The last observation implies that closures are defined uniquely:
+
+\begin{defn}
+	Let $M \subseteq V \times V$ be a binary relation. The smallest relation which contains $M$ and which is sensitive (transitive, complete) is called the sensitive- (transitive-, complete-, respectively) closure of $M$ and is denoted by $\langle M \rangle_{S}$ ($\langle M \rangle_{T}$ , $\langle M \rangle$, respectively).
+\end{defn}
+
+\begin{lemma}
+	For any binary relation $M \subseteq V \times V$, it is $\langle M \rangle_{} = \langle\langle M \rangle_{S}\rangle_{T}$.
+\end{lemma}
+
+\begin{proof}
+	It suffices to show that $\langle\langle M \rangle_{S}\rangle_{T}$ is sensitive. Suppose $x, y, z \in V$ are such that $(x, y) \in \langle\langle M \rangle_{S}\rangle_{T}, xz \in E, yz \notin E$. Then there is a sequence $x = x_1 , x_2 , \dots, x_k = y$ such that $x_i x_{i+1} \in \langle M \rangle_{S}$ for every $i = 1, 2, \dots, k-1$. Since $x_1 z \in E$ and $x_k z \notin E$, there is an index $i, 1 \leq i < k$ such that $x_i z \in E$ and $x_{i+1} z \notin E$. Then $(xi , z) \in \langle M \rangle_S$ (this follows from its sensitivity), and hence $(x, z) \in \langle\langle M \rangle_{S}\rangle_{T}$	follows from the sequence of arcs $(x_1 , x_2), (x_2 , x_3), \dots, (x_{i-1} , x_i), (x_i , z) \in \langle M \rangle_{S}$.
+\end{proof}
+
+\section{Blocks}
+
+\begin{defn}
+	A \textbf{block} is the sensitive closure $\langle(x, y)\rangle_S$ of a single arc $(x, y)$ such that $xy \in E$. A pathway of length $k - 1$ in $V \times V$ from $(a, b)$ to $(c, d)$ is a sequence $(x_i, y_i), i = 1, 2, \dots, k$ such that
+	
+	\begin{itemize}
+		\item $(a,b) = (x_1, y_1), (c,d) = (x_k, y_k)$,
+		\item for every $i = 1, 2, \dots, k, x_i y_i \in E$,
+		\item for every $i = 1, 2, \dots, k - 1$, either $x_i = x_{i+1}$ and $y_i y_{i+1} \notin E$, or $y_i = y_{i+1}$ and $x_i x_{i+1} \notin E$.
+	\end{itemize}
+	
+	The \textbf{distance} of $(a, b)$ and $(c, d)$ (denoted by $\text{dist}_\Gamma ((a, b), (c, d)))$ is the length of a shortest pathway	between $(a, b)$ and $(c, d)$.
+\end{defn}
+
+\begin{prop}
+	Let $xy \in E$ be an edge of $G$. Then the block $\langle(x, y)\rangle_S$ determined by an orientation $(x, y)$ of $xy$ contains exactly those arcs $(u, v)$ that are connected by pathways from $(x, y)$ to $(u, v)$. For every $(u, v) \in \langle(x, y)\rangle_S$, this arc defines the same block, i.e., $\langle(x, y)\rangle_S = \langle(u, v)\rangle_S$.
+\end{prop}
+
+%% Handout 6
+
+\section{Algorithmic aspects}
+
+Lemmas 2 and 3 also provide the correctness argument for a polynomial time algorithm for deciding if a graph is transitively orientable, and constructing such an orientation, if one exists.
+
+\begin{algorithm}[!ht]
+	\caption{Transitive Orientation}
+	\begin{algorithmic}[1]
+		\Require A graph $G = (V,E)$.
+		\State $M := \emptyset$
+		\While{$M$ is not whole}
+			\State let $xy \in E$ be such that $M \cap \{(x,y), (y,x)\} = \emptyset$
+			\State construct $U = \langle (x,y) \rangle_S$
+			\If{$U$ is not antisymmetric}
+				\State \Return "$G$ is not transitively orientable"
+			\Else
+				\State $M := \langle M \cup U \rangle_T$
+			\EndIf
+		\EndWhile
+		\State \Return "$G$ is transitively orientable by $M$"
+	\end{algorithmic}
+\end{algorithm}
