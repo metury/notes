@@ -378,14 +378,48 @@ In the next claims we prove that the collection of segments constructed in Step 
 \end{claim}
 
 \begin{figure}[!ht]
-	\begin{subfigure}{0.45\textwidth}\centering
-		\begin{tikzpicture}[be/.style = {thick, Blue, ->}, ge/.style = {thick, Blue, ->},
-			bn/.style = {Blue, thick}, gn/.style = {Green, thick}]
-			
+	\begin{subfigure}{0.53\textwidth}\centering
+		\begin{tikzpicture}[be/.style = {thick, Blue, ->}, ge/.style = {thick, Green, ->},
+			bn/.style = {Blue, thick, circle, draw}, gn/.style = {Green, thick, circle, draw}]
+			\node[bn] (1) at (0,0) {1};
+			\node[bn] (2) at (-1.7, 1.7) {2};
+			\node[bn] (3) at (.2, 3.2) {3};
+			\node[bn] (4) at (-3, 3) {4};
+			\node[bn] (5) at (1.8, 4) {5};
+			\node[bn] (6) at (-1.3, 5) {6};
+			\node[bn] (7) at (-.5, 6) {7};
+			\node[gn] (A) at (-4, 4) {A};
+			\node[gn] (B) at (-2.1, 3.2) {B};
+			\node[gn] (C) at (-.8, 3.6) {C};
+			\node[gn] (D) at (-.6, 1.7) {D};
+			\node[gn] (E) at (1, 3.6) {E};
+			\node[gn] (Z) at (1.6, 5.6) {Z};
+			\draw[be] (1) -- (2);
+			\draw[be] (1) -- (3);
+			\draw[be] (1) -- (5);
+			\draw[be] (2) -- (4);
+			\draw[be] (2) -- (6);
+			\draw[be] (2) -- (3);
+			\draw[be] (5) -- (7);
+			\draw[be] (3) -- (7);
+			\draw[be] (6) -- (7);
+			\draw[be] (4) -- (6);
+			\draw[ge, bend left = 20] (A) edge (B);
+			\draw[ge] (B) -- (C);
+			\draw[ge] (C) -- (D);
+			\draw[ge] (E) -- (Z);
+			\draw[ge, bend right = 20] (D) edge (E);
+			\draw[ge, bend left = 20] (C) edge (E);
+			\draw[ge] (A) to[out=290, in=90] (-4, 2) to[out=270, in=300] (B);
+			\draw[ge] (A) to[out=270, in=90] (-4.3, 1) to[out=270, in=280] (D);
+			\draw[ge] (A) to[out=30, in=90] (-1, 6) to[out=270, in=50] (C);
+			\draw[ge] (E) to[out=270, in=270] (2.5, 4) to[out=90, in=300] (Z);
+			\draw[ge, dashed] (A) to[out=50, in=180] (0, 7.5) to[out=0, in=130] (Z);
+			\draw[be, dashed] (1) to[out=20, in=270] (3, 4) to[out=90, in=50] (7);
 		\end{tikzpicture}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
-		\begin{tikzpicture}[b/.style = {line width = 3, Blue}, g/.style = {line width = 3, Green}]
+		\begin{tikzpicture}[b/.style = {line width = 4, Blue}, g/.style = {line width = 4, Green}]
 			\draw (1,1) -- (1,7);
 			\draw (2,1) -- (2,7);
 			\draw (3,1) -- (3,7);
