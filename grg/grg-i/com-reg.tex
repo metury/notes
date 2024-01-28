@@ -38,6 +38,7 @@ The last observation implies that closures are defined uniquely:
 
 \begin{lemma}
 	For any binary relation $M \subseteq V \times V$, it is $\langle M \rangle_{} = \langle\langle M \rangle_{S}\rangle_{T}$.
+	\label{lemma-1}
 \end{lemma}
 
 \begin{proof}
@@ -62,7 +63,130 @@ The last observation implies that closures are defined uniquely:
 	Let $xy \in E$ be an edge of $G$. Then the block $\langle(x, y)\rangle_S$ determined by an orientation $(x, y)$ of $xy$ contains exactly those arcs $(u, v)$ that are connected by pathways from $(x, y)$ to $(u, v)$. For every $(u, v) \in \langle(x, y)\rangle_S$, this arc defines the same block, i.e., $\langle(x, y)\rangle_S = \langle(u, v)\rangle_S$.
 \end{prop}
 
-%% Handout 6
+\begin{proof}
+	Define the graph $\Gamma_G = ((V \times V ) \cap \{(x, y) : xy \in E\}, \{(x, y)(u, v) : (x = u, yv \notin E) \land (y = v, xu \notin E)\})$ that captures the sensitive-rule constellations. Then blocks are connected components	of $\Gamma_G$. The concatenation of pathways from $(x, y)$ to $(u, v)$ and from $(u, v)$ to $(s, t)$ is a pathway from $(x, y)$ to $(s, t)$. Hence $\langle(u, v)\rangle_S \subseteq \langle(x, y)\rangle_S$ for every $(u, v) \in \langle(x, y)\rangle_S$. Since a pathway from $(x, y)$ to $(u, v)$ traversed in the opposite way is a pathway from $(u, v)$ to $(x, y)$, we get $\langle(x, y)\rangle_S = \langle(u, v)\rangle_S$.
+\end{proof}
+
+\begin{cor}
+	For an edge $xy \in E$, it is $\langle(y, x)\rangle_S = \langle(x, y)\rangle_{S}^{-1}$ and both $\langle(x, y)\rangle_S$ and $\langle(y, x)\rangle_S$ are faithful.
+\end{cor}
+
+\begin{lemma}
+	Let $xy \in E$ be an edge of $G$. If the block $\langle(x, y)\rangle_S$ is antisymmetric, then it is also transitive, and hence $\langle(x, y)\rangle = \langle(x, y)\rangle_S$ is faithful and complete.
+	\label{lemma-2}
+\end{lemma}
+
+\begin{proof}
+	For the sake of brevity, denote $U = \langle(x, y)\rangle_S$. Suppose $U$ is not transitive, i.e., there exist vertices $a, b, c \in V$ such that $(a, b), (b, c) \in U$ and $(a, c) \notin U$. Since $U$ is faithful, $ab, bc \in E$. It follows from the Proposition above that $\langle(a, b)\rangle_S = U$, and hence there is a pathway from $(a, b)$ to $(b, c)$ in $G$. Let the choice of the transitivity violating triple $a, b, c$ be such that the distance of $(a, b)$ and $(b, c)$ is the smallest possible.
+	
+	If $ac$ were not an edge of $G$, sensitivity of $U$ would imply $(c, b) \in U$ and that would be a contradiction with the assumed antisymmetry of $U$. Thus $ac \in E$.
+	
+	Let $(a, b) = (x_1 , y_1), (x_2 , y_2), \dots, (x_k , y_k ) = (b, c)$ be a shortest pathway from $(a, b)$ to $(b, c)$ in $G$ and let $l$ be the largest index such that $y_l \neq c$. Note that $x_l = x_{l+1}$ and $y_i = c$ for all $i = l + 1, \dots, k$. Set $\alpha = x_l$ and $\beta = y_l$.
+	
+	\begin{claim}
+		For every $i = l+1, \dots, k, ax_i \in E$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		If for any such $i$ were $ax_i \notin E$, the sensitivity rule applied to $a, x_i , y_i = c$ would imply $ac \in U$ and $a, b, c$ would not violate transitivity.
+	\end{proof}
+	
+	\begin{claim}
+		For every $i = l+1, \dots, k, (a, x_i) \in U$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		We know that $(a, x_k = b) \in U$ and applying the sensitivity rule backwards on triples $x_i , c, x_{i-1}$ for $i = k, k - 1, \dots, l + 1$, the claim is proven.
+	\end{proof}
+	
+	\begin{claim}
+		It is $(a, \beta = y_e) \notin U$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		If $(a, \beta)$ were in $U$, the sensitivity rule applied to $\beta, a, c$ would imply $(a, c) \in U$, what is assumed not be the case.
+	\end{proof}
+	
+	Now $a, \alpha = x_l , \beta = y_l$ is another transitivity violating example (as we have proved that $(a, \alpha) \in U , (a, \beta) \notin U$, and $(\alpha, \beta) \in U$ since it is included in the pathway). The sequence $(a, \alpha), (a, x_{l+2}), \dots, (a, x_k = b), (x_2 , y_2 ), \dots, (x_l = \alpha, y_l = \beta)$ is a pathway from $(a, \alpha)$ to $(\alpha, \beta)$ of length $k - l-  1 + l - 1 = k - 2 < \text{dist}_\Gamma ((a, b), (b, c))$, contradicting the choice of $a, b, c$.
+\end{proof}
+
+\section{Structure of transitive orientations}
+
+If $G$ allows a transitive orientation $T$, each edge $xy \in E$ must be oriented one way or the other, and hence $\langle(x, y)\rangle_S \subseteq T$ or $\langle(y, x)\rangle_S \subseteq T$. Thus $\langle(x, y)\rangle_S$ must be antisymmetric for every edge $xy \in E$. The goal of this section is to show that this obvious necessary condition is also sufficient.
+
+\begin{thm}
+	A graph $G$ is transitively orientable if and only if the block $\langle(x, y)\rangle_S$ is antisymmetric for every $xy \in E$.
+	\label{thm-24}
+\end{thm}
+
+The proof of the Theorem will follow from the following Lemma \ref{lemma-3}, which will also serve as a tool for finding a transitive orientation, if one exists.
+
+\begin{lemma}
+	Let $M \subseteq V \times V$ be a faithful complete binary relation and let $xy \in E$ be an edge such that $\langle(x, y)\rangle_S$ is antisymmetric and $M \cap \{(x, y), (y, x)\} = \emptyset$. Then $\langle M \cup \{(x, y)\}\rangle$ is faithful.
+	\label{lemma-3}
+\end{lemma}
+
+\begin{proof}
+	Denote by $U = \langle(x, y)\rangle_S$. Then $U = \langle(x, y)\rangle$ follows from Lemma \ref{lemma-2}. Since $M \cap \{(x, y), (y, x)\} = \emptyset$, it follows from the structure of blocks that $M \cap (U \cup U^{-1}) = \emptyset$, and hence $\langle M \cup \{(x, y)\}\rangle_S = M \cup U$. Lemma \ref{lemma-1} then implies that $\langle M \cup \{(x, y)\}\rangle = \langle\langle M \cup \{(x, y)\}\rangle_S \rangle_T = \langle M \cup U \rangle_T$.
+	
+	Suppose for the contrary that $\langle M \cup U \rangle_T$ is not faithful. Then there exists a sequence of edges $x_1 x_2 , x_2 x_3 , \dots, x_{k-1} x_k$ such that $(x_i , x_{i+1}) \in M \cup U$ for all $i = 1, 2, \dots, k - 1$ and $x_1 x_k \notin E$. Since $x_2 x_1 \in E$ and $x_k x_1 \notin E$, there is a $j, 2 \leq j < k$ such that $x_j x_1 \in E$ and $x_{j+1} x_1 \notin E$. Sensitivity of $M \cup U$ then implies that $x_j x_1 \in M \cup U$ and $M \cup U$ contains a directed cycle.
+	
+	Let $C$ be a shortest cycle in $M \cup U$. Since both $M$ and $U$ are transitive, the arcs of $C$ alternatively come from $M$ and $U$. The length of $C$ is at least 4, because a cycle of length 2 would contradict the assumption that $M \cap U^{-1} = \emptyset$. No diagonal of $C$ belongs to $M \cup U$, since any such diagonal would create a shorter cycle. Finally, all diagonals of $C$ are edges of $G$, since otherwise the sensitivity of $M \cup U$ would imply that either some diagonal belongs to $M \cup U$, or some arc of the cycle belongs to $M \cap U^{-1}$.
+	
+	Let now $a, b, c, d$ be consecutive vertices of $C$ such that $(a, b), (c, d) \in U$ and $(b, c) \in M$. Let the choice of $C$ and of $a, b, c, d$ be such that $\text{dist}_\Gamma ((a, b), (c, d))$ is minimum possible among all such choices. Note again that we have already observed that $ac, bd, ad \in E$, $\{(a, c), (c, a), (b, d), (d, b), (a, d)\} \cap (M \cup U) = \emptyset$ and $(d, a) \notin U$.
+	
+	Consider a shortest pathway $(a, b) = (x_1 , y_1), (x_2 , y_2), \dots , (x_k , y_k) = (c, d)$. Let $l$ be the smallest
+	index such that $y_l \neq b$ (i.e., $y_1 = y_2 = \dots = y_{l-1} = b, x_{l-1} = x_l and x_1 , x_2 , \dots , x_{l-1}$ are pair-wise
+	different). Set $\alpha = x_l$ and $\beta = y_l$ . We proceed with a sequence of observations.
+
+	\begin{claim}
+		For every $i = 1, 2, \dots , l, x_i d \in E$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		If $x_i d$ were a non-edge for some $i$, sensitivity would imply $(d, b) \in U$.
+	\end{proof}
+	
+	\begin{claim}
+		For every $i = 1, 2, \dots , l, x_i c \in E$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		If $x_j c$ were a non-edge for some $j$, sensitivity of $U$ would imply $(x_j , d) \in U$, and hence $(x_i , d) \in U$ for all $i = 1, 2, \dots , l$. Thus $(a, d) \in U$, contradicting the assumption.
+	\end{proof}
+	
+	\begin{claim}
+		It is $c\beta \in E$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		Otherwise sensitivity applied to $c, \alpha = x_l , \beta = y_l$ would imply $(\alpha, c) \in U$, and hence $(x_i , c) \in U$ for all $i = 1, 2, \dots , l$, and thus $(a, c) \in U$.
+	\end{proof}
+	
+	\begin{claim}
+		Now $(\beta, c) \in M$ follows from sensitivity of $M$ applied to $b, c, \beta$.
+	\end{claim}
+	
+	\begin{claim}
+		For every $i = 1, 2, \dots , l, x_i \beta \in E$.
+	\end{claim}
+	
+	\begin{proof}[Proof of claim]
+		If $x_j \beta$ were a non-edge for some $j$, sensitivity of $M$ would imply $(x_j , c) \in M$, hence we would get $(x_i , c) \in M$ for all $i = 1, 2, \dots , l$, and also $(a, c) \in M$.
+	\end{proof}
+	
+	\begin{claim}
+		Sensitivity of $U$ implies that $(x_i , \beta) \in U$ for all $i = 1, 2, \dots , l$, and hence also $(a, \beta) \in U$.
+	\end{claim}
+
+	Now we see that $a, \beta, c, d, \dots$ is a directed cycle in $M \cup U$ of the same length as $C$, while $\text{dist}_\Gamma ((a, \beta), (c, d)) \leq l - 2 + k - l = k - 2 < k - 1 = \text{dist}_\Gamma ((a, b), (c, d))$ since $(x_1 , \beta), (x_2 , \beta), \dots , (x_{l-1} , \beta), (x_{l+1} , y_{l+1}), \dots , (x_k , y_k )$ is a pathway from $(a, \beta)$ to $(c, d)$. This is the desired contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm-24}]
+	We have already seen that if $G$ is transitively orientable, each block must be asymmetric.
+	
+	For the opposite implication, suppose that $G$ is such that each block $\langle(x, y)\rangle_S$, $xy \in E$, is asymmetric and suppose that $M \subseteq V \times V$ is a largest possible complete and faithful binary relation on $V$. If $M$ is not whole, there is an edge $xy \in E$ which is not oriented by $M$, i.e., $M \cap \{(x, y), (y, x)\} = \emptyset$. Lemma \ref{lemma-3} implies that $\langle M \cup \{(x, y)\}\rangle$ is a faithful complete relation, and it is clearly a strict superset of $M$. That would contradict the choice of $M$. Hence $M$ is whole, and thus a transitive orientation of $G$.
+\end{proof}
 
 \section{Algorithmic aspects}
 
