@@ -174,6 +174,7 @@ This $s - t$ numbering and a corresponding planar drawing can be constructed in 
 
 \begin{thm}
 	Every planar vertex 2-connected graph has a rectangle visibility \\ representation.
+	\label{thm-2}
 \end{thm}
 
 \begin{proof}
@@ -193,6 +194,27 @@ This $s - t$ numbering and a corresponding planar drawing can be constructed in 
 		\State \Return this representation.
 	\end{algorithmic}
 \end{algorithm}
+
+It is, however, necessary to prove that this Algorithm really outputs a rectangle visibility representation of $G$. This is done via a series of claims. The first ones talk about the upward drawing of $G$ constructed in Step 1 and the dual graph $G^\ast$ and its drawing inherited from the drawing of $G$.
+
+\begin{claim}
+	Vertex number 1 and vertex number $n$ are both on the boundary of the outerface of $G$ (and also of $G'$). The face that gets the name $A$ is the unbounded face and the face with the highest name, say $Z$, is the other face incident with the dummy edge $1n$.
+\end{claim}
+
+\begin{claim}
+	The orientation of $G^\ast$ described in Step 4 is acyclic and $A$ is its only source and $Z$ is its only sink. Hence it is indeed an $s - t$ numbering of $G^\ast$. To see this, note first that the edge $AZ$ which crosses the dummy edge $1n$ cannot be involved in any directed cycle, as $A$ is a source and $Z$ is a sink in $G^\ast$. Next observe that a clock-wise oriented cycle in $G^\ast$ would bound a region with at least one vertex of $G$ inside and all edges of $G$ crossing this cycle would be oriented from inside towards the outside of this region, hence, there would necessarily be a source of $G$ in this region, and this would be different from the vertex $1$. Similarly, a counter-clock-wise oriented cycle in $G^\ast$ would bound a region that would contain a sink different from $n$. This would be a contradiction with the assumption that we were working with an $s - t$-numbering of $G$. Finally, a source different from $A$ (a sink different from $Z$) in $G^\ast$ would yield a directed cycle on the boundary of this face of $G$. A contradiction again.
+\end{claim}
+
+\begin{claim}
+	The boundary of every face $\alpha$ of $G$ consists of two directed paths, the left one and the right one, both connecting the vertex of the lowest number to the vertex of the highest number among the vertices of this face. We have seen this in the proof of Theorem \ref{thm-1}.
+\end{claim}
+
+\begin{claim}
+	For every vertex $i$ of $G, i \neq 1, n$, the faces incident with $i$ induce two directed paths in $G^\ast$,
+	both connecting the face to the left of $i$ to the face lying to the right of $i$, one of the paths passing
+	through the faces for which $i$ is their topmost vertex, the other one passing through the faces for which
+	$i$ is their lowest vertex. See Fig. \ref{fig-3} right.
+\end{claim}
 
 \begin{figure}[!ht]
 	\begin{subfigure}{0.45\textwidth}\centering
@@ -221,4 +243,171 @@ This $s - t$ numbering and a corresponding planar drawing can be constructed in 
 		\end{tikzpicture}
 	\end{subfigure}
 	\caption{Orientation of the dual edges (left). An example to the statement of Claim 4 (right).}
+	\label{fig-3}
+\end{figure}
+
+In the next claims we prove that the collection of segments constructed in Step 6 defines a rectangle visibility representation of $G$.
+
+\begin{claim}
+	Let $i$ be a vertex of $G, i \neq 1, n$. Let $\alpha$ and $\omega$ be the faces to the left and to the right of $i$, respectively. Then the (horizontal) segment $i$ touches the vertical segment for $\alpha$ from the right, it touches the vertical segment for $\beta$ from the left, it is touched by the segments representing the faces lying on the upper path from $\alpha$ to $\beta$ in $G^\ast$ from above, and it is touched by the faces lying on the lower path from $\alpha$ to $\beta$ in $G^\ast$ from below. The segment representing vertex $1$ spans the whole range from $A$ to $Z$ and is only touched by vertical segments from above, while the segment representing $n$ is only touched by vertical segments from below, and also spans the whole range from $A$ to $Z$.
+	\label{claim-5}
+\end{claim}
+
+\begin{claim}
+	Let $\alpha$ be an inner face of $G$, i.e., a face not incident with the dummy edge $1n$. The vertical segment representing $\alpha$ touches the horizontal segment representing its lowest vertex from above, it touches the segment representing its topmost vertex from below, it is touched by the segments representing the vertices on the left boundary path of $\alpha$ from the left and it is touched by the segments representing the vertices on the right boundary path of $\alpha$ from the right. The segment representing $A$ is touched only from right, while the segment representing $Z$ is touched only from left, always by the appropriate horizontal segments.
+	\label{claim-6}
+\end{claim}
+
+\begin{figure}[!ht]
+	\begin{subfigure}{.25\textwidth}\centering
+		\begin{tikzpicture}
+			\node[draw, circle, Blue, thick] (i) at (0,0) {$i$};
+			\node[Green, thick] (a) at (-1, 0) {$\alpha$};
+			\node[Green, thick] (w) at (1,0) {$\omega$};
+			\draw[->, Green] (a) -- (-0.5, 0.5);
+			\draw[->, Green] (-0.3,0.5) -- (0.25, 0.5);
+			\draw[->, Green] (0.35, .5) -- (w);
+			\draw[->, Green] (a) -- (-.6, -.5);
+			\draw[->, Green] (-.5, -.5) -- (0.4, -.5);
+			\draw[->, Green] (.5, -.5) -- (w);
+			\draw[->, Blue] (i) -- (-0.25, 1);
+			\draw[->, Blue] (-0.25, -1) -- (i);
+			\draw[->, Blue] (i) -- (-1.15, .5);
+			\draw[->, Blue] (-1.15, -.5) -- (i);
+			\draw[->, Blue] (i) -- (1.15, .8);
+			\draw[->, Blue] (1.15, -.8) -- (i);
+		\end{tikzpicture}
+	\end{subfigure}
+	\begin{subfigure}{.2\textwidth}\centering
+		\begin{tikzpicture}
+			\draw[thick, Blue] (0,0) -- (3,0);
+			\draw[thick, Green] (0,-1) -- (0,1);
+			\draw[thick, Green] (3,-1) -- (3,1);
+			\draw[thick, Green] (.8,0) -- (.8,1);
+			\draw[thick, Green] (1.9,0) -- (1.9,1);
+			\draw[thick, Green] (1.4,-1) -- (1.4,0);
+			\draw[thick, Green] (2.3,-1) -- (2.3,0);
+			\node[Green] at (.2, -1.3) {$\alpha$};
+			\node[Green] at (2.8, -1.3) {$\omega$};
+		\end{tikzpicture}
+	\end{subfigure}
+	\begin{subfigure}{.25\textwidth}\centering
+		\begin{tikzpicture}
+			\draw[->, thick, Blue] (0,0) -- (-1, .5);
+			\draw[->, thick, Blue] (-1, .5) -- (-.3, 1);
+			\draw[->, thick, Blue] (-.3, 1) -- (-1, 1.5);
+			\draw[->, thick, Blue] (-1, 1.5) -- (0, 2);
+			\draw[->, thick, Blue] (0,0) -- (1, .5);
+			\draw[->, thick, Blue] (1, .5) -- (.7, 1.2);
+			\draw[->, thick, Blue] (.7, 1.2) -- (.5, 1.6);
+			\draw[->, thick, Blue] (.5, 1.6) -- (0,2);
+			\node[Green, thick] at (0,1) {$\alpha$};
+		\end{tikzpicture}
+	\end{subfigure}
+	\begin{subfigure}{.2\textwidth}\centering
+		\begin{tikzpicture}
+			\draw[Green, thick] (0,0) -- (0,2);
+			\draw[Blue, thick] (-1,0) -- (1,0);
+			\draw[Blue, thick] (-1,2) -- (1,2);
+			\draw[Blue, thick] (-1,.3) -- (0,.3);
+			\draw[Blue, thick] (-1,.8) -- (0,.8);
+			\draw[Blue, thick] (-1,1.4) -- (0,1.4);
+			\draw[Blue, thick] (0,.4) -- (1,.4);
+			\draw[Blue, thick] (0,1.5) -- (1,1.5);
+			\node[Green, thick] at (0.2, 1) {$\alpha$};
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Illustration to Claims \ref{claim-5} and \ref{claim-6}.}
+\end{figure}
+
+\begin{claim}
+	For every edge $ij$ of $G$, let $\alpha\beta$ be its dual edge. Then the segments representing $i, j, \alpha$ and $\beta$ bound a rectangle in the representation.
+	\label{claim-7}
+\end{claim}
+
+\begin{claim}
+	No two segments constructed in Step 6 cross each other. For suppose segment $j$ crosses segment $\alpha$. By the way the segments are constructed, this means that there exist vertices $i, k, i < j < k$, and $\beta, \gamma, \beta < \alpha < \gamma$, such that $i$ is the lowest and $k$ the topmost vertex of face $\alpha$ and $\beta$ is the left and $\gamma$ the right face incident with $j$. Consider the upward drawing of $G$ and the horizontal stripe of vertices with their $y$-coordinates between $i$ and $k$. The face $\alpha$ spans this stripe from its bottom to its top lines, and thus it lies either to the left or to the right of vertex $i$. Suppose it is to the left. The horizontal ray starting in vertex $i$ and pointing to the left passes first through the face $\beta$ and then crosses several faces until it finally crosses $\alpha$. Since all edges of $G$ it crosses on this way are directed upward, these faces form a path directed from $\alpha$ to $\beta$ in $G^\ast$, which means that $\alpha < \beta$ in the topological sorting of $G^\ast$. Which is a contradiction.
+	\label{claim-8}
+\end{claim}
+
+\begin{figure}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}
+			\draw[thick, Green] (0,0) -- (0,3);
+			\draw[thick, Blue] (-1.5,1.5) -- (1.5, 1.5);
+			\draw[dotted] (-1.5, -.2) -- (-1.5, 3.2);
+			\draw[dotted] (1.5, -.2) -- (1.5, 3.2);
+			\draw[dotted] (-1.7, 0) -- (1.7, 0);
+			\draw[dotted] (-1.7, 3) -- (1.7, 3);
+			
+			\node[Green] at (.3, .2) {$\alpha$};
+			\node[Blue] at (1.2, 1.8) {$j$};
+			\node[Blue] at (1.9, 0) {$i$};
+			\node[Blue] at (1.9, 3) {$k$};
+			\node[Green] at (-1.2, -.3) {$\beta$};
+			\node[Green] at (1.2, -.3) {$\gamma$};
+		\end{tikzpicture}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}\centering
+		
+	\end{subfigure}
+	\caption{An illustration to Claim \ref{claim-8}.}
+\end{figure}
+
+\begin{claim}
+	The rectangles from Claim \ref{claim-7} are disjoint and fill in the base rectangle formed by segments $A, Z, 1, n$. This now follows from the previous claims. And this means that we have indeed constructed a rectangle visibility representation of $G$.
+\end{claim}
+
+\begin{figure}[!ht]
+	\begin{subfigure}{0.45\textwidth}\centering
+		
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		
+	\end{subfigure}
+	\caption{An overview of the construction by Algorithm RectangleVisibilityRep.}
+\end{figure}
+
+\section{Grid Contact graphs}
+
+\begin{defn}
+	A graph is a \textbf{Grid Intersection graph} if it has an intersection \\ representation by vertical and horizontal segments in which no two segments of the same direction share a point (in other words, all vertical, as well as all horizontal, segments are pairwise disjoint). A graph is a \textbf{Grid Contact} graph if it has a Grid Intersection representation in which no two segments cross, i.e., any two non-disjoint segments only touch each other.
+\end{defn}
+
+\begin{prop}
+	Every grid intersection graph is bipartite. Moreover, every grid contact graph is planar.
+\end{prop}
+
+\begin{proof}
+	The first claim is a simple observation. For the second claim, note that grid contact graphs form a subclass of triangle-free contact graphs of arc-connected regions in the plane. All such graphs are planar, since a non-crossing drawing can be constructed from a contact representation by selecting a point inside each region to represent its vertex, and connecting it to the contact points with the adjacent regions by curves inside the region.
+\end{proof}
+
+\begin{thm}
+	Every planar bipartite graph is a grid contact graph.
+	\label{thm-3}
+\end{thm}
+
+\begin{proof}
+	Given a planar bipartite graph $G = (A \cup B, E)$, consider a non-crossing drawing and extend it to a non-crossing drawing of a supergraph $G' = (A' \cup B' , E')$ such that
+	
+	\begin{itemize}
+		\item $G$ is an induced subgraph of $G'$,
+		\item every face of the drawing of $G'$ is bounded by a cycle of length 4 (i.e., $G'$ is a so called quadrangulation),
+		\item every vertex of $G'$ has degree greater than $2$, and
+		\item no vertex of $B$ is on the boundary of the outerface of $G'$. 
+	\end{itemize}
+	
+	Then construct the graph $\bar{G} = (A', \bar{E})$ by putting $\bar{E}$ the diagonals of the faces of $G'$ connecting their $A'$-vertices. It can be easily seen that $G$ is vertex 2-connected and that the faces of $\bar{G}$ are in 1-1 correspondence with the vertices of $B'$. Thus the segments of a rectangle visibility representation of $\bar{G}$ constructed as in the proof of Theorem \ref{thm-2} form a grid contact representation of $G'$ . Note the technical detail that the vertex (of $B'$) that corresponds to the outerface of $\bar{G}$ is represented by two vertical segments, not one. But this vertex does not belong to $B$, and so the segments corresponding to the vertices of $G$ form a grid contact representation of $G$.
+\end{proof}
+
+\begin{figure}[!ht]
+	\begin{subfigure}{0.45\textwidth}\centering
+		
+		\caption{The graph $G'$.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		
+		\caption{The graph $G$.}
+	\end{subfigure}
+	\caption{An illustration to the proof of Theorem \ref{thm-3}.}
 \end{figure}
