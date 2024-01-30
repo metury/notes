@@ -21,7 +21,7 @@
 \end{observ}
 
 \begin{observ}
-	Circular-Arc grafy splňujé: $\chi(G) \leq 2 \omega(G)$.
+	Circular-Arc grafy splňují: $\chi(G) \leq 2 \omega(G)$.
 \end{observ}
 
 \begin{proof}
@@ -32,7 +32,7 @@
 	Následující definice jsou si ekvivalentní:
 	
 	\begin{itemize}
-		\item $G \ in \text{CIR}$.
+		\item $G \in \text{CIR}$.
 		\item $G$ je průnikový graf sečen v kružnici.
 		\item $G$ je průnikový graf půlkružnic nad $x$-ovou osou.
 		\item $G$ se dá reprezentovat posloupností čísel, kde se každé číslo $1, \dots, n$ vyskytuje právě dvakrát a platí, že vrcholy $v_i, v_j$ spolu sousedí právě když ta posloupnost obsahuje podposloupnost $i,j,i,j$ nebo $j,i,j,i$.
@@ -70,19 +70,19 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 			\node at (1, -.3) {$x_1$};
 			\node at (2, -.3) {$x_2$};
 			\node at (3, -.3) {$x_i$};
-			\node at (4, -.3) {$x_n$};
+			\node at (3.9, -.3) {$x_p$};
 			\node at (4.4, -.3) {$y_1$};
 			\node at (5, -.3) {$y_1$};
 			\node at (5.6, -.3) {$y_2$};
 			\node at (6.2, -.3) {$y_2$};
 			\node at (6.8, -.3) {$y_i$};
 			\node at (7.4, -.3) {$y_i$};
-			\node at (8, -.3) {$y_n$};
-			\node at (8.6, -.3) {$y_n$};
-			\node at (9, -.3) {$x_1$};
+			\node at (8, -.3) {$y_q$};
+			\node at (8.6, -.3) {$y_q$};
+			\node at (9.1, -.3) {$x_1$};
 			\node at (10, -.3) {$x_2$};
 			\node at (11, -.3) {$x_i$};
-			\node at (12, -.3) {$x_n$};
+			\node at (12, -.3) {$x_p$};
 		\end{tikzpicture}
 		\caption{Definice $(p-q)$-konfigurace.}
 		\label{konf}
@@ -122,7 +122,7 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 			\item $V_2$ bude indukovat graf z $\text{CIR}(k,0,q-1)$.
 		\end{itemize}
 		
-		Označme $\pi$ jakožto nejpravější konec obloučku. Potom $V_1$ jsou vrcholy, které mají levý konec vlevo od $\pi$. A $V_2$ jsou vrcholy, které mají levý konec napravo od $\pi$. Pak už použijeme indukci.
+		Označme $\pi$ jakožto nejpravější levý konec obloučku. Potom $V_1$ jsou vrcholy, které mají levý konec vlevo od $\pi$. A $V_2$ jsou vrcholy, které mají levý konec napravo od $\pi$. Pak už použijeme indukci.
 	\end{proof}
 	
 	\begin{lemma}
