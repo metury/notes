@@ -40,9 +40,9 @@
 		\draw[color=Red, thick] (7, 4) .. controls (11,1) and (1,1) .. (10, .01);
 		\fill[color=Red] (7,4) circle[radius=.35pt];
 		
-		\draw[color=Green, thick] (3.5, .01) .. controls (4,3) and (4,.5) .. (4.5, .01);
+		\draw[color=Yellow, thick] (3.5, .01) .. controls (4,3) and (4,.5) .. (4.5, .01);
 		\draw[color=Blue, thick] (2, .03) .. controls (6,6) and (2,2) .. (6, .03);
-		\draw[color=YellowOrange, thick] (7, .03) .. controls (7.5,4) and (8,1) .. (9, .03);
+		\draw[color=Green, thick] (7, .03) .. controls (7.5,4) and (8,1) .. (9, .03);
 	\end{tikzpicture}
 	\caption{An illustration to the possible relative positions of interval-filaments.}
 	\label{filaments}
@@ -78,9 +78,9 @@
 	\overrightarrow{E_2} = \{uv : (I_u \subseteq I_v ) \land (f_u \cap f_v = \emptyset)\}
 	$$
 	
-	is a transitive orientation of $E_2$, $E_1 \cup E_2 = \binom{V}{2} \ E$, $(V, E_1) \in$ co-INT and $E_1$ and $\overrightarrow{E_2}$ satisfy the mixing property. Hence $-G \in$ (co-INT)-mixed.
+	is a transitive orientation of $E_2$, $E_1 \cup E_2 = \binom{V}{2} \setminus E$, $(V, E_1) \in$ co-INT and $E_1$ and $\overrightarrow{E_2}$ satisfy the mixing property. Hence $-G \in$ (co-INT)-mixed.
 	
-	"$\supseteq$": Consider a graph in (co-INT)-mixed and denote its complement by $G = (V, E)$. Our goal is to show that $-G \in$ co-IFA, or equivalently that $G \in$ IFA. Since $-G$ is (co-INT)-mixed, the non-edges of $G$ can be partitioned into disjoint sets $E_1$, $E_2$ so that $G_1 = (V, E_1) in$ co-INT, and $E_2$ allows a transitive orientation $\overrightarrow{E_2}$ such that $E_1$ and $\overrightarrow{E_2}$ satisfy the mixing property. Fix this partition $E_1$, $E_2$ and the transitive orientation $\overrightarrow{E_2}$.
+	"$\supseteq$": Consider a graph in (co-INT)-mixed and denote its complement by $G = (V, E)$. Our goal is to show that $-G \in$ co-IFA, or equivalently that $G \in$ IFA. Since $-G$ is (co-INT)-mixed, the non-edges of $G$ can be partitioned into disjoint sets $E_1$, $E_2$ so that $G_1 = (V, E_1) \in$ co-INT, and $E_2$ allows a transitive orientation $\overrightarrow{E_2}$ such that $E_1$ and $\overrightarrow{E_2}$ satisfy the mixing property. Fix this partition $E_1$, $E_2$ and the transitive orientation $\overrightarrow{E_2}$.
 	
 	Consider an interval intersection representation $\mathcal{R} = \{I_u = [l_u , r_u] : u \in V\}$ of $-G_1$ . We will only consider representations in which all end-points of the intervals are different points on the base line. For two vertices $u, v \in V$, there are three possibilities for the relative position of the intervals $I_u$, $I_v$ -- the intervals are disjoint (when $r_u < l_v$ or $r_v < l_u$), or in inclusion (when $l_u < l_v < r_v < r_u$ or $l_v <
 	l_u < r_u < r_v$), or overlapping (when $l_u < l_v < r_u < r_v$ or $l_v < l_u < r_v < r_u$). Given a representation	$\mathcal{R}$, we set $\mathcal{R}_{\text{disjoint}} = \{uv : I_u \text{ and } I_v \text{ are disjoint}\}$, $\mathcal{R}_{\text{inclusion}} = \{uv : I_u \text{ and } I_v \text{ are in inclusion}\}$ and $\mathcal{R}_{\text{overlap}} = \{uv : I_u \text{ and } I_v \text{ are overlapping}\}$. Observe that $\mathcal{R}$ is an interval intersection representation of $-G_1$ if and only if $\mathcal{R}_{\text{disjoint}} = E_1$. In such a case, $\mathcal{R}_{\text{inclusion}} \cup \mathcal{R}_{\text{overlap}} = E \cup E_2$.
@@ -134,12 +134,12 @@
 		Thus both Cases $B2$ and $B1$ lead to contradictions, and hence $k = 0$ and $\mathcal{R}$ satisfies the property described in the Claim.
 	\end{proof}
 	
-	Assume we are having an interval intersection representation $\mathcal{R}$ guaranteed by the Claim. It follows that $E_2 \subseteq Rinclusion$, and hence $Roverlap \subseteq E$. In the first step, define, for every vertex $u \in V$, the interval filament $f_u$ as the half-circle with diameter $I_u$. At this point we observe the following
+	Assume we are having an interval intersection representation $\mathcal{R}$ guaranteed by the Claim. It follows that $E_2 \subseteq \mathcal{R}_\text{inclusion}$, and hence $\mathcal{R}_\text{overlap} \subseteq E$. In the first step, define, for every vertex $u \in V$, the interval filament $f_u$ as the half-circle with diameter $I_u$. At this point we observe the following
 	
 	\begin{enumerate}
 		\item if $I_u$ and $I_v$ are disjoint, so are also $f_u$ and $f_v$, which corresponds to the fact that $uv \in E_1$ and thus $uv \notin E$;
 		\item if $I_u$ and $I_v$ are overlapping, $f_u$ and $f_v$ cross each other, which corresponds to the fact that $uv \in E$ which is observed above; however
-		\item if $I_u$ and $I_v$ are in inclusion, say $I_u \subseteq I_v$, then either $uv \in E_2$ (and thus $uv \in \overrightarrow{E_2}$) or $uv in E$, but $f_u \cap f_v = \emptyset$ in both cases.
+		\item if $I_u$ and $I_v$ are in inclusion, say $I_u \subseteq I_v$, then either $uv \in E_2$ (and thus $uv \in \overrightarrow{E_2}$) or $uv \in E$, but $f_u \cap f_v = \emptyset$ in both cases.
 	\end{enumerate}
 	
 	We will now modify some of the filaments in order to make filaments of case 3 intersect if the corresponding vertices are adjacent in $G$. For every pair of vertices $u, v \in V$ such that $I_u \subseteq I_v$ and $uv \in E$, choose a line $l_u$ perpendicular to the base line $l$ and crossing it in an interior point of $I_u$. Then pull the filament $f_u$ up along $l_u$ to make it cross $f_v$ (cf. an illustrative Fig. \ref{left}). To avoid creating undesired intersections with other filaments, we must modify also those filaments which cross the line $l_u$ between its crossings with $f_u$ and $f_v$. Imagine this as a dynamic process, as if $f_u$ would slowly grow a spike upward and this spike would be pushing every filament $f_w$ in front of it, if $w$ is such that $uw \notin E$. Moreover, if there were another filament $f_z$ above $f_w$ such that $wz \notin E$, $f_z$ would be pushed by $f_w$ etc. See Fig. \ref{right}. We claim that in this way no undesired intersections arise. Such could be only between one of the pushed filaments, say $f_y$, and the filament $f_v$. If $f_y$ is pushed, there is a sequence of vertices $u_0 = u, u_1 , \dots , u_t = y$ such that $f_{u_{i-1}}$ pushes $f_{u_{i}}$ for $i = 1, 2, \dots , t$, i.e., $u_{i-1} u_i \notin E$	and $I_{u_{i-1}} \subseteq I_{u_{i}}$, hence $u_{i-1} u_i \in \overrightarrow{E_2}$. Transitivity of $\overrightarrow{E_2}$ then implies $uy \in \overrightarrow{E_2}$. Similarly, if $f_y$ should not cross $f_v$, i.e., $yv \notin E$, we would have $yv \in \overrightarrow{E_2}$. But that would imply $uv \in \overrightarrow{E_2}$ contradicting the assumption that $uv \in E$.

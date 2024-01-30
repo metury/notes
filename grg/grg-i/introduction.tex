@@ -16,7 +16,7 @@ Firstly we will start by the introduction to the main characters -- intersection
 	Let $\mathcal{M}$ be a family of sets. We say that a graph $G$ is an intersection graph of (members of) $\mathcal{M}$ if $G$ is isomorphic to the graph $IG(\mathcal{A})$ for some family $\mathcal{A}$ whose all elements belong to $\mathcal{M}$. We write
 	
 	$$
-	\mathcal{IG}(\mathcal{M}) = \{\mathcal{IG}(\mathcal{A}) : \mathcal{A} \subseteq \mathcal{M}\}.
+	\mathcal{IG}(\mathcal{M}) = \{IG(\mathcal{A}) : \mathcal{A} \subseteq \mathcal{M}\}.
 	$$
 \end{defn}
 
@@ -159,6 +159,7 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 
 \begin{lemma}
 	Every chordal graph, which is not a complete graph, contains two nonadjacent simplicial vertices.
+	\label{lemma-r2}
 \end{lemma}
 
 \begin{proof}
@@ -187,7 +188,7 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 \end{thm}
 
 \begin{proof}
-	"$1. \Rightarrow 2.$" By induction on the number of vertices, using Lemma 2.
+	"$1. \Rightarrow 2.$" By induction on the number of vertices, using Lemma \ref{lemma-r2}.
 	
 	"$2. \Rightarrow 3.$" By induction on the number of vertices again. Suppose $G' = G \setminus v_n$ has a clique-tree	$T = (\mathcal{Q}' , F')$. If $Q' = N_G (v_n) \in \mathcal{Q}'$ , then $Q = N_G [v_n]$ is a maximal clique in $G, \mathcal{Q} = (\mathcal{Q}' \setminus \{Q'\}) \cup \{Q\}$ and $T = (\mathcal{Q}, F)$ is a clique-tree for $G$, where $F = (F' \setminus \{Q' P : P \in \mathcal{Q}'\}) \cup \{QP : Q'P \in F'\}$. If, on the other hand, $Q' = N_G(v_n) \notin \mathcal{Q}'$ , then $\mathcal{Q} = \mathcal{Q}' \cup N_G [v_n]$ and $(\mathcal{Q}, F' \cup N_G [v_n]P)$ is a clique-tree for $G$ for any $P \in \mathcal{Q}'$ such that $N_G (v_n) \subset P$.
 	

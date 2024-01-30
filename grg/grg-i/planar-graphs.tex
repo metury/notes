@@ -17,7 +17,7 @@
 \begin{thm}
 	Every vertex 2-connected plane graph has an $s - t$ numbering and a noncrossing planar drawing such that
 	
-	\begin{enumerate}[i]
+	\begin{enumerate}[i)]
 		\item every edge is drawn as a $y$-monotone curve (i.e., every horizontal line crosses the drawing of the edge in at most one point), and
 		\item the drawing of every edge is oriented upward in the $s - t$ numbering.
 	\end{enumerate}
@@ -31,7 +31,7 @@ This $s - t$ numbering and a corresponding planar drawing can be constructed in 
 \end{comm}
 
 \begin{proof}
-	By Ear Decomposition Lemma, the given graph $G$ can be constructed from the cycle bounding its outerface by adding ears. Choose two distinct vertices, say $a$ and $b$, on this cycle, place them in the plane so that they have different $y$-coordinates, the coordinate of a being smaller than the coordinate of $b$, orient the two $a - b$ paths forming the cycle from $a$ to $b$ and draw them as $y$-monotone paths from (the drawing of) a to (the drawing of) $b$.
+	By Ear Decomposition Lemma, the given graph $G$ can be constructed from the cycle bounding its outerface by adding ears. Choose two distinct vertices, say $a$ and $b$, on this cycle, place them in the plane so that they have different $y$-coordinates, the coordinate of $a$ being smaller than the coordinate of $b$, orient the two $a - b$ paths forming the cycle from $a$ to $b$ and draw them as $y$-monotone paths from (the drawing of) $a$ to (the drawing of) $b$.
 	
 	Then continue adding the ears, orienting their edges and adding them to the drawing constructed while keeping the following loop invariant -- the drawing is homeomorphic to the so far constructed part of $G$, it satisfies i) and ii), all vertices have distinct $y$-coordinates, and each face is bounded by two upward oriented paths connecting its vertices with the lowest and the highest $y$-coordinates (we will refer to these paths as the \textit{left} one and the \textit{right} one). Note that i) and ii) together imply that the drawing of any directed path is $y$-monotone.
 	
@@ -214,6 +214,7 @@ It is, however, necessary to prove that this Algorithm really outputs a rectangl
 	both connecting the face to the left of $i$ to the face lying to the right of $i$, one of the paths passing
 	through the faces for which $i$ is their topmost vertex, the other one passing through the faces for which
 	$i$ is their lowest vertex. See Fig. \ref{fig-3} right.
+	\label{claim-4}
 \end{claim}
 
 \begin{figure}[!ht]
@@ -222,6 +223,7 @@ It is, however, necessary to prove that this Algorithm really outputs a rectangl
 			\draw[->, color=Green, thick] (0,0) -- (2,0);
 			\draw[->, color=Blue, thick] (1, -1) -- (1, 1);
 		\end{tikzpicture}
+		\caption{Orientation of the dual edges.}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}
@@ -241,8 +243,9 @@ It is, however, necessary to prove that this Algorithm really outputs a rectangl
 			\draw[->, Blue] (i) -- (2.3, 1);
 			\draw[->, Blue] (2.3, -1) -- (i);
 		\end{tikzpicture}
+		\caption{An example to the statement of Claim \ref{claim-4}.}
 	\end{subfigure}
-	\caption{Orientation of the dual edges (left). An example to the statement of Claim 4 (right).}
+	\caption{Examples for claims.}
 	\label{fig-3}
 \end{figure}
 
