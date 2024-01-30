@@ -1,0 +1,97 @@
+\chapter{String graphs}
+
+\begin{defn}
+	string-graphs.tex are intersection graphs on arbitrary lines in plane.
+\end{defn}
+
+\begin{defn}
+	\textbf{OuterString} class is a class of graphs which are represented by inter-\\section graphs of lines starting from a circle boundary and growing arbitrarily inside the circle. Then \textbf{constrained outer strings} is class containing graphs that are outer strings but also it is determined the order of lines appearance on the circle.
+\end{defn}
+
+\TODO{Create some pictures.}
+
+\begin{thm}
+	For $n \geq 4$ the complement of $C_n$, $-C_n \notin$ constrained-outerstring.
+\end{thm}
+
+\begin{proof}
+	We proceed by induction on $n$. First we start by $n = 4$. Where if we draw the graph and because on the circle the two opposite nodes have to connect somewhere, but not cross any other. That is impossible.
+	
+	For greater $n > 4$ suppose for contrary that $-C_n$ has a representation. Take such with smallest number of crossing number. Then we create two more graphs $-C_{i+1} = -C_n[1,2, \dots, i]$ and $-C_{n-1+1} = -C_n[i, i+1, \dots, n]$ since $n \geq 5$ both have size at least $4$ but less than the $-C_n$ but we know that one of them don't have a representation.
+\end{proof}
+
+\begin{thm}
+	Recognition of STRING is NP-hard.
+\end{thm}
+
+\begin{proof}
+	The proof is done by creating a transformation of Planar 3-SAT to RECOG\\(STRING). We won't go deeper into the proof, but shortly as usual you create some gadgets for variables and for clauses. Then you need to bind them. After that you use the planarity of 3-SAT to create a graph that is representable as a STRING graph only if the SAT is satisfied. That is it abuses the previously mentioned theorem.
+	
+	Also it can be done by straight lines. Therefore also recognition of $GI$ is NP-complete.
+\end{proof}
+
+\begin{thm}
+	RECOG(SEG), RECOG(CONV) are in $\exists \R \subseteq$ PSPACE.
+\end{thm}
+
+This can be proven by the following $\exists \R$ problem. We ar egiven $n$ polynoms $p_1, \dots, p_n$ for $n$ variables $x_1, \dots, x_n$. The question is then whether there exists such assignment to $x_1, \dots, x_n \in \R$ that all polynoms are non-negative.
+
+\begin{proof}
+	We will represent $G$ for each $u \in V(G)$ as $M_u$ convex set. Then we set points $\forall uv \in E(G) : P_{uv} = (x_{uv}, y_{uv})$. After that we take a convex hull of all inner points. Therefore we denote $M'_u = \text{conv}(P_{uv}| v \in N_G(v))$. Now $(M_u' | u \in V(G))$ is convex reprezentation of $G$.
+	
+	If $M_u \cap M_v \neq \emptyset \Rightarrow P_uv \in M_u' \cap M_v' \neq \emptyset$ if $uv \notin E(G)$ there exists a line separating these two convex hulls. This line can be prescribed as a polynom. Therefore these polynoms must be negative for all non-edges.
+	
+	For the RECOG(SEG) we may use similiar trick.
+\end{proof}
+
+\begin{comm}
+	If $G \in$ STRING then mwe must find such lines instead of nodes, but if we pick points representing edges then the graph is planar. So we must guess such planar graph $H$ and then the paths. But this is not enough for NP since the polynomial is dependent on the size of the unknown $H$.
+\end{comm}
+
+\begin{defn}
+	$\text{STR}(n)$ is min $k$ such that $\forall G \in$ STRING $|V(G)| =n$  there exists STRING representation with at most $k$ crossing points.
+\end{defn}
+
+\begin{defn}
+	$AT$-graf is $(G = (V,E), R \subset \binom{E}{2})$ and it is (weakly) realisable if there exists drawing $D$ of a graph $G$ in the plane s.t. $\forall e,f \in E(G): D_e \cap D_f \neq \emptyset \Rightarrow \{e,f\} \in R$.
+\end{defn}
+
+\begin{observ}
+	$R = \emptyset$ then $(G, \emptyset)$ is realisable iff $G$ is planar.
+\end{observ}
+
+\begin{defn}
+	$\text{AT}(n)$ is min $k$ s.t. $\forall$ realisable $AT$-graf with $n = |E(G)|$ is realisable with at most $k$ crossing points.
+\end{defn}
+
+\begin{thm}
+	$\text{STR}(n) \sim \text{AT}(n)$.
+\end{thm}
+
+\begin{proof}
+	"$\Rightarrow$" Let $G \in$ STRING and $|V(G)| = n, G$ needs $\text{STR}(n)$ crossing points. Lets take such representation $\forall u,v \in V(G)$ where $u \neq v$ and $uv \in E(G)$ we select point $P_{uv} \in S_u \cap S_v$ and say that these are nodes of the new graph $G'$. $S_u$ is a line representing $U \in V(G)$.
+	
+	\TODO{finish the proof}
+\end{proof}
+
+\begin{thm}
+	$\text{AT}(n) \geq 2^{cn}$ for constant $c$.
+\end{thm}
+
+\begin{proof}
+	We will create a certain type of a graph depicted on the picture. %\ref{}.
+	
+	\TODO{Finsih the proof and create a picture.}
+\end{proof}
+
+\begin{thm}
+	RECOG(STRING) $\in$ NP.
+\end{thm}
+
+This will be shown in the second part of this course.
+
+\begin{thm}
+	$\text{AT}(n) \leq n \cdot 2^n$.
+\end{thm}
+
+\TODO{Finish the proof and also state supporting lemma.}
