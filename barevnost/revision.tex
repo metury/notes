@@ -1,0 +1,46 @@
+\chapter{Revision and introduction}
+
+One can already know some basics to the graph coloring and also some of the theorems. Therefore we will briefly introduce some basics and revisit some of the known theorems and perhaps some we will show throughout this document.
+
+\begin{notation}
+	First of all some basic notations.
+	
+	\begin{itemize}
+		\item $\chi(G)$ is minimal vertex coloring of a graph $G$.
+		\item $\Delta(G)$ is the maximal degree of a graph $G$.
+		\item $\delta(G)$ is the minimal degree of a graph $G$.
+		\item $\chi_e(G)$ is minimal edge coloring of a graph $G$.
+	\end{itemize}
+\end{notation}
+
+\begin{thm}[Four colors]
+	Every planar graph $G$ has $\chi (G) \leq 4$.
+\end{thm}
+
+\begin{thm}[Brooks]
+	If $G$ is a connected graph and $G \neq K_n$ and $G \neq C_{2n+1}$ then $\chi(G) \leq \Delta(G)$.
+\end{thm}
+
+\begin{thm}[Vizing]
+	$\Delta(G) \leq \chi_e(G) \leq \Delta(G) + 1$
+\end{thm}
+
+\begin{thm}[General Euler's formula]
+	If $G$ can be drawn on a surface of Euler genus $g$ then $|E| \leq |V| + |F| - g$. Where $|F|$ is for the number of faces of the drawing.
+\end{thm}
+
+From Euler's formula one can see that if $|V| \geq 3$ then $|E| \leq 3 |V| + 3g - 6$. Therefore the average degree is $\frac{2|E|}{|V|} = \frac{6(g-2)}{|V|}$.
+
+\begin{thm}[Heawood's formula]
+	If $G$ can be drawn on a surface of Euler genus $g$ then
+	
+	$$
+	\chi(G) \leq \frac{7 + \sqrt{24 g + 1}}{2}
+	$$
+\end{thm}
+
+Where this formula is tight for Klein's bottle. Then we will show us that deciding if a planar graph is 3-colorable is NP-hard problem. But on the other hand we have this theorem.
+
+\begin{thm}[Grötsch]
+	Every planar graph without triangle is 3-colorable.
+\end{thm}
