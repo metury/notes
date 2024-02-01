@@ -357,6 +357,13 @@ It is easy (i.e., decidable in polynomial time) to check if a bipartite graph co
 \begin{proof}[Sketch of proof]
 	Suppose $G = (A \cup B, E)$ is a bipartite graph and let $\mathcal{R} = \{R(u) : u \in A \cup B\}$ be an intersection representation of $G$ by axes-parallel rectangles in the plane. For a rectangle $C$ in the plane, we define regions $BL(C)$, $BR(C)$, $TL(C)$, $TR(C)$ as follows: $BR(C)$ contains all points with $x$-coordinate greater than the $x$-coordinate of the left side of $C$, with $y$-coordinate smaller than the $y$-coordinate of the top side of $C$, but which do not lie inside the rectangle $C$. The other regions ($BL$ standing for Bottom-Left, $TL$ standing for Top-Left, and $TR$ standing for Top-Right) are defined in a similar way. Then define two binary relations, one on $A$, the other one on $B$, as follows
 	
+	$$
+	\begin{array}{c c c c}
+		a_1 <_R a_2 & \Leftrightarrow & R(a_1) \cap BR(R(a_2)) \neq \emptyset & \text{ for } a_1, a_2 \in A, \\
+		b_1 <_R b_2 & \Leftrightarrow & R(b_1) \cap BL(R(b_2)) \neq \emptyset & \text{ for } b_1, b_2 \in B. \\
+	\end{array}
+	$$
+	
 	\begin{claim}
 		Both relations $<_R$ and $<_L$ are antireflexive, antisymmetric and acyclic. It follows that the transitive closures $<_{R}^T$ and $<_{L}^T$ of $<_R$ and $<_L$, respectively, are partial orders.
 	\end{claim}
