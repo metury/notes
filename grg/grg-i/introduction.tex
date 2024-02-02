@@ -46,32 +46,11 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.45\textwidth}\centering
-		\begin{tikzpicture}[node distance={7mm}, thick, main/.style = {draw, circle}]
-			\node (L) {};
-			\node[main, color=gray] (1) [right of=L] {};
-			\node[main, color=cyan] (11) [above of=1] {};
-			\node (2) [right of=1] {};
-			\node[main, color=orange] (3) [right of=2] {};
-			\node[main, color=gray] (4) [right of=3] {};
-			\node[main, color=cyan] (14) [above of=4] {};
-			\node (5) [right of=4] {};
-			\node[main, color=gray] (6) [right of=5] {};
-			\node[main, color=violet] (16) [above of=6] {};
-			\node[main, color=gray] (7) [right of=6] {};
-			\node[main, color=violet] (17) [above of=7] {};
-			\node[main, color=orange] (8) [right of=7] {};
-			\node (R) [right of=8] {};
-			\draw[main] (L) edge (R);
-			\node[main, color=orange] (3) [right of=2] {};
-			\node[main, color=orange] (8) [right of=7] {};
-			\draw[color=cyan] (11) edge (14);
-			\draw[color=cyan, dashed] (1) edge (11);
-			\draw[color=cyan, dashed] (4) edge (14);
-			\draw[color=orange] (3) edge (8);
-			\draw[color=violet] (16) edge (17);
-			\draw[color=violet, dashed] (6) edge (16);
-			\draw[color=violet, dashed] (7) edge (17);
-			\node[main, color=gray] (1) [right of=L] {};
+		\begin{tikzpicture}
+			\draw[line width = 3] (0,0) -- (6,0);
+			\draw[line width = 4, color = cyan] (1, .12) -- (3, .12);
+			\draw[line width = 4, color = violet] (4, .12) -- (5, .12);
+			\draw[line width = 4, color = orange] (2, .25) -- (5.5, .25);
 		\end{tikzpicture}
 		\caption{Drawn intervals.}
 	\end{subfigure}
@@ -91,26 +70,14 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}[node distance={9mm}, thick, main/.style = {draw, circle}]
-			\node[main, color=cyan] (L1) {};
-			\node[main, color=orange] (L2) [below of=L1] {};
-			\node[main, color=lime] (L3) [below of=L2] {};
-			\node[main, color=blue] (L4) [below of=L3] {};
-			\node[main, color=red] (L5) [below of=L4] {};
-			\node[main, color=violet] (L6) [below of=L5] {};
-			\node[main, color=lime] (R1) [right=2cm of L1] {};
-			\node[main, color=cyan] (R2) [below of=R1] {};
-			\node[main, color=violet] (R3) [below of=R2] {};
-			\node[main, color=blue] (R4) [below of=R3] {};
-			\node[main, color=orange] (R5) [below of=R4] {};
-			\node[main, color=red] (R6) [below of=R5] {};			
-			\draw[color=gray] (L1) edge (L6);
-			\draw[color=gray] (R1) edge (R6);
-			\draw[color=cyan] (L1) edge (R2);
-			\draw[color=orange] (L2) edge (R5);
-			\draw[color=lime] (L3) edge (R1);
-			\draw[color=blue] (L4) edge (R4);
-			\draw[color=red] (L5) edge (R6);
-			\draw[color=violet] (L6) edge (R3);
+			\draw[line width = 2, color = cyan] (0,1) -- (3,2);
+			\draw[line width = 2, color = orange] (0,2) -- (3,5);
+			\draw[line width = 2, color = lime] (0,3) -- (3,1);
+			\draw[line width = 2, color = blue] (0,4) -- (3,4);
+			\draw[line width = 2, color = red] (0,5) -- (3,6);
+			\draw[line width = 2, color = violet] (0,6) -- (3,3);
+			\draw[line width = 2] (0,.8) -- (0,6.2);
+			\draw[line width = 2] (3,.8) -- (3,6.2);
 		\end{tikzpicture}
 		\caption{Drawn permutations.}
 	\end{subfigure}
