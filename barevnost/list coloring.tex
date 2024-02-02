@@ -46,7 +46,7 @@ Firstly we can see a graph $G$ and its normal coloring which is depicted on a pi
 \end{figure}
 
 \begin{defn}
-	\textbf{$k$-list-assignment} is for an assignment for all vertices of size $k$.
+	\textbf{$k$-list-assignment} is for an assignment of lists for all vertices of size $k$.
 \end{defn}
 
 \begin{defn}
@@ -61,10 +61,10 @@ Firstly we can see a graph $G$ and its normal coloring which is depicted on a pi
 	$\chi(G) \leq \chi_l(G)$
 \end{observ}
 
-Now one could prove that the Heawood's formula works pretty much the same, thus $\chi_l(G) \leq \left\lfloor \frac{7 + \sqrt{24 g + 1}}{2} \right\rfloor$, but only if $g > 0$. On the other hand one can find a planar graph which has $\chi_l(G) > 4$, but it can be shown that for every planar graph $G$ the $\chi_l(G) \leq 5$ which was proven by Thomassen. Vizing's theorem will be shown and the Brooks' theorem remains the same.
+Now one could prove that the Heawood's formula works pretty much the same, thus $\chi_l(G) \leq \left\lfloor \frac{7 + \sqrt{24 g + 1}}{2} \right\rfloor$, but only if $g > 0$. On the other hand one can find a planar graph which has $\chi_l(G) > 4$, but it can be shown that for every planar graph $G$ the $\chi_l(G) \leq 5$ which was proven by Thomassen. Vizing's theorem is an open problem and the Brooks' theorem will be shown.
 
 \begin{defn}
-	$L$ is a \textbf{degree-list-assignment} for graph $G$ if $|L(v)| \geq \deg(v)$ $\forall v \in V$. And $G$ is a \textbf{degree-list-colorable} if $G$ is colorable from every degree-list-assignment.
+	$L$ is a \textbf{degree-list-assignment} for a graph $G$ if $|L(v)| \geq \deg(v)$ $\forall v \in V$. And $G$ is a \textbf{degree-list-colorable} if $G$ is colorable from every degree-list-assignment.
 \end{defn}
 
 \begin{defn}[Gallai tree]
@@ -99,24 +99,44 @@ Now one could prove that the Heawood's formula works pretty much the same, thus 
 
 \begin{thm}[Brooks]
 	If $G$ is connected and $G$ is not a gallai tree then $G$ is degree-list-colorable.
+	\label{brooks-thm}
 \end{thm}
 
+\begin{lemma}
+	$G$ is connected, $L$ is a degree-list-assignment $(\exists v \in V(G)) \ |L(v)| > \deg(v) \Rightarrow G$ is $L$-colorable.
+	\label{lemma-1}
+\end{lemma}
+
 \begin{proof}
-	\begin{lemma}
-		$G$ is connected, $L$ is a degree-list-assignment $(\exists v \in V(G)) \ |L(v)| > \deg(v) \Rightarrow G$ is $L$-colorable.
-	\end{lemma}
-	
-	\begin{lemma}
-		$G$ is connected, $L$ is a degree-list-assignment, $uv \in E(G)$, $u$ is not a cut vertex, $G$ not $L$-colorable then $L(u) \subseteq L(v)$.
-	\end{lemma}
-	
-	\begin{cor}
-		$G$ connected, $L$ is a degree-list-assignment, $uv \in E(G)$, $u,v$ not cut vertices, $G$ not $L$-colorable then $L(u) = L(v)$.
-	\end{cor}
-	
-	\begin{cor}
-		$G$ is 2-connected, $L$ is degree-list-assignment, $G$ is not $L$-colorable then $\forall u,v \in V(G) : L(u) = L(v)$ and $G$ is a clique or an odd cycle.
-	\end{cor}
+	By induction on $|V(G)|$. We firstly remove such vertex $v$ from the graph, which will leave us with graph $G'$ which has $|V(G')| + 1 = |V(G)|$ and also the neighbors have greater lists than their degrees. Also at least one neighbor exists since it is connected.
 \end{proof}
 
-\TODO{From this part it is missing.}
+\begin{lemma}
+	$G$ is connected, $L$ is a degree-list-assignment, $uv \in E(G)$, $u$ is not a cut vertex, $G$ not $L$-colorable then $L(u) \subseteq L(v)$.
+\end{lemma}
+
+\begin{proof}
+	For a contradiction suppose $L(u) \nsubseteq L(v)$ therefore $\exists c \in L(u) \setminus L(v)$. We delete $u$ and the color $c$ will be assigned to $u$. Now we use the Lemma \ref{lemma-1}.
+\end{proof}
+
+\begin{cor}
+	$G$ connected, $L$ is a degree-list-assignment, $uv \in E(G)$, $u,v$ not cut vertices, $G$ not $L$-colorable then $L(u) = L(v)$.
+\end{cor}
+
+\begin{cor}
+	$G$ is 2-connected, $L$ is degree-list-assignment, $G$ is not $L$-colorable then $\forall u,v \in V(G) : L(u) = L(v)$ and $G$ is a clique or an odd cycle.
+\end{cor}
+
+\begin{proof}[Proof of theorem \ref{brooks-thm}]
+	We will prove this by a contrapositive implication. We split the graph $G$ by a cut $S \subseteq V(G)$. We denote the corresponding parts of graph as $G_1$ and $G_2$. Fix $a$ as a number of edges between $S$ and $G_1$ and $b$ for $S$ and $G_2$. Therefore $|S| \geq a + b$. Lets say that color $c$ is \textbf{bad} if no $L$-coloring for $G$ of given color $c$ to vertex $v \in S$.
+	
+	\begin{observ}
+		$\leq a$ bad colors for $G_1$ and $\leq b$ bad colors for $G_2$.
+	\end{observ}
+	
+	\begin{observ}
+		Every color in $S$ is bad for $G_1$ and $G_2$.
+	\end{observ}
+	
+	Then $S = A \dot{\cup} B$ and $|A| \geq a$ and $|B| \geq b$. Now by induction $G_1, G_2$ are Gallai trees and therefore $G$ is a Gallai tree as well.
+\end{proof}

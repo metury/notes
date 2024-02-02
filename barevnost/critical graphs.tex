@@ -1,5 +1,15 @@
 \chapter{Critical graphs}
 
+\begin{defn}
+	\textbf{Girth} of a graph is the size of the shortest induced cycle.
+\end{defn}
+
+\begin{defn}
+	A graph $G$ is $k$-critical if $\chi(G) = c$ and for every proper subgraph $H \subsetneq G$ is $(c-1)$-colorable.
+\end{defn}
+
+\TODO{Second lecture skipped for now.}
+
 \begin{exerc}
 	If $G$ is $k$-critical, then it is $2$-connected.
 \end{exerc}
@@ -10,11 +20,22 @@
 	Now assume it is 1-conencted. Therefore we have a vertex cut $M = \{v\}$ which splits the graph to two components $G_1$ and $G_2$. Lets fix graphs $G_1 \cup \{v\}$ and $G_2 \cup \{v\}$ where both of them have chromatic number $k - 1$ since they are subgraphs. Lets fix those colorings. Now for one coloring switch the colors so that $v$ has the same color for both colorings. Therefore we have $G$ colored by $k-1$ colors which is a contradiction.
 \end{proof}
 
+\begin{table}[!ht]\centering
+	\begin{tabular}{c|c|c|c|c|c}
+		\# of colors & 3 & 4 & 5 & 6 & $\geq 7$ \\
+		\hline
+		general & NP & ? & P & P & P \\
+		triangle-free & P, $\ast$ & P & P & P & P \\
+		girth $\geq 4$ & P & P & P & P & P
+	\end{tabular}
+	\caption{What is NP and P problem for coloring graph on surfaces. \small{$\ast$ but infinitely many 4-critical triangle-free graphs.}}
+\end{table}
+
 \begin{thm}
 	If $G$ is $(c+1)$-critical for $c \geq 3$ and $G \neq K_{c+1}$ then the average degree is
 	
 	$$
-	\bar{d} \geq c + \frac{c-2}{c^2 - 2c -2} \approx c + \frac{1}{c} \quad (\text{for large } c)
+	\bar{d}(G) \geq c + \frac{c-2}{c^2 - 2c -2} \approx c + \frac{1}{c} \quad (\text{for large } c)
 	$$
 \end{thm}
 
@@ -44,12 +65,8 @@
 		\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
 	\end{aligned}
 	$$
-	
-	\TODO{Finish this.}
 \end{proof}
 
 \begin{thm}[Grötsch]
 	Every planar triangle-free graph is 3-colorable.
 \end{thm}
-
-\TODO{Skipped.}
