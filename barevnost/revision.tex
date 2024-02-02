@@ -2,14 +2,25 @@
 
 One can already know some basics to the graph coloring and also some of the theorems. Therefore we will briefly introduce some basics and revisit some of the known theorems and perhaps some we will show throughout this document.
 
+\begin{defn}[Standard colorings]
+	For a graph $G$ with vertices $V(G)$ and edges $E(G)$ we define:
+	
+	\begin{itemize}
+		\item Vertex coloring is an assignment $\varphi : V(G) \to \N$ such that no two adjacent vertices have the same color.
+		\item Edge coloring is an assignment $\varphi: E(G) \to \N$ such that all edges incident to one vertex have different color.
+		\item Graph is $k$-colorable ($k$-edge-colorable) if vertices (edges) can be colored by $k$ colors.
+		\item (Edge) chromatic number is min $k$ such that $G$ is $k$-(edge)-colorable.
+	\end{itemize}
+\end{defn}
+
 \begin{notation}
 	First of all some basic notations.
 	
 	\begin{itemize}
-		\item $\chi(G)$ is minimal vertex coloring of a graph $G$.
+		\item $\chi(G)$ A chromatic number of $G$.
 		\item $\Delta(G)$ is the maximal degree of a graph $G$.
 		\item $\delta(G)$ is the minimal degree of a graph $G$.
-		\item $\chi_e(G)$ is minimal edge coloring of a graph $G$.
+		\item $\chi_e(G)$ An edge chromatic number of $G$.
 	\end{itemize}
 \end{notation}
 
@@ -35,7 +46,7 @@ From Euler's formula one can see that if $|V| \geq 3$ then $|E| \leq 3 |V| + 3g 
 	If $G$ can be drawn on a surface of Euler genus $g$ then
 	
 	$$
-	\chi(G) \leq \frac{7 + \sqrt{24 g + 1}}{2}
+	\chi(G) \leq \left \lfloor \frac{7 + \sqrt{24 g + 1}}{2} \right \rfloor
 	$$
 \end{thm}
 

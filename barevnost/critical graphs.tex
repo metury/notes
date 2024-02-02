@@ -3,3 +3,53 @@
 \begin{exerc}
 	If $G$ is $k$-critical, then it is $2$-connected.
 \end{exerc}
+
+\begin{proof}[Solution]
+	Lets take a graph $G$ which has $\chi(G) = k$ but for all $H \subsetneq G$ $\chi(H) = k-1$. If $G$ is not connected then one component must have the largest $\chi(G)$, but if we remove vertex or edge from other component we don't achieve $\chi(H)$. That is contradiction.
+	
+	Now assume it is 1-conencted. Therefore we have a vertex cut $M = \{v\}$ which splits the graph to two components $G_1$ and $G_2$. Lets fix graphs $G_1 \cup \{v\}$ and $G_2 \cup \{v\}$ where both of them have chromatic number $k - 1$ since they are subgraphs. Lets fix those colorings. Now for one coloring switch the colors so that $v$ has the same color for both colorings. Therefore we have $G$ colored by $k-1$ colors which is a contradiction.
+\end{proof}
+
+\begin{thm}
+	If $G$ is $(c+1)$-critical for $c \geq 3$ and $G \neq K_{c+1}$ then the average degree is
+	
+	$$
+	\bar{d} \geq c + \frac{c-2}{c^2 - 2c -2} \approx c + \frac{1}{c} \quad (\text{for large } c)
+	$$
+\end{thm}
+
+\begin{thm}
+	If $G$ is $(c+1)$-critical, then
+	
+	$$
+	\bar{d} \geq c+1 - \frac{2}{c} - O\left( \frac{1}{|V(G)|}\right)
+	$$
+\end{thm}
+
+\begin{thm}
+	If $G$ is 4-critical, then
+	
+	$$
+	|E(G)| \geq \frac{5 \cdot |V(G)| - 2}{3} \Rightarrow \bar{d} \geq \frac{10}{3} - \frac{4}{3 \cdot |V(G)|}
+	$$
+\end{thm}
+
+\begin{proof}
+	Suppose $H$ is 4-critical plane graph. Let $f_i$ be the number of faces of length $i$ in a drawing of $H$. Therefore by Euler's formula we get the following.
+	
+	$$
+	\begin{aligned}
+		|V(G)| + |F(G)| &= |E(G)| + 2 \\
+		|V(G)| + \sum_{i \geq 3} f_i &= |E(G)| + 2 \\
+		\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
+	\end{aligned}
+	$$
+	
+	\TODO{Finish this.}
+\end{proof}
+
+\begin{thm}[Grötsch]
+	Every planar triangle-free graph is 3-colorable.
+\end{thm}
+
+\TODO{Skipped.}
