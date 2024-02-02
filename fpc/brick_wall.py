@@ -39,7 +39,7 @@ def create_graph(k):
 			print(f"\\node[main] ({(i+1)*10 + j + 1}) [right of={(i+1)*10 + j}]", end =" ")
 			print("{};")
 			print(f"\\draw ({(i+1)*10 + j + 1}) -- ({(i+1)*10 + j});")
-			if j != 2*k - 2 or odd:
+			if (j != 2*k - 2 or odd) and ((odd and j % 2 == 0) or (not odd and j % 2 == 1)):
 				print(f"\\draw ({(i+1)*10 + j + 1}) -- ({i*10 + j + 1});")
 		odd = not odd
 	last=(2*k)*10 + 1 # Create last bricks.
@@ -53,18 +53,23 @@ def create_graph(k):
 			print("{$t_{" ,end ="")
 			print(k - (i // 2) - 1, end="")
 			print("}$};")
+			print(f"\\draw ({last+(2*k - 2)-10}) -- ({last+(2*k - 2)});")
 		else:
 			print(f"\\node[main] ({last+i+1}) [right of={last+i}]", end =" ")
 			print("{};")
+			print(f"\\draw ({last+i}) -- ({last - 10 + i});")
 		print(f"\\draw ({last+i+1}) -- ({last+i});")
-		print(f"\\draw ({last+i}) -- ({last - 10 + i});")
-	print(f"\\draw ({last+(2*k - 2)-10}) -- ({last+(2*k - 2)});")
 
 def straight_path(x, k, s):
 	""" Straight path from x to bottom. """
-	for i in range(s):
+	for i in range(s // 2):
 		print()
-		print(f"\t({x + i * 10}) edge ({x + (i + 1) * 10})", end="")
+		print(f"\t({x + 2 * i * 10}) edge ({x + 2 * i * 10 + 1})", end="")
+		print(f"\t({x + 2 * i * 10 + 1}) edge ({x + (2 * i + 1) * 10 + 1})", end="")
+		print(f"\t({x + (2 * i + 1) * 10 + 1}) edge ({x + (2 * i + 1) * 10})", end="")
+		print(f"\t({x + (2 * i + 1) * 10}) edge ({x + (2 * i + 2) * 10})", end="")
+	print(f"\t({x + (s - 1) * 10}) edge ({x + (s - 1) * 10 + 1})", end="")
+	print(f"\t({x + (s - 1) * 10 + 1}) edge ({x + s  * 10 + 1})", end="")
 
 def rec_path(x, k, s):
 	""" Recusrive path zig-zag. """
@@ -72,10 +77,10 @@ def rec_path(x, k, s):
 		return
 	print()
 	if x % 10 == 2 * k - 1:
-		for i in range(s + 1):
+		for i in range(s + 2):
 			print(f"\t({x - i}) edge ({x - i -1})")
-		print(f"\t({x - s - 1}) edge ({x - s - 1 + 10})", end="")
-		straight_path(x - s - 1 + 10, k, s);
+		print(f"\t({x - s - 2}) edge ({x - s - 2 + 10})", end="")
+		straight_path(x - s - 2 + 10, k, s);
 	else:
 		print(f"\t({x}) edge ({x + 1})")
 		print(f"\t({x + 1}) edge ({x + 11})", end="")
@@ -83,7 +88,7 @@ def rec_path(x, k, s):
 
 def create_path(x, k, s, color):
 	""" Create a path from x. """
-	print(f"\\path[color={color}, thick] ({x}) edge ({x+10})")
+	print(f"\\path[color={color}, line width = 4] ({x}) edge ({x+10})")
 	print(f"\t({x+10}) edge ({x+11})")
 	print(f"\t({x+11}) edge ({x+21})", end="")
 	rec_path(x+21, k, s)
@@ -94,20 +99,28 @@ def create_flow(k):
 	for i in range(k):
 		create_path(2*i, k, 2*i-1, colors[i])
 
-""" Create only a graph. """
-#create_header()
-#create_graph(k)
-#create_footer()
+def graph():
+	""" Create only a graph. """
+	create_header()
+	create_graph(k)
+	create_footer()
 
-""" Create also one path. """
-#create_header()
-#create_graph(k)
-#create_path(0, k, 0, "blue")
-#create_footer()
+def path():
+	""" Create also one path. """
+	create_header()
+	create_graph(k)
+	create_path(0, k, 0, "blue")
+	create_footer()
 
-""" Create the flow. """
-create_header()
-create_graph(k)
-create_flow(k)
-create_footer()
+def flow():
+	""" Create the flow. """
+	create_header()
+	create_graph(k)
+	create_flow(k)
+	create_footer()
+
+if __name__ == "__main__":
+	#graph()
+	#path()
+	flow()
 
