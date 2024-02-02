@@ -20,17 +20,6 @@
 	Now assume it is 1-conencted. Therefore we have a vertex cut $M = \{v\}$ which splits the graph to two components $G_1$ and $G_2$. Lets fix graphs $G_1 \cup \{v\}$ and $G_2 \cup \{v\}$ where both of them have chromatic number $k - 1$ since they are subgraphs. Lets fix those colorings. Now for one coloring switch the colors so that $v$ has the same color for both colorings. Therefore we have $G$ colored by $k-1$ colors which is a contradiction.
 \end{proof}
 
-\begin{table}[!ht]\centering
-	\begin{tabular}{c|c|c|c|c|c}
-		\# of colors & 3 & 4 & 5 & 6 & $\geq 7$ \\
-		\hline
-		general & NP & ? & P & P & P \\
-		triangle-free & P, $\ast$ & P & P & P & P \\
-		girth $\geq 4$ & P & P & P & P & P
-	\end{tabular}
-	\caption{What is NP and P problem for coloring graph on surfaces. \small{$\ast$ but infinitely many 4-critical triangle-free graphs.}}
-\end{table}
-
 \begin{thm}
 	If $G$ is $(c+1)$-critical for $c \geq 3$ and $G \neq K_{c+1}$ then the average degree is
 	
@@ -39,34 +28,87 @@
 	$$
 \end{thm}
 
-\begin{thm}
-	If $G$ is $(c+1)$-critical, then
-	
-	$$
-	\bar{d} \geq c+1 - \frac{2}{c} - O\left( \frac{1}{|V(G)|}\right)
-	$$
-\end{thm}
+\section{Coloring graph on a surface}
 
-\begin{thm}
-	If $G$ is 4-critical, then
-	
-	$$
-	|E(G)| \geq \frac{5 \cdot |V(G)| - 2}{3} \Rightarrow \bar{d} \geq \frac{10}{3} - \frac{4}{3 \cdot |V(G)|}
-	$$
-\end{thm}
+\begin{table}[!ht]\centering
+	\begin{tabular}{c|c|c|c|c|c}
+		\# of colors & 3 & 4 & 5 & 6 & $\geq 7$ \\
+		\hline
+		general & NP & ? & P & P & P \\
+		triangle-free & P, $\ast$ & P & P & P & P \\
+		girth $> 4$ & P & P & P & P & P
+	\end{tabular}
+	\caption{What is NP and P problem for coloring graph on surfaces. \small{$\ast$ but infinitely many 4-critical triangle-free graphs.}}
+\end{table}
 
-\begin{proof}
-	Suppose $H$ is 4-critical plane graph. Let $f_i$ be the number of faces of length $i$ in a drawing of $H$. Therefore by Euler's formula we get the following.
-	
-	$$
-	\begin{aligned}
-		|V(G)| + |F(G)| &= |E(G)| + 2 \\
-		|V(G)| + \sum_{i \geq 3} f_i &= |E(G)| + 2 \\
-		\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
-	\end{aligned}
-	$$
-\end{proof}
+\begin{observ}
+	Now recall \ref{avg-deg} therefore if $|V(G)| > 6(g-2)$ then $\delta(G) < 6$. Hence there exists an $O(n + f(g))$ algorithm to decide 7-colorability.
+\end{observ}
+
+Now for 6 colors we consider $G$ a 7-critical graph, then $G = K_7$ or $\bar{d} \geq 6 + \frac{2}{23}$. If $G$ is on surface of euler genus $g$ then $6 + \frac{2}{23} \leq \bar{d}(G) \leq 6 + \frac{6(g+2)}{|V(G)|}$. Therefore we see that $|V(G)| \leq 69(g-2)$.
+
+\begin{cor}
+	For any surface $\Sigma$, there are finitely many $7$-critical graphs that can be drawn on $\Sigma$.
+\end{cor}
+
+Therefore we are able only to check finitely many number of graphs for the 6-colorabi-\\lity algorithm. Also there can be used \textbf{Epstein's} result which is $O(n)$ test for fixed $F, \Sigma$ whether $F \subseteq G$.
+
+\subsection{Triangle-free $G$}
 
 \begin{thm}[Grötsch]
 	Every planar triangle-free graph is 3-colorable.
 \end{thm}
+
+\begin{lemma}
+	If $G$ is drawn os surface of Euler genus $g$, $G$ is triangle-free then
+	
+	$$
+	\bar{d}(G) \leq 4 + \frac{4 (g+2)}{|V(G)|}.
+	$$
+\end{lemma}
+
+\begin{observ}
+	If $|V(G)| > 4(g-2)$, then $\delta(G) \leq 4$. Thus the algorithm for 5-colorability.
+\end{observ}
+
+\begin{lemma}
+	Suppose $G$ is quadrangulation of the projective plane and $G$ is not bipartite. For every proper coloring of $G$ there exists a face of $G$ whose vertices have four different colors. ($\Rightarrow \chi(G) \geq 4$)
+\end{lemma}
+
+\begin{proof}
+	We will firstly split the graph on the projective plane by a five cycle, which can be seen on a picture \ref{}. So we obtain a 10-cycle $A,B,C,D,E,A',B',C',D',E'$. And then we will redraw the graph so that the 10-cycle is on the outer face. Now we will construct a flow between the faces. The orientation is that if we have an $ab$ colored edge where $b < a$, then the orientation is shown on the picture \ref{}.
+	
+	\begin{observ}
+		Total flow through the outer face is $0 = 2 (n_1 - n_2)$
+	\end{observ}
+\end{proof}
+
+\TODO{Pictures and more.}
+
+%\begin{thm}
+%	If $G$ is $(c+1)$-critical, then
+%	
+%	$$
+%	\bar{d} \geq c+1 - \frac{2}{c} - O\left( \frac{1}{|V(G)|}\right)
+%	$$
+%\end{thm}
+%
+%\begin{thm}
+%	If $G$ is 4-critical, then
+%	
+%	$$
+%	|E(G)| \geq \frac{5 \cdot |V(G)| - 2}{3} \Rightarrow \bar{d} \geq \frac{10}{3} - \frac{4}{3 \cdot |V(G)|}
+%	$$
+%\end{thm}
+%
+%\begin{proof}
+%	Suppose $H$ is 4-critical plane graph. Let $f_i$ be the number of faces of length $i$ in a drawing of $H$. Therefore by Euler's formula we get the following.
+%	
+%	$$
+%	\begin{aligned}
+%		|V(G)| + |F(G)| &= |E(G)| + 2 \\
+%		|V(G)| + \sum_{i \geq 3} f_i &= |E(G)| + 2 \\
+%		\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
+%	\end{aligned}
+%	$$
+%\end{proof}
