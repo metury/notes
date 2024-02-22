@@ -10,16 +10,6 @@
 
 \TODO{Second lecture skipped for now.}
 
-\begin{exerc}
-	If $G$ is $k$-critical, then it is $2$-connected.
-\end{exerc}
-
-\begin{proof}[Solution]
-	Lets take a graph $G$ which has $\chi(G) = k$ but for all $H \subsetneq G$ $\chi(H) = k-1$. If $G$ is not connected then one component must have the largest $\chi(G)$, but if we remove vertex or edge from other component we don't achieve $\chi(H)$. That is contradiction.
-	
-	Now assume it is 1-conencted. Therefore we have a vertex cut $M = \{v\}$ which splits the graph to two components $G_1$ and $G_2$. Lets fix graphs $G_1 \cup \{v\}$ and $G_2 \cup \{v\}$ where both of them have chromatic number $k - 1$ since they are subgraphs. Lets fix those colorings. Now for one coloring switch the colors so that $v$ has the same color for both colorings. Therefore we have $G$ colored by $k-1$ colors which is a contradiction.
-\end{proof}
-
 \begin{thm}
 	If $G$ is $(c+1)$-critical for $c \geq 3$ and $G \neq K_{c+1}$ then the average degree is
 	
@@ -57,6 +47,7 @@ Therefore we are able only to check finitely many number of graphs for the 6-col
 
 \begin{thm}[Grötsch]
 	Every planar triangle-free graph is 3-colorable.
+	\label{thm-grotsch}
 \end{thm}
 
 \begin{lemma}
@@ -83,32 +74,76 @@ Therefore we are able only to check finitely many number of graphs for the 6-col
 	\end{observ}
 \end{proof}
 
-\TODO{Pictures and more.}
+\begin{observ}
+	If we took triangulation instead of quadrangulation then it is not 4-color-\\able.
+\end{observ}
 
-%\begin{thm}
-%	If $G$ is $(c+1)$-critical, then
-%	
-%	$$
-%	\bar{d} \geq c+1 - \frac{2}{c} - O\left( \frac{1}{|V(G)|}\right)
-%	$$
-%\end{thm}
-%
-%\begin{thm}
-%	If $G$ is 4-critical, then
-%	
-%	$$
-%	|E(G)| \geq \frac{5 \cdot |V(G)| - 2}{3} \Rightarrow \bar{d} \geq \frac{10}{3} - \frac{4}{3 \cdot |V(G)|}
-%	$$
-%\end{thm}
-%
-%\begin{proof}
-%	Suppose $H$ is 4-critical plane graph. Let $f_i$ be the number of faces of length $i$ in a drawing of $H$. Therefore by Euler's formula we get the following.
-%	
-%	$$
-%	\begin{aligned}
-%		|V(G)| + |F(G)| &= |E(G)| + 2 \\
-%		|V(G)| + \sum_{i \geq 3} f_i &= |E(G)| + 2 \\
-%		\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
-%	\end{aligned}
-%	$$
-%\end{proof}
+\begin{lemma}
+	$G$ planar triangulation graph where $u,v$ vertices have odd degree and all other vertices have even degree then $\forall$ 4-coloring $\varphi$ of $G$ it holds that $\varphi(u) = \varphi(v)$.
+\end{lemma}
+
+\begin{proof}
+	Now we will consider the following triangle counting. We will be talking about counter-clockwise order of vertices.
+	
+	$$
+	t_{a,b,c} = \text{\# of } abc \text{ triangles } - \text{\# of } acb \text{ triangles}
+	$$
+	
+	We may see that $t_{a,b,c} = t_{b,c,d}$ and that follows for others as well. Now compute the following.
+	
+	$$
+	t_{a,b,c} + t_{a,c,d} + t_{a,d,b} = 3 t_{a,b,c} \equiv \sum_{v : \varphi(v) = a} \deg(v) \mod 2
+	$$
+	
+	Therefore if not sum includes $u$ it must also include $v$ because otherwise the sum will be odd and two even which is impossible.
+\end{proof}
+
+\begin{exerc}
+	If $G$ is $k$-critical, then it is $2$-connected.
+\end{exerc}
+
+\begin{proof}[Solution]
+	Lets take a graph $G$ which has $\chi(G) = k$ but for all $H \subsetneq G$ $\chi(H) = k-1$. If $G$ is not connected then one component must have the largest $\chi(G)$, but if we remove vertex or edge from other component we don't achieve $\chi(H)$. That is contradiction.
+	
+	Now assume it is 1-conencted. Therefore we have a vertex cut $M = \{v\}$ which splits the graph to two components $G_1$ and $G_2$. Lets fix graphs $G_1 \cup \{v\}$ and $G_2 \cup \{v\}$ where both of them have chromatic number $k - 1$ since they are subgraphs. Lets fix those colorings. Now for one coloring switch the colors so that $v$ has the same color for both colorings. Therefore we have $G$ colored by $k-1$ colors which is a contradiction.
+\end{proof}
+
+\begin{observ}
+	If $G$ is $k$-critical, then it is $3$-connected.
+\end{observ}
+
+\begin{thm}[Korstochka, Tarcey]
+	If $G$ is $(c+1)$-critical, then
+	
+	$$
+	\bar{d} \geq c+1 - \frac{2}{c} - O\left( \frac{1}{|V(G)|}\right)
+	$$
+\end{thm}
+
+\begin{thm}
+	If $G$ is 4-critical, then
+	
+	$$
+	|E(G)| \geq \frac{5 \cdot |V(G)| - 2}{3} \Rightarrow \bar{d} \geq \frac{10}{3} - \frac{4}{3 \cdot |V(G)|}
+	$$
+\end{thm}
+
+Now for an application. Suppose $G$ is 4-critical plane graph. Let $f_i$ be the number of faces of length $i$ in a drawing of $G$. Therefore by Euler's formula we get the following.
+
+$$
+\begin{aligned}
+	|V(G)| + |F(G)| &= |E(G)| + 2 \\
+	|V(G)| + \sum_{i \geq 3} f_i &= |E(G)| + 2 \\
+	\frac{5}{3}|V(G)| + \frac{5}{3}\sum_{i \geq 3} f_i &= \frac{5}{3}|E(G)| + \frac{10}{3} \\
+	\frac{1}{3} \sum_{i \geq 3} i f_i &= \frac{2}{3} |E(G)| \\
+	\frac{5}{3}|V(G)| + \frac{1}{3} \sum_{i \geq 3} (5-i) f_i &= |E(G)| + \frac{10}{3} \\
+	|E(G)| &= \frac{5}{3} |V(G)| + \frac{1}{3} \sum_{i \geq 3} (5-i) f_i - \frac{10}{3} \\
+	\frac{5}{3} |V(G)| - \frac{2}{3} &\leq \frac{5}{3} |V(G)| + \frac{1}{3} 2f_3 + \frac{1}{3} f_4 - \frac{10}{3}
+\end{aligned}
+$$
+
+So if it is a 4-critical planar graph, then $2f_3 + f_4 \geq 8$.
+
+\begin{proof}[Proof of theorem \ref{thm-grotsch}]
+	Suppose there exists a triangle-free planar graph that is not 3-color-\\able. Choose one with $|V(H)| + |E(H)|$ minimal. Therefore $H$ is 4-critical. By the last application it has at least $8$ 4-faces.
+\end{proof}
