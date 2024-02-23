@@ -1,1 +1,168 @@
 \chapter{STRING $\in$ NP}
+
+Now we will take a look at recognition of STRING graphs. Mainly that this problem is indeed in NP. We have already shown in the first part that STRING-recognition is NP-hard. The main problem is that some string graphs require representation with exponentially many crossings. Which is not possible to guess in an NP algorithm.
+
+Also we have shown (Schaeffer and Štěfanovič) result that any string graph has a representation with at most exponentially many crossings.
+
+Before we continue lets give us an example of a graph and its STRING representation which can be seen on Fig. \ref{string example}.
+
+\begin{figure}[!ht]
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, thick}]
+			\node[main] (u) at (0,0) {$u$};
+			\node[main] (v) at (2,0) {$v$};
+			\node[main] (w) at (0,1.5) {$w$};
+			\node[main] (x) at (2,1.5) {$x$};
+			\node[main] (y) at (1,3) {$y$};
+			\draw[thick] (u) -- (v);
+			\draw[thick] (u) -- (w);
+			\draw[thick] (v) -- (x);
+			\draw[thick] (w) -- (x);
+			\draw[thick] (w) -- (y);
+			\draw[thick] (x) -- (y);
+		\end{tikzpicture}
+		\caption{Graph $G$.}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}
+			\draw[thick] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
+			\node at (-1,.3) {$y$};
+			\draw[thick] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
+			\node at (0, -1.4) {$w$};
+			\draw[thick] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
+			\node at (2.3, -2.7) {$u$};
+			\draw[thick] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
+			\node at (3.9, 1) {$x$};
+			\draw[thick] (0, -3) to (3.7, -.3);
+			\node at (0, -3.2) {$v$};
+		\end{tikzpicture}
+		\caption{String representation.}
+	\end{subfigure}
+	\caption{Example of a STRING graph.}
+	\label{string example}
+\end{figure}
+
+Firstly lets define another problem which can be converted from STRING-recognition.
+
+\section{Weak AT-realization}
+
+The \textbf{INPUT} is a graph $G = (V,E)$ and $R \subseteq \binom{E}{2}$. The \textbf{GOAL} is to find a drawing of $G$ where only the pairs of edges from $R$ are allowed to cross.
+
+Note that AT stands for abstract topological and weak means that the pairs do \textbf{not hove} to cross, only they can.
+
+For now the drawing is somewhat basic. That is No edges crosses through a vertex. Vertices are points and edges are curves.
+
+\section{Reduction of STRING-recognition to Weak AT-realization}
+
+For a given graph $G = (V_G,E_G)$ we define the following graph $H = (V_H, E_H)$ and $R$. $V_H = V_G \cup E_G$ and $E_H = \{\{v,e\}, v \in V_G, e \in E_G, v \in e\}$. Lets see an example on Fig. \ref{reduction of strings}. We may see that the graph is obtained by subdividing all edges.
+
+\begin{figure}[!ht]
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, thick}, e/.style = {Blue}]
+			\node[main] (u) at (0,0) {$u$};
+			\node[main] (v) at (2,0) {$v$};
+			\node[main] (w) at (0,2) {$w$};
+			\node[main] (x) at (2,2) {$x$};
+			\node[main] (y) at (1,4) {$y$};
+			\draw[thick] (u) -- (v) node[midway, e, below] {$e$};
+			\draw[thick] (u) -- (w) node[midway, e, left] {$f$};
+			\draw[thick] (v) -- (x) node[midway, e, right] {$g$};
+			\draw[thick] (w) -- (x) node[midway, e, below] {$h$};
+			\draw[thick] (w) -- (y) node[midway, e, above, left] {$i$};
+			\draw[thick] (x) -- (y) node[midway, e, above, right] {$j$};
+		\end{tikzpicture}
+		\caption{Original graph $G$.}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, thick}, e/.style = {draw, circle, fill, Blue}]
+			\node[main] (u) at (0,0) {$u$};
+			\node[main] (v) at (2,0) {$v$};
+			\node[main] (w) at (0,2) {$w$};
+			\node[main] (x) at (2,2) {$x$};
+			\node[main] (y) at (1,4) {$y$};
+			\draw[thick] (u) -- (v) node[midway, e] {\textcolor{white}{$e$}};
+			\draw[thick] (u) -- (w) node[midway, e] {\textcolor{white}{$f$}};
+			\draw[thick] (v) -- (x) node[midway, e] {\textcolor{white}{$g$}};
+			\draw[thick] (w) -- (x) node[midway, e] {\textcolor{white}{$h$}};
+			\draw[thick] (w) -- (y) node[midway, e] {\textcolor{white}{$i$}};
+			\draw[thick] (x) -- (y) node[midway, e] {\textcolor{white}{$j$}};
+		\end{tikzpicture}
+		\caption{Graph $H$.}
+	\end{subfigure}
+	\caption{Creating $H$ from $G$.}
+	\label{reduction of strings}
+\end{figure}
+
+Lastly we define $R = \{\{\{v, e\}, \{w,f\}\}, \{v,w\} \in E_G\}$.
+
+\begin{claim}
+	$G$ is a STRING graph $\Leftrightarrow$ $(H,R)$ has Weak AT-realization.
+\end{claim}
+
+\begin{proof}
+	"$\Rightarrow$" Suppose $G$ is a STRING graph. Pick endpoints as vertices and crossings as edge-vertices of $H$. Choose these arbitrary (see Fig. \ref{rightarrow} for an example). The edges will follow the lines in a STRING representation.
+	
+	"$\Leftarrow$" Suppose $(H,R)$ has a Weak AT-realization. See that $H$ is bipartite. Now represent it by going from the vertex alongside every edge to the edge-vertices of $H$ and almost return to the vertex. See Fig. \ref{leftarrow} for an example. It is easily observable that when lines cross then indeed they need be connected by an edge.
+	
+	\begin{figure}[!ht]
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[main/.style = {draw, circle, thick}]
+				\draw[thick] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
+				\node[main] at (-1.35,0) {$y$};
+				\draw[thick] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
+				\node[main] at (.3, -1.75) {$w$};
+				\draw[thick] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
+				\node[main] at (2.35, -2.7) {$u$};
+				\draw[thick] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
+				\node[main] at (3.6, 1.35) {$x$};
+				\draw[thick] (0, -3) to (3.7, -.3);
+				\node[main] at (-.2, -3.25) {$v$};
+				% Add edge-nodes
+			\end{tikzpicture}
+			\caption{$\Rightarrow$}
+			\label{rightarrow}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\caption{$\Leftarrow$}
+			\label{leftarrow}
+		\end{subfigure}
+		\caption{Examples for the proof.}
+	\end{figure}
+\end{proof}
+
+\subsection{Test Weak AT-realization in NP}
+
+Firstly we will write down all our assumption about the drawing we will be using.
+
+\begin{enumerate}
+	\item We are on the sphere.
+	\item Vertex $v$ is drawn as an open disc $D_v$ (also we will denote $\partial D_v$ as the boundary of $D_v$ and $\overline{D_v}$ as the closure of $D_v$, i.e. $\overline{D_v} = D_v \cup \partial D_v$).
+	\item An edge $e = \{v,w\}$ is represented by a curve $\gamma_e$ connecting a point from $\partial D_v$ to a point from $\partial D_w$ otherwise $\gamma_e$ is disjoint from $\bigcup_{x \in V} \overline{D_x}$.
+	\item For $e \neq f$ $\gamma_e$ and $\gamma_f$ have distinct endpoints.
+\end{enumerate}
+
+We can easily see that these assumption are not restricting since it can be switch to "normal" drawing we are using by shrinking the discs to single points and switch back by expanding the single points.
+
+Now we will proceed with the algorithm.
+
+\begin{algorithm}[!ht]
+	\begin{algorithmic}[1]
+		\Require $G = (V,E), R \subseteq \binom{E}{2}$
+		\State $\forall v \in V:$ choose $D_v$ (so that $v \neq w$ have $\overline{D_v} \cap \overline{D_w} = \emptyset$).
+		\State For any edge $e \in E$ incident to $v \in V:$ choose an endpoint of $\gamma_e$ on $\partial D_v$.
+		\State \textcolor{Green}{$\dots$}
+	\end{algorithmic}
+	\caption{NP algorithm for testing Weak AT-realization.}
+\end{algorithm}
+
+Before we continue with the algorithm we will take a short topological detour to some definitions and facts.
+
+\subsection{Topological detour}
+
+\begin{defn}
+	$\mathcal{S} := (\text{sphere}) \setminus \bigcup_{v \in V} D_v$. Which is a compact surface with boundary.
+\end{defn}
+
+\begin{defn}
+	$\mathcal{S}-\text{curve}$ is a curve in $\mathcal{S}$ with endpoints in the $\partial \mathcal{S}$ and no other point in $\partial \mathcal{S}$.
+\end{defn}
