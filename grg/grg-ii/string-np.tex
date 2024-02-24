@@ -123,6 +123,11 @@ Lastly we define $R = \{\{\{v, e\}, \{w,f\}\}, \{v,w\} \in E_G\}$.
 			\label{rightarrow}
 		\end{subfigure}
 		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[main/.style = {draw, circle, thick}]
+				\node[main] at (0,0) (v) {$v$};
+				\node[main] at (-2, -1) (1) {};
+				\draw[thick] (v) to[] (1);
+			\end{tikzpicture}
 			\caption{$\Leftarrow$}
 			\label{leftarrow}
 		\end{subfigure}
@@ -166,3 +171,76 @@ Before we continue with the algorithm we will take a short topological detour to
 \begin{defn}
 	$\mathcal{S}-\text{curve}$ is a curve in $\mathcal{S}$ with endpoints in the $\partial \mathcal{S}$ and no other point in $\partial \mathcal{S}$.
 \end{defn}
+
+\begin{defn}
+	Two $\mathcal{S}$-curves $\gamma, \delta$ are \textbf{isotopic} (written as $\gamma \sim \delta$) if $\gamma$ and $\delta$ have the same endpoints and $\gamma$ can be transformed into $\delta$ by a continuous deformations of $\mathcal{S}$ which fixes the boundary.
+\end{defn}
+
+\begin{figure}[!ht]
+	\caption{Example of isotopic and non-isotopic $\mathcal{S}$-curves.}
+\end{figure}
+
+\begin{defn}
+	For two $\mathcal{S}$-curves $\gamma_1, \gamma_2$ the intersection number $i(\gamma_1, \gamma_2)$ is
+	
+	$$
+	\min_{\delta_1 \sim \gamma_1, \delta_2 \sim \gamma_2} |\delta_1 \cap \delta_2|.
+	$$
+\end{defn}
+
+\begin{figure}[!ht]
+	\caption{Example of intersection number.}
+\end{figure}
+
+\begin{fact}
+	Let $\gamma_1, \dots, \gamma_n$ be $\mathcal{S}$-curves. Then there are $\mathcal{S}$-curves $\delta_1, \dots, \delta_n$ s.t.
+	
+	\begin{enumerate}
+		\item $\delta_i \sim \gamma_i$ for $i = 1, \dots, n$,
+		\item $|\delta_i \cap \delta_j| = i(\gamma_i, \gamma_j)$ for $i\neg j \in \{1, \dots, n\}$. 
+	\end{enumerate}
+\end{fact}
+
+\noindent
+With all these definitions we will choose the following triangulation $T = (V_T, E_T)$ of $\mathcal{S}$:
+
+\begin{enumerate}
+	\item $\forall v \in V: \partial D_v$ has three vertices and three edges of $T$.
+	\item There are no other vertices of $T$, the remaining edges are chosen arbitrarily as $\mathcal{S}$-curves, so that $\mathcal{S}$ is partitioned into triangle faces.
+	\item Vertices of $T$ do not coincide with endpoints of $\gamma_e, e \in E$ from algorithm.
+\end{enumerate}
+
+\begin{defn}
+	An $\mathcal{S}$-curve $\gamma$ is \textbf{normal} w.r.t. T if
+	
+	\begin{enumerate}
+		\item The endpoints of $\gamma$ are distinct from $V_T$.
+		\item Any point where an edge of $T$ meets $\gamma$ is either an endpoint of $\gamma$ or a proper crossing (no touching is allowed).
+		\item $\gamma$ does not have two consecutive crossings with any edge of $T$.
+		\item $\gamma$ does not cross the same edge of $T$ no more than $2^{|E_T| + |E|}$-times.
+	\end{enumerate}
+\end{defn}
+
+\begin{claim}
+	If $G$ has a weak AT-realization, then it has a realization where each $\gamma_e$ is normal w.r.t. T.
+\end{claim}
+
+\begin{proof}
+	Take AT with minimum number of crossings. 1. is satisfied by the definition. 2. otherwise minimality is broken, 3. again the minimality is broken and lastly 4. follows from GRG1.
+	
+	\begin{figure}
+		\caption{Examples for the proof.}
+	\end{figure}
+\end{proof}
+
+\begin{defn}
+	Let $\gamma$ be an $\mathcal{S}$-curve, normal w.r.t T for $e \in E_T: C_e(\gamma) := |e \cap \gamma|$.
+\end{defn}
+
+\begin{claim}
+	The numbers $\left( C_e(\gamma)\right)_{e \in E_T}$ determine $\gamma$ up to isotopy.
+\end{claim}
+
+\begin{proof}
+	Suppose we have a triangle face.
+\end{proof}
