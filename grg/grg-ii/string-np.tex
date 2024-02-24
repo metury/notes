@@ -6,7 +6,7 @@ Also we have shown (Schaeffer and Štěfanovič) result that any string graph ha
 
 Before we continue lets give us an example of a graph and its STRING representation which can be seen on Fig. \ref{string example}.
 
-\begin{figure}[!ht]
+\begin{figure}[!ht]\centering
 	\begin{subfigure}{.45\textwidth}\centering
 		\begin{tikzpicture}[main/.style = {draw, circle, thick}]
 			\node[main] (u) at (0,0) {$u$};
@@ -56,7 +56,7 @@ For now the drawing is somewhat basic. That is No edges crosses through a vertex
 
 For a given graph $G = (V_G,E_G)$ we define the following graph $H = (V_H, E_H)$ and $R$. $V_H = V_G \cup E_G$ and $E_H = \{\{v,e\}, v \in V_G, e \in E_G, v \in e\}$. Lets see an example on Fig. \ref{reduction of strings}. We may see that the graph is obtained by subdividing all edges.
 
-\begin{figure}[!ht]
+\begin{figure}[!ht]\centering
 	\begin{subfigure}{.45\textwidth}\centering
 		\begin{tikzpicture}[main/.style = {draw, circle, thick}, e/.style = {Blue}]
 			\node[main] (u) at (0,0) {$u$};
@@ -104,29 +104,34 @@ Lastly we define $R = \{\{\{v, e\}, \{w,f\}\}, \{v,w\} \in E_G\}$.
 	
 	"$\Leftarrow$" Suppose $(H,R)$ has a Weak AT-realization. See that $H$ is bipartite. Now represent it by going from the vertex alongside every edge to the edge-vertices of $H$ and almost return to the vertex. See Fig. \ref{leftarrow} for an example. It is easily observable that when lines cross then indeed they need be connected by an edge.
 	
-	\begin{figure}[!ht]
-		\begin{subfigure}{.45\textwidth}\centering
-			\begin{tikzpicture}[main/.style = {draw, circle, thick}]
-				\draw[thick] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
+	\begin{figure}[!ht]\centering
+		\begin{subfigure}{.4\textwidth}\centering
+			\begin{tikzpicture}[main/.style = {draw, circle, thick, Blue}, c/.style = {thick, Blue},
+				side/.style = {draw, circle, thick, Green}]
+				\draw[c] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
 				\node[main] at (-1.35,0) {$y$};
-				\draw[thick] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
+				\draw[c] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
 				\node[main] at (.3, -1.75) {$w$};
-				\draw[thick] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
+				\draw[c] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
 				\node[main] at (2.35, -2.7) {$u$};
-				\draw[thick] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
+				\draw[c] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
 				\node[main] at (3.6, 1.35) {$x$};
-				\draw[thick] (0, -3) to (3.7, -.3);
+				\draw[c] (0, -3) to (3.7, -.3);
 				\node[main] at (-.2, -3.25) {$v$};
-				% Add edge-nodes
 			\end{tikzpicture}
 			\caption{$\Rightarrow$}
 			\label{rightarrow}
 		\end{subfigure}
-		\begin{subfigure}{.45\textwidth}\centering
-			\begin{tikzpicture}[main/.style = {draw, circle, thick}]
+		\begin{subfigure}{.58\textwidth}\centering
+			\begin{tikzpicture}[main/.style = {draw, circle, thick, Blue}]
 				\node[main] at (0,0) (v) {$v$};
-				\node[main] at (-2, -1) (1) {};
-				\draw[thick] (v) to[] (1);
+				\node[main] at (-3, -2) (1) {};
+				\node[main] at (0, -2) (2) {};
+				\node[main] at (3, -2) (3) {};
+				\draw[thick, Blue] (v) to[] (1);
+				\draw[thick, Blue] (v) to[] (2);
+				\draw[thick, Blue] (v) to[] (3);
+				\draw[thick, Green] (v) to[out=190, in=180] (-3.2, -2.4) to[out=0, in=180] (-.4,-.6) to[out=0, in=180] (0, -2.3) to[out=0, in=180] (.4,-.6) to[out=0, in=180] (3.2, -2.4) to[out=0, in=-10] (.5, 0);
 			\end{tikzpicture}
 			\caption{$\Leftarrow$}
 			\label{leftarrow}
@@ -176,7 +181,40 @@ Before we continue with the algorithm we will take a short topological detour to
 	Two $\mathcal{S}$-curves $\gamma, \delta$ are \textbf{isotopic} (written as $\gamma \sim \delta$) if $\gamma$ and $\delta$ have the same endpoints and $\gamma$ can be transformed into $\delta$ by a continuous deformations of $\mathcal{S}$ which fixes the boundary.
 \end{defn}
 
-\begin{figure}[!ht]
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, thick, fill, Blue}]
+			\node[main] (0) at (0,2) {};
+			\node[main] (1) at (-2,0) {};
+			\node[main] (2) at (2,0) {};
+			\node[main] (3) at (0, -2) {};
+			\draw[thick, Blue] (1) to[out=30, in=180] (0,1.5) to[out=0, in=150] (2);
+			\node[blue] (gamma) at (-1.8, .4) {$\gamma$};
+			\draw[thick, Blue] (1) to[out=-30, in=180] (-.5,-1) to[out=0, in=180] (.5, -1.4) to[out=0, in=210] (2);
+			\node[blue] (delta) at (-1.8, -.5) {$\delta$};
+			\draw[thick, Green, ->] (0, 1.45) to[] (0,-1.15);
+			\draw[thick, Green, ->] (-1, .8) to[] (-1,-.8);
+			\draw[thick, Green, ->] (-.5, 1.3) to[] (-.5,-.9);
+			\draw[thick, Green, ->] (.5, 1.3) to[] (.5,-1.3);
+			\draw[thick, Green, ->] (1, .8) to[] (1,-1.05);
+		\end{tikzpicture}
+		\caption{Example of $\mathcal{S}$-curves $\gamma, \delta$ that are isotopic.}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, thick, fill, Blue}]
+			\node[main] (0) at (0,2) {};
+			\node[main] (1) at (-2,0) {};
+			\node[main] (2) at (2,0) {};
+			\node[main] (3) at (0, 0) {};
+			\draw[thick, Blue] (1) to[out=40, in=140] (2);
+			\node[blue] (gamma) at (-1.8, 1) {$\gamma$};
+			\draw[thick, Blue] (1) to[out=60, in=180] (0,3) to[out=0, in=120] (2);
+			\node[blue] (delta) at (-1.3, .2) {$\delta$};
+			\draw[thick, Blue] (1) to[out=190, in=180] (0,-2) to[out=0, in=350] (2);
+			\node[blue] (deltap) at (-1.3, -1.2) {$\delta'$};
+		\end{tikzpicture}
+		\caption{Counterexample of non-isotopic $\gamma \not \sim \delta$ and example of isotopic $\gamma \sim \delta'$.}
+	\end{subfigure}
 	\caption{Example of isotopic and non-isotopic $\mathcal{S}$-curves.}
 \end{figure}
 
@@ -187,10 +225,6 @@ Before we continue with the algorithm we will take a short topological detour to
 	\min_{\delta_1 \sim \gamma_1, \delta_2 \sim \gamma_2} |\delta_1 \cap \delta_2|.
 	$$
 \end{defn}
-
-\begin{figure}[!ht]
-	\caption{Example of intersection number.}
-\end{figure}
 
 \begin{fact}
 	Let $\gamma_1, \dots, \gamma_n$ be $\mathcal{S}$-curves. Then there are $\mathcal{S}$-curves $\delta_1, \dots, \delta_n$ s.t.
@@ -228,7 +262,19 @@ With all these definitions we will choose the following triangulation $T = (V_T,
 \begin{proof}
 	Take AT with minimum number of crossings. 1. is satisfied by the definition. 2. otherwise minimality is broken, 3. again the minimality is broken and lastly 4. follows from GRG1.
 	
-	\begin{figure}
+	\begin{figure}[!ht]\centering
+		\begin{subfigure}{.2\textwidth}\centering
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{.2\textwidth}\centering
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{.2\textwidth}\centering
+			\caption{}
+		\end{subfigure}
+		\begin{subfigure}{.2\textwidth}\centering
+			\caption{}
+		\end{subfigure}
 		\caption{Examples for the proof.}
 	\end{figure}
 \end{proof}
