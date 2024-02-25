@@ -106,20 +106,38 @@ Lastly we define $R = \{\{\{v, e\}, \{w,f\}\}, \{v,w\} \in E_G\}$.
 	
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.4\textwidth}\centering
-			\begin{tikzpicture}[main/.style = {draw, circle, thick, Blue}, c/.style = {thick, Blue},
-				side/.style = {draw, circle, thick, Green}]
-				\draw[c] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
-				\node[main] at (-1.35,0) {$y$};
-				\draw[c] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
-				\node[main] at (.3, -1.75) {$w$};
-				\draw[c] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
-				\node[main] at (2.35, -2.7) {$u$};
-				\draw[c] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
-				\node[main] at (3.6, 1.35) {$x$};
-				\draw[c] (0, -3) to (3.7, -.3);
-				\node[main] at (-.2, -3.25) {$v$};
-			\end{tikzpicture}
-			\caption{$\Rightarrow$}
+				\begin{tikzpicture}[main/.style = {draw, circle, thick, Blue}, c/.style = {thick, Blue},
+					side/.style = {draw, circle, thick, Green}]
+					\draw[c,name path=A] (-1,0) to[out=0, in=180] (1,.5) to[out=0, in=180] (2,-.5) to[out=0, in=180] (4,0);
+					\node[main] at (-1.35,0) (y) {$y$};
+					\draw[c,name path=B] (.3, -1.4) to[out=90, in=180] (1,1) to[out=0, in=90] (1.7, -1.4);
+					\node[main] at (.3, -1.75) (w) {$w$};
+					\draw[c,name path=C] (2, -0.8) to[out=180, in=90] (-1, -2) to[out=270, in=180] (2, -2.7);
+					\node[main] at (2.35, -2.7) (u) {$u$};
+					\draw[c,name path=D] (1.4, -1.3) to[out=0, in=225] (3.3, -.7) to[out=45, in=270] (3.6, 1);
+					\node[main] at (3.6, 1.35) (x) {$x$};
+					\draw[c,name path=E] (0, -3) to (3.7, -.3);
+					\node[main] at (-.2, -3.25) (v) {$v$};
+					% Intersections and dots
+					\coordinate[name intersections={of=A and B, by=ab}];
+					\fill[Green] (ab) circle (2pt) node[circle,draw] {};
+					\coordinate[name intersections={of=A and D, by=ad}];
+					\fill[Green] (ad) circle (2pt) node[circle,draw] {};
+					\coordinate[name intersections={of=B and C, by=bc}];
+					\fill[Green] (bc) circle (2pt) node[circle,draw] {};
+					\coordinate[name intersections={of=B and D, by=bd}];
+					\fill[Green] (bd) circle (2pt) node[circle,draw] {};
+					\coordinate[name intersections={of=C and E, by=ce}];
+					\fill[Green] (ce) circle (2pt) node[circle,draw] {};
+					\coordinate[name intersections={of=D and E, by=de}];
+					\fill[Green] (de) circle (2pt) node[circle,draw] {};
+					\draw[dashed, thick, Green, bend right = 10] (v) edge (ce);
+					\draw[dashed, thick, Green, bend left = 10] (u) edge (ce);
+					\draw[dashed, thick, Green, bend right = 10] (v) edge (de);
+					\draw[dashed, thick, Green, bend left = 10] (w) edge (bc);
+					\draw[dashed, thick, Green, bend left = 10] (x) edge (ad);
+				\end{tikzpicture}
+			\caption{$\Rightarrow$ (Only some edges are present.)}
 			\label{rightarrow}
 		\end{subfigure}
 		\begin{subfigure}{.58\textwidth}\centering
@@ -264,16 +282,42 @@ With all these definitions we will choose the following triangulation $T = (V_T,
 	
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.2\textwidth}\centering
-			\caption{}
+			\begin{tikzpicture}[main/.style = {draw, circle}, e/.style = {thick, Blue}]
+				\node[main,e] at (0,0) (0) {};
+				\node[main,e] at (-2,2) (1) {};
+				\draw[e] (0) -- (1);
+				\draw[thick, Green] (0, .5) to[out=170, in=310] (-1,1) to[out=130,in=290] (-1.5,2);
+			\end{tikzpicture}
+			\caption{Second before.}
 		\end{subfigure}
 		\begin{subfigure}{.2\textwidth}\centering
-			\caption{}
+			\begin{tikzpicture}[main/.style = {draw, circle}, e/.style = {thick, Blue}]
+				\node[main,e] at (0,0) (0) {};
+				\node[main,e] at (-2,2) (1) {};
+				\draw[e] (0) -- (1);
+				\draw[thick, Green] (0, .5) to[out=170, in=310] (-.8,1.2) to[out=130,in=290] (-1.5,2);
+			\end{tikzpicture}
+			\caption{Second after.}
 		\end{subfigure}
 		\begin{subfigure}{.2\textwidth}\centering
-			\caption{}
+			\begin{tikzpicture}[main/.style = {draw, circle}, e/.style = {thick, Blue}]
+				\node[main,e] at (0,0) (0) {};
+				\node[main,e] at (-2,2) (1) {};
+				\draw[e] (0) -- (1);
+				\draw[e] (-1.5,.5) -- (-.5,1.5);
+				\draw[thick, Green] (0, .5) to[out=170, in=310] (-1.2,.8) to[out=130,in=290] (-1.5,2);
+			\end{tikzpicture}
+			\caption{Third before.}
 		\end{subfigure}
 		\begin{subfigure}{.2\textwidth}\centering
-			\caption{}
+			\begin{tikzpicture}[main/.style = {draw, circle}, e/.style = {thick, Blue}]
+				\node[main,e] at (0,0) (0) {};
+				\node[main,e] at (-2,2) (1) {};
+				\draw[e] (0) -- (1);
+				\draw[e] (-1.5,.5) -- (-.5,1.5);
+				\draw[thick, Green] (0, .5) to[out=170, in=310] (-.8,1.2) to[out=130,in=290] (-1.5,2);
+			\end{tikzpicture}
+			\caption{Third after.}
 		\end{subfigure}
 		\caption{Examples for the proof.}
 	\end{figure}
