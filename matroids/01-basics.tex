@@ -110,3 +110,84 @@ One can see that (B2) can be proven using $I_1 - e =: B_1$ and $I_2 = B_2$.
 \begin{defn}
 	For a matroid $\M = (E, \I)$ define a \textbf{rank function} $\rank : 2^E \to \Z^+_0$, such that $\rank(X) = \max_{I \subseteq X, I \in \I} |I|$ and $\rank (\M) = \rank(E)$.
 \end{defn}
+
+\begin{claim}
+	Rank function has the following properties:
+	
+	\begin{enumerate}[(R1)]
+		\item $X \subseteq E: 0 \leq \rank (X) \leq |X|$,
+		\item $X \subseteq Y \subseteq E \Rightarrow \rank (X) \leq \rank(Y)$ and
+		\item $X, Y \subseteq E : \rank(X \cup Y) + \rank(X \cap Y) \leq \rank(X) + \rank(Y)$ (which is called \textbf{submodularity}).
+	\end{enumerate}
+\end{claim}
+
+\begin{proof}[Proof of the properties]
+	While (R1) and (R2) are obvious and now we will show that (R3) also holds. Let $I_1$ be the max independent in $X \cap Y$ and $I_2$ be an extension $I_2 \supseteq I_1$ and max independent in $X \cup Y$. Now $\rank(X \cup Y) + \rank(X \cap Y) = \abs{I_2} + \abs{I_1}$ and also $|I_2 \cap X| \leq \rank(X)$ and $|I_2 \cap Y| \leq \rank(Y)$. We apply simple rule $|A| + |B| = |A \cup B| + |A \cap B|$ and get
+	
+	$$
+	\rank(X) + \rank(Y) \geq |I_2 \cap X| + |I_2 \cap Y| = |I_2| + |I_1| = \rank(X \cup Y) + \rank(X \cap Y)
+	$$
+\end{proof}
+
+\begin{thm}
+	For $E \neq \emptyset$ finite set and $\rank: 2^E \to \Z^+_0$ satisfying (R1), (R2) and (R3). Then $\I = \{X \subseteq E | \rank(X) = |X| \}$ and $\M = (E, \I)$ is a matroid.
+	\label{rank-func-thm}
+\end{thm}
+
+\begin{lemma}
+	For $E \neq \emptyset$ finite set and $\rank: 2^E \to \Z^+_0$ satisfying (R1), (R2) and (R3). It holds that if $X, Y \subseteq E$ $\forall y \in Y: \rank(X) = \rank(X + y)$ then $\rank(X) = \rank(X \cup Y)$.
+	\label{rank-func-lemma}
+\end{lemma}
+
+\begin{proof}[Proof of lemma \ref{rank-func-lemma}]
+	Let $Y \setminus X = \{y_1, y_2, \dots, y_k\}$ and now we will prove it by induction on $k$. For $k = 1$ it obviously holds. For $k \geq 2$ we use the submodularity.
+	
+	$$
+	\begin{aligned}
+		&\rank(X) + \rank(X) &= &\rank(X \cup \{y_1, y_2, \dots, y_{k-1}\}) + \rank(X + y_k) &\geq \rank(X \cup \{y_1, y_2, \dots, y_k\}) + \rank(X)\\
+		&                    &  & \text{\small{(by induction hypothesis)}}\\
+		&\rank(X)            &= &                                                            &\geq \rank(X \cup \{y_1, y_2, \dots, y_k\})\\
+		&\rank(X)            &  &                                                            &\geq \rank(X \cup Y)\\
+	\end{aligned}
+	$$
+	
+	\noindent For the other inequality we use (R2) and hence we obtain equality.
+\end{proof}
+
+\begin{proof}[Proof of theorem \ref{rank-func-thm}]
+	\TODO{Finish the proof.}
+\end{proof}
+
+\TODO{Insert missing part.}
+
+\section{Uniform matroids}
+
+\begin{defn}
+	For $0 \leq r \leq n \neq 0, |E| = n$ and $\I = \{X \subseteq E : |X| \leq r\}$ is \textbf{Uniform matroid} $U_{r,n} = (E, \I)$.
+\end{defn}
+
+All the properties should be formally proven, but one can already see that all (I1), (I2) and (I3) are really satisfied. Now we will show us some examples.
+
+\TODO{Add examples.}
+
+\section{Visualization of matroids}
+
+\TODO{Finish this part.}
+
+\section{(Direct) Sum of matroids (also disjoint union)}
+
+\begin{defn}
+	We have two matroids $\M_i = (E_i, \I_i)$ for $i= 1,2$, then the (direct) sum $\M_1 \bigoplus \M_2$ is defined as a matroid $\M = (E, \I)$ where $E = E_1 \dot\cup E_2$ and $\I = \{X \subseteq E, X \cap E_i \in \I_i, i=1,2\}$.
+\end{defn}
+
+\begin{observ}
+	Lets see the basis and circuits:
+	
+	$$
+	\begin{aligned}
+		&\B(\M_1 \bigoplus \M_2) = \{B_1 \cup B_2, B_i \in \B_i, i = 1,2\}\\
+		&\C(\M_1 \bigoplus \M_2) = \C_1 \cup \C_2\\
+		&X \subseteq E : \rank(X) = \rank_1(X \cap E_1) + \rank_2(X \cap E_2)
+	\end{aligned}
+	$$
+\end{observ}
