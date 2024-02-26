@@ -1,0 +1,45 @@
+\chapter{Basic definitions}
+
+\begin{defn}
+	\textbf{Matroid} $\M = (E, \I)$ is for $E$ finite non-empty set and $\I \subseteq 2^E$ (also called as independent sets) satisfying these properties:
+	
+	\begin{enumerate}[(\text{I}1)]
+		\item $\emptyset \in \I$,
+		\item $I \in \I \Rightarrow \forall I' \subseteq I : I' \in \I$,
+		\item $I_1, I_2 \in \I, \abs{I_1} < \abs{I_2} \Rightarrow \exists e \in I_2 \setminus I_1: I_1 \cup \{e\} \in \I$.
+	\end{enumerate}
+\end{defn}
+
+\begin{notation}
+	For further use and simplification we will sometimes use $I + e$ as a substitution for $I \cup \{e\}$. Similarly also $I - e$ for $I \setminus \{e\}$.
+\end{notation}
+
+\begin{example}
+	For a given multi-graph $G = (V,F)$ we will set $E = F$ (or in other words $E$ stands for edges and the set). Independent sets $\I$ will be all acyclic subsets of $E$. Easily seen (I1) and (I2) is satisfied. For the third one (I3) it is also quite easily seen, because if we have one larger and smaller non-cycles then we can append one edge from the larger to the smaller.
+\end{example}
+
+\begin{example}
+	Let $E$ be some elements of a vector space $V$. If $X \subseteq E$ is independent then it is linearly independent in $V$.
+\end{example}
+
+\begin{defn}
+	Matroid \textbf{isomorphism} for two matroids $\M_i = (E_i, \I_i)$ for $i = 1,2$ is a bijection $f: E_1 \to E_2$ satisfying $\forall X \subseteq E_i : X \in \I_1 \Leftrightarrow f(X) \in \I_2$.
+\end{defn}
+
+\begin{defn}
+	$X \subseteq E$ is a \textbf{circuit} if $X \notin \I$ and $\forall x \in X : X - x \in \I$. Also we will denote $\C(\M)$ as the set of all circuits of $\M$.
+\end{defn}
+
+\begin{lemma}
+	Let $\M = (E, \I)$ be a matroid and $\C$ its circuits, then
+	
+	\begin{enumerate}[(C1)]
+		\item $\emptyset \notin \C$,
+		\item $\forall C_1, C_2 \in \C : C_1 \subseteq C_2 \Rightarrow C_1 = C_2$ and
+		\item $C_1, C_2 \in \C, C_1 \neq C_2, e \in C_1 \cap C_2 \Rightarrow C_3 \subseteq (C_1 \cup C_2) -e , C_e \in \C$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	(C1) and (C2) are easily seen from (I1) and (I2). Now for the third part (C3).
+\end{proof}
