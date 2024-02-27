@@ -155,10 +155,18 @@ One can see that (B2) can be proven using $I_1 - e =: B_1$ and $I_2 = B_2$.
 \end{proof}
 
 \begin{proof}[Proof of theorem \ref{rank-func-thm}]
-	\TODO{Finish the proof.}
+	Again we have to prove all the properties of matroids. For (I1) $\emptyset \in \I$ we use (R1) to get that $0 \leq \rank (X) \leq |\emptyset| = 0$ therefore it is satisfied. For (I2) $I \in \I, I' \subseteq I \Rightarrow I' \in \I$ we have that $\rank(I) = |I|$ and $I' \subseteq  I$ so $\rank(I') + \rank(I \setminus I') \geq \rank(I) + \rank(\emptyset) = |I| + 0$ and also by (R1) $\rank(I') + \rank(I \setminus I') \leq |I'| + |I \setminus I'| = |I|$ so all inequalities are actually equalities.
+	
+	Lastly the third (I3). Let $I_1, I_2 \in \I, |I_1| < |I_2| \Rightarrow \exists e \in I_2 \setminus I_1$ s.t. $I_1 + e \in \I$. For this we will use Lemma \ref{rank-func-lemma}. We have that $\rank(I_i) = |I_i|$ for $i=1,2$ where $|I_1| < |I_2|$ for contradiction assume that $\forall e \in I_2 \setminus I_1 : I_1 + e \notin \I$ therefore $|I_1| = \rank(I_1) \leq \rank(X+e) < |I_1| + 1$. This means that the $\leq$ is $=$ instead. Now use the lemma
+	
+	$$
+	|I_2| = \rank(I_2) \leq \rank(I_1 \cup (I_2 \setminus I_1)) = \rank(I_1) = |I_1|
+	$$
+	
+	\noindent where $I_1 \cup (I_2 \setminus I_1) \supseteq I_2$ and we get that $|I_2| \leq |I_1|$ which is a contradiction.
 \end{proof}
 
-\TODO{Insert missing part.}
+For this part we could use any field $F$ but as of now $\R$ is sufficient enough. Let $A \in \R^{n \times n}$. Where $n$-columns are the elements of matroid. We usually take the multi-set of the columns or indexes, since they may be the same (parallel) columns. Also observe that for every operation as in Gauss elimination it will preserve the matroid same up to isomorphism. So we may use the Gauss-Jordan elimination. By other operations we may have matrix $I$ of $\rank(E)$ rows and number of basis columns. This format is often called \textit{the standard form}. An example is when $A = (0, 0, \dots, 0)$ where this is a special case when $|\I| = 1$ and $\I = \{\emptyset\}$.
 
 \section{Uniform matroids}
 
@@ -168,11 +176,93 @@ One can see that (B2) can be proven using $I_1 - e =: B_1$ and $I_2 = B_2$.
 
 All the properties should be formally proven, but one can already see that all (I1), (I2) and (I3) are really satisfied. Now we will show us some examples.
 
-\TODO{Add examples.}
+\begin{example}
+	The matroid $A = (0, 0, \dots, 0)$ is actually $\M(A) \cong U_{0,n}$.
+\end{example}
+
+\begin{example}
+	Now remind ourselves the example in the beginning, that is the graphic matroid. If we take graph as a trees then $\rank(\M) = \rank(E) =$ the size of spanning tree. For a tree with $n$ vertices we obtain $U_{n,n}$ matroid. Note that we can now see that every operation that does not effect circuits neither effects the matroid.
+\end{example}
+
+\begin{example}
+	For other graphic matroids see:
+	
+	\begin{itemize}
+		\item $\M(C_n) = U_{n-1,n}$;
+		\item $U_{0,n}$ is for a graph with $n$-loops;
+		\item $U_{1,n}$ is for $n$-parallel edge;
+		\item $U_{2,n}$ is more interesting, because $U_{2,2}$ is a $P_3$ and $U_{2,3}$ is $C_3$, but for $n \geq 4$ there is no (multi-)graph representing it.
+	\end{itemize}
+\end{example}
 
 \section{Visualization of matroids}
 
-\TODO{Finish this part.}
+From the previous part we see that some matroids cannot be visualized by graphs. So the question is whether we can visualize it in some other way. Lets take $U_{2,4}$ for an example, for which we construct the matrix:
+
+$$
+\begin{pmatrix}
+	1 & 0 & \textcolor{red}{1} & \textcolor{blue}{1}\\
+	0 & 1 & \textcolor{red}{1} & \textcolor{blue}{-1}
+\end{pmatrix}
+$$
+
+\noindent See that the \textcolor{red}{red numbers} are forced to be ones and then the \textcolor{blue}{blue ones} are forced to use some other element. This also implies that the field has to have at least three elements. This way we can visualize the $U_{2,4}$ by depicting the vectors in the plane.
+
+Alternatively we may use affine spaces. For them we know that one element is always independent and so are two points which also forms a line. To add dependent points we have to put them on the line. Therefore four points on the line also visualize $U_{2,4}$. Also for $U_{1,3}$ we use single coordinate for all points.
+
+Also when using affine spaces we can easily visualize $U_{3,n}$ by simply putting $n$ points in general position.
+
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[e/.style = {->, line width = 1}]
+			\draw[e] (0,0) -- (1,0);
+			\draw[e] (0,0) -- (0,1);
+			\draw[e] (0,0) -- (1,1);
+			\draw[e] (0,0) -- (1,-1);
+			\node at (-.1, -.2) {$0$};
+			\node at (1.5,0) {(1,0)};
+			\node at (1.3,1.3) {(1,1)};
+			\node at (0,1.3) {(0,1)};
+			\node at (1.3,-1.3) {(1,-1)};
+		\end{tikzpicture}
+		\caption{Representation by vectors.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}\centering
+		\begin{tikzpicture}[e/.style = {line width = 1}, n/.style = {draw, circle, fill}]
+			\draw[e] (0,0) -- (3,3);
+			\node[n] at(.5,.5) {};
+			\node[n] at(1,1) {};
+			\node[n] at(1.5,1.5) {};
+			\node[n] at(2,2) {};
+			\node[n] at(2.5,2.5) {};
+		\end{tikzpicture}
+		\caption{Affine representation.}
+	\end{subfigure}\\
+	\caption{Some different ways of visualization of $U_{2,4}$.}
+\end{figure}
+
+Some additional notes are for when we use some other field one can use the Fano's plane which specifically represents a Fano's matroid $F_7$. Which cannot be represented by reals.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}[scale=1.5]
+	\draw (0,0) circle (0.5);
+	\draw (90:1) -- (-30:1)--(210:1)--cycle;
+	\draw (90:1)--(0,0);
+	\draw (210:1)--(0,0);
+	\draw (-30:1)--(0,0);
+	\draw (30:0.5)--(0,0);
+	\draw (150:0.5)--(0,0);
+	\draw (270:0.5)--(0,0);
+	\fill (-0.866,-0.5) circle (1.5pt);
+	\fill (0.866,-0.5) circle (1.5pt);
+	\fill (0,-0.5) circle (1.5pt);
+	\fill (0,1) circle (1.5pt);
+	\fill (0,0) circle (1.5pt);
+	\fill (0.433,0.25) circle (1.5pt);
+	\fill (-0.433,0.25) circle (1.5pt);
+	\end{tikzpicture}
+	\caption{Fano's plane.}
+\end{figure}
 
 \section{(Direct) Sum of matroids (also disjoint union)}
 
