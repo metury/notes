@@ -324,13 +324,175 @@ With all these definitions we will choose the following triangulation $T = (V_T,
 \end{proof}
 
 \begin{defn}
-	Let $\gamma$ be an $\mathcal{S}$-curve, normal w.r.t T for $e \in E_T: C_e(\gamma) := |e \cap \gamma|$.
+	Let $\gamma$ be an $\mathcal{S}$-curve, normal w.r.t T for $e \in E_T: c_e(\gamma) := |e \cap \gamma|$.
 \end{defn}
 
+Sometimes when we will be talking about $\gamma_e$ for some $e \in E$ then for $f \in E_T$ we will denote $c_f(e)$ as $c_f(\gamma_e)$. Also in the context we will sometimes leave out $\gamma_e$ and only have $c_f$ or $c_{uv}$ if $f = \{u,v\}$. 
+
 \begin{claim}
-	The numbers $\left( C_e(\gamma)\right)_{e \in E_T}$ determine $\gamma$ up to isotopy.
+	The numbers $\left( c_f(e)\right)_{f \in E_T}$ determine $\gamma_e$ up to isotopy.
+	\label{string-claim}
 \end{claim}
 
-\begin{proof}
-	Suppose we have a triangle face.
+\subsection{Word equations}
+
+Before we showcase the proof we will show us a quick introduction to word algebra and its equations. We will be considering an alphabet $\mathcal{A} = \{\mathtt{a}, \mathtt{b}, \mathtt{c}, \dots\}$ finite and variables $\mathcal{V} = \{X,Y, \dots\}$. Each variable $X \in V$ has prescribed length $l(X) \in \N_0$ and represents a word over $A$ of length $l(X)$.
+
+\begin{example}
+	$\mathcal{A} = \{\mathtt{a}, \mathtt{b}\}, \mathcal{V} = \{X,Y\}, l(X) = 2, l(Y) = 3$ and the equation is:
+	
+	$$
+	XX\mathtt{a} = XY,
+	$$
+	
+	\noindent where the operation is concatenation. A simple one solution os $X := \mathtt{ba}$ and $Y := \mathtt{baa}$.
+\end{example}
+
+We may see that having one equation or a whole system of equation is the same. As we can see here:
+
+$$
+\begin{array}{c c c}
+	L_1 = R_1 & & \\
+	L_2 = R_2 & \Leftrightarrow & L_1L_2 \dots = R_1 R_2 \dots \\
+	\vdots & &
+\end{array}
+$$
+
+Also it may be that the size od a solution can be even exponential. But there is usually a repeating pattern. We can examine the following example to see that it is indeed true.
+
+$$
+\begin{array}{r c l}
+	X_1 &=& \mathtt{a} \\
+	X_2 &=& X_1 X_1 \\
+	X_3 &=& X_2 X_2 \\
+	&\vdots&
+\end{array}
+$$
+
+\begin{fact}
+	There is an encoding ("LZ-encoding") such that for any system of word equations we can in \textbf{polynomial time} (in $\abs{\mathcal{A}} + \abs{\mathcal{V}} + \abs{\text{equations}} + \abs{\sum_{X \in \mathcal{V}} \log |l(X)|}$) determine if a solution exists and compute the LZ-encoding of the lexicographicaly smallest solution.
+\end{fact}
+
+\begin{fact}
+	From the LZ-encoding of a word $X \in \mathcal{A}^{\ast}$ we can compute the number of occurrences of any symbol $\mathtt{a} \in \mathcal{A}$ in $X$.
+\end{fact}
+
+\subsubsection{LZ-encoding}
+
+Shortly we will talk about the exact LZ-encoding. Firstly for a word $\mathtt{a}_1 \mathtt{a}_2 \mathtt{a}_3 \dots \mathtt{a}_n \in \mathcal{A}^\ast$, the \textbf{LZ-factorization} is an expresion of the form $\mathtt{a}_1 \mathtt{a}_2 \mathtt{a}_3 \dots \mathtt{a}_{n} = \mathtt{b}_1 X_1 \mathtt{b}_2 X_2 \mathtt{b}_3 X_3 \dots \mathtt{b}_n X_n$ where $X_i$ is the longest possible sub-word that also occurs in $\mathtt{b}_1 X_1 \mathtt{b}_2 X_2 \mathtt{b}_3 X_3 \dots \mathtt{b}_i$.
+
+Then for LZ-encoding we replace each $X_i$ with a point to previous occurrence and the length of $X_i$.
+
+\begin{example}
+	Here is a simple example of converting a word to LZ-factorization and then to LZ-encoding.
+	$$
+	\begin{array}{l l l l l l l l l l}
+		\mathtt{a}&\textcolor{Green}{\mathtt{a}}&\mathtt{b}&\textcolor{Blue}{\mathtt{a}}&\textcolor{Blue}{\mathtt{b}}&\mathtt{a}&\textcolor{Red}{\mathtt{a}}&\textcolor{Red}{\mathtt{b}}&\mathtt{b}&\textcolor{violet}{\mathtt{b}}\\
+		\mathtt{a}&\textcolor{Green}{X_1}       &\mathtt{b}&\textcolor{Blue}{X_2}       &                            &\mathtt{a}&\textcolor{Red}{X_3}       &                           &\mathtt{b}&\textcolor{violet}{X_4}\\
+		\mathtt{a}&\textcolor{Green}{(1,1)}     &\mathtt{b}&\textcolor{Blue}{(2,2)}     &                            &\mathtt{a}&\textcolor{Red}{(2,2)}     &                           &\mathtt{b}&\textcolor{violet}{(3,1)}\\
+	\end{array}
+	$$
+\end{example}
+
+Now we will return back to the claim.
+
+\begin{proof}[Proof of claim \ref{string-claim}]
+	To clarify this we must showcase the following two points.
+	
+	\begin{enumerate}
+		\item Verify that for every $e \in E$, the numbers $(c_f(e), f \in E_T)$ actually describe a curve $\gamma_e$ normal to $T$, with correct endpoints.
+		\begin{itemize}
+			\item Choose $e \in E$, check that for $f \in E_T$ belonging to $\partial \mathcal{S}$ we have
+			
+			$$
+			c_f(e) =
+			\left\{
+			\begin{array}{ll}
+				1 & \text{if } f \text{ contains an endpoint of } \partial \mathcal{S}\\
+				0 & \text{otherwise}
+			\end{array}
+			\right. .
+			$$
+			
+			\item For every face $t = \{x,y,z\}$ of $T$ we can see that the number of connections from $xy$ to $xz$ is equal to $\frac{c_{xy} + c_{xz} - c_{xz}}{2}$, therefore we must check that the number is in $\N_0$ for every face $t$ and every pair od edges $xy, xz$.
+			
+			\begin{figure}[!ht]\centering
+				\begin{tikzpicture}[main/.style = {draw, circle, thick}, e/.style = {Green, bend right = 20, line width = 2pt}]
+					\node[main] (u) at (0,0) {$u$};
+					\node[main] (v) at (5,0) {$v$};
+					\node[main] (w) at (2.5, 4) {$w$};
+					\draw[thick] (u) -- (v);
+					\draw[thick] (w) -- (v);
+					\draw[thick] (u) -- (w);
+					\node[main, fill, Green] (0) at (1,0) {};
+					\node[main, fill, Green] (1) at (2,0) {};
+					\node[main, fill, Green] (2) at (3,0) {};
+					\node[main, fill, Green] (3) at (4,0) {};
+					
+					\node[main, fill, Green] (4) at (2.5/4,1) {};
+					\node[main, fill, Green] (5) at (2.5/2,2) {};
+					\node[main, fill, Green] (6) at (7.5/4,3) {};
+					
+					\node[main, fill, Green] (7) at (2.5 + 7.5/4,1) {};
+					\node[main, fill, Green] (8) at (2.5 + 2.5/2,2) {};
+					\node[main, fill, Green] (9) at (2.5 + 2.5/4,3) {};
+					
+					\draw[e] (0) edge (4);
+					\draw[e] (1) edge (5);
+					\draw[e] (7) edge (3);
+					\draw[e] (8) edge (2);
+					\draw[e] (6) edge (9);
+				\end{tikzpicture}
+				\caption{Example of connecting the triangle face edges.}
+			\end{figure}
+			
+			\item Also we need to verify that this gives a correct curve $\gamma_e$, therefore no loops are present. For which we will use word equations $\mathcal{A} = \{\mathtt{a}, \mathtt{b}\}$. For every $f = \{u,v\} \in E_T$ we will introduce two variables $X_{uv}$ and $X_{vu}$ for which $l(X_{uv}) = l(X_{vu}) = c_{uv}(e)$. For every face $t = \{u,v,w\}$ and vertex $u \in t$ we will introduce variables $Y_{ut}$ and $Y_{ut}$, where $l(Y_{ut}) = l(Y_{tu}) = \frac{c_{xy} + c_{xz} - c_{xz}}{2}$. The equations will be as follows. For every $\{u,v\} = f \in E_T, f \in \partial \mathcal{S}$:
+			
+			$$
+			X_{uv} = X_{vu} =
+			\left\{
+			\begin{array}{ll}
+				\mathtt{b} & \text{if } f \text{ contains an endpoint of } \partial \mathcal{S}\\
+				\emptyset & \text{otherwise}
+			\end{array}
+			\right.
+			$$
+			
+			\noindent and for every face $t = \{u,v,w\}$ and edge $\{u,v\}$ we will have:
+			
+			$$
+			X_{uv} = Y_{ut} Y_{tv}, X_{vu} = Y_{vt} Y_{tu}.
+			$$
+			
+			\begin{observ}
+				If $\gamma_e$ is a single connected curve, the system has a unique solution (all $\mathtt{b}$'s). Otherwise, there is a solution containing $\mathtt{a}$, we can find it efficiently.
+			\end{observ}
+		\end{itemize}
+		\item Verify that for each $e_1,e_2 \in E, e_1 \neq e_2, \{e_1,e_2\} \notin R$ have $i (\gamma_{e_1}, \gamma_{e_1}) = 0$.
+		
+		\begin{itemize}
+			\item Now we will denote $c_{uv} := c_{uv}(e_1) + c_{uv}(e_2)$ and then we will check that correct-\\ness as we did before.
+			\item Next we also introduce similiar word equations. For alphabet $\mathcal{A} = \{\mathtt{a}, \mathtt{b}, \mathtt{c}\}$ and variables $X_{uv}, X_{vu}, Y_{ut}, Y_{tu}$ as was defined earlier. Only the length is different, for example $l(X_{uv}) = c_{uv} (e_1) + c_{vu}(e_2)$ and similarly for $l(Y_{ut}) = \dots$.
+			
+			For the first equations it will be more tricky since we can have both $e_1$ and $e_2$ intersecting $f \in E_T, f \subseteq \partial\mathcal{S}$. Otherwise it is straightforward how it is defined.
+			
+			For the next equations it will remain the same, which is $X_{uv} = Y_{ut} Y_{tv}, X_{vu} = Y_{vt} Y_{tu}$.
+			
+			\item Lastly we need to verify $X_{uv}$ has $c_{uv}(e_1)$ occurrences of $\mathtt{b}$ and also $c_{uv}(e_2)$ occurrences of $\mathtt{c}$.
+		\end{itemize}
+	\end{enumerate}
 \end{proof}
+
+
+By all these steps we have finished the proof that Weak AT-realization is in NP, because we only need to guess the numbers $c_{uv}(e)$ and add it to the NP algorithm, because with that we can in polynomial time check it is correct.
+
+\begin{algorithm}[!ht]
+	\begin{algorithmic}[1]
+		\Require $G = (V,E), R \subseteq \binom{E}{2}$
+		\State $\forall v \in V:$ choose $D_v$ (so that $v \neq w$ have $\overline{D_v} \cap \overline{D_w} = \emptyset$).
+		\State For any edge $e \in E$ incident to $v \in V:$ choose an endpoint of $\gamma_e$ on $\partial D_v$.
+		\State \textcolor{Green}{Create a triangulation $T$.}
+		\State \textcolor{Green}{Guess all the numbers $c_{f}(e)$.}
+	\end{algorithmic}
+	\caption{NP algorithm for testing Weak AT-realization.}
+\end{algorithm}

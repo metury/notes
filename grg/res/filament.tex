@@ -1,13 +1,13 @@
 \documentclass[tikz, border=1mm]{standalone}
 
 \begin{document}
-	\begin{tikzpicture}
-		\draw[thick] (0,0) -- (12,0);
-		\draw[color=red, thick] (2,0) arc (180:0:3);
-		\draw[color=cyan, thick] (1,0) arc (180:0:2);
-		\draw[color=orange, thick] (2.5,0) arc (180:0:1);
-		\draw[color=blue, thick] (6,0) arc (180:0:1.5);
-		\draw[color=green, thick] (3,0) arc (180:0:4);
-		\draw[color=gray, thick] (5.5,0) arc (180:0:2);
+	\begin{tikzpicture}[th/.style = {line width = 2pt}]
+		\draw[th] (0,0) -- (12,0);
+		\draw[color=red, th] (2,0) arc (180:0:3);
+		\draw[color=cyan, th] (1,0) arc (180:0:2);
+		\draw[color=orange, th] (2.5,0) arc (180:0:1);
+		\draw[color=blue, th] (6,0) arc (180:0:1.5);
+		\draw[color=green, th] (3,0) arc (180:0:4);
+		\draw[color=gray, th] (5.5,0) arc (180:0:2);
 	\end{tikzpicture}
 \end{document}
