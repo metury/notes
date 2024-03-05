@@ -83,11 +83,17 @@
 	
 	\begin{enumerate}[(B1)]
 		\item $\B \neq \emptyset$ and
-		\item $B_1, B_2 \in \B, e \in B_1 \setminus B_2 \Rightarrow \exists f \in B_2 \setminus B_1 : |B_1 - e| + f \in \B$.
+		\item $B_1, B_2 \in \B, e \in B_1 \setminus B_2 \Rightarrow \exists f \in B_2 \setminus B_1 : (B_1 - e) + f \in \B$.
 	\end{enumerate}
 \end{defn}
 
-One can see that (B2) can be proven using $I_1 - e =: B_1$ and $I_2 = B_2$.
+One can see that (B2) can be proven using $I_1 - e =: B_1$ and $I_2 = B_2$. And alternatively we may exchange the second property for the following.
+
+\noindent \textit{(B2') $B_1, B_2 \in \B, \forall x \in B_2 \setminus B_1, \exists y \in B_1 \setminus B_2$ s.t. $(B_1 - y) + x \in \B$.}
+
+\begin{proof}
+	To proof that indeed we can exchange these properties we see that $B_1 + x$ has to be dependent therefore $\exists C \in \C, C \subseteq B_1 + x$. Now we show that $C$ is unique, otherwise $C_1, C_2 \subseteq B_1 +x, x \in C_1 \cap C_2, \exists C_3 \subseteq (C_1 \cup C_2) - x \subseteq B_1$ which is a contradiction. Also this is sometimes called \textbf{fundamental circuit w.r.t. $B_1$ and $x$}. See that $C \setminus B_2 \neq \emptyset$ so $\exists y \in C \setminus B_2 \subseteq B_1 \setminus B_2$; hence $(B_1 + x) - y$ does not contain a circuit and $|(B_1 + x) - y| = |B_1| \Rightarrow (B_1 +x) - y \in \B$.
+\end{proof}
 
 \begin{prop}
 	Let $E \neq \emptyset$ finite set and $\B \subseteq 2^E$ satisfying (B1) and (B2). Let $\I = \{X \subseteq E : \exists B \in \B\ : X \subseteq B\}$ then $\M = (E, \I)$ is a matroid.

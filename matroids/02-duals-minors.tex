@@ -1,0 +1,150 @@
+\chapter{Duals \& Minors}
+
+\section{Dual}
+
+Firstly we will take a look at duals of matroids.
+
+\begin{claim}
+	Let $\M = (E, \I)$ be a matroid and $\B$ its bases. We set $\dual{\B} = \{E \setminus B : B \in \B\}$ then $\dual{\B}$ satisfies (B1) and (B2).
+\end{claim}
+
+\begin{proof}
+	Firstly (B1) is easy. For (B2) $(E \setminus B_1), (E \setminus B_2) \in \dual{\B}, \forall e \in (E \setminus B_1) \setminus (E \setminus B_2) = B_2 \setminus B_1, \exists f \in B_1 \setminus B_2 = (E \setminus B_2) \setminus (E \setminus B_1)$. Now we apply (B2') and get that $(B_1 - f) + e \in \B$ then $E \setminus ((B_1 -f) +e) =((E \setminus B_1) -e ) + f$.
+\end{proof}
+
+Therefore $\exists \dual{\M}$ matroid with $\B(\dual{\M}) = \dual{\B}$ which will be called a \textbf{dual}. Generally we will denote duals $\M$ as $\dual{\M}$. Also we will call such elements with a prefix co-. For example $\dual{\B}$ will be a co-bases and so on.
+
+\begin{observ}
+	$\dual{(\dual{\M})} = \M$
+\end{observ}
+
+\begin{prop}
+	There are two basic observations:
+	
+	\begin{enumerate}
+		\item $\rank(\M) + \rank(\dual{\M}) = |E|$
+		\item $\forall X \subseteq E : \dual{\rank}(X) = |X| - \rank(\M) + \rank(E \setminus X)$
+	\end{enumerate}
+	\label{rank-prop}
+\end{prop}
+
+\begin{proof}
+	1. is obvious from the definitions. 2. we denote $\dual{I}$ as the max independent subset of $X$ in $\dual{\M}$ and $I$ as the max independent subset of $E \setminus X$ in $\M$. Then $\exists B \in \B, B \cap \dual{I} = \emptyset$. We may assume $I \subseteq B \Rightarrow \rank(B) = |B| = \rank(\M)$.
+	
+	$$
+	\begin{aligned}
+		B &\subseteq E \setminus \dual{I}\\
+		\rank(B) &\leq \rank(E \setminus \dual{I}) \leq \rank(\M) \text{ therefore we get equality}\\
+		\rank(B) &= \rank(E \setminus \dual{I})
+	\end{aligned}
+	$$
+	
+	\noindent Let $\dual{B} = E \setminus B$ be the basis of $\dual{\M}$ and $\dual{I} \subseteq \dual{B}$, moreover $\dual{I} = \dual{B} \cap X$. Also $I = B \cap (E \setminus X)$.
+	
+	$$
+	|X| = |X \cap B| + |X \cap \dual{B}| = |B| - |I| + |\dual{I}| = \rank(\M) - \rank(E \setminus X) + \dual{\rank}(X)
+	$$
+\end{proof}
+
+\begin{defn}
+	We say that $H \subseteq E$ is a \textbf{hyperplane} in $\M$ if $H$ is $\subseteq$-max subset with $\rank(H) < \rank(\M)$. Or in other words
+	
+	$$
+	\forall e \in E \setminus H : \rank(H) < \rank(H+e) < \rank(\M) \text{ so } \rank(H) = \rank(\M)-1
+	$$
+\end{defn}
+
+\begin{lemma}
+	For a matroid $\M = (E, \I)$ the following holds:
+	
+	$$
+	\forall \dual{C} \subseteq E, \dual{C} \in \dual{\C}(\M) \Leftrightarrow E \setminus \dual{C} \text{ is a hyperplane of } \M.
+	$$
+\end{lemma}
+
+\begin{proof}
+	"$\Rightarrow$" Suppose $\dual{C} \in \dual{\C}$ by the dual of proposition \ref{rank-prop} we get
+	
+	$$
+	\begin{aligned}
+		\rank(X) &= |X| - \dual{\rank}(\M) + \dual{\rank}(E \setminus X)\\
+		\rank(E \setminus \dual{C}) &= |E \setminus \dual{C}| - \dual{\rank}(\M) + \dual{\rank}(\dual{\C})\\
+		&= |E| - |\dual{C}| - \dual{\rank}(\M) + |\dual{C}| - 1\\
+		&= \rank(\M) - 1
+	\end{aligned}
+	$$
+	
+	\noindent then this is maximal with this property, therefore it is a hyperplane.
+	
+	"$\Leftarrow$" is analogous.
+\end{proof}
+
+Lets now diverge to the graphic matroids, where when we decrease $\rank(\M)$ by 1 this will result in increasing components of connectivity; hence co-circuits are edge-cuts.
+
+\begin{prop}
+	Let $\M = (E, \I)$ be a matroid, $C \in \C, \dual{C} \in \dual{\C}$ then $|C \cap \dual{C}| \neq 1$.
+\end{prop}
+
+\begin{proof}
+	By contradiction assume that $C \cap \dual{C} = \{e\}$. Lets define $H = E \setminus \dual{C}$ a hyperplane for which $e \notin H$. Now we compute the following
+	
+	$$
+	\begin{aligned}
+		\rank(C) + \rank(E) &= \rank(C - e) + \rank(H + e) \\
+		&= \rank(C \cap H) + \rank(C \cup H) \\
+		&\leq \rank(C) + \rank(H) \\
+		&= \rank(H) + \rank(E) - 1 \text{, which is a contradiction.}
+	\end{aligned}
+	$$
+\end{proof}
+
+Now we take a look at how does a direct sum of duals look like.
+
+$$
+\begin{aligned}
+	\B(\dual{(\M_1 \bigoplus \M_2)}) &= \{E \setminus B, B \in \B(\M_1 \bigoplus \M_2)\}\\
+	&= \{E \setminus (B_1 \cup B_2), B_1 \in \B_1, B_2 \in \B_2\}\\
+	&= \{(E_1 \cup E_2) \setminus (B_1 \cup B_2), B_1 \in \B_1, B_2 \in \B_2\}\\
+	&= \{(E_1 \setminus B_1) \cup (E_2 \setminus B_2), B_1 \in \B_1, B_2 \in \B_2\}\\
+	&= \{\dual{B_1} \cup \dual{B_2}, \dual{B_1} \in \dual{\B}(\M_1), \dual{B_2} \in \dual{\B}(\M_2)\}\\
+	&= \B (\dual{\M_1} \bigoplus \dual{\M_2})
+\end{aligned}
+$$
+
+\noindent Therefore we may say that $\dual{(\M_1 \bigoplus \M_2)} = \dual{\M_1} \bigoplus \dual{\M_2}$.
+
+\section{Minors}
+
+Reader may already know minors in graph theory. They are made by two operations. Deletions of vertices and edges and contractions of edges. For minors it will work similarly, therefore we define such operations.
+
+\begin{defn}[Deletion]
+	For a matroid $\M = (E, \I)$ for $T \subseteq E$ we define $\M \setminus T = (E \setminus T, \I')$ where $\I' = \{I \in \I, I \subseteq E \setminus T\}$.
+\end{defn}
+
+\begin{defn}[Contraction]
+	$\M / T = \dual{(\dual{\M} \setminus T)}$
+\end{defn}
+
+\begin{prop}
+	For $\M = (E, \I), T \subseteq E$ assume $X \subseteq E \setminus T$, then
+	
+	\begin{enumerate}
+		\item $\rank_{\M \setminus T} (X) = \rank_{\M} (X)$ and
+		\item $\rank_{\M / T}(X) = \rank_{\M}(X \cup T) - \rank_{\M}(T)$.
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. can be easily seen. For 2. we de the following computation.
+	
+	$$
+	\begin{aligned}
+		\rank_{\M / T} (X) &= \dual{\rank_{\dual{\M} \setminus T}} (X) \\
+		&= |X| - \rank_{\dual{\M} \setminus T} (E \setminus T) + \rank_{\dual{\M} \setminus T} ((E \setminus T) \setminus X)\\
+		&= |X| - \dual{\rank}(E \setminus T) + \dual{\rank}(E \setminus (T \cup X)) \\
+		&= |X| - (|E \setminus T| - \rank(E) + \rank(T)) + |E \setminus (T \cup X)| - \rank(E) + \rank(E \setminus (E \setminus (T \cup X))) \\
+		&= |X| - |E| + |T| + |E| - |T| - |X| + \rank(E) - \rank(E) - \rank(T) + \rank(T \cup X)\\
+		&=\rank(T \cup X) - \rank(T)
+	\end{aligned}
+	$$
+\end{proof}
