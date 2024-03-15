@@ -224,6 +224,65 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	We will construct two sequences of $A_1, A_2, A_3, \dots$ and $B_1, B_2, B_3, \dots$ of configurations s.t.:
 	
 	\begin{enumerate}
-		\item $\forall k \in \N$
+		\item $\forall k \in \N$ in any proper coloring of the L-curves in $A_k$, the L-curves seen inside the probes use at least $k$-different colors.
+		\item $\forall k \in \N$ in any proper coloring of the L-curves in $B_k$ there exist a probe of $B_k$ which is crossed by L-curves of at least $k$ different colors.
 	\end{enumerate}
+	
+	By induction for $k = 1$ it is straightforward, see Fig. \ref{}. Now we show two parts.
+	
+	\begin{figure}[!ht]\centering
+		\caption{Figure}
+	\end{figure}
+	
+	\begin{enumerate}
+		\item From $B_k$ to $A_k+1$. See Fig. \ref{}.
+		\begin{enumerate}
+			\item Insert one new L-shape inside every probe of $B_k$ and
+			\item replace each probe by 2 new probes.
+		\end{enumerate}
+		\item From $B_k$ and $A_{k+1}$ to $B_{k+1}$. See Fig. \ref{}.
+		\begin{enumerate}
+			\item Insert a small copy of $A_{k+1}$ near the top of every probe of $B_k$ and
+			\item extend the probes of these small copies all the way down to obtain probes of $B_{k+1}$.
+		\end{enumerate}
+	\end{enumerate}
+	
+	\begin{figure}[!ht]\centering
+		\caption{Figure}
+	\end{figure}
+	
+	\begin{figure}[!ht]\centering
+		\caption{Figure}
+	\end{figure}
+\end{proof}
+
+Now we may ask ourselves if this prove can be extended to some other type of intersection graphs. Well indeed it can be done. Note that \textit{arc-connected} set means that all pairs from the set can be connected via an arc.
+
+\begin{fact}
+	For any compact arc-connected set $X \subseteq \R^2$ other then an axis parallel rectangle there is a triangle-free graph $G_k$, $\chi(G_k) \geq k$, which is the intersection graph of horizontally and vertically scaled copies of $X$.
+\end{fact}
+
+\begin{thm}[Asblund, Grunbaum]
+	If $G$ is an intersection graph of axis parallel rect-\\angles in the plane then $\chi(G) \leq O(\omega^2 (G))$.
+\end{thm}
+
+\begin{proof}
+	Suppose we have $G = (V,E)$ as above: each vertex $u \in V$ is represented by a rectangle $R_u$. Let $E = E_1 \dot{\cup} E_2$ as follows
+	
+	\begin{enumerate}
+		\item $\{u,v\} \in E_1$ if a vertex of $R_u$ is inside $R_v$ or vice versa
+		\item $E_2 = E \setminus E_1$ if it is cross-like.
+	\end{enumerate}
+	
+	\begin{figure}[!ht]\centering
+		\caption{Figure}
+	\end{figure}
+	
+	Lets denote $G_1 = (V, E_1)$, $G_2 = (V, E_2)$ and $k = \omega(G)$. We will show $\chi(G_1) = O(k)$ and $\chi(G_2) = O(k)$.
+	
+	\begin{itemize}
+		\item For $G_1$ we claim that $|E_1| \leq 8 k \cdot |V|$ (and any subgraph of $G_1$ induced by $W \subseteq V$ has at most $8 k \cdot |V|$ edges). This is because each vertex of a rectangle is inside at most $K-1$ other rectangles, due to the maximal clique. Now we direct an edge $uv$ if $R_u$ is inside $R_v$. Thus the outdegree of any vertex is $\leq 4 (k-1)$ so $|E-1| \leq 4 (k-1) \cdot |V|$. Hence $G_1$ (and any of its induced subgraphs) has a vertex of degree $\leq 8 (k-1) \Rightarrow \chi(G_1) \leq 8 (k-1) + 1$.
+		\item For $G_2$ we claim that $\chi(G_2) = \omega(G_2) = O(k)$ because $G_@$ is a comparability graph (for example sort the boxes from tallest to shortest).
+		\item For $G$ we have $\chi(G) \leq \chi(G_1) \chi(G_2) = O(k^2)$.
+	\end{itemize}
 \end{proof}
