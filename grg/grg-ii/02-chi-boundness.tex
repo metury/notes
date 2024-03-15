@@ -1,7 +1,7 @@
-\chapter{$\chi$-omezenost}
+\chapter{$\chi$-boundedness}
 
 \begin{notation}
-	$\chi(G) = $ barevnost $G$ a $\omega(G) = $ klikovost $G$.
+	$\chi(G) = $ chromatic number $G$ and $\omega(G) = $ is the maximal clique in $G$.
 \end{notation}
 
 \begin{observ}
@@ -9,7 +9,7 @@
 \end{observ}
 
 \begin{defn}
-	Grafová třída je $\chi$-omezená, pokud $\exists f : \N \to \N$ $\forall G$ graf z dané třídy platí $\chi(G) \leq f(\omega(G))$.
+	Graph class $\mathcal{C}$ is $\chi$-bounded if $\exists f : \N \to \N$ s.t. $\forall G \in \mathcal{C} : \chi(G) \leq f(\omega(G))$.
 \end{defn}
 
 \begin{example}
@@ -19,6 +19,8 @@
 \begin{observ}
 	Intervalové, permutační, chordální, comparability, $\dots$ jsou perfektní a tudíž i $\chi$-omezené.
 \end{observ}
+
+\section{$\chi$-boundedness of CIRC graphs}
 
 \begin{observ}
 	Circular-Arc grafy splňují: $\chi(G) \leq 2 \omega(G)$.
@@ -158,4 +160,70 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 		
 		Závěrem $V_{A} := \cup_{i \text{ sudé}} V_{i}$ a $V_{B} := \cup_{i \text{ liché}} V_{i}$.
 	\end{proof}
+\end{proof}
+
+\section{$\chi$-unboundedness of SEG graphs}
+
+\begin{defn}
+	SEG is the class of graphs of intersection graphs of segments in the plane.
+\end{defn}
+
+Now the question might be if SEG graphs are $\chi$-bounded or not. This was firstly stated by Erdos. The answer came later by the following theorem.
+
+\begin{thm}[Pawlik, Kozik, Krawczyk, Lagos, Micek, Trotter, Wolezak, 2012]
+	$\forall k \in \N$ there exists triangle-free graph $G_k \in \text{SEG}$ with $\chi(G_k) \geq k$.
+	\label{PKKLMTW thm}
+\end{thm}
+
+\begin{defn}
+	\textbf{L-curve} is a union of a horizontal and vertical segment sharing a common bottom-left endpoint. \textbf{L-graph} is an intersection graph of L-curves.
+\end{defn}
+
+\begin{thm}
+	Any L-graph is also SEG-graph.
+\end{thm}
+
+\begin{proof}
+	Suppose $\mathcal{L} = \{l_1, l_2, \dots, l_n\}$ is a set of L-curves, we will show by induction on $\abs{\mathcal{L}} = n$ that there is a set $\mathcal{S} = \{s_1, s_2, \dots, s_n\}$ of segments s.t. $l_i \cap l_j \neq \emptyset \Leftrightarrow s_i \cap s_j \neq \emptyset$, and moreover:
+	
+	\begin{enumerate}
+		\item all $s_1, \dots, s_n$ lie in the half plane below the $x$-axis;
+		\item $s_i$ touches the $x$-axis \ifft $l_i$ can be extended upwards to infinity without crossing any other $l_j \in \mathcal{L}$;
+		\item left-to-right order of $s_i$'s touching the $x$-axis is the same as for $l_i$'s.
+	\end{enumerate}
+	
+	Now for $n = 1$ it is simple, see Fig. \ref{}, and for $n > 1$ WLOG $l_n$ has topmost horizontal part. By induction we represent $\mathcal{L}' = \{l_1, \dots, l_{n-1}\}$ by $\mathcal{S}' = \{s_1, \dots, s_{n-1}\}$ then
+	
+	\begin{enumerate}
+		\item shorten the $s_i$ if $l_i$ no longer can extend upwards and
+		\item insert $s_n$ touching $x$-axis, nearly horizontal. See Fig. \ref{}.
+	\end{enumerate}
+	\begin{figure}[!ht]\centering
+		\caption{Proof examples.}
+	\end{figure}
+\end{proof}
+
+\begin{proof}[Proof of theorem \ref{PKKLMTW thm}]
+	In fact we show that $\forall k \in \N$ there exists triangle-free L-graph $G_k$ with $\chi(G_k) \geq k$.
+	
+	\begin{defn}
+		A \textit{configuration} is
+		
+		\begin{enumerate}
+			\item a collection of L-curves inside the unit square $[0,1] \times [0,1]$, whose intersection graph os triangle-free
+			\item a set $\{P_1, \dots, P_m\}$ of \textit{"probes"} which are pairwise disjoint rectangles inside $[0,1] \times [0,1]$ touching its bottom boundary
+			\item any L-shape from the collection intersecting a probe $P_i$ must cross it from left to right
+			\item the L-shape crossing a given probe are pairwise disjoint.
+		\end{enumerate}
+		
+		\begin{figure}[!ht]\centering
+			\caption{Example of definition.}
+		\end{figure}
+	\end{defn}
+	
+	We will construct two sequences of $A_1, A_2, A_3, \dots$ and $B_1, B_2, B_3, \dots$ of configurations s.t.:
+	
+	\begin{enumerate}
+		\item $\forall k \in \N$
+	\end{enumerate}
 \end{proof}
