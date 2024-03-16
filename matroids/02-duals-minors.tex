@@ -148,3 +148,84 @@ Reader may already know minors in graph theory. They are made by two operations.
 	\end{aligned}
 	$$
 \end{proof}
+
+\begin{prop}
+	We can prove that $\M ? T = (E \setminus T, \I')$ where $\I' = \{I \subseteq E \setminus T | I \cup B_T \in \I\}$, where $B_T$ is max independent subset of $T$.
+\end{prop}
+
+\begin{proof}
+	In one direction lets have $I \subseteq E \setminus T$ s.t. $U \cup B_T \in \I$ now its rank has to be equal to its size.
+	
+	$$
+	\begin{aligned}
+		\rank_{\M / T} (I) &= \rank (I \cup T) - \rank(T)\\
+		&= \rank(I \cup B_T) - \rank(B_T)\\
+		&=|I \cup B_T| - |B_T|\\
+		&= |I| + |B_T| - |B_T| = |I|
+	\end{aligned}
+	$$
+	
+	Now the other direction. For that lets have $X \in \I'$ then the following holds.
+	
+	$$
+	\begin{aligned}
+		|X| &= \rank_{\M / T}(X) = \rank(X \cup T) - \rank(T) = \rank(X \cup T) - \rank(B_T) = \rank(X \cup B_T) - |B_T|\\
+		|X \cup B_T| &= |X| + |B_T| = \rank(X \cup B_T) \Rightarrow X \cup B_T \in \I
+	\end{aligned}
+	$$
+\end{proof}
+
+Therefore we may say that for dual it is true that: $B' \in \B(\M /T) \Leftrightarrow \exists B_T \in \B(\M | T)$ s.t. $B' \cup B_T \in \B(\M)$ where existential kvantificator can be replaced by for all. Also on notation $\M | T =  \M \setminus (E \setminus T)$ called the \textit{restriction}.
+
+\begin{prop}
+	$\C (\M /T)$ are minimal non-empty members $\{C \setminus T| C \in \C(\M)\}$.
+\end{prop}
+
+\begin{proof}
+	For "$\Rightarrow$" consider $C_1 \in \C(\M / T)$ and $B_T$ max independent in $\M | T$. $C_1 \cup B_T \notin \I, \forall e \in C_1 : (C_1 - e) \cup B_T \in \I$ and therefore $\exists C \in \C(\M)$ s.t. $C_1 \subseteq C \subseteq C_1 \cup B_T \Rightarrow C_1 = C \setminus B_T = C \setminus T$.
+	
+	Now for "$\Leftarrow$" let $D \setminus T$ be min non-empty member $\{C \setminus T | C \in \C(\M)\}$ so $D \cap T \subsetneq D \Rightarrow D \cap T \in \I \Rightarrow \exists B_T$ max independent in $\M |T$ s.t. $D \cap T \subseteq B_T$ and now $D \subseteq D \cup B_T = (D \setminus T) \cup B_T \notin \I$ because it contains a circuit $\Rightarrow (D \setminus T) \notin \I(\M / T)$ therefore $\exists D' \in \C (\M / T) : D' \subseteq D \setminus T$ if $D' \subsetneq D \setminus T$ then it would contradicts the minimality.
+\end{proof}
+
+\begin{claim}
+	For $\M = (E, \I), T_1, T_2 \subseteq E, T_1 \cap T_2 = \emptyset$ we have:
+	
+	\begin{enumerate}
+		\item $(\M \setminus T_1) \setminus T_2 = (\M \setminus T_2) \setminus T_1 = \M \setminus (T_1 \cup T_2)$;
+		\item $(\M / T_1) / T_2 = (\M / T_2) / T_1 = \M / (T_1 \cup T_2)$;
+		\item $(\M \setminus T_1) / T_2 = (\M / T_2) \setminus T_1$.
+	\end{enumerate}
+\end{claim}
+
+\begin{proof}
+	Lets go through all statements.
+	
+	\begin{enumerate}
+		\item This is obviously true, since we only delete sets which is same.
+		\item For this see
+		
+		$$
+		\begin{aligned}
+			(\M / T_1) / T_2 &= \dual{(\dual{\M} \setminus T_1)} / T_2 = \dual{((\dual{\M} \ T_1) \ T_2)}\\
+			&= \dual{(\dual{\M} \setminus (T_1 \cup T_2))} = \M / (T_1 \cup T_2).
+		\end{aligned}
+		$$
+		
+		\item Lets have $X \subseteq E \setminus (T_1 \cup T_2)$, then:
+		
+		$$
+		\begin{aligned}
+			\rank_{(\M / T_2) \setminus T_1} (X) &= \rank_{\M / T_2}(X) = \rank_{\M} (X \cup T_2) - \rank_{\M}(T_2)\\
+			&= \rank_{\M \setminus T_1} (X \cup T_2) - \rank_{\M \setminus T_1} (T_2) = \rank_{(\M \setminus T_1) / T_2} (X).
+		\end{aligned}
+		$$
+	\end{enumerate}
+\end{proof}
+
+\begin{cor}
+	$\M$ has minor $\mathcal{N}$, then $\dual{\M}$ has minor $\dual{\mathcal{N}}$. Namely $\mathcal{N} = (\M \setminus T_1) / T_2$ then $\dual{\mathcal{N}} = (\dual{\M} \setminus T_2) / T_1$.
+\end{cor}
+
+\section{Duals and minors of vector matroids}
+
+\section{Duals and minors of graphic matroids}
