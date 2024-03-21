@@ -425,6 +425,8 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 	This observation can be seen by induction. Lets take $u$ which has $\deg(u) \leq d$ now take $G - u$ which is also $d$-degenrate and therefore by I.H. colorable by $d+1$ colors. Lets take such coloring and now give $u$ a possible color. Because it only has $d$ neighbors we will have at least 1 possibility.
 \end{proof}
 
+\section{Axis-parallel rectangles intersection graphs}
+
 \begin{thm}[Asblund, Grunbaum]
 	If $G$ is an intersection graph of axis parallel rect-\\angles in the plane then $\chi(G) \leq O(\omega^2 (G))$.
 \end{thm}
@@ -458,8 +460,100 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 	Lets denote $G_1 = (V, E_1)$, $G_2 = (V, E_2)$ and $k = \omega(G)$. We will show $\chi(G_1) = O(k)$ and $\chi(G_2) = O(k)$.
 	
 	\begin{itemize}
-		\item For $G_1$ we claim that $|E_1| \leq 8 k \cdot |V|$ (and any subgraph of $G_1$ induced by $W \subseteq V$ has at most $8 k \cdot |V|$ edges). This is because each vertex of a rectangle is inside at most $K-1$ other rectangles, due to the maximal clique. Now we direct an edge $uv$ if $R_u$ is inside $R_v$. Thus the outdegree of any vertex is $\leq 4 (k-1)$ so $|E-1| \leq 4 (k-1) \cdot |V|$. Hence $G_1$ (and any of its induced subgraphs) has a vertex of degree $\leq 8 (k-1) \Rightarrow \chi(G_1) \leq 8 (k-1) + 1$.
-		\item For $G_2$ we claim that $\chi(G_2) = \omega(G_2) = O(k)$ because $G_@$ is a comparability graph (for example sort the boxes from tallest to shortest).
-		\item For $G$ we have $\chi(G) \leq \chi(G_1) \chi(G_2) = O(k^2)$.
+		\item For $G_1$ we claim that $|E_1| \leq 8 k \cdot |V|$ (and any subgraph of $G_1$ induced by $W \subseteq V$ has at most $8 k \cdot |W|$ edges). This is because each vertex of a rectangle is inside at most $k-1$ other rectangles, due to the maximal clique. So this means one for each vertex of a rectangle is in total $4 (k-1)$. Now we direct an edge $uv$ if vertex of $R_u$ is inside $R_v$. Thus the outdegree of any vertex is $\leq 4 (k-1)$ so $|E_1| \leq 4 (k-1) \cdot |V|$. Hence $G_1$ (and any of its induced subgraphs) has average degree $\frac{2 |E_1|}{|V|} = 8 (k-1)$. So the min degree is $\leq 8 (k-1)$ therefore it is $8(k-1)$-degenrate and $\Rightarrow \chi(G_1) \leq 8 (k-1) + 1$.
+		\item For $G_2$ we claim that $\chi(G_2) = \omega(G_2) = O(k)$ because $G_2$ is a comparability graph (for example sort the boxes from tallest to shortest).
+		\item For $G$ we have $\chi(G) \leq \chi(G_1) \chi(G_2) = O(k^2)$. For this lets have $E_1 \dot{\cup} E_2$ and see Fig. \ref{two-colors}. That is we have coloring $1,2, \dots, p$ colors for $E_1$ and $1,2, \dots, q$ colors for $E_2$ and we create a coloring by tuples $(x,y)$ where $x \in [p]$ and $y \in [q]$.
 	\end{itemize}
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[node distance = 30mm, main/.style = {draw, circle, thick}]
+			\node[main] (0) {(1,\textcolor{Green}{1})};
+			\node[main, above of = 0] (1) {(2,\textcolor{Green}{1})};
+			\node[main, left of = 1] (2) {(3,\textcolor{Green}{1})};
+			\node[main, right of = 1] (3) {(2,\textcolor{Green}{2})};
+			\node[main, left of = 0] (4) {(1,\textcolor{Green}{3})};
+			\node[main, above of = 2] (5) {(1,\textcolor{Green}{3})};
+			\draw[thick] (0) -- (1);
+			\draw[thick] (0) -- (2);
+			\draw[thick] (1) -- (2);
+			\draw[thick] (1) -- (5);
+			\draw[thick, Green] (0) -- (3);
+			\draw[thick, Green] (0) -- (5);
+			\draw[thick, Green] (1) -- (4);
+			\draw[thick, Green] (1) -- (3);
+			\draw[thick, Green] (2) -- (4);
+			\draw[thick, Green] (2) -- (5);
+			\draw[thick, Green] (3) -- (4);
+			\draw[thick] (3) -- (5);
+		\end{tikzpicture}
+		\caption{Disjoint union of edges for coloring.}
+		\label{two-colors}
+	\end{figure}
+\end{proof}
+
+\section{1-String with big girth}
+
+Now we will continue further and see that L-graphs $\subseteq$ (proper, i.e. not overlapping segments) SEG $\subseteq$ 1-String $\subseteq$ String. For this we need to see the definitions first.
+
+\begin{defn}
+	$G \in$ 1-String if $G$ has a String representation in which every two strings intersect at most once.
+\end{defn}
+
+\begin{defn}
+	The \textbf{girth} of a graph $G$ is the length of the shortest cycle in $G$, if $G$ has no cycle then girth is $+ \infty$. We will denote girth of $G$ as $\gamma(G)$.
+\end{defn}
+
+With the newly established terminology we have previously shown that L-graphs of girth $\geq 4$ have unbounded $\chi$, but what about girth $\geq 5$ (or $6, \dots$). Also we will give a remark which is that for arbitrary large girth and chromatic number can be created. This can be shown by probabilistic techniques.
+
+\begin{thm}[Kostochka \& Nešetřil]
+	Let $G$ be a 1-String graph, then
+	$$
+	\begin{array}{r c l r}
+		\text{if } \gamma(G) \geq 5 & \Rightarrow & \chi(G) \leq 6 & (\text{degeneracy } \leq 5), \\
+		\text{if } \gamma(G) \geq 6 & \Rightarrow & \chi(G) \leq 4 & (\text{degeneracy } \leq 3), \\
+		\text{if } \gamma(G) \geq 8 & \Rightarrow & \chi(G) \leq 3 & (\text{degeneracy } \leq 2). \\
+	\end{array}
+	$$
+\end{thm}
+
+\begin{proof}
+	Let $G = (V,E)$ be a connected 1-String graph, with a given 1-String representation. $n = |V|, m = |E|$. We will show the minimal degree of this graph where the degeneracy will follow, since its subgraphs can only have larger girth. Let $H = (V_H, E_H)$ be a plane graph whose drawing is obtained by placing a vertex on every crossing of strings of $G$, pieces of string between adjacent crossing are the edges of $H$. Recall Euler's formula $v - e + f = 2 \geq 0$.
+	
+	$$
+	\begin{aligned}
+		&v = |V_H| = \frac{1}{2} \sum_{v \in V} \deg(v) = m \\
+		&e = |E_H| = \sum_{w \in V}(\deg(w) - 1) = \left(\sum_{w \in V} \deg (w)\right) - n = 2m - n \\
+		&f = \text{\# of faces of } H
+	\end{aligned}
+	$$
+	
+	\begin{observ}
+		If $H$ has a face bounded by a cycle of length $l$, then $G$ has a closed walk of length $l$ in which each edge appears at most once. Hence $\gamma(G) \leq l$.
+	\end{observ}
+	
+	And consequently every face of $H$ is incident to at least $\gamma(G)$ edges of $H$. Hence $f \cdot \gamma(G) \leq 2 e$.
+	
+	$$
+	f \leq \frac{2e}{\gamma(G)} = \frac{4m - 2n}{\gamma(G)}
+	$$
+	
+	So we can use the following computation.
+	
+	$$
+	0 < v - e + f \leq m - 2m + n + \frac{4m - 2n}{\gamma(G)} = n \left(1 - \frac{2}{\gamma(G)} \right) - m \left(1 - \frac{4}{\gamma(G)} \right)
+	$$
+	
+	\noindent This enforces the following.
+	
+	$$
+	m \left(1 - \frac{4}{\gamma(G)}\right) < n \left(1 - \frac{2}{\gamma(G)} \right)
+	$$
+	
+	\noindent Thus the min. degree $\leq$ average degree which is
+	
+	$$
+	= \frac{2m}{n} \leq \frac{2 \left(1 - \frac{2}{\gamma(G)} \right)}{\left(1 - \frac{4}{\gamma(G)}\right)} = \frac{2 (\gamma(G) -2)}{\gamma(G) - 4}
+	$$
+	
+	\noindent Lastly we compute the exact values. If $\gamma(G) \geq 5$ then min degree $< 6$ so $\leq 5$ hence $\chi(G) \leq 6$. If $\gamma(G) \geq 6$ then min degree $< 4$ so $\leq 3$ hence $\chi(G) \leq 4$. If $\gamma(G) \geq 8$ then min degree $< 3$ so $\leq 2$ hence $\chi(G) \leq 3$.
 \end{proof}
