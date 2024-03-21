@@ -192,14 +192,67 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 		\item left-to-right order of $s_i$'s touching the $x$-axis is the same as for $l_i$'s.
 	\end{enumerate}
 	
-	Now for $n = 1$ it is simple, see Fig. \ref{}, and for $n > 1$ WLOG $l_n$ has topmost horizontal part. By induction we represent $\mathcal{L}' = \{l_1, \dots, l_{n-1}\}$ by $\mathcal{S}' = \{s_1, \dots, s_{n-1}\}$ then
+	Now for $n = 1$ it is simple, see Fig. \ref{start-l-curves}, and for $n > 1$ WLOG $l_n$ has topmost horizontal part. By induction we represent $\mathcal{L}' = \{l_1, \dots, l_{n-1}\}$ by $\mathcal{S}' = \{s_1, \dots, s_{n-1}\}$ then
 	
 	\begin{enumerate}
 		\item shorten the $s_i$ if $l_i$ no longer can extend upwards and
-		\item insert $s_n$ touching $x$-axis, nearly horizontal. See Fig. \ref{}.
+		\item insert $s_n$ touching $x$-axis, nearly horizontal. See Fig. \ref{induction-l-curves}.
 	\end{enumerate}
+	
 	\begin{figure}[!ht]\centering
-		\caption{Proof examples.}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {Blue}]
+				\draw[l, b] (0,2) to[out=270, in=90] (0,0) to[out=0, in=180] (4,0);
+				\node[b] at (-.3,0) {$l_1$};
+			\end{tikzpicture}
+			\caption{L-curves.}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {Blue}]
+				\draw[l, gray] (0,0) -- (5,0);
+				\node[gray] at (-.3,0) {$x$};
+				\draw[l, b] (1, -2) -- (1,0);
+				\node[b] at (.7, -2) {$p_1$};
+			\end{tikzpicture}
+			\caption{Segments.}
+		\end{subfigure}
+		\caption{Simple of start for an induction.}
+		\label{start-l-curves}
+	\end{figure}
+	
+	\begin{figure}[!ht]\centering
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 2pt}]
+				\draw[l] (0,3) to[out=270, in=90] (0,0) to[out=0, in=180] (4,0);
+				\node at (-.3,0) {$l_1$};
+				\draw[l] (1,1.5) to[out=270, in=90] (1,-2) to[out=0, in=180] (3,-2);
+				\node at (.7,-2) {$l_2$};
+				\draw[l] (2,-.5) to[out=270, in=90] (2,-1.5) to[out=0, in=180] (5,-1.5);
+				\node at (1.7,-1.5) {$l_3$};
+				\draw[l, Blue] (.5,3) to[out=270, in=90] (.5,2) to[out=0, in=180] (4,2);
+				\node[Blue] at (.8,3) {$l_4$};
+			\end{tikzpicture}
+			\caption{L-curves.}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 2pt}]
+				\draw[l, gray] (0,0) -- (5,0);
+				\node[gray] at (-.3,0) {$x$};
+				\draw[l] (1, -4) -- (1,0);
+				\node at (.7, -4) {$p_1$};
+				\draw[l] (0, -3) -- (2.7,-.3);
+				\draw[dotted, line width = 1pt] (0, -3) -- (3,0);
+				\node at (-.3, -3) {$p_2$};
+				\draw[l] (2, -3) -- (3.6,-.6);
+				\draw[dotted, line width = 1pt] (2, -3) -- (4,0);
+				\node at (1.7, -3) {$p_3$};
+				\draw[l, Blue] (4.7, -.5) -- (2,0);
+				\node[Blue] at (5, -.5) {$p_4$};
+			\end{tikzpicture}
+			\caption{Segments.}
+		\end{subfigure}
+		\caption{Simple example for conversion.}
+		\label{induction-l-curves}
 	\end{figure}
 \end{proof}
 
@@ -217,7 +270,31 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 		\end{enumerate}
 		
 		\begin{figure}[!ht]\centering
-			\caption{Example of definition.}
+			\begin{subfigure}{.45\textwidth}\centering
+				\begin{tikzpicture}[l/.style = {line width = 1pt}]
+					\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+					\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+					\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+					\draw[l] (.5,5) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
+					\draw[l] (2.3,2) to[out=270, in=90] (2.3,1.5) to[out=0, in=180] (5.4,1.5);
+					\draw[l] (2.6,3) to[out=270, in=90] (2.6,2) to[out=0, in=180] (5.6,2);
+					\draw[l] (3,5.5) to[out=270, in=90] (3,4) to[out=0, in=180] (5,4);
+				\end{tikzpicture}
+				\caption{Example of configuration where we have \textcolor{Red}{two probes} in a \textcolor{Blue}{[0,1] box} with four L-curves.}
+			\end{subfigure}
+			\begin{subfigure}{.45\textwidth}\centering
+				\begin{tikzpicture}[l/.style = {line width = 1pt}]
+					\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+					\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+					\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+					\draw[l] (2.6,2) to[out=270, in=90] (2.6,.5) to[out=0, in=180] (4.6,.5);
+					\draw[l] (4,4) to[out=270, in=90] (4,2) to[out=0, in=180] (4.6,2);
+					\draw[l] (.5,5) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
+					\draw[l] (.7,5) to[out=270, in=90] (.7,.5) to[out=0, in=180] (2.5,.5);
+				\end{tikzpicture}
+				\caption{Counterexample of violating the definitions 3 and 4.}
+			\end{subfigure}
+			\caption{Example and counterexamples of the definition.}
 		\end{figure}
 	\end{defn}
 	
@@ -228,19 +305,25 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 		\item $\forall k \in \N$ in any proper coloring of the L-curves in $B_k$ there exist a probe of $B_k$ which is crossed by L-curves of at least $k$ different colors.
 	\end{enumerate}
 	
-	By induction for $k = 1$ it is straightforward, see Fig. \ref{}. Now we show two parts.
+	By induction for $k = 1$ it is straightforward, see Fig. \ref{start-configuration}. Now we show two parts.
 	
 	\begin{figure}[!ht]\centering
-		\caption{Figure}
+		\begin{tikzpicture}[l/.style = {line width = 1pt}]
+			\draw[Blue, fill=Blue!20] (0,0) rectangle (3,3);
+			\draw[Red, fill=Red!20] (1,0) rectangle (2,2);
+			\draw[l] (.5,2.6) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
+		\end{tikzpicture}
+		\caption{Start of the induction with \textcolor{Red}{one probe} and one L-curve.}
+		\label{start-configuration}
 	\end{figure}
 	
 	\begin{enumerate}
-		\item From $B_k$ to $A_k+1$. See Fig. \ref{}.
+		\item From $B_k$ to $A_k+1$. See Fig. \ref{ak+1}.
 		\begin{enumerate}
 			\item Insert one new L-shape inside every probe of $B_k$ and
 			\item replace each probe by 2 new probes.
 		\end{enumerate}
-		\item From $B_k$ and $A_{k+1}$ to $B_{k+1}$. See Fig. \ref{}.
+		\item From $B_k$ and $A_{k+1}$ to $B_{k+1}$. See Fig. \ref{bk+1}.
 		\begin{enumerate}
 			\item Insert a small copy of $A_{k+1}$ near the top of every probe of $B_k$ and
 			\item extend the probes of these small copies all the way down to obtain probes of $B_{k+1}$.
@@ -248,11 +331,79 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	\end{enumerate}
 	
 	\begin{figure}[!ht]\centering
-		\caption{Figure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 1pt}]
+				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[l] (1,1) to (2,1);
+				\draw[l] (1,2) to (2,2);
+				\draw[l] (1,3) to (2,3);
+				\draw[l] (3,1) to (5,1);
+				\draw[l] (3,2) to (5,2);
+				\node at (5,5) {$B_k$};
+			\end{tikzpicture}
+			\caption{Simplification with \textcolor{Red}{two probes}.}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 1pt}]
+				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[VioletRed, fill=VioletRed!20] (1.1,0) rectangle (1.2,3.7);
+				\draw[VioletRed, fill=VioletRed!20] (1.4,0) rectangle (1.6,.8);
+				\draw[l] (1,1) to (2,1);
+				\draw[l] (1,2) to (2,2);
+				\draw[l] (1,3) to (2,3);
+				\draw[l, Green] (1.3,3.6) to[out=270, in=90] (1.3,.5) to[out=0, in=180] (1.7,.5);
+				\draw[VioletRed, fill=VioletRed!20] (3.1,0) rectangle (3.4,2.7);
+				\draw[VioletRed, fill=VioletRed!20] (3.6,0) rectangle (4.4,.8);
+				\draw[l] (3,1) to (5,1);
+				\draw[l] (3,2) to (5,2);
+				\draw[l, Green] (3.5,2.6) to[out=270, in=90] (3.5,.5) to[out=0, in=180] (4.5,.5);
+				\node at (4.3,5) {$B_k \to A_{k+1}$};
+			\end{tikzpicture}
+			\caption{\textcolor{Green}{Two new L-curves} and \textcolor{VioletRed}{four new probes}.}
+		\end{subfigure}
+		\caption{Conversion from $B_k$ to $A_{k+1}$.}
+		\label{ak+1}
 	\end{figure}
 	
 	\begin{figure}[!ht]\centering
-		\caption{Figure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 1pt}]
+				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[l] (1,1) to (2,1);
+				\draw[l] (1,2) to (2,2);
+				\draw[l] (1,3) to (2,3);
+				\draw[l] (3,1) to (5,1);
+				\draw[l] (3,2) to (5,2);
+				\node at (5,5) {$B_k$};
+			\end{tikzpicture}
+			\caption{Simplification with \textcolor{Red}{two probes}.}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[l/.style = {line width = 1pt}]
+				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
+				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
+				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[Violet, fill=Violet!20] (1.1, 3.1) rectangle (1.9, 3.9);
+				\draw[VioletRed, fill=VioletRed!20] (1.2, 0) rectangle (1.6, 3.6);
+				\draw[Violet, fill=Violet!20] (3.6, 2.1) rectangle (4.4, 2.9);
+				\draw[VioletRed, fill=VioletRed!20] (3.7, 0) rectangle (4.1, 2.6);
+				\draw[l] (1,1) to (2,1);
+				\draw[l] (1,2) to (2,2);
+				\draw[l] (1,3) to (2,3);
+				\draw[l] (3,1) to (5,1);
+				\draw[l] (3,2) to (5,2);
+				\node at (4,5) {$B_k \ \& \ A_{k+1} \to B_{k+1}$};
+			\end{tikzpicture}
+			\caption{\textcolor{Violet}{Copies of $A_{k+1}$} and \textcolor{VioletRed}{prolonged probes}.}
+		\end{subfigure}
+		\caption{Conversion from $A_{k+1}$ and $B_{k}$ to $B_{k+1}$.}
+		\label{bk+1}
 	\end{figure}
 \end{proof}
 
@@ -261,6 +412,18 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 \begin{fact}
 	For any compact arc-connected set $X \subseteq \R^2$ other then an axis parallel rectangle there is a triangle-free graph $G_k$, $\chi(G_k) \geq k$, which is the intersection graph of horizontally and vertically scaled copies of $X$.
 \end{fact}
+
+\begin{defn}
+	A graph $G$ is $d$-degenerate if every non-empty subgraph of $G$ contains a vertex of degree at most $d$.
+\end{defn}
+
+\begin{observ}
+	$G$ is $d$-degenrate then $\chi(G) \leq d+1$.
+\end{observ}
+
+\begin{proof}
+	This observation can be seen by induction. Lets take $u$ which has $\deg(u) \leq d$ now take $G - u$ which is also $d$-degenrate and therefore by I.H. colorable by $d+1$ colors. Lets take such coloring and now give $u$ a possible color. Because it only has $d$ neighbors we will have at least 1 possibility.
+\end{proof}
 
 \begin{thm}[Asblund, Grunbaum]
 	If $G$ is an intersection graph of axis parallel rect-\\angles in the plane then $\chi(G) \leq O(\omega^2 (G))$.
@@ -275,7 +438,21 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 	\end{enumerate}
 	
 	\begin{figure}[!ht]\centering
-		\caption{Figure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}
+				\draw[VioletRed, fill=VioletRed!20] (0, 0) rectangle (2, 2);
+				\draw[VioletRed, fill=VioletRed!20, opacity=0.8] (1, 1) rectangle (3, 3);
+			\end{tikzpicture}
+			\caption{One vertex is inside the other rectangle.}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}
+				\draw[VioletRed, fill=VioletRed!20] (0, 1) rectangle (3, 2);
+				\draw[VioletRed, fill=VioletRed!20, opacity=0.8] (1, 0) rectangle (2, 3);
+			\end{tikzpicture}
+			\caption{Cross-like intersection.}
+		\end{subfigure}
+		\caption{Two possibilities.}
 	\end{figure}
 	
 	Lets denote $G_1 = (V, E_1)$, $G_2 = (V, E_2)$ and $k = \omega(G)$. We will show $\chi(G_1) = O(k)$ and $\chi(G_2) = O(k)$.
