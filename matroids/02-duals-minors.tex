@@ -228,4 +228,105 @@ Therefore we may say that for dual it is true that: $B' \in \B(\M /T) \Leftright
 
 \section{Duals and minors of vector matroids}
 
+\begin{thm}
+	Let $\M = \M(A)$ be a matroid over matrix $A$ s.t. $\M \not\cong U_{0,n}$ and $\M \not\cong U_{n,n}$. We may consider standard form which is $A = (I_n | D)$ and $\M(A) = \M((I_n|D))$ and $r = \rank (\M)$ then $\dual{\M} = \M(D^T | I_{n-r})$.
+\end{thm}
+
+\begin{proof}
+	See that $B \in \B(\M) \Leftrightarrow B = \{e_1, e_2, \dots, e_n\}$ which all $e_i$ are linearly independent in $(I_n |D)$. Now take a look at the matrix:
+	
+	$$
+	\left[
+	\begin{array}{c | c c c}
+		& D_{11} &  & D_{12} \\
+		I_n & & & \\
+		& D_{21} &  & D_{22}
+	\end{array}
+	\right]
+	$$
+	
+	Consider that first $s$ columns are taken as first columns from $I_n$ and the rest is from $D_{11}$. Which also means that $\rank (D_{21}) = r - s$. Now take the transposed matrix.
+	
+	$$
+	\left[
+	\begin{array}{c c c | c}
+		D_{11}^T &  & D_{21}^T & \\
+		& & & I_{n-r} \\
+		D_{12}^T &  & D_{22}^T &
+	\end{array}
+	\right]
+	$$
+	
+	There the rank $\rank (D_{21}^T) = r-s$ which means that all of $E \setminus B$ are linearly independent in $(D^T | I_n)$.
+\end{proof}
+
+Now we take a moment to explore the deletion. For that we just erase the columns which are about to be deleted. So for contraction is is also nicely working from the dual and deletion. All in all vector matroids are closed under both \textbf{minors} and \textbf{duals}. Also note that if $D$ would be symmetric (i.e. $D = D^T$) then $\M \cong \dual{\M}$ also called \textbf{self-dual}.
+
 \section{Duals and minors of graphic matroids}
+
+Firstly consider a deletion in a graphic matroid. This will correspond to simple deletion of all such edges. Now for contractions we will be looking at it just for one single element.
+
+\begin{prop}
+	$\M = \M(G), e \in E$ which is an element of $\M$ and also an edge. Them $\M(G) / \{e\} = \M (G / e)$.
+\end{prop}
+
+\begin{proof}
+	If $e$ is a loop, then we can simply delete it in matroid and also in the graph. Otherwise $U \subseteq E - e$ is acyclic in $G/e$ \ifft $I \cup \{e\}$ is acyclic in $G$ \ifft $I \in \M(G/e) \iff I \cup \{e\} \in \I$.
+\end{proof}
+
+From this proposition and the easy observation we obtain the fact that graphic matroids are closed under \textbf{minor} operations. Let now consider duals of graphic matroids for a moment. The duals are quite nice since it follows from graph duals which are fairly known. That is we have one-to-one correspondence between $E(G)$ and $E(\dual{G})$. Also $\dual{(\dual{G})} = G$ and $\dual{\M}(G) = \M(\dual{G})$. Moreover having a circuit in $G$ corresponds to min cut of the dual hence the co-circuit. There the duality works.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}[main/.style = {draw, circle, thick, color = Blue}]
+		\node[main] (4) at (0,0) {4};
+		\node[main] (3) at (-2,1.7) {3};
+		\node[main] (6) at (3,3) {6};
+		\node[main] (2) at (-0.8,4) {2};
+		\node[main] (5) at (3,6) {5};
+		\node[main] (1) at (1,6) {1};
+		\node[main, color=Green] (b) at (-0.9, 1.7) {$b$};
+		\node[main, color=Green] (a) at (-2, 4.3) {$a$};
+		\node[main, color=Green] (c) at (1, 3.3) {$c$};
+		\node[main, color=Green] (d) at (2.4, 5) {$d$};
+		\draw[thick, color=Blue] (4) edge (3);
+		\draw[thick, color=Blue] (4) edge (2);
+		\draw[thick, color=Blue] (4) edge (6);
+		\draw[thick, color=Blue] (5) edge (6);
+		\draw[thick, color=Blue] (6) edge (1);
+		\draw[thick, color=Blue] (2) edge (1);
+		\draw[thick, color=Blue] (1) edge (5);
+		\draw[thick, color=Blue] (2) edge (3);
+		\draw[thick, color=Green] (b) edge (c);
+		\draw[thick, color=Green] (d) edge (c);
+		\draw[thick, color=Green] (b) edge (a);
+		
+		\coordinate (6') at (4,2);
+		\coordinate (3') at (-3, 1);
+		
+		\draw[thick, color=Green] (b) to[out = 240, in = -70] (3') to[out = 110, in = 190] (a);
+		\draw[thick, color=Green, bend left = 80] (a) edge (c);
+		\draw[thick, color=Green] (a) to[] (-4,1) to[] (.5,-1) to[] (c); %TODO
+		\draw[thick, color=Green] (d) to[] (1,7) to[] (a); %TODO
+		\draw[thick, color=Green] (d) to[] (4,6) to[] (1,8) to[] (a); %TODO
+	\end{tikzpicture}
+	\caption{A \textcolor{Blue}{primal graph $G$} and its \textcolor{Green}{dual $\dual{G}$}.}
+\end{figure}
+
+Also duals in Matroids (and also minors) were inspired from graphs. Now we have encountered only planar graphs. But one can ask what about non-planar ones. By Kuratowsku and the fact that graphic matroids are closed under minor operations we get the following proposition.
+
+\begin{prop}
+	$\dual{\M}(K_5)$ (and $\dual{\M}(K_{3,3})$) are not graphic.
+\end{prop}
+
+\begin{proof}
+	By a contradiction: $\exists G : \M(G) = \dual{G}(K_5)$. By that $|E| = 10, \rank(\dual{\M}(K_5)) = 6 = 10 -4$. Also $|V(G)| = 7$ so average degree is $\frac{20}{7} < 3$. Which means that there exists a vertex $v$ s.t. $\deg(v) = 1$ or 2. This leads to at most 2 edges therefore the size of min edge cut is 2 and so is the size of co-circuit of $\dual{\M}(K_5)$ hence the size of circuit in $\M(K_5)$ is 2 which is a contradiction. Similar argument can be made for $K_{3,3}$.
+\end{proof}
+
+From these facts if we have a non-planar graph its dual is \textbf{not graphic}. Therefore we get the following diagram.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}
+		
+	\end{tikzpicture}
+	\caption{Diagram of graphic duals.}
+\end{figure}
