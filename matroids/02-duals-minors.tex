@@ -305,9 +305,9 @@ From this proposition and the easy observation we obtain the fact that graphic m
 		
 		\draw[thick, color=Green] (b) to[out = 240, in = -70] (3') to[out = 110, in = 190] (a);
 		\draw[thick, color=Green, bend left = 80] (a) edge (c);
-		\draw[thick, color=Green] (a) to[] (-4,1) to[] (.5,-1) to[] (c); %TODO
-		\draw[thick, color=Green] (d) to[] (1,7) to[] (a); %TODO
-		\draw[thick, color=Green] (d) to[] (4,6) to[] (1,8) to[] (a); %TODO
+		\draw[thick, color=Green] (c) to[out=270,in=0] (.5,-1) to[out=180,in=-40] (-4,1) to[out=140, in=120] (a); %TODO
+		\draw[thick, color=Green] (d) to[out=90,in=0] (1,7) to[out=180,in=80] (a);
+		\draw[thick, color=Green] (d) to[out=0,in=270] (4,6) to[out=90,in=0] (1,8) to[out=180, in=100] (a);
 	\end{tikzpicture}
 	\caption{A \textcolor{Blue}{primal graph $G$} and its \textcolor{Green}{dual $\dual{G}$}.}
 \end{figure}
@@ -326,7 +326,20 @@ From these facts if we have a non-planar graph its dual is \textbf{not graphic}.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}
-		
+		% Set A
+		\draw[Blue, fill=Blue!30] (0,0) ellipse (2cm and 1cm);
+		\node[Blue] at (0,0) {$A$};
+		% Set B
+		\draw[Red, fill=Red!30] (2.5,0) ellipse (2cm and 1cm);
+		\node[Red] at (2.5,0) {$B$};
+		% Intersection
+		\begin{scope}
+			\clip (0,0) ellipse (2cm and 1cm);
+			\clip (2.5,0) ellipse (2cm and 1cm);
+			\fill[Green!50] (2.5,0) ellipse (2cm and 1cm);
+		\end{scope}
+		% Label for intersection
+		\node[green] at (1.25,0) {$A \cap B$};
 	\end{tikzpicture}
 	\caption{Diagram of graphic duals.}
 \end{figure}
