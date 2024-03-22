@@ -30,10 +30,85 @@ First question is how to save all values for given matroid. Because the isze of 
 
 Firstly we can clearly see that $\forall i:  E_i \subseteq E$ and $E_i \in \I \Rightarrow E_n \in \I$ which also means that $E_n \in \I$ and $E_n \in \B$.
 
-Now look at maximality. For contradiction $\exists E' \in \B$ s.t. $w(E') > w(E_n)$.
+Now look at maximality. For contradiction $\exists E' \in \B$ s.t. $w(E') > w(E_n)$. See that $E_n$ is formed by $e_{i_1}, e_{i_2}, \dots, e_{i_r}$ if $r = \rank (\M)$ ($i_1 < i_2 < \dots < i_r$) and also $E'$ is formed by $e_{j_1}, e_{j_2}, \dots, e_{j_r}$ ($j_1 < j_2 < \dots < j_r$), where the lower index the higher weight. Therefore $\exists k$ s.t. $w(e_{i_k}) > w(e_{j_k})$ and lets take such smallest one. Now lets have $I_1 = \{e_{i_1}, \dots, e_{i_{k-1}}\}$ and $I_2 = \{e_{j_{1}}, \dots, e_{j_k}\}$ and apply (I3) because $|I_1| < |I_2|$ therefore $\exists l : I_1 + e_{j_l} \in \I$ and $w(e_{j_l}) \geq w(e_{j_k}) > w(e_{i_k})$ and $e_{j_l} \notin I_1$ which is a contradiction because algorithm would have chosen $e_{j_l}$ instead of $e_{i_k}$.
 
 \subsection{Time complexity}
 
+Firstly sorting $E$ is in $O(n \log n)$. Then the loop has $n$ repetitions where in every step we call an oracle. Lets say that the oracle has time complexity $t$ so the entire loop take $nt$ time. So altogether we obtain $O(n \log n + nt)$.
+
+Lastly note that non-negative weight function is important for the algorithm to work. But we may see that this procedure can be used to define the matroid. Which we will talk about now.
+
 \subsection{Defining matroid by greedy algorithm}
 
+\begin{prop}
+	We have $E$ finite non-empty set, let $\mathcal{F} \subseteq 2^E,\emptyset \in \mathcal{F}$ s.t. $\forall w : E \to \R_0^+$ greedy algorithm find max weighted member of $\mathcal{F}$, then $\mathcal{F}$ satisfies (I1),(I2) and (I3).
+\end{prop}
+
+\begin{proof}
+	Firstly (I1) is easy, since $\emptyset \in \mathcal{F}$.
+	
+	Now take a look at (I2). By contradiction $I' \subseteq I$ and $I \in \mathcal{F}$ but $I' \notin \mathcal{F}$. WLOG $|I| = |I'| + 1$. We will define the weight function like this:
+	
+	$$
+	w(e) = \left\{
+	\begin{array}{l l}
+		2 & \text{if } e \in I' \\
+		1 & \text{if } e \in I \setminus I' \\
+		0 & \text{otherwise}
+	\end{array}
+	\right..
+	$$
+	
+	\noindent So $w(I) = 2 \cdot |I'| + 1$ and greedy algorithm find $|I'|$, but at least one element has to be skipped. So the weight of the result is $\leq 2(|I'| - 1) + 1 = 2 \cdot |I'| - 1 < w(I)$ which is a contradiction.
+	
+	Finally (I3) which is $I_1, I_2 \in \mathcal{F}, |I_1| < |I_2| : \exists e \in I_2 \setminus I_1 : I_1 + e \in \mathcal{F}$ and WLOG $|I_2| = |I_1| + 1$. By contradiction $I_1, I_2 \in \mathcal{F}, |I_1| = |I_2| - 1$ and $\forall e \in I_2 \setminus I_1 : I_! + e \notin \mathcal{F}$. Denote $k = |I_1|$. Lets define the weight function.
+	
+	$$
+	w(e) = \left\{
+	\begin{array}{l l}
+		k+2 & \text{if } e \in I_1 \\
+		k+1 & \text{if } e \in I_2 \setminus I_1 \\
+		0 & \text{otherwise}
+	\end{array}
+	\right..
+	$$
+	
+	\noindent Where $w(I_2) \geq |I_2| \cdot (k+1) = (k+1)^2$. The greedy algorithm firstly takes all $e \in I_1$ so after $k$ steps $E_k = I_1$, but then non-zero elements are skipped $(I_2 \setminus I_1)$ so the result has $w = I_1 \cdot (k+2) = k (k+2)$ but $k (k+2) = k^2 +2k < k^2 +2k + 1 = (k+1)^2$ so we got the contradiction.
+\end{proof}
+
 \section{Matroid intersection problem}
+
+Firstly we must define this problem. As an \textbf{input} we have $\M_i = (E, \I_i)$ for $i = 1,2$ and \textbf{output} is to find max $I \in \I_1 \cap \I_2$. Firstly observe that there always exists a solution $\emptyset$.
+
+\begin{thm}
+	Having $\M_i = (E, \I_i)$ for $i = 1,2$ then
+	
+	$$
+	\max_{I \in \I_1 \cap \I_2} |I| = \min_{E_1 \cup E_2 = E} \rank_1(E_1) + \rank_2(E_2).
+	$$
+\end{thm}
+
+\begin{proof}
+	For "$\leq$" we have $I \in \I_1 \cap \I_2, E_1 \cup E_2 = E$. We may consider it is disjoint since $E_2 = E \setminus E_1$ might only decrease the rank.
+	
+	$$
+	\begin{array}{r c c c l}
+		|I \cap E_1| & = & \rank_1 (I \cap E_1) & \leq & \rank_1(E_1) \\
+		|I \cap E_2| & = & \rank_2 (I \cap E_2) & \leq & \rank_2(E_2) \quad \text{(sum both together)}\\
+		|I| & & & \leq & \rank_1(E_1) + \rank_2(E_2) \\
+	\end{array}
+	$$
+	
+	Now "$\geq$" for which we will state the algorithm. Firstly start in $I = \emptyset$. Then $I \in \I_1 \cap \I_2$ construct $H$ bipartite graph with $I, X = E \setminus I$ parts. Create arc $y \to x$ if $(I - y) + x \in \I_1$ and arc $y \leftarrow x$ if $(I - y) + x \in \I_2$. Then define $X_1 = \{x \in X | I + x \in \I_1\}$ and $X_2 = \{x \in X | I + x \in \I_2\}$.
+	
+	\begin{enumerate}
+		\item If $X_1 \cap X_2 = \emptyset$ we just add such element from intersection to $I$.
+		\item Otherwise find $X_1 \to X_2$ path if there is one, and choose shortest one. That is $x_0 y_1 x_1 y_2 x_2 \dots y_k x_k$ this path where $x_0 \in X_1$ and $x_k \in X_2$. Now we update $I$ like this $I' = (I \setminus \{y_1, y_2, \dots, y_k\}) \cup \{x_0, x_1, x_2, \dots, x_k\}$. Clearly the size is bigger but it is independent? We will sketch the proof of this. We have to show that $I' \in \I_1 \cap \I_2$.
+		
+		For $I' \in \I_1$ we proceed by induction on $k$. Lets have $I \in \I$ and $(I - y_k) + x_k$ because $y_k \to x_k$ by the definition of arc it implies that it is $\in \I_1$. Lets denote $I_l = (I \setminus \{y_l, \dots, y_k\}) \cup \{x_l, \dots, x_k\} = (((I \setminus \{y_{l+1}, \dots, y_k\}) \cup \{x_{l+1}, \dots, x_k\}) - y_l) + x_l$ and $I_{l+1}$ is $\in \I_1$ by induction. So $I_l = (I_{l+1} - y_l) + x_l$, $I_l + x_l \in \I_1$ and $y_l \to x_l$ therefore $(I - y_l) + x_l \in \I_1$. We obtained two independent sets where $|I_l - x_l| = |(I - y_l) + x_l| - 1$ so by (I3) $\exists z \in (I - y_l) + x_l$ s.t. $(I_l - x_l) + z \in \I_1$.
+		
+		If $z = x_l$ we are done, otherwise if $z \neq x_l$ we set $(I - y_l + x_l) \setminus (I_l - x_l) = \{x_l, y_{l+1}, \dots, y_k\}$ so $\exists i : z = y_i$ $(I_l - x_l) + y_i \in \I_1$ and again apply (I3) so $\exists z' \in ((I_l - x_l) + y_i) \setminus (I - y_l)$ s.t. $(I - y_l) + z' \in \I_1$ and $z' = \{x_{l+1}, \dots, x_k\}$. This implies that $y_l \to z'$ which contradicts the shortest path. Hence we may remove $y_1, \dots, y_k$ and add $x_1, \dots, x_k$. Now we only need to show we may also add $x_0$. For showing $I' \in \I_2$ we would proceed similarly.
+		
+		\item Next step is what if the path does not exists? We want to show a partitioning $E_1$ and $E_2$.
+	\end{enumerate}
+\end{proof}
