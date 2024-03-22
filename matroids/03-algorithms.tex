@@ -1,1 +1,39 @@
 \chapter{Algorithms}
+
+In this section we will walk through some of the known matroid algorithms for solving some problems. Also we may derive some more information about the matroids themselves by looking at the solution of the given algorithms.
+
+\section{Greedy algorithm}
+
+The main algorithm is greedy one. One can already know the greedy algorithm for min spanning tree which is gradually putting lightest edges not forming cycle into the set. Now it will be pretty much the same only we will be maximizing and not minimizing. That is for minimizing we create a constant $C$ and subtract every value from it and still look for maximum which will indeed be a minimum with the original values.
+
+First question is how to save all values for given matroid. Because the isze of $\I$ can be exponentially large. Therefore we will be working with so called \textbf{oracle}. That is for $X \subseteq E$ we ask if $X$ is independent $\in \I$ or not.
+
+\begin{algorithm}[!ht]
+	\caption{Greedy algorithm.}
+	\begin{algorithmic}[1]
+		\Require Matroid $\M = (E, \I)$ and weight function $w : E \to \R_0^+$.
+		\Ensure $I \in \I$ with max $w(I) = \sum_{e \in I} w(e)$.
+		\State Sort $E$ s.t. $w(e_1) \geq w(e_2) \geq \dots \geq w(e_n)$.
+		\State $E_0 = \emptyset$
+		\For{$i = 1, 2, \dots,n$}
+			\If{$E_{i-1} + e_i \in \I$}
+				\State $E_{i} = E_{i-1} + e_i$
+			\Else
+				\State $E_i = E_{i-1}$
+			\EndIf
+		\EndFor
+		\State \Return $E_n$
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{Correctness}
+
+Firstly we can clearly see that $\forall i:  E_i \subseteq E$ and $E_i \in \I \Rightarrow E_n \in \I$ which also means that $E_n \in \I$ and $E_n \in \B$.
+
+Now look at maximality. For contradiction $\exists E' \in \B$ s.t. $w(E') > w(E_n)$.
+
+\subsection{Time complexity}
+
+\subsection{Defining matroid by greedy algorithm}
+
+\section{Matroid intersection problem}

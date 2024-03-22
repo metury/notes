@@ -274,7 +274,7 @@ Firstly consider a deletion in a graphic matroid. This will correspond to simple
 	If $e$ is a loop, then we can simply delete it in matroid and also in the graph. Otherwise $U \subseteq E - e$ is acyclic in $G/e$ \ifft $I \cup \{e\}$ is acyclic in $G$ \ifft $I \in \M(G/e) \iff I \cup \{e\} \in \I$.
 \end{proof}
 
-From this proposition and the easy observation we obtain the fact that graphic matroids are closed under \textbf{minor} operations. Let now consider duals of graphic matroids for a moment. The duals are quite nice since it follows from graph duals which are fairly known. That is we have one-to-one correspondence between $E(G)$ and $E(\dual{G})$. Also $\dual{(\dual{G})} = G$ and $\dual{\M}(G) = \M(\dual{G})$. Moreover having a circuit in $G$ corresponds to min cut of the dual hence the co-circuit. There the duality works.
+From this proposition and the easy observation we obtain the fact that graphic matr-\\oids are closed under \textbf{minor} operations. Let now consider duals of graphic matroids for a moment. The duals are quite nice since it follows from graph duals which are fairly known. That is we have one-to-one correspondence between $E(G)$ and $E(\dual{G})$. Also $\dual{(\dual{G})} = G$ and $\dual{\M}(G) = \M(\dual{G})$. Moreover having a circuit in $G$ corresponds to min cut of the dual hence the co-circuit. There the duality works.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[main/.style = {draw, circle, thick, color = Blue}]
@@ -325,21 +325,17 @@ Also duals in Matroids (and also minors) were inspired from graphs. Now we have 
 From these facts if we have a non-planar graph its dual is \textbf{not graphic}. Therefore we get the following diagram.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}
-		% Set A
-		\draw[Blue, fill=Blue!30] (0,0) ellipse (2cm and 1cm);
-		\node[Blue] at (0,0) {$A$};
-		% Set B
-		\draw[Red, fill=Red!30] (2.5,0) ellipse (2cm and 1cm);
-		\node[Red] at (2.5,0) {$B$};
-		% Intersection
+	\begin{tikzpicture}[thick]
+		\draw[Blue, fill=Blue!30, opacity=.5] (0,0) ellipse (3cm and 1cm);
+		\node[Blue] at (-1.2,0) {co-graphic};
+		\draw[Red, fill=Red!30, opacity=.5] (3,0) ellipse (3cm and 1cm);
+		\node[Red] at (4,0) {graphic};
 		\begin{scope}
-			\clip (0,0) ellipse (2cm and 1cm);
-			\clip (2.5,0) ellipse (2cm and 1cm);
-			\fill[Green!50] (2.5,0) ellipse (2cm and 1cm);
+			\clip (0,0) ellipse (3cm and 1cm);
+			\clip (3,0) ellipse (3cm and 1cm);
+			\fill[Violet!40, opacity=.5] (2,0) ellipse (2cm and 1cm);
 		\end{scope}
-		% Label for intersection
-		\node[green] at (1.25,0) {$A \cap B$};
+		\node[Violet] at (1.5,0) {planar};
 	\end{tikzpicture}
 	\caption{Diagram of graphic duals.}
 \end{figure}
