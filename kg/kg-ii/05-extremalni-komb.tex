@@ -16,9 +16,9 @@
 	$\forall n,r \in \mathbb{N}: \text{ex}(n,K_{r+1}) = t(n,r)$
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Pozorování: $T(n,r)$ neobsahuje $K_{r+1}$, tedy $\text{ex}(n,K_{r+1}) \geq t(n,r)$. Stačí dokázat: $\text{ex}(n,K_{r+1})\leq t(n,r)$. Nechť $G = (V,E)$ je graf na $n$ vrcholech, $K_{r+1} \nsubseteq G$ a $|E| = \text{ex}(n,K_{r+1})$. Tvrzení 1: Každé 2 nesousedící vrcholy $x,y$ mají v $G$ stejný stupeň. Sporem kdyby $\deg(x) > \deg(y)$ tak $y$ odstraním sousedy a přidám mu sousedy $x$. Ten má ale více hran a protože $\{x,y\} \notin E$ a s $x$ nebyla klika, tak teď také žádná klika nevznikla s $y$. "Nebo-li $y$ nahradím kopií $x$." Tvrzení 2: Definujeme relaci $R := \{(x,y) \in V \times V: \{x,y\} \notin E\}$. Potom $R$ je ekvivalence. Jistě je $R$ reflexivní, také symetrické. Pro spor předpokládejme, že $R$ není tranzitivní: $\exists x,y,z: (x,y) \in R, (y,z) \in R \land (x,z) \notin R$. Dle Tvrzení 1: $\deg_{G}(x) = \deg_{G}(y) = \deg_{G}(z)$. Potom "nahradím $x$ a $z$ kopiemi $y$". A platí $|E(G')| > |E|$. A $G'$ neobsahuje $K_{r+1}$ obdobným argumentem jako u Tvrzení 1. Nyní nechť $P_{1}, P_{2}, \dots, P_{k}$ jsou třídy ekvivalence $R$. Tvrzení 3: $k=r$ (pokud $n \geq r$). $k > r:$ tak $K_{r+1} \subseteq G$ a to je spor. $k < r:$ tak lze partitu s $\geq 2$ vrcholy rozdělit na dvě menší partity a přidáme hrany mezi nimi a dostaneme $G'$, který $K_{r+1} \nsubseteq G'$ \& $|E(G')| > |E|$ opět spor. Tvrzení 4: BÚNO: $|P_{1}| \leq |P_{2}| \leq \dots \leq |P_{r}|$. Tvrdíme, že $|P_{1}| \leq |P_{r}| + 1$. Kdyby nějaké dvě partity byly odlišné $\geq 2$. Potom vezmeme půlku přebytečných vrcholů a přehodíme je do předchozí partity. Následně spojíme hranami. Dostanu $G'$ kde $K_{r+1} \nsubseteq G$ a $|E(G')| > |E|$. \textit{Poznámka: $(l+2) l < (l+1)(l+1)$.} Shrnutí: $G$ je úplný $r$-partitní graf, kde všechny partity jsou skoro stejné $\Rightarrow G \cong T(n,r)$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Hypergraf} je dvojice $(V,E)$, kde prvky $E$ \textit{("hyperhrany")} jsou podmnožiny $V$.
@@ -56,15 +56,15 @@
 	Nechť $V = \{1,2,3,\dots,n\}, n \geq 2k$ a $G = (V,E)$ je $k$-uniformní hypergraf jehož každá hyperhrana je interval a každé dvě hyperhrany se protínají. Potom $|E| \leq k$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	BÚNO: $I = \{1,2,3,\dots,k\} \in E$. Označme $I_{j}^{-}:= \{j,j-1,j-2, \dots, j-k+1\}$ a $I_{j}^{+}:= \{j+1,j+2, \dots, j+k\}$. $I$ je protnutí $I_{1}^{-}, I_{2}^{-}, \dots, I_{k-1}^{-}$ \& $I_{1}^{+}, I_{2}^{+}, \dots, I_{k-1}^{+}$. Navíc z každé dvojice $I_{j}^{-},I_{j}^{+}$ nejvýše jeden patří do $E$, protože $I_{j}^{-} \cap I_{j}^{+} = \emptyset$. Tudíž $|E| \leq k$.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Erdös-Ko-Rado]
 	Pro libovolné $k \in \mathbb{N}$ a $n \geq 2k$ platí $f(n,k) = \binom{n-1}{k-1}$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	\textbf{Myšlenka:} $G = (V,E)$ je $k$-uniformní hypergraf na $n$ vrcholech, každé dvě hyperhrany se protínají $\to |E| \leq \binom{n-1}{k-1}$. Ekvivalentně: \textbf{(1)} -- $\frac{|E|}{\binom{n}{k}} \leq \frac{\binom{n-1}{k-1}}{\binom{n}{k}} = \frac{k}{n}$. Lemma: Když každá hyperhrana je interval $\frac{|E|}{n} \leq \frac{k}{n}$ -- \textbf{(2)}. Tyto dva zlomky jsou vlastně pravděpodobnosti. Takže náhodně očíslujeme vrcholy a mám stejnou pravděpodobnost v obou případech. \textbf{Důkaz:} Mějme $n \geq 2k$. Nechť $G= (V,E)$ je $k$-uniformní hypergraf v němž aždé 2 hyperhrany se protínají a $|E|$ je co největší. Chceme dokázat $|E| \leq \binom{n-1}{k-1}$. Nechť $X$ je počet dvojic $(e,\pi)$ t.ž. $e \in E$ a $\pi: V \to \{1,2,\dots,n\}$ taková, že $\pi$ zobrazí $e$ na intervalu. Potom pomocí počítání dvěma způsoby:
 	
 	\begin{enumerate}
@@ -73,7 +73,7 @@
 	\end{enumerate}
 	
 	$|E| \cdot n \cdot k! \cdot (n-k)! \leq n! \cdot k$ a $|E| \leq \frac{k}{n} \binom{n}{k} = \binom{n-1}{k-1}$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Slunečnice (nebo $\Delta$-systém) se středem $S$ a $l$ lístky je $l$-tice množin $L_{1},\dots,L_{l}$ taková, že $\forall i \neq j: L_{i} \cap L_{j} = S$.
@@ -87,9 +87,9 @@
 	$\forall k,l \in \mathbb{R}: s(k,l) < + \infty$
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Indukcí dle $k$. $k=1: s(k,l) = l -1$. $k > 1:$ Nechť $G= (V,E)$ je $k$-uniformní hypergraf neobsahující slunečnici s $l$ lístky. Nechť $D \subseteq E$ je co největší množina po dvou disjunktních hyperhran v $G$. Jistě $|D| \leq l - 1$, jinak máme slunečnici s $|D| \geq l$ lístky. Označme $W := \bigcup_{d \in D} d \subseteq V, |W| = k \cdot |D| \leq k \cdot (l - 1)$. Jistě každá $e \in E$ obsahuje aspoň jeden vrchol $W$. Tedy existuje $x \in W$, který je obsažen v aspoň $\frac{|E|}{|W|} = \frac{|E|}{k \cdot(l-1)}$ hyperhranách z $E$. Označme $E_{x} := \{ e \in E, x \in e\}$ pak $E_{x}^{-} := \{ e \setminus \{x\}, e \in E_{x}\}$ a $G_{x}^{-} := (V,E_{x}^{-})$. $G_{x}^{-}$ je $(k-1)$-uniformní hypergraf, který neobsahuje slunečnici s $l$ lístky: kdyby $e_{1},e_{2}, \dots ,e_{l}$ byla slunečnice v $G_{x}^{-}$, tak $e_{1} \cup \{x\}, e_{2} \cup \{x\}, \dots, e_{l} \cup \{x\}$ je slunečnice v $G$. Tedy dle IP: $|E_{x}^{-}| = s(k-1,l) < + \infty$. Navíc $|E_{x}^{-}| = |E_{x}| \geq \frac{|E|}{k \cdot (l-1)}$, tedy $|E| \leq k \cdot (l-1) \cdot s(k-1,l)$. Tedy $s(k,l) \leq k \cdot (l-1) \cdot s(k-1,l)$.
-\end{dukaz}
+\end{proof}
 
 \begin{pozn}
 	Důkaz nám dává odhad $s(k,l) \leq k!(l-1)^{k}$.
@@ -109,9 +109,9 @@
 	Nechť $G = (V,E)$ je graf s $n \geq 3$ vrcholy, nechť $x,y \in V$ jsou nesousedící vrcholy $G$ takové, že $\deg_{G}(x) + \deg_{G}(y) \geq n$. Nechť $G^{+}:= (V,E\cup\{xy\})$. Potom $G$ je hamiltonovský iff $G^{+}$ je hamiltonovský.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	"$\Rightarrow$" je triviální. "$\Leftarrow$" Označme $e_{0} = \{xy\}$. Nechť $G^{+}$ obsahuje hamiltonovskou kružnici $C$. Pokud $e_{0} \notin C$, tak $C$ je hamiltonovská kružnice v $G$. Předpoklad $e_{0} \in C$ jinak triviálně. Očíslujeme vrcholy a hrany $C$ takto: $x = x_{1}, x_{2}, \dots, x_{n-1}, x_{n} = y$ a $e_{0}, e_{1}, e_{2}, \dots , e_{n}, e_{0}$. Cíl je najít $i \in \{1,2,3, \dots, n-1\}$ tak, že $x$ sousedí s $x_{i+1}$ a $y$ sousedí s $x_{i}$ v grafu $G$. Označme $S_{x} := \{i \in \{1,2,3,\dots,n-1\}, \{xx_{i+1}\} \in E\}$ z toho plyne, že $|S_{x}| = \deg_{G}(x)$ a taky $S_{y} := \{i \in \{1,2,3,\dots,n-1\}, \{yx_{i}\} \in E\}$ pak $|S_{y}| = \deg_{G}(y)$. Tedy $|S_{x}| + |S_{y}| \geq n, |S_{x} \cup S_{y}| \leq |\{1,2,3, \dots, n-1\}| \leq n-1$, tudíž $\exists i \in S_{x} \cap S_{y}$. $(C \setminus \{e_{0},e_{i}\}) \cup \{\{xx_{i+1}\},\{yx_{i}\}\}$ je hamiltonovská kružnice v $G$.
-\end{dukaz}
+\end{proof}
 
 \begin{dusl}[Dirac]
 	Každý graf na $n \geq 3$ vrcholech s min stupněm $\geq \frac{n}{2}$ je hamiltonovský. (Nebo $h(n) < \frac{n}{2}$.)
@@ -229,7 +229,7 @@ $$
 	Nechť $G_{1} =(V_{1},E_{1})$ a $G_{2} = (V_{2},E_{2})$ jsou multigrafy, kde $E_{1} \cap E_{2} = \emptyset$ a $|V_{1} \cap V_{2}| \leq 1$. Nechť $G = (V = V_{1} \cup V_{2}, E = E_{1} \cup E_{2})$. Potom $T_{G}(x,y) = T_{G_{1}}(x,y)T_{G_{2}}(x,y)$.
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Nechť $V_{1} \cap V_{2} = \emptyset$ (situace $|V_{1} \cap V_{2}| = 1$ je obdobná).
 	
 	$T_{G}(x,y) = \sum_{F_{1} \subseteq E_{1}} \sum_{F_{2} \subseteq E_{2}} (x-1)^{r(V,E) - r(V, F_{1} \cup F_{2}} \cdot (y-1)^{n(V,F_{1} \cup F_{2}} =$ \textbf{(1)}. $r(V, F_{1} \cup F_{2}) = r(V,F_{1}) + r(V,F_{2})$ stejně tak i pro $n(G)$.
@@ -245,7 +245,7 @@ $$
 	$$
 	=T_{G_{1}}(x,y) T_{G_{2}}(x,y)
 	$$
-\end{dukaz}
+\end{proof}
 
 \begin{dusl}
 	$e$ je most v $G+(V,E)$, tak $T_{G-e}(x,y) = T_{G/e}(x,y)$.
@@ -269,7 +269,7 @@ $$
 	\end{enumerate}
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	1. Plyne z definice. 2. Volme $e \in E$ potom:
 	
 	$$
@@ -304,7 +304,7 @@ $$
 	\end{array}
 	\right.
 	$$
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Obarvení multigrafu} $G=(V,E)$ pomocí $b$ barev je funkce $f: V \to \{1,2,3, \dots ,b\}$ taková, že žádná hrana $e \in E$ nemá oba konce zbarvené na stejnou barvu. Pokud $G$ obsahuje smyčku, tak $G$ nemá žádné obarvení.
@@ -331,9 +331,9 @@ $$
 	\end{enumerate}
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	1. Triviálně. 2. 1. Plyne z definice. 2. 2. jsou dvě možnosti: Více hran: pak musí být stejné obarvení a to také platí, protože $\chi_{G/e}(z) = 0$ kvůli smyčce. Jen jedna hrana, tak musíme odebrat obarvení, které dají oboum vrcholům stejnou barvu a to je přesně $\chi_{G/e}(z)$.
-\end{dukaz}
+\end{proof}
 
 \begin{tvrz}
 	$\forall$ multigraf $G$:
@@ -343,7 +343,7 @@ $$
 	$$
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Druhou stranu výrazu si označíme jako $PS_{G}(z)$. Pak jsou dva možné postupy.
 	
 	\begin{enumerate}
@@ -372,4 +372,4 @@ $$
 	$$
 	(1) = \sum_{F \subseteq E}(-1)^{F} z^{k(V,F)} = \bar{\chi_{G}}(z)
 	$$
-\end{dukaz}
+\end{proof}

@@ -61,25 +61,25 @@ Nesouvislé grafy mají vrcholovou i hranobvou souvislost 0.
 	$\forall G = (V,E) \forall e \in E: k_{e}(G) -1 \leq k_{e}(G-e) \leq k_{e}(G)$ Po odebrání hrany klesne hranová souvislost maximálně o 1.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 \begin{lemma}
 	$\forall G = (V,E) \ \forall e \in E: k_{v}(G) -1 \leq k_{v}(G-e) \leq k_{v}(G)$ Po odebrání hrany klesne vrcholová souvislost maximálně o 1.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 \begin{dusl}
 	$\forall G=(V,E): k_{v}(G) \leq k_{e}(G)$ Vrcholová souvislost je maximálně stejná jako hranová souvislost.
 \end{dusl}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 Nerovnost může být ostrá. To lze vidět na příkaldu "motýlka". Lze vidět na obrázku \ref{motylek}.
 
@@ -105,9 +105,9 @@ Nerovnost může být ostrá. To lze vidět na příkaldu "motýlka". Lze vidět
 	$\forall G \ \forall t \in \mathbb{N}: k_{e} \geq t \Leftrightarrow$ mezi každými $2$ vrcholy grafu $G$ $\exists$ $\geq t$ hranově disjunktních cest.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 Varianat Fordovy-Fulkersonovy věty platí i pro vrcholovou souvislost. Tyto věty jsou známé také jako Mengerovy věty.
 
@@ -115,9 +115,9 @@ Varianat Fordovy-Fulkersonovy věty platí i pro vrcholovou souvislost. Tyto vě
 	$\forall G \ \forall t \in \mathbb{N}: k_{e}(G) \geq t \Leftrightarrow$ mezi každými $2$ vrcholy grafu $G$ $\exists$ $\geq t$ vrcholově disjunktních cest (mimo $u,v$).
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 Jelikož lze zjistit tok maximální velikost v polynomiálním čase, tak máme algoritmus na zjištení $k_{e}(G), k_{v}(G)$ také v polynomiálním čase.
 
@@ -133,9 +133,9 @@ Pro graf $G=(V,E)$ s $e \in E$ označme $C \div e$ graf vzniklýz $G$ operací \
 	Pro každý graf $G=(V,E)$ a pro každou hranu $e \in E$ platí: $G$ je vrcholově $2$-souvislý $\Leftrightarrow G \div e$ je vrcholově $2$-souvislý.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Ušaté lemma]
 	Graf $G$ je vrcholově $2$-souvislý $\Leftrightarrow G$ lze vytvořit z $K_{3}$ operacemi přidávání a podrozdělování hran. Proč "Ušaté lemma"? Přidání hrany a její podrozdělení odpovídám přidání cesty mezi 2 vrcholy (="přiepení ucha").
@@ -145,6 +145,6 @@ Pro graf $G=(V,E)$ s $e \in E$ označme $C \div e$ graf vzniklýz $G$ operací \
 	$G$ je vrcholově $2$-souvislý $\Leftrightarrow G$ lze vytvořit z cyklu přidá-\newline váním uší, protože přidávání ucha lze symulovat přidáním hrany a jejím podrozdělení.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}

@@ -37,7 +37,7 @@
 	Pro každý souvislý graf $G$, který není ani úplný graf ani lichá kružnice, platí $\chi(G) \leq \Delta (G)$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Nechť $k$ je vrcholová souvislost $G$. Potom zavedeme $\Delta := \Delta (G)$.
 	
 	Pokud $k = 1$, tak existuje artikulace $x$. Graf $G$ rozdělíme na $G_{1}$ a $G_{2}$ podle dané artikulace s tím, že $x$ je v oubou grafech. Z toho pak plyne, že $\deg_{G_{1}}(x) < \Delta$ a $\deg_{G_{2}}(x) < \Delta$. Pak po použití lemma máme $\chi(G_{1}) \leq \Delta \land \chi(G_{2}) \leq \Delta:$ obarvím $G_{1}$ obarvením $f_{1}$ pomocí $\Delta$ barev, stejně i pro $G_{2}$ s $f_{2}$. BŮNO: $f_{1}(x) = f_{2}(x)$, jinak udělám permutaci barev. Pak mám obarvení celého $G$.
@@ -51,7 +51,7 @@
 	\end{enumerate}
 	
 	$k \geq 3: G$ souvislý, není úplný $\Rightarrow G$ obsahuje 2 nesousedící vrcholy $x$ a $y$, které mají společného souseda $z$. $G - x - y$ je souvislý, tedy jeho vrcholy lze uspořádat do posloupnosti $v_{1},v_{2}, \dots, v_{n-2}$ tak, že $v_{n-2} = z$ a každý $v_{i} \in \{v_{1}, \dots, v_{n-3}\}$ má aspoň jednoho souseda mezi $v_{i+1}, \dots, v_{n-2}$. Vrcholy tedy uspořádám $x,y,v_{1},v_{2},\dots,v_{n-2}$ a obarvím $G$ hladově zleva doprava pomocí $\Delta$ barev.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Hranové obarvení} grafu $G = (V,E)$ je funkce $f: E \to \mathbb{Z}$ taková, že pro 2 různé hrany $e, e' \in E$ sdílející vrchol platí $f(e) \neq f(e')$. \textbf{Hranová barevnost} grafu $G$ značená $\chi_{e}(G)$ je nejmenší $k$ takové, že $G$ má hranové obarvení používající $k$ barev.
@@ -155,13 +155,13 @@
 	\end{enumerate}
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	$3 \Rightarrow 2$ triviálně.
 	
 	$2 \Rightarrow 1$ Nechť $G' \leq_{i} G$ a chceme $\omega(G') = \chi(G')$. Obarvení $G'$ pomocí $\omega(G')$ barev najdeme takto: $N_{1}$ je rozlehlá NzMna v $G_{1}$ a té dáme barvu 1. Následně $N_{2} :=$ NzMna v $G' - N_{1}$ barvu 2 a tak dále opakujeme dokud nemáme obarvené celé $G'$. $\omega(G' - N_{1}) = \omega(G') -1$, $\omega(G' - (N_{1} \cup N_{2})) = \omega(G') -2$ a tak dále. Proto použijeme právě $\omega(G')$ barev. Hotovo.
 	
 	$1 \Rightarrow 3$ Nechť $G$ je perfektní graf, mějme $H \leq_{i} G, \forall x \in V(H)$. Víme $\omega(H) = \chi(H)$. Vrcholy $H$ barvy $f(x)$ jsou rozlehlá nezávislá množina. Každá největší klika musí mít právě jeden vrchol s danou barvou.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Nechť $G= (V,E)$ je graf s vrcholem $x$. Nechť $k \in \mathbb{N}$. Potom \textbf{$k$-násobné nafouknutí} vrcholu $x$, která vytvoří $G^{+}$ takto:
@@ -178,7 +178,7 @@
 \end{lemma}
 
 
-\begin{dukaz}
+\begin{proof}
 	Dokážeme, že $\forall H \leq_{i} G^{+}$ má rozlehlou nezávislou množinu. Pak ještě použijeme Lemma 1 a máme hotovo. Volme $H \leq_{i} G^{+}:$ Pokud $H$ obsahuje nejvýš jeden z $x_{1}, \dots, x_{k}$ tak $H \leq_{i} G$, takže $H$ má rozlehlou NzMnu dle Lemma 1. Předpokládejme, že $H$ obsahuje aspoň dva vrcholy z $x_{1}, \dots, x_{k}$. Potom $H$ je nfouknutí nějakého $H^{-} \leq_{i} G, x \in V(H^{-})$. Dle Lemma 1, $H^{-}$ obsahuje rozlehlou NzMnu $N^{-}$ obsahující $x$. BÚNO: $x_{1} \in V(H)$. Tvrdím: $N := (N^{-} \setminus \{x\}) \cup \{x_{1}\}$ je rozlehlá NzMna v $H$. Jistě $N$ je nezávislá. Nechť $K$ je klika $H$ velikosti $\omega(H)$. Pak jsou dvě možnosti:
 	
 	\begin{enumerate}
@@ -187,7 +187,7 @@
 	\end{enumerate}
 	
 	Tedy $N$ he rozlehlá NzMna $H$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Značení: $H <_{i} G := H \leq_{i} G \text{ \& } H \ncong G$ - $H$ je vlastní indukovaný podgraf $G$.
@@ -197,9 +197,9 @@
 	$G$ je perfektní iff $\bar{G}$ je perfektní.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Sporem: $\exists$ perfektní graf $G = (V,E)$. ale $\bar{G}$ není perfektní. Volme $G$ tak, že $|V|$ je co nejmenší. Tedy $\forall H <_{i} G$ platí, že $H$ i $\bar{H}$ jsou perfektní. Jinak to je menší graf co do velikosti $|V|$. Protože $\bar{G}$ není perfektní, tak dle Lemma 1 $\exists G' \leq_{i} \bar{G}: G'$ nemá rozlehlou NzMnu. Tvrdím, že $G' \cong \bar{G}$, kdyby $G' <_{i} \bar{G}$ tak $G'$ není perfektní, ale $\bar{G'} <_{i} G$ tedy $\bar{G'}$ je perfektní, spor s minimalitou $G$. Tedy $\bar{G}$ nemá rozlehlou NzMnu. Tj. pro každou NzMnu $\bar{N}$ v $\bar{G}$ existuje v $\bar{G}$ klika velikosti $\omega(G)$ disjunktní s $\bar{N}$. Tedy pro každou kliku $K$ v $G$ existuje v $G$ NzMna velikosti $\alpha(G)$ disjunktní s $K$. Nechť $Q_{1},Q_{2}, \dots, Q_{t}$ je seznam všech klik v $G$. Nechť $N_{i}$ je NzMna $G$ velikosti $\alpha(G)$ disjunktní s $Q_{i}$, pro $i = 1,\dots, t$. Pro každý vrcholy $x \in V$ nechť $f(x)$ je počet indexů $i \in \{1, \dots, t\}$ takových, že $x \in N_{i}$. $G^{+}$ vznikne z $G$ tak, že se každý vrchol $x$ nafoukne $f(x)$-krát. Vrcholy $x \in V$ s $f(x) = 0$ se smažou. Dle Lemma 2 $G^{+}$ je stále perfektní. $|V(G^{+}| = t \alpha(G) = t \alpha(G^{+})$. Víme: $\chi(G^{+}) \alpha(G^{+}) \geq |V(G^{+})| = t \alpha(G^{+})$. Tedy $\chi(G^{+}) \geq t$ -- \textbf{(1)}. Ale $\chi(G^{+}) = \omega(G^{+})$ -- \textbf{(2)}. Nechť $Q^{+}$ je největší klika v $G^{+}$, ta musela vzniknout nafouknutím nějaké kliky $Q_{j}$ v $G$. \textbf{(3)} -- $|Q^{+}| = \sum_{x \in Q_{j}} f(x) = \sum_{x \in Q_{j}} \sum_{i=1}^{t}|N_{i} \cap \{x\}| = \sum_{i=1}^{t}\sum_{x \in Q_{j}} |N_{i} \cap \{x\}| = \sum_{i=1}^{t} |Q_{j} \cap N_{i} \leq t -1$. Protože $Q_{j} \cap N_{j} = \emptyset$ dle definice $N_{j}$ a dohromady (1), (2) a (3) je spor.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}[Připomenutí]
 	Částečné uspořádaná množina $(X, \leq)$, kde $\leq$ je reflexivní, slabě antisymetrická a tranzitivní. \textbf{Řetězec:} podmnožina $X$, v níž každé dva prvky jsou porovnatelné. \textbf{Antiřetězec:} podmnožina $X$, v níž žádné dva prvky nejsou porovnatelné. Také je dobré znát \textbf{Hasseho diagram}.
@@ -222,9 +222,9 @@
 	Pokud v částečně uspořádané množině $(X,\leq)$ má každý antiřetězec velikost $l$, tak $(X, \leq)$ se dá rozdělit na $\leq l$ řetězců.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Každý $G_{\leq}$ je perfektní $\Rightarrow \bar{G_{\leq}}$ je perfektní. $\omega(\bar{G_{\leq}}) \leq l$ \& $\chi(\bar{G_{\leq}}) \leq l \Rightarrow l$ Nzmna $\to l$ klik $\Rightarrow$ řetězce v $(X, \leq)$.
-\end{dukaz}
+\end{proof}
 
 \begin{pozor}
 	Bipartitní grafy jsou perfektní.
@@ -256,11 +256,11 @@ Připomenutí: Konig-Egerváryho věta: $G$ bipartitní: $\text{m}(G) = \text{vp
 	Graf $G= (V,E)$ je chordální iff pro každé dva nesousední vrcholy $x,y$ existuje $xy$-řez, který je klika v $G$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	"$\Leftarrow$" Nechť $G$ není chordální. Chceme dva nesousední vrcholy $x,y$, t.ž. žádný $xy$-řez není klika. Nechť $G$ obsahuje indukovanou kružnici $C$ délky $\geq 4$, nechť $x,y$ jsou nesousedící vrcholy na $C$. Vždy musím odebrat aspoň 2 vrcholy z cyklu. Ale mezi nimi není hrana a tudíž nemůže se jednat o kliku. S tím, že odstraněné vrcholy musí přerušit dvě cesty $P_{1}, P_{2}$. Kde $P_{1}$ a $P_{2}$ je rozdělení $C$ dle $x,y$.
 	
 	"$\Rightarrow$" Nechť $G$ je chordální, nechť $x,y$ jsou dva nesousedící vrcholy. Nechť $R$ je $xy$-řez minimální vzhledem k inkluzi. Ukážeme, že $R$ je klika v $G$. Sporem: nechť existují nesousedící vrcholy $u,v \in R$. Nechť $G_{x}, G_{y}$ jsou komponenty $G-R$ obsahující $x$ respektive $y$. Pozorování: $u$ i $v$ má aspoň jednoho souseda v $G_{x}$ i v $G_{y}$ z minimality řezu. Nechť $P_{x}$ je co nejkratší csta z $u$ do $v$ jejichž vnitřní vrcholy patří do $G_{x}$. Podobně $P_{y}$. $P_{x} \cup P_{y}$ je indukovaná kružnice délky $\geq 4$, spor.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Vrchol $x$ grafu $G$ je \textbf{simpliciální}, pokud sousedi $x$ tvoří kliku v $G$.
@@ -274,13 +274,13 @@ Připomenutí: Konig-Egerváryho věta: $G$ bipartitní: $\text{m}(G) = \text{vp
 	Každý chordální graf (s aspoň jedním vrcholem) má simpliciální vrchol.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Dokážeme: $\forall$ chordální graf $G = (V,E)$ je buď úplný nebo má dva nesousední simpliciální vrcholy. Indukcí dle $|V|$.
 	
 	$|V|=1$ $G$ je úplný.
 	
 	$|V|>1$ Pokud $G$ není úplný (jinak triviálně platí). Volme $x,y$ nesousedící vrcholy v $G$. Nechť $R$ je $xy$-řez tvořící kliky v $G$ (Lemma). $G_{x}, G_{y}$ jsou komponenty $G-R$ obsahující $x$ popřípadě $y$. $G_{x}^{+},G_{y}^{+}$ jsou podgrafy $G$ indukované $G_{x} \cup R$ respektive $G_{y} \cup R$. IP: $G_{x}^{+}$ je buď úplný, nebo obsahuje dva nesousedící simpliciální vrcholy. V obou případech to znamená, že $G_{x}^{+}$ obsahuje simpliciální vrchol $s_{x}$ nepatřící do $R$. Obdobně $s_{y}$ je simpliciální vrchol v $G_{y}^{+}$ nepatřící do $R$. V $G$ mají $s_{x}$ i $s_{y}$ stejné sousedy jako v $G_{x}^{+}$ resp. $G_{y}^{+}$, tedy $s_{x}$ a $s_{y}$ jsou dva nesousedící simpliciální vrcholy v $G$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Perfektní eliminační schéma} (\textit{PES}) grafu $G$ je uspořádání vrcholů $G$ do posloupnosti $v_{1}, v_{2}, v_{3}, \dots, v_{n}$ takové, že $\forall i = 1, \dots ,n$ sousedi $v_{i}$ mezi $\{v_{1}, \dots, v_{i-1}\}$ tvoří kliky v $G$. (Ekvivalentně: $v_{i}$ je simpliciální v indukovaném podgrafu $G$ $\{v_{1}, \dots, v_{i}\}$.)
@@ -296,9 +296,9 @@ Připomenutí: Konig-Egerváryho věta: $G$ bipartitní: $\text{m}(G) = \text{vp
 	\end{enumerate}
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	$1 \Rightarrow 2: \forall H \leq_{i} G$ je chordální $\Rightarrow$ z Lemma $H$ má simpliciální vrchol. $2 \Rightarrow 3:$ Vezmu simpliciální vrchol v $G$ dám ho doprava v PES. Odeberu z $G$ a takhle pořád opakuji. $3 \Rightarrow 1: G$ s PES, pak každá $C$ s $|V| \geq 4$ musí mít chordu. Podívám se na poslední vrchol v PES. Pak z vlastnosti PES musí mít předchozí vrcholy chordu.
-\end{dukaz}
+\end{proof}
 
 \begin{dusl}
 	Důkaz $2 \Rightarrow 3$ říká, že v polynomiálním čase lze pro dané $G$ najít PES nebo zjistit, že neexistuje.
@@ -308,6 +308,6 @@ Připomenutí: Konig-Egerváryho věta: $G$ bipartitní: $\text{m}(G) = \text{vp
 	Každý chordální graf je perfektní. Pro chordální graf $G$ lze v polynomiálním čase zjistit $\omega(G) = \chi(G)$, spolu s nevětší klikou a optimálním obarvením.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Už víme, že lze vytvořit PES. Pro každý vrchol v PES platí, že jeho předchozí sousedi tvoří kliku a s daným vrcholem tvoří kliku o jedna větší. Pak již stačí najít vrchol s největším počtem předchozích vrcholů (značeno $k$) a potom $\omega(G) = k+1$. Pro spor vezmu největší kliku z algoritmu. Kdyby nebyl největší, tak lze přidat další, ale ten musí být sousedem a tudíž ho algoritmus musel najít. Pro obarvení budu postupovat zleva a danému vrcholu dám nejmenší možnou barvu. Zaznačím si největší barvu a novou barvu přidám jakmile vrchol bude mít v předchozích vrcholech právě tolik sousedů. Tím pádem nikdy nepřekročím velikost maximální kliky a tedy $\chi(G) = \omega(G)$. Najdu tedy obarvení, které je rovno klice a tedy je i perfektní.
-\end{dukaz}
+\end{proof}

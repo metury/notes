@@ -8,15 +8,15 @@ Faktoriál: $n \in \mathbb{N}: n!$. Poskládání $n$ prvků.
 	$\forall n \in \mathbb{N}: n^{n/2} \leq n! \leq n^n$
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Horní odhad se dá napsat jako: $n! = \prod_{i=1}^{n}i \leq \prod_{i=1}^{n} n = n^{n}$. Dolní odhad použijeme, že $i(n+1 - i) \geq n$ (to platí pro $i=1$ a $i=n$). Potom pro $2 \leq i \leq \lceil \frac{n}{2} \rceil$ máme $i(n+1-i) \geq 2 \frac{n}{2} = n$. Obdobný odhad je i pro $\lceil \frac{n}{2} \rceil \leq i \leq n$. Následně $(n!)^2 = n1 \cdot n2 \dots 2(n-1) \cdot 1n \geq n^{n}$. Potom platí, že $n! \geq n^{n/2}$.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}
 	$\forall n \in \mathbb{N}: e (\frac{n}{e})^n \leq n! \leq en(\frac{n}{e})^n$
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Horní odhad: Pro $n = 1$ platí $(1 = 1! \leq e 1 \left( \frac{1}{e} \right)^{1} = 1)$. Nechť $n \geq 2$.
 	
 	$$
@@ -44,15 +44,15 @@ Faktoriál: $n \in \mathbb{N}: n!$. Poskládání $n$ prvků.
 	$$
 	\frac{1}{e} \left( \frac{n}{n-1} \right)^{n-1} = \frac{1}{e} \left( 1 + \frac{1}{n-1} \right)^{n-1} \leq \frac{1}{e} \left( e^{\frac{1}{n-1}} \right)^{n-1}
 	$$
-\end{dukaz}
+\end{proof}
 
 \begin{lemma}
 	$1+x \leq e^x$
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	$f(x) := e^x - (x+1)$ chceme ukázat, že $f(x) \geq 0$ pro $\forall x \in \mathbb{R}$. $f'(x) = e^x - 1 \Rightarrow (f'(x) = 0 \Leftrightarrow x = 0)$. $f''(x) = e^x$. $f''(x) = 1 > 0 \Rightarrow$ v bodě $x = 0$ je globální minimum pro $f \Rightarrow f(x) \geq 0$ pro $\forall x \in \mathbb{R}$.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Stirlingův vzorec]
 	$n! \approx n \sqrt{2\pi n} (\frac{n}{e})^n$ $\lim_{n \to \infty} \frac{n!}{\sqrt{2\pi n}(\frac{n}{e})^n} = 1$
@@ -73,9 +73,9 @@ $$
 	\end{enumerate}	
 \end{pozor}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 \subsection{Binomická věta}
 
@@ -89,9 +89,9 @@ $$
 
 Užití Stirlingového vzorce: $\binom{2m}{m} \approx \frac{2^{2m}}{\sqrt{\pi m}}$. $\forall k,n \in \mathbb{N}: n > k, \binom{n}{k} \leq (\frac{en}{k})^k$.
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 \subsection{Aplikace (náhodné procházky)}
 

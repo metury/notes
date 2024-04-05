@@ -12,13 +12,13 @@
 	Pro každou hranu $e = \{xy\} \in E$ existuje vrchol $z \in V \setminus \{x,y\}$ takový, že $G - \{x,y,z\}$ je nesouvislý, navíc každý z vrcholů $\{x,y,z\}$ má aspoň jednoho souseda v každé komponentě $G-\{x,y,z\}$.
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Víme, že $G.e$ není 3-souvislý, navíc $|V(G.e)| \geq 4$ jinak je to $K_{4}$, tedy existuje v $G.e$ vrcholový řez $R$ velikosti nejvýše 2. Jistě $v_{e} \in R$ jinak by $R$ byl řez v $G$> $R \neq \{v_{e}\}$ jinak by $\{x,y\}$ byl řez v $G$. Tedy $R = \{v_{e},z\}$ a $\{x,y,z\}$ je řez v $G$. Kdyby např. $x$ neměl žádného souseda v nějaké komponentě $C$ grafu $G - \{x,y,z\}$, tak $G - \{y,z\}$ je nesouvislý, spor s tím, že $G$ má být 3-souvislý.
-\end{dukaz}
+\end{proof}
 
-\begin{dukaz}
+\begin{proof}
 	Pro spor nechť $G = (V,E)$ je protipříklad. Volme $e = \{x,y\} \in E$ a vrchol $z \in V$, komponentu $C$ grafu $G - \{x,y,z\}$ tak, aby $C$ mělo co nejméně vrcholů. Nechť $w$ je vrchol $C$ sousedící se $z$. Pro hranu $f = \{z,w\}$ použiji pomocné tvrzení: $\exists v \in V \setminus \{z,w\}: G -\{z,w,v\}$ je nesouvislý a každá jeho komponenta obsahuje vrchol sousedící s $w$. Nechť $D$ je komponenta $G - \{z,v,w\}$ neobsahující $x$ ani $y$. Tedy $D \subseteq C \setminus \{w\}: D$ obsahuje souseda $w$, ten musí být uvnitř $C$, žádná cesta uvnitř $D$ neobsahuje $x,y,z,w$ tedy $D$ je uvnitř jediné komponenty $G -\{x,y,z\}$, tedy $D$ je uvnitř $C$, tedy i uvnitř $C \setminus \{w\}$. To je spor s minimalitou $C$.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Tutteova charakterizace 3-souvislých grafů]
 	Graf $G = (V,E)$ je 3-souvislý $\Leftrightarrow \exists$ posloupnost grafů $G_{0},G_{1},\dots ,G_{k}$, kde:
@@ -65,9 +65,9 @@
 	$H = (V_{H}, E_{H})$ je graf, $V_{H} = \{x_{1}, x_{2}, \dots, x_{k}\}, G=(V_{G},E_{G})$ je graf. Potom $H \leq_{m} G$ iff $G$ obsahuje $k$ disjunktních souvislých neprázdných podgrafů $B_{1}, B_{2}, \dots , B_{k}$ takových, že pokud $\{x_{i}, x_{j}\} \in E_{H}$, tak $G$ obsahuje aspoň jednu hranu spojující vrchol $B_{I}$ s vrcholem $B_{j}$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Danou vlastnost si označíme jako vlastnost p. "$\Leftarrow$" Zkontrahuji všechny hrany v $B_{i}$. Nadbytečné hrany a vrcholy odstraním. "$\Rightarrow$" Nechť $H \leq_{M} G$, tj. existuje posloupnost grafů $G_{0}, G_{1}, \dots ,G_{p}$, kde $H \cong G_{0}, G_{p} \cong G$ a pro $\forall i = 1, \dots, p: G_{i-1}$ vznikne z $G_{i}$ smazáním hrany nebo vrcholu anebo kontrakcí hrany. Dokážeme indukcí podle $i = 0, \dots, p$, že $G_{i}$ má vlastnost p. $i = 0: \forall j = 1, \dots ,k: \{x_{j}\} = B_{j}$. $i > 0$ předpokládejme $G_{i-1}$ splňuje vlastnost p. Pak přidáním vrcholu nebo hrany - nic neděláme, zůstávají stejné. Dekontrakce hrany. Pokud není v $B_{j}$ tak hotovo (zůstane stejné). Pokud ale je v $B_{j}$ tak oba nové vrcholy přidáme do $B_{j}$ a ostatní stejné.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Pro uspořádání $\leq$ a množinu grafů $F = \{F_{1}, F_{2}, \dots\}$ označím $\mathcal{F}\text{orb}_{\leq}(F) := \{G \text{ graf}; \forall H \in F: H \nleq G\}$. (Plyne ze slova Forbidden, nebo-li zakázané.)

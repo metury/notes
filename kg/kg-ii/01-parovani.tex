@@ -44,7 +44,7 @@
 	Nechť $M$ je párování v $G$. Potom $M$ je největší párování v $G \Leftrightarrow$ v $G$ neexistuje volná střídající se cesta pro $M$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	$\Rightarrow$ Pokud v $G$ existuje VSC pak lze tyto hrany přehodit. Potom je to spor s tím, že je největší. $\Leftarrow$ Nechť $M$ není největší potom existuje $N$ větší párování než $M$. Uvažme graf s hranami $M \cup N$. Každá komponenta grafu je buď:
 	
 	\begin{enumerate}
@@ -54,7 +54,7 @@
 	\end{enumerate}
 	
 	Protože $|N| > |M|$ v $M \cup N$ musí být komponenta $K$, která má víc hran z $N$ než z $M$. $K$ je cesta liché délky, která začíná a končí hranou z $N$, tedy $K$ je VSC pro $M$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Kytka} v grafu $G$ a párování $M$ je podgraf tvořený \textbf{stonkem} $S$ a \textbf{květem} $K$, kde $S$ je cesta sudé délky mezi dvěma vrcholy $x$ a $y$, kde $x$ je volný a $y \in K$, navíc na $S$ se střídají párovací a nepárovací hrany. $K$ je lichá kružnice, která neobsahuje žádný vrchol z $S$ a střídají se na ni párovací a nepárovací hrany (u $y$ má dvě nepárovací hrany).
@@ -174,7 +174,7 @@ Nebo-li: \textit{$M$ má VSC v $G \Leftrightarrow M.K$ má VSC v $G.K$}. Navíc 
 	Pro každý $G=(V,E)$ platí $G$ má perfektní párování $\Leftrightarrow \forall S \subseteq V: \text{odd}(G-S) \leq |S|$. Druhá část se nazývá \textit{Tutteova podmínka}.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	$\Rightarrow$ Nechť $G$ má perfektní párování $M$. Pro spor, nechť $\exists S \subseteq V: \text{odd}(G-S) >|S|$. Potom ale z každé liché komponenty $G-S$ vede aspoň jedna hrana z $M$ do $S$, tudíž $\text{odd}(G-S) \leq |S|$ a to je spor. $\Leftarrow$ Nechť $G$ splňuje Tutteovu podmínku. Pozorování: $\text{odd}(G) = 0$, jinak spor $S = \emptyset$. Chci dokázat, že $G$ má perfektní párování a to pomocí indukce podle $|\binom{V}{2} \setminus E|$.
 	
 	Pro $|\binom{V}{2} \setminus E| = 0$: $G$ je úplný graf, navíc $\text{odd}(G) = 0$. Tudíž zjevně má perfektní párování. Pro $|\binom{V}{2} \setminus E| > 0: S:= \{x \in V: \deg (x) = |V|-1\}$. Rozliším dva případy:
@@ -187,7 +187,7 @@ Nebo-li: \textit{$M$ má VSC v $G \Leftrightarrow M.K$ má VSC v $G.K$}. Navíc 
 	Pozorování $G_{1}, G_{2}$ splňují Tutteovu podmínku. Pak z indukčního předpokladu $G_{1}$ má perfektní párování $M_{1}$ a $G_{2}$ má $M_{2}$. Pokud $M_{1}$ neobsahuje hranu $\{xy\}$, tak $M_{1}$ je perfektní párování v $G$. Tak je to hotové.
 	
 	Pokud ale $\{xy\} \in M_{1}$ tak podobně předpokládám, že $\{zw\} \in M_{2}$. Uvažme graf $H = (V, M_{1} \cup M_{2})$: každá komponenta $H$ je buď hrana patřící $M_{1} \cap M_{2}$, nebo sudá kružnice na níž se střídají hrany z $M_{1}$ a $M_{2}$. V každé komponentě $H$ neobsahující hranu $\{xy\}$ můžu vrcholy spárovat pomocí hran $M_{1}$. Nechť $C$ je komponenta $H$ obsahující $\{xy\}$. Pokud $C$ neobsahuje $\{zw\}$, vrcholy spáruji pomocí $M_{2}$, hotovo. Ve zbylém případu v $C$ použijeme jednu z hran $\{xy\}, \{zw\}$ a zbytek lze spárovat pomocí $M_{1} \setminus \{xy\} \text{ a } M_{2} \setminus \{zw\}$. Tedy $G$ má perfektní párování.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Graf je \textbf{$d$-regulární}, pokud všechny jeho vrcholy mají stupeň $d$.
@@ -201,14 +201,14 @@ Nebo-li: \textit{$M$ má VSC v $G \Leftrightarrow M.K$ má VSC v $G.K$}. Navíc 
 	Nechť $G = (V,E)$ je graf, jehož každý vrchol má lichý stupeň, nechť $A \subseteq V$ je množina liché velikosti. Potom $G$ obsahuje lichý počet hran z $A$ do $V \setminus A$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	$S = 2k + \text{ ven}$ je součet stupňů v $A$. Ten musí být lichý. $2k$ je pro každou hranu, která má oba vrcholy v $A$. Tudíž \textit{ven} musí být liché.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Petersen]
 	Každý 3-regulární a 2-souvislý graf má perfektní párování.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Nechť $G = (V,E)$ je 3-regulární a 2-souvislý graf. Tvrdíme: $\forall S \subseteq V: \text{ odd}(G-S) \leq |S|$. Pro $S = \emptyset$ Tutteova podmínka platí: $|V|$ je sudá (z principu sudosti grafů) a taky souvislý $\Rightarrow \text{ odd}(G)=0$. $S \neq \emptyset, l := \text{ odd}(G-S)$ nechť $Q_{1},\dots,Q_{l}$ jsou liché komponenty $G-S$. Nechť $p$ je počet hran mezi $S$ a $Q_{1} \cap \dots \cap Q_{l}$. Pozorování: $p \leq 3|S|$ - plyne z toho, že je 3-regulární. Pozorování: z každé $Q_{i}$ vedou aspoň 2 hrany do $S$ to plyne z toho, že je $G$ 2-souvislý, jinak by existovala artikulace. Pozorování: z každé $Q_{i}$ vedou aspoň 3 hrany do $S$. To plyne z lemma. $\Rightarrow p \geq 3l \Rightarrow l \leq |S|$. A ještš použít Tutteovu větu.
-\end{dukaz}
+\end{proof}

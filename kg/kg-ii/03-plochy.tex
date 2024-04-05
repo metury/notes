@@ -109,10 +109,10 @@
 	Nechť $\mathcal{G}$ je buňkové nakreslení grafu $G=(V,E)$ na ploše $\Gamma$ a označme $h(\mathcal{G}) = |V|, e(\mathcal{G}) = |E|, f(\mathcal{G})=\text{\# stěn }\mathcal{G}$. Potom $h(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G}) = \chi(\Gamma)$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Předpokládáme, že $\Gamma \cong \Sigma_{g}$ (případně $\Gamma \cong \Pi_{g}$ je podobný). Indukcí podle $g$.
 	- $g=0:$ Eulerova formule pro rovinné grafy. Hotovo. $g>0:$ Zafixujeme si ucho reprezentované kružnicemi $u,u'$. Nechť $e_{1},e_{2},\dots,e_{k}$ jsou hrany křížící $u,u'$ v pořadí daným orientací $u,u'$ ($e_{1},e_{2}, \dots, e_{k}$ nejsou nutně různé). Jistě $k \geq 1$, jinak by nakreslení nebylo buňkové. Označme $\text{LS}(\mathcal{G}) = n(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G})$. Nechť $\mathcal{G}_{1}$ vznikne z $\mathcal{G}$ tak, že se na každou $e_{i}$ přidají dělící vrcholy $x_{i}$ a $y_{i}$, těsně k $u$ a $u'$. $\text{LS}(\mathcal{G}_{1}) = \text{LS}(\mathcal{G})$. Nechť $\mathcal{G}_{2}$ vznikne z $\mathcal{G}_{1}$ tak, že pro $\forall i = 1, \dots , k$ přidám cestu délky 3 z $x_{i}$ do $x_{i+1}$ a z $y_{i}$ do $y_{i+1}$ a $x_{k}$ do $x_{i}$ a $y_{k}$ do $y_{i}$, cesty jsou těsně u $u$ a $u'$. $\text{LS}(\mathcal{G}_{2}) = \text{LS}(\mathcal{G}_{1})$. $\mathcal{G}_{3}$ nakreslení na $\Sigma_{g-1}$ vzniklé z $\mathcal{G}_{2}$ odstraněním $u,u'$ a všech hran, které ho kříží. $n(\mathcal{G}_{2}) = n(\mathcal{G}_{3}), e(\mathcal{G}_{2}) - k = e(\mathcal{G}_{3}), f(\mathcal{G}_{2}) = f(\mathcal{G}_{3}) - 2 + k$. $\text{LS}(\mathcal{G}_{2}) = \text{LS}(\mathcal{G}_{3}) - 2 =^{IP} \chi(\Sigma_{g-1}) - 2 = \chi(\Sigma_{g})$.
-\end{dukaz}
+\end{proof}
 
 \begin{fakt}
 	Pro nebuňkové nakreslení $\mathcal{G}$ platí: $h(\mathcal{G}) - e(\mathcal{G}) + f(\mathcal{G}) > \chi(\Gamma)$.
@@ -127,9 +127,9 @@
 	\end{enumerate}
 \end{dusl}
 
-\begin{dukaz}
+\begin{proof}
 	BŮNO $\mathcal{G}$ je buňkové, každá stěna je incidentní s aspoň 3mi hranami, každá hrana je incidentní s nejvýš dvěma stěnami. Tedy $3 f(\mathcal{G}) \leq$ počet incidencí "hrana-stěna": $\leq 2 e(\mathcal{G}) \Rightarrow f(\mathcal{G}) \leq \frac{2}{3} e(\mathcal{G})$. Tedy: $\chi(\Gamma) \leq |V| - \frac{1}{3}|E|$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Pro plochu $\Gamma$ označme:
@@ -143,7 +143,7 @@
 	Nechť $\Gamma$ je plocha, $\Gamma \ncong \Sigma_{0}$. Potom každý graf, který má nakreslení na $\Gamma$ obsahuje vrchol stupně $\leq H_{\Gamma}$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	$\Gamma \cong \Pi_{1}:$ průměrný stupeň nakreslení $\mathcal{G}$ na $\Gamma$ je $\leq 6 - \frac{6}{n(\mathcal{G})} < 6 \Rightarrow \exists$ vrchol stupně $\leq 5 = H_{\Pi_{1}}$. $\Gamma \cong \Pi_{2}$ nebo $\Gamma \cong \Sigma_{1}:$ průměrný stupeň $\leq 6$. Hotovo. $\chi(\Gamma) < 0:$ Mějme nakreslení $\mathcal{G}$ na $\Gamma$, uvažme pro minimální stupeň $\delta$ nakreslení $\mathcal{G}$ dva odhady.
 	
 	\begin{enumerate}
@@ -152,7 +152,7 @@
 	\end{enumerate}
 	
 	tedy $\delta \leq \min \{6 - \frac{6 \chi(\Gamma)}{n(\mathcal{G})}, n(\mathcal{G}) -1\}$. Budeme zkoumat $\max_{n \in \mathbb{N}}(\min \{6 - \frac{6 \chi(\Gamma)}{n(\mathcal{G})}, n(\mathcal{G}) -1\} \leq \lfloor \delta_{0} \rfloor)$. Hledáme $n_{0}: 6 - \frac{6 \chi(\Gamma)}{n_{0}} = n_{0} -1 \Leftrightarrow 6n_{0} - 6\chi(\Gamma) = n_{0}^{2} - n_{0} \Leftrightarrow n_{0}^{2} - 7n_{0} + 6\chi(\Gamma) = 0$. $n_{0} = \frac{7+\sqrt{49-24\chi(\Gamma)}}{2}$. $\delta_{0} = n_{0} - 1 = \frac{5+\sqrt{49-24\chi(\Gamma)}}{2}$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Graf $G=(V,E)$ je \textbf{$d$-degenerovaný}, pokud každý jeho podgraf obsahuje vrchol stupně $\leq d$.

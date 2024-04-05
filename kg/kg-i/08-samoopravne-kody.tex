@@ -83,17 +83,17 @@ Kódy $C, C'$ jsou ekvivalentní, pokud se liší jen pořadím pozic. $\exists 
 	Je-li $C$ kód se vzdáleností $2t+1$, pak $\forall X,X' \in C: B(X,t) \cap B(X',t) = \emptyset$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Sporem - $\exists z \in B(x, t) \cap B(x', t) \implies d(x, x') \leq d(x,z) + d(x', z) \leq t+t = 2t$, kde $d(x, x')$ je $\geq 2t+1$, takze celkove je $2t+1 \leq 2t$.
-\end{dukaz}
+\end{proof}
 
 \begin{veta}[Hammingův odhad]
 	$\forall \text{ kód } C$ s parametrama $(n,k,d)_q$ plati, že $|C| \leq \frac{q^n}{V(t)}$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	$d = 2t +1 \implies$ koule okolo kódovych slov s poloměrem $t$ jsou disjunktní. $\implies |C| \cdot |V(t)| \leq |\Sigma^n| \implies |C| \leq \frac{|\Sigma^n|}{|V(t)|} = \frac{|q^n|}{|V(t)|}$.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Perfektní kód} = kód s parametry $(n,k, 2t+1)_q$ a s $|C| = \frac{q^n}{V(t)}$.
@@ -106,9 +106,9 @@ Opakovací kód s $q=2$ a lichou delkou.
 	$\forall n,q,d \in \mathbb{N}: \exists \text{ kód } C$ s parametry $(n,k,d)_q$, kde $|C| \geq \frac{q^n}{V(d-1)}$.
 \end{veta}
 
-\begin{dukaz}
+\begin{proof}
 	Stačí iterativně odebírat slova z $\Sigma^n$ spolu se slovy v Hammingové vzdálenosti $\leq d-1$. Proces skončí po $\geq \frac{q^n}{V(d-1)}$ krocích, protože odebírané koule jsou nanejvýš disjunktní.
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	\textbf{Linearní kódy} - jako abecedu použít konečné těleso $\mathbb{K} = \Sigma^n$. Podprostor vektorového prostoru $\mathbb{K}^n$ s parametry $n,k,d,q$ značíme $[n,k,d]_q$.
@@ -191,9 +191,9 @@ kde šířka je $r$ a výška $n-r$, protože pak $M^{\bot} M^{\top} = -B^{\top}
 	Zobrazení $S$ je prosté na $B(0,t)$ kde $t=\lfloor \frac{d-1}{2} \rfloor$.
 \end{lemma}
 
-\begin{dukaz}
+\begin{proof}
 	Empty.
-\end{dukaz}
+\end{proof}
 
 Podle lemma tedy k $S \restriction B(0,t)$ existuje inverzní zobrazení $S^{-1}: S(B(0,t)) \to B(0,t)$. $S^{-1}$ není lineární, ale jde popsat tabulkou s $q^{n-k}$ prvky z $B(0,t)$ a v této tabulce je pro každý syndrom slova uloženo nějaké slovo s minimální vahou a s daným syndromem.
 
@@ -214,9 +214,9 @@ Pro přijaté slovo $y \in \mathbb{F}_{q}^{n}$ spočítat $x = y - S^{-1}(M^{\bo
 	Vzdálenost $d$ kódu $C$ = minimální počet lineárně závislých sloupců kontrolní matice $M^{\bot}$.
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Víme, že $d$ = minimální počet nenulových symbolů v nenulovém slově $x$ z $C$. $x \in C \Leftrightarrow M^{\bot}x = 0$ tedy sliupce $M^{\bot}$ vybrané nenulovými složkami $x$ jsou lineárně závislé.
-\end{dukaz}
+\end{proof}
 
 \section{Hammingovy kódy}
 

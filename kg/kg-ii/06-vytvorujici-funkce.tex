@@ -74,7 +74,7 @@ $$
 	Pokud $\mathbb{R}[|x|] \ni A(x) = a_{0} + a_{1} x + a_{2} x^{2} + \dots$ má $A^{-1}(x)$ v tom případě je $A^{-1}(x)$ jednoznačná.
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	$a_{0} = 0 \Rightarrow A^{-1}(x)$ neexistuje. Předpoklad $a_{0} \neq 0$ hledejme $b_{0},b_{1},b_{2},\dots \in \mathbb{R}$ tak, aby
 	
 	$$
@@ -92,7 +92,7 @@ $$
 		\vdots \\
 	\end{array}
 	$$
-\end{dukaz}
+\end{proof}
 
 \begin{definice}
 	Nechť $A_{1}(x), A_{2}(x), \dots$ je posloupnost FMŘ řeknu, že součet $A_{1}(x) + A_{2}(x) + \dots$ je \textbf{konvergentní}, pokud $\forall n \in \mathbb{N}_{0}$ existuje jen konečně mnoho indexů $j \in \mathbb{N}_{0}$ takových, že $[x^{n}]A_{j}(x) \neq 0$. V takovém případě pak definuji $A_{1}(x) + A_{2}(x) + A_{3}(x) + \dots$ jako FMŘ $S(x) \in \mathbb{R}[|x|]$ splňující (jen konečně mnoho nenul):
@@ -140,7 +140,7 @@ Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall
 	$\text{OVF}(\mathcal{A} \times \mathcal{B}) = \text{OVF}(\mathcal{A}) \cdot \text{OVF}(\mathcal{B})$
 \end{pozor}
 
-\begin{dukaz}
+\begin{proof}
 	$$
 	\text{OVF}(\mathcal{A} \times \mathcal{B}) = \sum_{n=0}^{\infty} |(\mathcal{A} \times \mathcal{B})_{n}|x^{n} = \sum_{n=0}^{\infty}\left(\sum_{k=0}^{n}|\mathcal{A}_{k}| \cdot |\mathcal{B}_{n-k}|\right)x^{n} =
 	$$
@@ -148,7 +148,7 @@ Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall
 	$$
 	= \sum_{n=0}^{\infty} \sum_{k=0}^{n} |\mathcal{A}_{k}|x^{k} \cdot |\mathcal{B}_{n-k}|x^{n-k} = \text{OVF}(\mathcal{A}) \cdot \text{OVF}(\mathcal{B})
 	$$
-\end{dukaz}
+\end{proof}
 
 \begin{pozor}
 	$$
@@ -207,7 +207,7 @@ Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall
 	$\text{EVF}(\mathcal{A} \otimes \mathcal{B}) = \text{EVF}(\mathcal{A}) \cdot \text{EVF}(\mathcal{B})$
 \end{tvrz}
 
-\begin{dukaz}
+\begin{proof}
 	Levou stranu si označím jako $LS(x)$ a pravou jako $PS(x)$. $\forall n \in \mathbb{N}_{0}: [x^{n}] LS$ jestli se rovná $[x^{n}] PS$
 	
 	$$
@@ -221,4 +221,4 @@ Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall
 	$$
 	= \sum_{k=0}^{n} [x^{k}]\text{EV}(\mathcal{A})[x^{n-k}]\text{EVF}(\mathcal{B}) = PS(x)
 	$$
-\end{dukaz}
+\end{proof}
