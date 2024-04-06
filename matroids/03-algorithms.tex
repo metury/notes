@@ -86,6 +86,7 @@ Firstly we must define this problem. As an \textbf{input} we have $\M_i = (E, \I
 	$$
 	\max_{I \in \I_1 \cap \I_2} |I| = \min_{E_1 \cup E_2 = E} \rank_1(E_1) + \rank_2(E_2).
 	$$
+	\label{min-max-thm}
 \end{thm}
 
 \begin{proof}
@@ -109,6 +110,94 @@ Firstly we must define this problem. As an \textbf{input} we have $\M_i = (E, \I
 		
 		If $z = x_l$ we are done, otherwise if $z \neq x_l$ we set $(I - y_l + x_l) \setminus (I_l - x_l) = \{x_l, y_{l+1}, \dots, y_k\}$ so $\exists i : z = y_i$ $(I_l - x_l) + y_i \in \I_1$ and again apply (I3) so $\exists z' \in ((I_l - x_l) + y_i) \setminus (I - y_l)$ s.t. $(I - y_l) + z' \in \I_1$ and $z' = \{x_{l+1}, \dots, x_k\}$. This implies that $y_l \to z'$ which contradicts the shortest path. Hence we may remove $y_1, \dots, y_k$ and add $x_1, \dots, x_k$. Now we only need to show we may also add $x_0$. For showing $I' \in \I_2$ we would proceed similarly.
 		
-		\item Next step is what if the path does not exists? We want to show a partitioning $E_1$ and $E_2$.
+		\item Next step is what if the path does not exists? We want to show a partitioning $E_1$ and $E_2$ such that $X_2 \subseteq E_1$ and $X_1 \subseteq E_2$ and there is no edge from $E_2$ to $E_1$. We create the partition by adding all elements accesible from $X_1$ to $E_2$ and the rest will form $E_1$.
+
+			\begin{observ}
+				$\rank_i (E_i) = |I \cap E_i|, i =1,2$
+			\end{observ}
+
+			\begin{proof}[Proof of observation]
+				For $i = 1$ we have that $\rank_1 (E_1) = |I \cap E_1|$ where $I \cap E_1$ is independent so $\rank_1(E_1) \geq \rank_1 (I \cap E_1))$. Assume that it is strict, i.e. $\rank_1 (E_1) > \rank_1 (I \cap E_1)$. Then $\exists x \in E_1 \setminus I : \rank(I \cap E_1 + x) > \rank(I \cap E_1)$ where $I \cap E_1 + x \in \I_1$. But $I + x \notin \I_1$ because this $x \in X_1$ and $E_1 \cap X_1 = \emptyset$. Also $(I - y) + x \in \I_1, y \in I \cap E_2$ from (I3) property. This all implies that there is an arc $y \to x$ which contradicts $E_1 \to E_2$ having no edge.
+			\end{proof}
+
+			With this observation we may see that $|I| = |I \cap E_1| + |I \cap E_2| = \rank_1 (E_1) + \rank_2(E_2)$ which finishes the proof of the theorem.
 	\end{enumerate}
+\end{proof}
+
+\subsection{Time complexity}
+
+We have at most $\rank (\rank \geq \rank_1 (E), \rank_2(E))$ iterations. Then also $2 \cdot |I| \cdot |X|$ queries for independent sets which is $\leq 2 \rank n$ and also we have $2 \cdot |X| \leq 2n$ other queries. Thus in total $O(\rank n)$ queries and if we denote the time for query as $\tau$ then the time complexity is $O(\tau \rank n)$. So all together it is $O(\rank^2 n \tau)$. Another remark is that it is known that we could obtain $O(\rank^{3/2} n \tau)$.
+
+\subsection{Applications}
+
+We will show us some usage of the theorem and the algorithm itself. The next theorems and algorithms are well known.
+
+\subsubsection{Maximal matching in bipartite graph}
+
+\begin{thm}
+	$G$ is connected bipartite graph. Then maximum matching of $G$ has size equal to minimum vertex cover of $G$.
+\end{thm}
+
+\begin{proof}
+	Let $G = (V_1 \cup V_2, E)$ and $\M_i = (E, \I_i)$ for $i = 1,2$. The matroids are defined by independ sets, where $E \supseteq I \in \I_i$ iff $\forall v \in V_i$ $\deg(v_i) \leq 1$ in $(V_1 \cup V_2, I)$. See an example on Fig. \ref{max-matching-matroid}. Therefore the maximal $I \in \I_1 \cap \I_2$ is equal to maximum matching of $G$. So by the theorem \ref{min-max-thm} $\exists E = E_1 \cup E_2$ s.t. $|I| = \rank_1 (E_1) + \rank_2 (E_2)$. Now take a look at the rank function. Denote $V_i' = \{v \in V_i | \exists e \in X : v \in e\}$ the rank function is $\rank_i (X) = |V_i'|$. Then from $\rank_1 (E_1)$ we get $|V_1'|$ and similary $|V_2'|$ and hence $V_1' \cup V_2'$. Therefore by the theorem $= |V_1'| + |V_2'| = |V_1' \cup V_2'|$ which is indeed a minimum vertex cover.
+
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, fill}, thick]
+			\node (v1) {$V_1$};
+			\node[right of = v1] (v2) {$V_2$};
+			\node[main, below of = v1] (11) {};
+			\node[main, below of = 11] (12) {};
+			\node[main, below of = 12] (13) {};
+			\node[main, below of = 13] (14) {};
+			\node[main, below of = v2] (21) {};
+			\node[main, below of = 21] (22) {};
+			\node[main, below of = 22] (23) {};
+			\node[main, below of = 23] (24) {};
+			\draw (11) -- (21);
+			\draw (12) -- (21);
+			\draw (13) -- (24);
+			\draw (14) -- (23);
+		\end{tikzpicture}
+		\caption{An example of matroids, where these edges are independent in $\M_1$ but not $\M_2$.}
+		\label{max-matching-matroid}
+	\end{figure}
+\end{proof}
+
+\subsubsection{Nash-Williams}
+
+\begin{thm}[Nash-William]
+	$G$ is connected (multi)graph, $k \in \N$ there exists $k$ pairwise disjoint spanning trees $\iff$ $\forall$ partition $V_1, \dots, V_k$ of $V$ we have $|\{e \in E, \forall i |e \cap V_i| \leq 1\}| \geq k (l-1)$.
+\end{thm}
+
+We will not prove this directly. Instead we will show more general matroid version which actually as a consequence proves this theorem.
+
+\begin{thm}
+	Let $\M = (E, \I)$ be a matroid and $k \in \N$. $\exists B_1, \dots, B_k$ disjoint bases of $\M$ $\iff$ $\forall S \in E$ $|E \setminus S| \geq k (\rank(E) - \rank(S))$.
+\end{thm}
+
+\begin{proof}
+	Firstly we will create $k$ copies of $E$ that will be $E_0 = E \times \{1, \dots, k\}$. Now we will define two matroids. $\M_1 = (E_0, \I_1)$ where $X \in \I_1$ if $\forall i = 1, \dots, k \ X_i = \{e : (e,i) \in X\} \in \I$, that is from the original matroid $\M$. And also $\M_2 = (E_0, \I_2)$ where $X \in \I_2 \iff \forall e \in E$ there is at most one $i$ s.t. $(e,i) \in X$. Now we could say that it must be independent for every copy of $E$ and they have to be disjoint to be in the intersection.
+
+	$\M$ has disjoint bases $B_1, \dots, B_k \iff \exists I \in \I_1 \cap \I_2$ s.t. $|I| \geq k \rank(E)$. And for the outline of the proof. Lets have $k$ disjoint bases $X = \{(e,i), \exists i : e \in B_i\}$ and for the other implication $|I| = k \rank(\M)$ constuct $B_i = \{e, (e,i) \in I\}$ and $|B_i| = \rank (B_i) \leq \rank(\M)$ since it is independent in $\M_2$ then $|I| = |\bigcup_i B_i|$ so $|B_i| = \rank(\M)$ for $i = 1,2, \dots, k$.
+
+	"$\Rightarrow$" Now $B_1, \dots, B_k$ be disjoint bases of $\M$. See the following computation.
+
+	$$
+	\begin{aligned}
+		|E \setminus S| &\geq \sum_{i=1}^k |B_i \cap (E \setminus S)| = \sum_{i=1}^k |B_i \setminus (B_i \cap S)| = \sum_{i=1}^k |B_i| - |B_1 \cap S| \\
+		&= \sum_{i=1}^k \rank(\M) - |B_i \cap S| = \sum_{i=1}^k \rank(\M) - \rank(B_i \cap S) \geq \sum_{i=1}^k \rank(\M) - \rank(S) = k \cdot (\rank(\M) - \rank(S))
+	\end{aligned}
+	$$
+
+	"$\Leftarrow$" Assume $\forall S \subseteq E : |E \setminus S| \geq k \cdot (\rank(E) - \rank(S))$. Now $|I| = \rank_1 (E_1) + \rank_2 (E_2)$ by the theorem \ref{min-max-thm}. If $(e,i) \in E_2$ we can add all $(e,j)$ to $E_2$ and $\rank_2(E_2)$ does not increases. Let $E_2 = E' \times \{1, \dots, k\}$ and $E_1 = E' \setminus E_2$. Set $S = E \setminus E'$. Then we have the following
+
+	$$
+	\begin{aligned}
+		\rank_1 (E_1) &= \sum_{i=1}^k \rank(E_{1,i}) = k \cdot \rank(S) \\
+		\rank_2 (E_2) &= |E'|\\
+		\rank_1(E_1) + \rank_2(E_2) &= k \cdot \rank(S) + |E'| = k \cdot \rank(S) + |E \setminus S| \geq k \cdot \rank(S) + k \cdot \rank(E) - k \cdot \rank(S) = k \cdot \rank(\M)
+	\end{aligned}
+	$$
+
+	\noindent So it can be decomposed to $B_1, \dots, B_k$ disjoint bases.
 \end{proof}
