@@ -645,12 +645,51 @@ We won't show this theorem. Also the lower bound is known to be 3. Also String g
 	We may construct a so called "$3 \times 5$ grid" see Fig. \ref{grid} for the graph itself and a representation. Then if 2 cops are adjacent to the robber then there is always one vertex for "lazy strategy" robber.
 	
 	\begin{figure}[!ht]\centering
-		\begin{subfigure}{.45\textwidth}
-			\begin{tikzpicture}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[scale=.7]
+				\foreach \i in {1,...,5} {
+					\node[draw, circle, fill] (O-\i) at ({360/5 * (\i-1)}:3) {};
+			    	}
+				\foreach \i in {1,...,4} {
+					\pgfmathtruncatemacro{\j}{\i+1}
+					\draw[thick, Blue, bend right = 25] (O-\i) edge (O-\j);
+				}
+				\draw[thick, Blue, bend right = 25] (O-5) edge (O-1);
+			       	\foreach \i in {1,...,5} {
+			    		\node[draw,circle, fill] (M-\i) at ({360/5 * (\i-1) + 20}:2) {};
+			    	}
+			    	\foreach \i in {1,...,4} {
+					\pgfmathtruncatemacro{\j}{\i+1}
+					\draw[thick, Blue, bend right = 25] (M-\i) edge (M-\j);
+				}
+				\draw[thick, Blue, bend right = 25] (M-5) edge (M-1);
+			    	\foreach \i in {1,...,5} {
+					\node[draw, circle, fill] (I-\i) at ({360/5 * (\i-1)}:1) {};
+			    	}
+			    	\foreach \i in {1,...,4} {
+					\pgfmathtruncatemacro{\j}{\i+1}
+					\draw[thick, Blue, bend right = 25] (I-\i) edge (I-\j);
+				}
+				\draw[thick, Blue, bend right = 25] (I-5) edge (I-1);
+				\foreach \i in {1,...,5} {
+					\draw[thick, Green] (I-\i) -- (M-\i);
+					\draw[thick, Green] (O-\i) -- (M-\i);
+					\draw[thick, Green] (O-\i) -- (I-\i);
+				}
 			\end{tikzpicture}
 		\end{subfigure}
-		\begin{subfigure}{.45\textwidth}
-			\begin{tikzpicture}
+		\begin{subfigure}{.45\textwidth}\centering
+			\begin{tikzpicture}[thick, scale=.8]
+				\draw[Black!30] (0,0) -- (7,0);
+				\foreach \i in {1,...,4}{
+					\pgfmathtruncatemacro{\j}{\i+1}
+					\draw[Blue] (\i,0) to (\i,1) to (\j.1,.5);
+					\draw[Blue] (\i.2,0) to (\i.2,2) to (\j.3, 1);
+					\draw[Blue] (\i.4,0) to (\i.4,3) to (\j.5, 2);
+				}
+				\draw[Blue] (5,0) to (5,1) to (6.6,.5) to[out=-10, in=0] (2,4.8) to[out=180, in=90] (1.1,.5);
+				\draw[Blue] (5.2,0) to (5.2,2) to (6.3, 1) to[out=-10, in=0] (2,4.4) to[out=180, in=90] (1.3,1.5);
+				\draw[Blue] (5.4,0) to (5.4,2) to[out=120, in=0] (2,4) to[out=180, in=90] (1.5,2.5);
 			\end{tikzpicture}
 		\end{subfigure}
 		\caption{Graph on the left and on the right its representation.}
@@ -666,7 +705,38 @@ We won't show this theorem. Also the lower bound is known to be 3. Also String g
 	For the lower bound we can use the proposition \ref{girth-cop} and draw a planar graph which has girth $\gamma = 5$, one such graph is a dodecahedron, see Fig. \ref{dodecahedron}.
 	
 	\begin{figure}[!ht]\centering
-		\begin{tikzpicture}
+		\begin{tikzpicture}[scale=.7]
+			\foreach \i in {1,...,5} {
+				\node[draw, circle, fill] (O-\i) at ({360/5 * (\i-1)}:3) {};
+		    	}
+			\foreach \i in {1,...,4} {
+				\pgfmathtruncatemacro{\j}{\i+1}
+				\draw[thick, Blue] (O-\i) -- (O-\j);
+			}
+			\draw[thick, Blue] (O-5) -- (O-1);
+		       	\foreach \i in {1,...,10} {
+		    		\node[draw,circle, fill] (M-\i) at ({360/10 * (\i-1)}:2) {};
+		    	}
+		    	\foreach \i in {1,...,9} {
+				\pgfmathtruncatemacro{\j}{\i+1}
+				\draw[thick, Blue] (M-\i) -- (M-\j);
+			}
+			\draw[thick, Blue] (M-10) -- (M-1);
+		    	\foreach \i in {2,4,6,8,10} {
+		    		\pgfmathtruncatemacro{\j}{\i / 2}
+				\node[draw, circle, fill] (I-\j) at ({360/10 * (\i - 1)}:1) {};
+		    	}
+		    	\foreach \i in {1,...,4} {
+				\pgfmathtruncatemacro{\j}{\i+1}
+				\draw[thick, Blue] (I-\i) -- (I-\j);
+			}
+			\draw[thick, Blue] (I-5) -- (I-1);
+			\foreach \i in {1,...,5} {
+				\pgfmathtruncatemacro{\j}{2*\i}
+				\pgfmathtruncatemacro{\k}{2*\i-1}
+				\draw[thick, Blue] (I-\i) -- (M-\j);
+				\draw[thick, Blue] (O-\i) -- (M-\k);
+			}
 		\end{tikzpicture}
 		\caption{Dodecahedron as a planar graph.}
 		\label{dodecahedron}
