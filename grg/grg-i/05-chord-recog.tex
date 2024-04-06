@@ -20,7 +20,7 @@ is not chordal if it has no simplicial vertex. Checking a vertex for being simpl
 \end{algorithm}
 
 \begin{thm}
-	If $G = (V, E)$ is chordal, then $\sigma(n), \sigma(n - 1), . . . , \sigma(1)$ is a PES \faDog.
+	If $G = (V, E)$ is chordal, then $\sigma(n), \sigma(n - 1), . . . , \sigma(1)$ is a PES \PES.
 \end{thm}
 
 \begin{proof}
@@ -49,7 +49,7 @@ With a suitable data structure, the LexBFS algorithm can be implemented to run i
 However, this is only one half of testing for chordality. The algorithm LexBFS outputs a linear ordering of the vertices of $G$, but we need to test this ordering if it is a PES or not. This can, fortunately, also be achieved in linear time.
 
 \begin{algorithm}[!ht]
-	\caption{TestPES \faDog}
+	\caption{TestPES \PES}
 	\begin{algorithmic}[1]
 		\Require A graph $G = (V, E)$ with $n$ vertices, a linear ordering $\sigma(i) \in V, i = 1, 2, \dots, n$ of its vertices.
 		\Ensure \textbf{YES} or \textbf{NO} if $\sigma(n), \sigma(n-1), \dots, \sigma(1)$ is a PES.
@@ -65,7 +65,7 @@ However, this is only one half of testing for chordality. The algorithm LexBFS o
 				\State \Return \textbf{NO}
 			\EndIf
 		\EndFor
-		\State \Return \textbf{YES} \faDog
+		\State \Return \textbf{YES} \PES
 	\end{algorithmic}
 \end{algorithm}
 

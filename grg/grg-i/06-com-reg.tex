@@ -107,7 +107,7 @@ The last observation implies that closures are defined uniquely:
 		If $(a, \beta)$ were in $U$, the sensitivity rule applied to $\beta, a, c$ would imply $(a, c) \in U$, what is assumed not be the case.
 	\end{proof}
 	
-	Now $a, \alpha = x_l , \beta = y_l$ is another transitivity violating example (as we have proved that $(a, \alpha) \in U , (a, \beta) \notin U$, and $(\alpha, \beta) \in U$ since it is included in the pathway). The sequence $(a, \alpha), (a, x_{l+2}), \dots, (a, x_k = b), (x_2 , y_2 ), \dots, (x_l = \alpha, y_l = \beta)$ is a pathway from $(a, \alpha)$ to $(\alpha, \beta)$ of length $k - l-  1 + l - 1 = k - 2 < \text{dist}_\Gamma ((a, b), (b, c))$, contradicting the choice of $a, b, c$.
+	Now $a, \alpha = x_l , \beta = y_l$ is another transitivity violating example (as we have proved that $(a, \alpha) \in U , (a, \beta) \notin U$, and $(\alpha, \beta) \in U$ since it is included in the pathway). The sequence $(a, \alpha), (a, x_{l+2}), \dots,\\ (a, x_k = b), (x_2 , y_2 ), \dots, (x_l = \alpha, y_l = \beta)$ is a pathway from $(a, \alpha)$ to $(\alpha, \beta)$ of length $k - l-  1 + l - 1 = k - 2 < \text{dist}_\Gamma ((a, b), (b, c))$, contradicting the choice of $a, b, c$.
 \end{proof}
 
 \section{Structure of transitive orientations}
@@ -129,7 +129,7 @@ The proof of the Theorem will follow from the following Lemma \ref{lemma-3}, whi
 \begin{proof}
 	Denote by $U = \langle(x, y)\rangle_S$. Then $U = \langle(x, y)\rangle$ follows from Lemma \ref{lemma-2}. Since $M \cap \{(x, y), (y, x)\} = \emptyset$, it follows from the structure of blocks that $M \cap (U \cup U^{-1}) = \emptyset$, and hence $\langle M \cup \{(x, y)\}\rangle_S = M \cup U$. Lemma \ref{lemma-1} then implies that $\langle M \cup \{(x, y)\}\rangle = \langle\langle M \cup \{(x, y)\}\rangle_S \rangle_T = \langle M \cup U \rangle_T$.
 	
-	Suppose for the contrary that $\langle M \cup U \rangle_T$ is not faithful. Then there exists a sequence of edges $x_1 x_2 , x_2 x_3 , \dots, x_{k-1} x_k$ such that $(x_i , x_{i+1}) \in M \cup U$ for all $i = 1, 2, \dots, k - 1$ and $x_1 x_k \notin E$. Since $x_2 x_1 \in E$ and $x_k x_1 \notin E$, there is a $j, 2 \leq j < k$ such that $x_j x_1 \in E$ and $x_{j+1} x_1 \notin E$. Sensitivity of $M \cup U$ then implies that $x_j x_1 \in M \cup U$ and $M \cup U$ contains a directed cycle.
+	Suppose for the contrary that $\langle M \cup U \rangle_T$ is not faithful. Then there exists a sequence of edges $x_1 x_2 , x_2 x_3 , \dots,\\ x_{k-1} x_k$ such that $(x_i , x_{i+1}) \in M \cup U$ for all $i = 1, 2, \dots, k - 1$ and $x_1 x_k \notin E$. Since $x_2 x_1 \in E$ and $x_k x_1 \notin E$, there is a $j, 2 \leq j < k$ such that $x_j x_1 \in E$ and $x_{j+1} x_1 \notin E$. Sensitivity of $M \cup U$ then implies that $x_j x_1 \in M \cup U$ and $M \cup U$ contains a directed cycle.
 	
 	Let $C$ be a shortest cycle in $M \cup U$. Since both $M$ and $U$ are transitive, the arcs of $C$ alternatively come from $M$ and $U$. The length of $C$ is at least 4, because a cycle of length 2 would contradict the assumption that $M \cap U^{-1} = \emptyset$. No diagonal of $C$ belongs to $M \cup U$, since any such diagonal would create a shorter cycle. Finally, all diagonals of $C$ are edges of $G$, since otherwise the sensitivity of $M \cup U$ would imply that either some diagonal belongs to $M \cup U$, or some arc of the cycle belongs to $M \cap U^{-1}$.
 	

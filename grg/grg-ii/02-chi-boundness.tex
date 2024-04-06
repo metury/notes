@@ -136,7 +136,7 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 	\end{cor}
 	
 	\begin{proof}[Proof of lemma]
-		Mějme $G \in \text{CIR}(k,p,q)$. BÚNO: $G$ je souvislý a máme danou repre-\\zentaci. Nechť $x_0$ je vrchol $G$ jehož oblouček má nejlevější levý konec. Definujeme $V_i := \{x \in V(G) : \text{ nejkratší cesta v } G \text{ od } x_0 \text{ do } x \text{ má délku } i\}$.
+		Mějme $G \in \text{CIR}(k,p,q)$. BÚNO: $G$ je souvislý a máme danou reprezentaci. Nechť $x_0$ je vrchol $G$ jehož oblouček má nejlevější levý konec. Definujeme $V_i := \{x \in V(G) : \text{ nejkratší cesta v } G \text{ od } x_0 \text{ do } x$ má délku $i\}$.
 		
 		\begin{observ}
 			Pokud vede hrana z $V_i$ do $V_j$ tak $|i - j| \leq 1$.
@@ -156,7 +156,7 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 			Každý soused $w \in V_{i-1}$ vrcholu $y_{q+1}$ musí mít jeden konec mimo $I$.
 		\end{observ}
 		
-		Potom $w, x_1, \dots, x_{p-1}, y_{1}, \dots, y_q$ nebo $w, x_1, \dots, x_{p-1}, y_{q+2}, \dots, y_{2q+1}$ je $(p,q)$-konfi-\\gurace v $G$, což je spor.
+		Potom $w, x_1, \dots, x_{p-1}, y_{1}, \dots, y_q$ nebo $w, x_1, \dots, x_{p-1}, y_{q+2}, \dots, y_{2q+1}$ je $(p,q)$-konfigurace v $G$, což je spor.
 		
 		Závěrem $V_{A} := \cup_{i \text{ sudé}} V_{i}$ a $V_{B} := \cup_{i \text{ liché}} V_{i}$.
 	\end{proof}
@@ -428,7 +428,7 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 \section{Axis-parallel rectangles intersection graphs}
 
 \begin{thm}[Asblund, Grunbaum]
-	If $G$ is an intersection graph of axis parallel rect-\\angles in the plane then $\chi(G) \leq O(\omega^2 (G))$.
+	If $G$ is an intersection graph of axis parallel rectangles in the plane then $\chi(G) \leq O(\omega^2 (G))$.
 \end{thm}
 
 \begin{proof}
@@ -556,4 +556,156 @@ With the newly established terminology we have previously shown that L-graphs of
 	$$
 	
 	\noindent Lastly we compute the exact values. If $\gamma(G) \geq 5$ then min degree $< 6$ so $\leq 5$ hence $\chi(G) \leq 6$. If $\gamma(G) \geq 6$ then min degree $< 4$ so $\leq 3$ hence $\chi(G) \leq 4$. If $\gamma(G) \geq 8$ then min degree $< 3$ so $\leq 2$ hence $\chi(G) \leq 3$.
+\end{proof}
+
+Now we will further generalize to String graphs, which will use completely new topic which is called Game of robber and cops. Note that there exists more versions of this game.
+
+\section{Game of robber and cops}
+
+We have a given graph $G$. Then 1 robber (\textcolor{Red}{\faCircle}) and $c$ cops (\textcolor{Green}{\faSquare}). This game is for 2 players. Both players take turns. First one plays with cops and the second with robber.
+
+\begin{itemize}[]
+	\item \textbf{Start of the game:} First player places cops on vertices of graph $G$. Then second player places the robber on some vertex.
+	\item \textbf{Single turn:} First player can with each cop either move to adjacent vertex or stay in the same one. Then the robber can move to adjacent or stay in the same vertex.
+	\item \textbf{Goal:} If both cop and robber end up in the same vertex cops have won. Alternatively robber wants to stay as long as possible.
+\end{itemize}
+
+\begin{example}
+	We have an easy example of the given graph and robber and cops. See Fig. \ref{cops-robber}
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[node distance = 15mm, main/.style = {draw, circle}, thick]
+			\node[main] (0) {\textcolor{Green}{\faSquare}};
+			\node[main, below of = 0] (1) {\textcolor{Green}{\faSquare}};
+			\node[main, left of =1] (2) {};
+			\node[main, right of =1] (3) {};
+			\node[main, below of =1] (4) {};
+			\node[main, left of=4] (5) {\textcolor{Green}{\faSquare} \textcolor{Green}{\faSquare}};
+			\node[main, right of=4] (6) {\textcolor{Red}{\faCircle}};
+			\node[main, below of =6] (7) {};
+			\draw (0) -- (1);
+			\draw (1) -- (2);
+			\draw (0) -- (2);
+			\draw (1) -- (3);
+			\draw (0) -- (3);
+			\draw (1) -- (4);
+			\draw (2) -- (4);
+			\draw (3) -- (4);
+			\draw (5) -- (4);
+			\draw (6) -- (4);
+			\draw (7) -- (4);
+			\draw (7) -- (6);
+			\draw (2) -- (5);
+		\end{tikzpicture}
+		\caption{Example for cops and robber game.}
+		\label{cops-robber}
+	\end{figure}
+\end{example}
+
+
+
+\begin{defn}
+	The \textbf{cop-number} $\cn(G) :=$ smallest number of cops for which the cops have a winning strategy on $G$. And for class $\mathcal{C}$ of graphs we define $\cn(\mathcal{C}) := \sup \{\cn (G), G \in \mathcal{C}, G \text{ connected}\}$.
+\end{defn}
+
+\begin{example}[Cycles]
+	For cycles $C_n$ with $n \geq 4$ we can easily see that $\cn(G) = 2$ because we may put two cops in one vertex and then enclose the circle by two pats. Alternatively one is not enough since the robber may only wait and if cop is in the neighboring vertex the robber moves away.
+\end{example}
+
+\begin{example}[Int]
+	In Int which is class of interval graphs we may find out that $\cn(\text{Int}) = 1$. Firstly we sort the intervals by its left endpoints, then place cop in the leftmost interval. The strategy is either catch a robber or move right to the next interval. If robber could move away the robber must stay way apart to the right or left. But note that if he would be in the left we didn't follow our strategy.
+	
+	Alternatively we can say the Int has a clique-path decomposition and in each step we are either in the same clique so we can catch the robber or we may move to the next clique.
+\end{example}
+
+\begin{prop}
+	Let $G$ be a graph with $\gamma(G) \geq 5$. If every vertex of $G$ has degree $\geq d$, then $\cn(G) \geq d$.
+	\label{girth-cop}
+\end{prop}
+
+\begin{proof}
+	If $v$ is the robbers current vertex and $v_1, v_2, \dots, v_k$ are the neighbours of $v$, then each cop can be in the closed neighbourhood of at most one of $v_1, v_2, \dots, v_k$. If $k > \#$ of cops, robber may move to a "safe" neighbour $v_i$ if needed.
+\end{proof}
+
+\begin{cons}
+	If $\mathcal{C}$ is a class of graphs closed under induced subgraphs with $\cn(\mathcal{C}) = c < + \infty$, then every graph $G \in \mathcal{C}$ of girth $\geq 5$ is $c$-degenrate and henc $\chi(G) \leq c+1$.
+\end{cons}
+
+\begin{thm}[Das and Gahlawat, 2022]
+	$\cn(\text{String}) \leq 13$.
+\end{thm}
+
+We won't show this theorem. Also the lower bound is known to be 3. Also String graphs of girth $\geq 5$ have $\chi \leq 14$ which follows from the theorem and proposition \ref{girth-cop}.
+
+\begin{thm}
+	$\cn(\text{Outer planar}) \in \{3,4\}$.
+\end{thm}
+
+\begin{proof}[Proof of the lower bound]
+	We may construct a so called "$3 \times 5$ grid" see Fig. \ref{grid} for the graph itself and a representation. Then if 2 cops are adjacent to the robber then there is always one vertex for "lazy strategy" robber.
+	
+	\begin{figure}[!ht]\centering
+		\begin{subfigure}{.45\textwidth}
+			\begin{tikzpicture}
+			\end{tikzpicture}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}
+			\begin{tikzpicture}
+			\end{tikzpicture}
+		\end{subfigure}
+		\caption{Graph on the left and on the right its representation.}
+		\label{grid}
+	\end{figure}
+\end{proof}
+
+\begin{thm}
+	$\cn(\text{Planar}) = 3$.
+\end{thm}
+
+\begin{proof}
+	For the lower bound we can use the proposition \ref{girth-cop} and draw a planar graph which has girth $\gamma = 5$, one such graph is a dodecahedron, see Fig. \ref{dodecahedron}.
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}
+		\end{tikzpicture}
+		\caption{Dodecahedron as a planar graph.}
+		\label{dodecahedron}
+	\end{figure}
+	
+	Now for the upper bound we will show a strategy for 3 cops on connected planar graph $G$. Firstly one lemma.
+	
+	\begin{lemma}[cop guards path $P$]
+		Let $G$ be a graph, let $P$ be a shortest path from $x$ to $y$ in $G$, $x,y \in V(G)$. Then 1 cop after finitely many moves can take position on $P$ and play a strategy that catches the robber if the robber takes any vertexof $P$.
+	\end{lemma}
+	
+	\begin{proof}
+		For simplicity denote $d(u,v)$ as the distance from $u \to v$, $c$ for cop and $r$ for robber. Strategy: If there is a vertex $w \in P$ s.t. $d(w,c) > d(w,r)$ on cops turn, then $c$ moves towards $w$, otherwise $c$ stays in place.
+		
+		If there is such $w$, then for $w' \in P$ on the other side of $c$ than $w$, we have $d(r,w') > d(w', c)$. Eventually, the game reaches a situation, where after every cop move $\forall w \in P : d(c,w) \leq d(r,w)$.
+	\end{proof}
+	
+	The overview of the whole strategy is to constrain the robber by two paths and use the third cop to shrinken the graph even more. We will restrict the robber to smaller and smaller subgraphs $G = G_1 \supsetneq G_2 \subsetneq G_3 \subsetneq \dots \subsetneq \emptyset$ s.t. for $G_i$:
+	
+	\begin{enumerate}[I)]
+		\item There are two paths $P,Q$ each guarded by 1 cop, $G_i$ is the connected component of $G \setminus (P \cup Q)$ containing the robber. $P,Q$ share the same endpoints $x_i, y_i$ and $P$ is the shortest $x_i \to y_i$ path in $G_i \cup P \cup Q$ and $Q$ is the shortest $x_i \to y_i$ path in $G_i \cup Q$. Where $G_i \cup P \cup Q$ is the same as $G_i \cup G[P] \cup G[Q]$.
+		\item There is a vertex $x$ s.t. $G_i$ is a component of $G-x$ containing the robber, $x$ is occupied by a cop.
+	\end{enumerate}
+	
+	Now for the strategy itself. Cops will take any vertex $x$ and robber takes any vertex $y \neq x$, let $G_2$ be the component of $G - x$ containing $y$, therefore we get type II. Now consider subcases of the starting type.
+	
+	\begin{itemize}[]
+		\item Type II: consider few subcases.
+		
+		\begin{itemize}
+			\item $x$ has only one neighbour $z$ in $G_i$, so put a cop there, and let $G_{i+1}$ be the component of $G_i - z$ containing the robber. Therefore we obtain again type II.
+			\item $x$ has more neighbours, choose $z \neq y$ neighbour of $x_i$ in $G_i$, $P :=$ shortest $xz$-path in $G_i$. Guard $P$ with a cop and let $G_{i+1}$ be the component of $G_i \setminus P$, so we obtain type I.
+		\end{itemize}
+		
+		\item Type I: again some subcases.
+		
+		\begin{itemize}
+			\item If $G_i$ is adjacent to one vertex of $P \cup Q$ then we have type II. So see above case.
+			\item Otherwise there is a path $R$ from $x$ to $y$ in $P \cup Q \cup G_i$, containing a vertex from $G_i$. Let $R$ be shortest such path, put cop to guard it. Afterwards either $P$ or $Q$ is no longer needed to constraint the robber so we will have free cop and smaller graph. This can be seen by dividing the face $G_i$ by the path $R$, after the cops guard all three paths then the orbber is left out in one face which is constrained by $R$ and one of $P$ or $Q$. Also we won't need to guard whole $R$ and the second path, since the face may be way smaller, only the common endpoints.
+		\end{itemize}
+	\end{itemize}
 \end{proof}

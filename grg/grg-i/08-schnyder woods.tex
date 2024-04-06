@@ -3,7 +3,7 @@
 \section{Canonical ordering}
 
 \begin{defn}
-	Given a plane triangulation (i.e., a non-crossing embedding of a trian-\\gulation in the plane, which means that the outerface is fixed) $G = (V, E)$, a canonical ordering of it is a numbering $1, 2, \dots, n$ of its vertices such that
+	Given a plane triangulation (i.e., a non-crossing embedding of a triangulation in the plane, which means that the outerface is fixed) $G = (V, E)$, a canonical ordering of it is a numbering $1, 2, \dots, n$ of its vertices such that
 	
 	\begin{enumerate}[i)]
 		\item the vertices of the outerface are $1, 2$ and $n = |V|$,
@@ -320,10 +320,10 @@ For every graph $G = (V, E)$, its boxicity is a correctly defined finite number.
 \section{Grid intersection graphs}
 
 \begin{defn}
-	A graph is a \textbf{Grid Intersection graph} if it has an intersection repre-\\sentation by vertical and horizontal segments in which no two segments of the same direction share a point (in other words, all vertical, as well as all horizontal, segments are pairwise disjoint).
+	A graph is a \textbf{Grid Intersection graph} if it has an intersection representation by vertical and horizontal segments in which no two segments of the same direction share a point (in other words, all vertical, as well as all horizontal, segments are pairwise disjoint).
 \end{defn}
 
-It is easy to observe that every grid intersection graph has a grid intersection repre-\\sentation in which no two segments lie on the same line. Moreover, the exact $x$-coordinates of the vertical segments, nor the exact $y$-coordinates of the horizontal ones, are important, only their linear orders. Thus we assume that our bipartite graph $G = (A \cup B, E)$ has its vertices linearly ordered within the classes of bipartition, $A = \{a_1 , a_2 , \dots, a_n\}, B = \{b_1 , b_2 \dots, b_m\}$. We further assume that the vertices of $A$ are to be represented by vertical segments and the vertices of $B$ by horizontal ones. We say that a grid intersection representation respects the orders of $A$ and $B$ if for every $i < j$, the $x$-coordinate of $a_i$ is smaller than the $x$-coordinate of $a_j$, and the $y$-coordinate of $b_i$ is smaller than the $y$-coordinate of $b_j$.
+It is easy to observe that every grid intersection graph has a grid intersection representation in which no two segments lie on the same line. Moreover, the exact $x$-coordinates of the vertical segments, nor the exact $y$-coordinates of the horizontal ones, are important, only their linear orders. Thus we assume that our bipartite graph $G = (A \cup B, E)$ has its vertices linearly ordered within the classes of bipartition, $A = \{a_1 , a_2 , \dots, a_n\}, B = \{b_1 , b_2 \dots, b_m\}$. We further assume that the vertices of $A$ are to be represented by vertical segments and the vertices of $B$ by horizontal ones. We say that a grid intersection representation respects the orders of $A$ and $B$ if for every $i < j$, the $x$-coordinate of $a_i$ is smaller than the $x$-coordinate of $a_j$, and the $y$-coordinate of $b_i$ is smaller than the $y$-coordinate of $b_j$.
 
 \begin{thm}
 	The graph $G = (A \cup B, E)$ has a grid intersection representation that respects the linear orders of $A$ and $B$ if and only if there are no 6 indices $i < j < k, \alpha < \beta < \gamma$ such that $a_i b_\beta , a_k b_\beta , a_j b_\alpha , a_j b_\gamma$ are edges of $G$ and $a_j b_\beta$ is not. Such a configuration of 6 vertices is called a \textbf{volswagen} in $G$.

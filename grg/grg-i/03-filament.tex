@@ -1,9 +1,7 @@
 \chapter{Interval filament graphs}
 
 \begin{defn}
-	Given a half-plane $\pi$ with a border-line $l$, an \textbf{interval filament} in $\pi$ is a simple curve with
-	endpoints on $l$, its interior lying in $\pi$ and within the stripe determined by lines perpendicular to $l$ and
-	passing through the endpoints of the curve. The class of \textbf{interval filament graphs} is $\text{IFA} = \mathcal{IG}\{\text{interval filaments in a half-plane}\}$.
+	Given a half-plane $\pi$ with a border-line $l$, an \textbf{interval filament} in $\pi$ is a simple curve with endpoints on $l$, its interior lying in $\pi$ and within the stripe determined by lines perpendicular to $l$ and passing through the endpoints of the curve. The class of \textbf{interval filament graphs} is $\text{IFA} = \mathcal{IG}\{$interval filaments in a half-plane$\}$.
 \end{defn}
 
 \begin{figure}[!ht]\centering
@@ -125,7 +123,7 @@
 			\item \underline{Case $B2$. $m > 0$} Let $r_v < r_u$, with $uv \in \overrightarrow{E_2}$, be a violation with $m$ endpoints between $r_v$ and $r_u$. Let $P$ be the leftmost of these endpoints.
 			
 			\begin{itemize}[]
-				\item \underline{Subcase $B2\alpha$. $P$ is the right endpoint of an interval.} Let $w \in V$ be such that $P = r_w$. Change the representation $\mathcal{R}$ to $\mathcal{R}'$ by changing the interval $I_v$ to $I_v' = [l_v , r_w + \epsilon]$ for a positive $\epsilon$ small enough so that no endpoint of any interval is between $r_w$ and $r_w + \epsilon$. Then $\mathcal{R}'$ is still an interval intersection representation of $-G_1$. The number of endpoints between $r_v'$ and $r_u$ is $m - 1 < m$. If $\mathcal{R}'$ had the same number of violations as $\mathcal{R}$, this would contradict the assumption of minimality of $m$. Thus $\mathcal{R}'$ must have more than $k$ violations. The only new violation can be formed by $r_w < r_v'$, which means that $vw \in \overrightarrow{E_2}$. Then the transitivity of $\overrightarrow{E_2}$ implies that $uw \in \overrightarrow{E_2}$ and $r_w < r_u$ is a violation in $\mathcal{R}$ with $m - 1 < m$ endpoints between $r_w$ and $r_u$, contradicting the assumption on minimality of $m$.
+				\item \underline{Subcase $B2\alpha$. $P$ is the right endpoint of an interval.} Let $w \in V$ be such that $P = r_w$. Change the represen-\newline tation $\mathcal{R}$ to $\mathcal{R}'$ by changing the interval $I_v$ to $I_v' = [l_v , r_w + \epsilon]$ for a positive $\epsilon$ small enough so that no endpoint of any interval is between $r_w$ and $r_w + \epsilon$. Then $\mathcal{R}'$ is still an interval intersection representation of $-G_1$. The number of endpoints between $r_v'$ and $r_u$ is $m - 1 < m$. If $\mathcal{R}'$ had the same number of violations as $\mathcal{R}$, this would contradict the assumption of minimality of $m$. Thus $\mathcal{R}'$ must have more than $k$ violations. The only new violation can be formed by $r_w < r_v'$, which means that $vw \in \overrightarrow{E_2}$. Then the transitivity of $\overrightarrow{E_2}$ implies that $uw \in \overrightarrow{E_2}$ and $r_w < r_u$ is a violation in $\mathcal{R}$ with $m - 1 < m$ endpoints between $r_w$ and $r_u$, contradicting the assumption on minimality of $m$.
 				
 				\item \underline{Subcase $B2\beta$. $P$ is the left endpoint of an interval.} Let $w \in V$ be such that $P = l_w$. Then $I_v \cap I_w = \emptyset$ and hence $vw \in E_1$. The mixing property applied to $u, v, w$ then implies $uw \in E_1$, which is impossible since $P \in I_u \cap I_w \neq \emptyset$.
 			\end{itemize}
