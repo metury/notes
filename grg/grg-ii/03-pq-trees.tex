@@ -1,3 +1,118 @@
 \chapter{PQ trees}
 
-\TODO{Start this chapter.}
+\begin{notation}
+	A set $\{1, \dots, n\}$ will be denoted as $[n]$. Then \textbf{permutation} of $[n]$ is a sequence $\pi = \pi_1, \pi_2, \dots, \pi_n$ in which each $i \in [n]$ appears exactly once. \textbf{Interval} in a permutation $\pi$ of $[n]$ is a set $S = \{\pi_i, \pi_{i+1}, \dots, \pi_j\}$ for some $1 \leq i \leq j \leq n$. \textbf{Cyclic shift} of $\pi_1, \pi_2, \dots, \pi_n$ is a permutation of the form $\pi_i, \pi_{i+1}, \dots, \pi_n, \pi_1, \pi_2, \dots, \pi_{n-1}$ for some $i \in [n]$. Lastly \textbf{cyclic interval} of $\pi$ is interval in a cyclic shift of $\pi$.
+\end{notation}
+
+\begin{example}
+	Lets see an example for a permutation $\pi = 31524$ of $[5]$. Then $\{1,2,5\}$ is an interval and $\{2,3,5\}$ is \textbf{not} an interval. Furthermore its cyclic shift can be $52431$. Where one cyclic interval of the original permutation can be $\{2,3,4\}$.
+\end{example}
+
+Now we will introduce two problems.
+
+\begin{itemize}[]
+	\item \textit{Consecutivity}
+	
+	\begin{itemize}[]
+		\item \textbf{Input:} $n \in \N$, sets $S_1, S_2, \dots, S_k \subseteq [n]$.
+		\item \textbf{Question:} is there a permutation $\pi$ of $[n]$ in which $S_1, S_2, \dots, S_k$ are all intervals?
+	\end{itemize}
+	
+	\item \textit{Cyclic consecutivity}
+	
+	\begin{itemize}[]
+		\item \textbf{Input:} $n \in \N$, sets $S_1, S_2, \dots, S_k \subseteq [n]$.
+		\item \textbf{Question:} is there a permutation $\pi$ of $[n]$ in which $S_1, S_2, \dots, S_k$ are all cyclic intervals?
+	\end{itemize}
+\end{itemize}
+
+\begin{lemma}
+	Consecutivity can be reduced to cyclic consecutivity.
+\end{lemma}
+
+\begin{proof}
+	We are given $n \in \N$, and sets $S_1, S_2, \dots, S_k \subseteq [n]$. Now see the following: $\exists \pi$ of $[n]$ in which $S_1, \dots, S_k$ are intervals $\iff$ $\exists \pi^+$ of $[n+1]$ in which $S_1, \dots, S_k$ are cyclic intervals. For one way see that if we have $\pi$ which has intervals $S_1, \dots, S_k$ and create $(\pi, n+1) = \pi^+$ permutation which has cyclic intervals. For the other way lets have $\pi^+$ of $[n+1]$ that has cyclic intervals in $S_1, \dots, S_k$, choose the cyclic shift of $\pi^+$ with $n+1$ at the end. Then $\pi^+ = (\pi, n+1)$ where $\pi$ will be the permutation of $[n]$ containing $S_1, \dots, S_k$ intervals.
+\end{proof}
+
+\textbf{Cyclic permutation} is determined by a permutation $\pi$ and it is the set of all cyclic shifts of $\pi$. (Unformally we may draw a circle with the elements on the boundary and all cyclic permutations are when going clockwise around the circle.) We also denote $\cyc{n}{S_1, \dots, S_k}$ as the set of cyclic permutations of $[n]$ in which all the sets $S_1, \dots, S_k$ are cyclic intervals.
+
+\begin{defn}
+	A \textbf{PQ-tree} of order $n$ is an (unrooted, undirected0 tree with $n$ leaves labeled $1,2, \dots, n$ and two types of interval nodes: P-nodes \faCircle, Q-nodes \faCircle[regular], every internal node has a prescribed cyclic permutation of its neighbours.
+\end{defn}
+
+\begin{defn}
+	$\pi_T$ for PQ-tree $T$ is the cyclic permutation of $[n]$ induced by the clockwise order of the leaves of $T$.
+\end{defn}
+
+\begin{defn}
+	Two PQ-trees $T,T'$ are equivalent if $T'$ can be obtained from $T$ by a sequence of the following operations:
+	
+	\begin{enumerate}
+		\item change the cyclic order of neighbours of P-node arbitrarily, and
+		\item reverse the order of neighbours of Q-node.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	The set of cyclic permutations represented by $T$, denoted by $R_T$ is $\{\pi_{T'} | T'$ equivalent to $T\}$.
+\end{defn}
+
+\begin{figure}[!ht]\centering
+	\begin{subfigure}{.45\textwidth}
+		\begin{tikzpicture}
+		\end{tikzpicture}
+		\caption{PQ-tree $T$ with permutation $\pi_T = 14378625$.}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}
+		\begin{tikzpicture}
+		\end{tikzpicture}
+		\caption{Equivalent PQ-tree $T'$ with $\pi_{T'} = 15237864$.}
+	\end{subfigure}
+	\caption{Example of PQ-tree, its permutation and equivalent tree.}
+\end{figure}
+
+\begin{thm}
+	For any $n \in \N$, sets $S_1, \dots, S_k \subseteq [n]$, we can, in time $O(n + \sum_{i=1}^k |S_i|)$ determine whether $\cyc{n}{S_1, \dots, S_k}$ is non-empty, and if it is, construct a PQ-tree $T$ such that $R_T = \cyc{n}{S_1, \dots, S_k}$.
+\end{thm}
+
+\begin{proof}[Construction of the PQ-tree]
+	We won't show the whole proof, but only the construction of $T$ which will be shown by an induction on $k$. For $k=0$ we create one internal P-node which has all $[n]$ leaves ordered as $1,2, \dots, n$ clockwise. Suppose for $k > 0$ we have constructed PQ-tree $T_{k-1}$ with $R_{T_{k-1}} = \cyc{n}{S_1, \dots, S_{k-1}}$. The goal is to fing $T$ with $R_T = \cyc{n}{S_1, \dots, S_k}$.
+	
+	Let $e$ be an edge in $T_{k-1}$, then $T_{k-1}-e$ has two components "substrees determined by $e$". Then subtrees is \textbf{full} if each of its leaves is in $S_k$, \textbf{empty} if none of its leaves are from $S_k$ and \textbf{mixed} otherwise. Then an edge $e$ of $T_{k-1}$ is \textbf{mixed} if both subtrees of $T_{k-1}-e$ are mixed.
+	
+	\begin{observ}
+		Mixed edges form a connected subgraph of $T_{k-1}$.
+	\end{observ}
+	
+	\begin{proof}
+		If it is not true then there is a path connecting two mixed edges, but the edges on the path has to be also mixed.
+	\end{proof}
+	
+	\begin{observ}
+		If there is a certex of $T_{k-1}$ incident to three or more mixed edges, then $\cyc{n}{S_1, \dots, S_k} = \emptyset$.
+	\end{observ}
+	
+	Suppose mixed edges form a path $P$. Now we will show steps to create new PQ-tree.
+	
+	\begin{enumerate}
+		\item Replace $T_{k-1}$ by an equivalent tree in which around every vertex of $P$ the edges towards full subtrees are above $P$, the edges towards empty subtrees are below. If this is not possible, then $\cyc{n}{S_1, \dots, S_k} = \emptyset$.
+		\item Replace every node $v_i$ of $P$ by two nodes $v_i^+$ connected to the full subtrees only and $v_i^-$ connected to the empty subtrees only.
+		\item Insert a new Q-node adjacent to $v_1^+, v_2^+, \dots, v_m^+, v_m^-, v_{m-1}^-, \dots, v_1^-$ in this order ($m$ is for the number of nodes of $P$), call the new node $w$.
+		\item If $v_i^+$ or $v_i^-$ is a Q-node, then contract the edge $w v_i^+$ (or $w v_i^-$).
+		\item If there is a node of degree 2, suppress it, if $v_i^+$ or $v_i^-$ has degree 1, delete it. (Where suppressing is swapping the path by a single edge.) 
+	\end{enumerate}
+	
+	The correctness of this process involves more checking if all representations are still preserved and that all present in the new one was already there.
+	
+	For time complexity one must use clever data structure and use amortization arguments to obtain such result.
+\end{proof}
+
+\section{Recognition of INT in linear time}
+
+Recall that we have already shown that INT = Chordal $\cap$ co-Co nad also $G \in$ INT $\iff$ the maximal cluques of $G$ can be arranged into a sequence $Q_1, Q_2, \dots, Q_l$ so that for every vertex $v$, the cliques containing $v$ form an interval (in the permutation of maximal cliques).
+
+Thus we can see that this is Consecutivity problem and we only need to find all maximal cliques.
+
+\begin{cons}
+	$G \in$ INT can be tested in linear time $O(|V| + |E|)$.
+\end{cons}
