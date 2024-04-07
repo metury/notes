@@ -58,13 +58,55 @@ Now we will introduce two problems.
 \end{defn}
 
 \begin{figure}[!ht]\centering
-	\begin{subfigure}{.45\textwidth}
-		\begin{tikzpicture}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[node distance = 40, p/.style = {draw, circle, fill}, q/.style = {draw, circle}, thick]
+			\node[p] (c) {};
+			\node[q, left of = 0] (l) {};
+			\node[q, right of = 0] (r) {};
+			\node[left of = l] (5) {5};
+			\node[above of = l] (1) {1};
+			\node[below of = l] (2) {2};
+			\node[above left of = c] (4) {4};
+			\node[above right of = c] (3) {3};
+			\node[right of = r] (8) {8};
+			\node[above of = r] (7) {7};
+			\node[below of = r] (6) {6};
+			\draw (c) edge (4);
+			\draw (c) edge (3);
+			\draw (l) edge (5);
+			\draw (l) edge (1);
+			\draw (l) edge (2);
+			\draw (r) edge (8);
+			\draw (r) edge (7);
+			\draw (r) edge (6);
+			\draw (r) edge (c);
+			\draw (l) edge (c);
 		\end{tikzpicture}
 		\caption{PQ-tree $T$ with permutation $\pi_T = 14378625$.}
 	\end{subfigure}
-	\begin{subfigure}{.45\textwidth}
-		\begin{tikzpicture}
+	\begin{subfigure}{.45\textwidth}\centering
+		\begin{tikzpicture}[node distance = 40, p/.style = {draw, circle, fill}, q/.style = {draw, circle}, thick]
+			\node[p] (c) {};
+			\node[q, left of = 0] (l) {};
+			\node[q, right of = 0] (r) {};
+			\node[left of = l] (5) {5};
+			\node[above of = l] (2) {2};
+			\node[below of = l] (1) {1};
+			\node[above of = c] (3) {3};
+			\node[below of = c] (4) {4};
+			\node[right of = r] (8) {8};
+			\node[above of = r] (7) {7};
+			\node[below of = r] (6) {6};
+			\draw (c) edge (4);
+			\draw (c) edge (3);
+			\draw (l) edge (5);
+			\draw (l) edge (1);
+			\draw (l) edge (2);
+			\draw (r) edge (8);
+			\draw (r) edge (7);
+			\draw (r) edge (6);
+			\draw (r) edge (c);
+			\draw (l) edge (c);
 		\end{tikzpicture}
 		\caption{Equivalent PQ-tree $T'$ with $\pi_{T'} = 15237864$.}
 	\end{subfigure}
@@ -98,8 +140,8 @@ Now we will introduce two problems.
 		\item Replace $T_{k-1}$ by an equivalent tree in which around every vertex of $P$ the edges towards full subtrees are above $P$, the edges towards empty subtrees are below. If this is not possible, then $\cyc{n}{S_1, \dots, S_k} = \emptyset$.
 		\item Replace every node $v_i$ of $P$ by two nodes $v_i^+$ connected to the full subtrees only and $v_i^-$ connected to the empty subtrees only.
 		\item Insert a new Q-node adjacent to $v_1^+, v_2^+, \dots, v_m^+, v_m^-, v_{m-1}^-, \dots, v_1^-$ in this order ($m$ is for the number of nodes of $P$), call the new node $w$.
-		\item If $v_i^+$ or $v_i^-$ is a Q-node, then contract the edge $w v_i^+$ (or $w v_i^-$).
-		\item If there is a node of degree 2, suppress it, if $v_i^+$ or $v_i^-$ has degree 1, delete it. (Where suppressing is swapping the path by a single edge.) 
+		\item If $v_i^+$ or $v_i^-$ is a Q-node, then contract the edge $w v_i^+$ (or $w v_i^-$). But keep the order.
+		\item If there is a node of degree 2, suppress it, if $v_i^+$ or $v_i^-$ has degree 1, delete it. (Where suppressing is swapping the 2-edge path by a single edge.) 
 	\end{enumerate}
 	
 	The correctness of this process involves more checking if all representations are still preserved and that all present in the new one was already there.
