@@ -1,1 +1,60 @@
 \chapter{Connectivity}
+
+We have seen some properties that were derived from graph theory. But now this is not the case. That is the connectivity of matroids is not directly translated from graphs, but instead 2-(vertex)-connectivity.
+
+\begin{prop}
+	$G$ without isolated vertices, $G$ is 2-connected $\iff$ $\forall e,f \in E$ and $e \neq f$ $\exists C$ circuit s.t. $e,f \in E(C)$.
+\end{prop}
+
+\begin{proof}
+	This can be easily seen. Consider subdividing $e$ (and $f$) by $w_e$ ($w_f$) which by itself do not affect 2-connectivity, thic constructs $G'$. Therefore $\exists C'$ in $G'$ where $w_e, w_f \in V(C')$.
+\end{proof}
+
+\begin{prop}
+	The following properties are equivalent.
+
+	\begin{itemize}[]
+		\item (C3) $\forall C_1, C_2 \in \C, C_1 \neq C_2, e \in C_1 \cap C_2, \exists C_3 \subseteq (C_1 \cup C_2) -e , C_3 \in \C$
+		\item (C3') $\forall C_1, C_2 \in \C, C_1 \neq C_2, f \in C_1 \cap C_2, \exists C_3  : f \in C_3 \subseteq (C_1 \cup C_2) - e$
+	\end{itemize}
+\end{prop}
+
+\begin{proof}
+	For contradiction let $C_1, C_2$ violates (C3') and $|C_1 \cup C_2|$ is minimal. By (C3) $\exists C_3$ where $e,f \notin C_3$ and by (C2) $\exists g \in C_2 \setminus C_1, g \in C_2 \cap C_3$. Since $f \notin C_2$ it implies $f \notin C_2 \cup C_3$ hence $|C_2 \cup C_3| < |C_1 \cup C_2|$. Use (C3') on $C_2, C_3, g \in C_2 \cap C_3, e \in C_2 \setminus C_3$ then $\exists C_4 : e \in C_4 \subseteq (C_2 \cup C_3) - g$. Now $g \notin C_1, C_4$ so $|C_1 \cup C_4| < |C_2 \cup C_3|$ therefore we again use (C3') $C_1, C_4, e \in C_1 \cap C_4, f \in C_1 \setminus C_4, \exists C: f \in (C_1 \cup C_4) - e \subseteq (C_1 \cup C_2) - e$ which is a contradiction.
+\end{proof}
+
+Now we define a relation $\sim$ for $\M = (E, \I)$ on $E \times E$ s.t. $e \sim f \iff (e = f) \lor (\exists C \in \C : e,f \in C)$.
+
+\begin{prop}
+	Relation $\sim$ is an equivalence on $E$.
+\end{prop}
+
+\begin{proof}
+	We can easily see taht reflexivity and symmetry holds. Now for transitivity. $e \sim f$ and $f \sim g$ if one of these relations were obtained by $=$, then we can rename the elements and obtain $e \sim g$, thus we will assume both are obtained by the circuit property.
+
+	Suppose $\exists C_1' \supseteq \{e,f\}, C_2' \supseteq \{f,g\}$ and we want to find $C_3' \supseteq \{e,g\}$. Let $C_1, C_2$ be s.t. $e \in C_1, g \in C_2$ and $C_1 \cap C_2 \neq \emptyset$ such that $|C_1 \cup C_2|$ is minimal. Denote $h \in C_1 \cap C_2, e \in C_1 \setminus C_2$ (otherwise we are done), this implies by (C3') that $e \in C_3 \subseteq (C_1 \cup C_2) - h$. If $g \in C_3$ we are done. Therefore assume $g \notin C_3$.
+
+	$\exists i \in C_2 \cap C_3, i \notin C_1, |C_2 \cup C_3| < |C_1 \cup C_2|, g \in C_2 \setminus C_3$ and by (C3') we get that $\exists C_4 : g \in C_4 \subseteq (C_2 \cup C_3) - i$. Due to the fact that $C_4 \cap (C_3 \setminus C_2) \neq \emptyset$, otherwise it would be a proper subset, and $C_3 \setminus C_2 \subsetneq C_1 \setminus C_2 \Rightarrow C_1 \cap C_4 \neq \emptyset$ and $i \notin C_! \cup C_4$ so $|C_1 \cup C_4| < |C_1 \cup C_2|$ which contradicts the minimality.
+\end{proof}
+
+The classes of the equivalence $\sim$ on $E(\M)$ form so called "\textbf{components}". Also one can easily see that $\M$ connected $\iff |E| = 1$ or $\forall e,f \in E, \exists C \in \C : e, f \in C$.
+
+\begin{defn}
+	\textbf{Separation} $X \subseteq E$ s.t. $X$ is union of components of $\M$.
+\end{defn}
+
+\begin{prop}
+	$\M = (E, \I)$, $X$ is separation $\iff$ $\forall C \in \C : C \subseteq X$ or $C \subseteq E \setminus X$.
+\end{prop}
+
+\begin{prop}
+	$\M = (E, \I)$, $X$ is separation $\iff$ $\rank(X) + \rank(E \setminus X) = \rank(E)$.
+\end{prop}
+
+\begin{proof}
+	"$\Rightarrow$" by using submodularity we may see that $\rank(X) + \rank(E \setminus X) \geq \rank(E)$ and now we have to show the other inequality.
+\end{proof}
+
+\begin{prop}
+	$\M = (E, \I)$, $X$ is separation $\Rightarrow$
+\end{prop}
