@@ -1,6 +1,6 @@
 \chapter{The Sparsest cut problem}
 
-Same as before we have an undirected graph $G = (V,E)$ and $k$-pairs of sources and targets $(s_{1},t_{1}), (s_{2}, t_{2}), \dots, (s_{k}, t_{k}) \in V^{2}$. But we will introduce a new parameters $d_{1}, d_{2}, \dots, d_{k} \in \R^{+}$ called \textbf{demands}.
+Same as before we have an undirected graph $G = (V,E)$ and $k$-pairs of sources and targets $(s_{1},t_{1}), (s_{2}, t_{2}), \dots,\\ (s_{k}, t_{k}) \in V^{2}$. But we will introduce a new parameters $d_{1}, d_{2}, \dots, d_{k} \in \R^{+}$ called \textbf{demands}.
 
 Firstly we will take a look at linear program for solving this problem for $k = 1$.
 
@@ -313,7 +313,11 @@ Before we continue we remind ourselves the Manhattan distance $||z||_{1} = \sum_
 	\end{aligned}
 	$$
 	
-	The last part is due to the previous observation and the fact that $\sum_{e \in E} c(e) \mu_{S}(e) = a_{S}$ and $\sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i}) = b_{S}$ taken means $\frac{a_{S}}{b_{S}} = \rho(S)$.
+	The last part is due to the previous observation and the fact that
+
+	$$
+	\sum_{e \in E} c(e) \mu_{S}(e) = a_{S} \text{ and } \sum_{i =1}^{k} d(i)  \mu_{S}(s_{i},t_{i}) = b_{S} \text{ taken means } \frac{a_{S}}{b_{S}} = \rho(S).
+	$$
 \end{proof}
 
 Now we will be proving the Lemma B \ref{B}. For that we denote $T = \{s_{i} | i \in [k]\} \cup \{t_{i}| i \in [k]\}$ and without loss of generality assume that $|T| = 2^{\tau}$ (we can add arbitrary sources and targets that are essentially the same). Let us denote $d_{x} (u,v)$ the length of the $x$-shortest $u-v$ path. Where $x$ is the result of our LP. For $A \subseteq V: d_{x}(A,u) = \min_{v \in A} d_{x}(v,u)$.
