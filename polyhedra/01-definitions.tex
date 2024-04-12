@@ -1,0 +1,112 @@
+\chapter{Definitions}
+
+Reader may already know some basic definitions of polyhedrons and polytopes and also might be familiar with some basic theorems and characterization. But in the other case we will introduce some of these basics one more time. Also note that the main part is that we are considering somewhat basic linear program.
+
+$$
+\begin{aligned}
+	\max c^{T} x \\
+	A x \leq b
+\end{aligned}
+$$
+
+\noindent Where we are considering a finite number of linear inequalities.
+
+\section{Polyhedra and Polytopes}
+
+The polyhedron created by such linear program is usually called \hpoly{hedron}. But we will formulate it more precisely.
+
+\begin{defn}
+	\hpoly{hedron} is prescribed as $\{x | A x \leq b\}$ where $A \in \R^{m \times n}$ and $b \in \R^{n}$.
+\end{defn}
+
+\begin{defn}[Minkowski sum]
+	Minkowski sum of two sets $A,B$ denoted by $A \msum B$ is $\{a + b | a \in A, b \in B\}$.
+\end{defn}
+
+\begin{defn}[Combinations]
+	Let $V$ be a finite set, then by the following statements
+
+	\begin{enumerate}
+			\item $x = \sum_{v_{i} \in V} \lambda_{i} v_{i}, \lambda_{i} \in \R${}
+			\item $1 = \sum_{v_{i} \in V} \lambda_{i}$
+			\item $0 \leq \lambda_{i}$
+	\end{enumerate}
+
+	\noindent we will define:
+
+	\begin{itemize}
+			\item Linear combination $\lin(V)$ as 1.
+			\item Affince combination $\aff(V)$ as 1. and 2.
+			\item Conic combination $\cone(V)$ as 1. and 3.
+			\item Convex combination $\conv(V)$ as 1., 2. and 3.
+	\end{itemize}
+\end{defn}
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}
+			
+	\end{tikzpicture}
+	\caption{Example of combinations.}
+\end{figure}
+
+\begin{defn}
+	\vpoly{hedron} is defined as $\conv(V) \msum \cone(Y)$ where $V,Y$ are finite set of points.
+\end{defn}
+
+\begin{defn}
+	Bounded-polyhedron is called \textbf{polytope}.
+\end{defn}
+
+This can be either visualized just by the definition or consider having a $n$-dimensional ball which is being cut by hyperplanes until no surface obtained by the ball itself persists.
+
+\subsection{Examples of polytopes}
+
+\subsubsection{Simplex}
+
+This is a well known polytope which can be prescribed as follows. $k$-simplex is a convex combination of $k+1$ affine independent vertices.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}
+			
+	\end{tikzpicture}
+	\caption{3 dimensional simplex.}
+\end{figure}
+
+\subsubsection{Cube}
+
+Cube is even more known than the simplex. Already here we can see that it can be prescribed as \hpoly{tope} $\{x \in \R^{k} | 0 \leq x_{i} \leq 1\}$, but also as \vpoly{tope} $\conv(\{0,1\}^{k})$. This is quite essential, because we will see that \hpoly{hedra} and \vpoly{hedra} are equal.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}
+			
+	\end{tikzpicture}
+	\caption{3 dimensional cube.}
+\end{figure}
+
+\subsubsection{Pyramids and other creations}
+
+\TODO{Puramids and parallel plane prism.}
+
+\begin{thm}[Minkowski-Weyl]
+	$P$ is \hpoly{hedron} $\iff$ it is a \vpoly{hedron}.
+\end{thm}
+
+\begin{proof}[Sketch of the proof]
+	"$\Rightarrow$" We will gradually make the polyhedron more non-general and then consider a simple case. So WLOG:
+
+	\begin{enumerate}
+		\item $P$ is full-dimensional. Where dimension is defined as dimension of the smallest affine space containing it.
+		\item $P$ is pointed, that is it does not contain a line. -- If it contains a line we can split it by an orthogonal hyperplane, inductively use Minkowski-Weyl theorem and then extend $Y$ by rays to both sides of the hyperplane. Use theorem \ref{pointed-P}.
+		\item $V = \emptyset$ -- Use trick which is called \textbf{Homogenization} or \textbf{Homogenized cone} which is that $P : Ax \leq b$ create $P' : Ax - bz \leq 0$ and $z \geq 0$. So for $z = 1$ we have original $P$ and then for all others $z$ we have scaled copy of $P$. After this trick we use Minkowski-Weyl for this cone and create $V$ by the points for which $z > 0$ and $Y$ from poitns for which $z = 0$.
+		\item $P$ is a polytope.
+	\end{enumerate}
+\end{proof}
+
+\begin{thm}
+	$P$ is a pointed $\iff$ it has an extreme point.
+	\label{pointed-P}
+\end{thm}
+
+\begin{proof}
+	If there is a line and we have extreme point we can shift the line so it goes through the extreme point. But now the line representing the optimization function is either parallel hence it is not an extreme point or not parallel which also implies it is not an extreme point.
+\end{proof}
