@@ -39,6 +39,8 @@ Now we define a relation $\sim$ for $\M = (E, \I)$ on $E \times E$ s.t. $e \sim 
 
 The classes of the equivalence $\sim$ on $E(\M)$ form so called "\textbf{components}". Also one can easily see that $\M$ connected $\iff |E| = 1$ or $\forall e,f \in E, \exists C \in \C : e, f \in C$.
 
+\section{Separators}
+
 \begin{defn}
 	\textbf{Separation} $X \subseteq E$ s.t. $X$ is union of components of $\M$.
 \end{defn}
@@ -52,9 +54,57 @@ The classes of the equivalence $\sim$ on $E(\M)$ form so called "\textbf{compone
 \end{prop}
 
 \begin{proof}
-	"$\Rightarrow$" by using submodularity we may see that $\rank(X) + \rank(E \setminus X) \geq \rank(E)$ and now we have to show the other inequality.
+	"$\Rightarrow$" by using submodularity we may see that $\rank(X) + \rank(E \setminus X) \geq \rank(E)$ and now we have to show the other inequality. Let $B_{1}$ be max independent subset of $X$, hence $|B_{1}| = \rank(X)$ and $B_{2}$ be max independent subset of $E \setminus X$, hence $|B_{2}| = \rank(E \setminus X)$. Create $B = B_{1} \cup B_{2}$. If $X$ is a seprator then $B \in \I$ since $B_{1}$ and $B_{2}$ do not include a circuit and also no circuit is present in their union from the fact that $X$ is a separator. Moreover
+
+	$$
+	\rank(E) \geq |B| = |B_{1}| + |B_{2}| = \rank(X) + \rank(E \setminus X).
+	$$
+
+	"$\Leftarrow$" Assume that $\rank(X) + \rank(E \setminus X) = \rank(E)$ and $X$ is not a separator. Then $\exists C \in \C : C \cap X \neq \emptyset$ and $C \cap (E \setminus X) \neq \emptyset$. Now $C \cap X \in \I$ can be completed to $B_{1}'$ max independent subset of $X$ and similarly $C \cap (E \setminus X) \in \I$ can be completed to $B_{2}'$. Let $B' = B_{1}' \cup B_{2}'$ but $C \subseteq B' \Rightarrow B' \notin \I$ so $\rank(B') < |B'|$, but on the other hand $|B'| = |B_{1}'| + |B_{2}'| = \rank(X) + \rank(E \setminus X) = \rank(E)$. If $\rank(B') < \rank(E)$ this cannot happen, because otherwise we could add an elemnt so $\rank(B') = \rank(E)$.
 \end{proof}
 
 \begin{prop}
-	$\M = (E, \I)$, $X$ is separation $\Rightarrow$
+	$\M = (E, \I)$, $X$ is separation $\Rightarrow \forall F \subseteq E : \rank(F) = \rank(F \cap X) + \rank(F \cap (E \setminus X)) = \rank(F \cap X) + \rank(F \setminus X)$.
 \end{prop}
+
+\begin{proof}
+	THis proof is similar as in previous proposition, therefore is omitted.
+\end{proof}
+
+\begin{prop}
+	$\M = (E, \I), X \subseteq E, \M \setminus X = \M / X \iff \rank(X) + \rank(E \setminus X) = \rank(E)$
+\end{prop}
+
+\begin{proof}
+	"$\Rightarrow$" Let $B_{x}$ be max independent subset of $X$ and $B$ be max independent subset of $\M \setminus X = \M / X$. From $\M / X$ we get that $B \cup B_{x} \in \B(\M)$ and from $\M \setminus X$ we get
+
+	$$
+	\rank(E) = |B \cup B_{x}| = |B| + |B_{x}| = \rank(E \setminus X) + \rank(X).
+	$$
+
+	"$\Leftarrow$" Assume that $\rank(X) + \rank(E \setminus X) = \rank(E)$ holds, compare $\I(\M / X)$ and $\I(\M \setminus X)$. Easily seen $\I(\M / X) \subseteq \I(\M \setminus X)$ is true for all $X$. Now $I \in \I(\M \setminus X) \Rightarrow \exists B$ max independent in $\M \setminus X$, $I \subseteq B \Rightarrow \exists B'$ s.t. $B \cup B' \in \B$ max independent in $\M$ therefore $|B \cup B'| = \rank(X)$ and $|B| = \rank(E \setminus X)$. From both we get the following
+
+	$$
+	|B \cup B'| = \rank(E) = \rank(X) + \rank(E \setminus X) = \rank(X) + |B| \Rightarrow |B'| = \rank(X)
+	$$
+
+	\noindent and hence $B'$ is max independent set of $X$. Lastly
+
+	$$
+	I \cup B' \subseteq B \cup B' \in \I \Rightarrow I \cup B' \in \I \Rightarrow I \in \I(\M / X).
+	$$
+
+	\noindent Therefore we get the other inclusion so it must be equal.
+\end{proof}
+
+\begin{cor}
+	$X$ is separator of $\M$ $\iff$ $X$ is a separator of $\dual{\M}$. So also $\M$ is connected $\iff$ $\dual{\M}$ is connected.
+\end{cor}
+
+\begin{thm}
+	$\M = \M_{1} \bigoplus \M_{2} \bigoplus \dots \bigoplus \M_{k}$, $\M_{i}$ is connected s.t. $\exists X_{1}, \dots, X_{k}$, $\M |_{X_{i}} = \M_{i}$ $\iff$ $X_{1}, \dots, X_{k}$ are connected components of $\M$.
+\end{thm}
+
+\begin{proof}
+	We won't show the whole proof, but this follows from proposition on curcuits in directed sums and circuits in separators.
+\end{proof}
