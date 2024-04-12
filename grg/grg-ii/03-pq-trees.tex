@@ -149,12 +149,8 @@ Now we will introduce two problems.
 	For time complexity one must use clever data structure and use amortization arguments to obtain such result.
 \end{proof}
 
-\section{Recognition of INT in linear time}
+\section{Applications}
+
+\subsection{Recognition of INT in linear time}
 
 Recall that we have already shown that INT = Chordal $\cap$ co-Co nad also $G \in$ INT $\iff$ the maximal cluques of $G$ can be arranged into a sequence $Q_1, Q_2, \dots, Q_l$ so that for every vertex $v$, the cliques containing $v$ form an interval (in the permutation of maximal cliques).
-
-Thus we can see that this is Consecutivity problem and we only need to find all maximal cliques.
-
-\begin{cons}
-	$G \in$ INT can be tested in linear time $O(|V| + |E|)$.
-\end{cons}
