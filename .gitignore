@@ -12,6 +12,8 @@
 *.cb2
 .*.lb
 
+polyhedra/res/polytope.tex
+
 # kg/kg.pdf
 # past-ii/past-ii.pdf
 # teorie-mnozin/temno.pdf
