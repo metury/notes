@@ -12,7 +12,8 @@
 *.cb2
 .*.lb
 
-polyhedra/res/polytope.tex
+polyhedra/res/*.tex
+polyhedra/res/*.py
 
 # kg/kg.pdf
 # past-ii/past-ii.pdf
