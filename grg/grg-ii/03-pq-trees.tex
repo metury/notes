@@ -154,3 +154,85 @@ Now we will introduce two problems.
 \subsection{Recognition of INT in linear time}
 
 Recall that we have already shown that INT = Chordal $\cap$ co-Co nad also $G \in$ INT $\iff$ the maximal cluques of $G$ can be arranged into a sequence $Q_1, Q_2, \dots, Q_l$ so that for every vertex $v$, the cliques containing $v$ form an interval (in the permutation of maximal cliques).
+
+\begin{algorithm}[!ht]
+	\caption{Idea of the algorithm}
+	\begin{algorithmic}[1]
+			\Require Graph $G = (V,E)$.
+			\Ensure Is $G \in$ INT?
+			\State Create a set $\{Q_{i}; i \text{ is maximal clique of } G\} = \{Q_{1}, Q_{2}, \dots, Q_{l}\}$.
+			\State $\forall v \in V(G):$ create a set $S_{v} = \{i; v \in Q_{i}\}$.
+			\State Solve consecutivity for $\{S_{v}; v \in V\}$ in $[l]$.
+	\end{algorithmic}
+\end{algorithm}
+
+Note that from PQ-trees this can be solved in linear time $O(|V| + \sum_{v \in V} |S_{v}|)$. Now we will dig deeper into the details of each step.
+
+\begin{enumerate}
+	\item We know that $G$ is chordal $\iff$ $G$ has PES \PES. Also we have shown how to compute PES in linear time. Therefore create PES $v_{1}, \dots, v_{n}$. If it does not exists, return that $G$ is not INT. From now on assume it exists. Create $\forall i = 1, \dots, n$ cliques $Q_{i} := \{v_{i}\} \cup \{\text{left neighbours of } v_{i}\}$. Firstly observe that all maximal cliques are among these cliques (simply because all cliques have their rightmost vertex in PES, therefore its $Q_{i}$ since it is maximal). Next we will discard $Q_{i}$  if $\exists j : Q_{i} \subsetneq Q_{j}$. Note that this happens if $j > i$ and $v_{i}v_{j} \in E$ and any more to the left neighbour of $v_{j}$ is also a neighbour of $v_{i}$ so we only need to compute sizes $|Q_{i}| = S_{i}$ and denote $k$ as the number of left neighbours starting by $v_{i}$.
+		\begin{itemize}
+			\item If $k = S_{i}$ then $Q_{i} \subseteq Q_{j}$.
+			\item If $k < S_{i}$ then $Q_{i} \nsubseteq Q_{j}$.
+			\item Also $k > S_{i}$ cannot happen.
+		\end{itemize}
+
+	\item We will also use PES.
+
+	$$
+	S_{v} = (\{i\} \cup \{j | v_{j} \text{ is a right neighbour of } v_{i}\}) \cap \{k; Q_{k} \text{ is maximal}\}
+	$$
+
+	Which also implies that $|S_{v}| \leq$ right degree of $v$ + 1. Therefore $\sum_{v \in V} |S_{v}| \leq |E| + |V|$. So all together it is $O(|E| + |V|)$.
+\end{enumerate}
+
+\subsection{Planarity testing}
+
+\begin{itemize}[]
+	\item \textbf{Input:} Graph $G = (V,E)$.
+	\item \textbf{Output:} Planar embedding of $G$ or a $K_{5}$ or $K_{3,3}$ minor of $G$.
+\end{itemize}
+
+For our usecase we will denote "planar embedding" as the rotation scheme, which is for any $v \in V$, cyclic order of edges incident to $v$ in a planar drawing.
+
+\begin{defn}
+	Fragment of a graph $G = (V,E)$ induced by a set $X \subseteq V$ contains
+
+	\begin{enumerate}
+			\item The subgraph of $G$ induced by $X$.
+			\item For any edge $e = \{u,v\} \in E$ s.t. $u \in X$ and $v \notin X$ create new vertex $s_{e}$ ("stump of $e$") and an edge $\{u, s_{e}\}$.
+	\end{enumerate}
+\end{defn}
+
+We say that fragment induced by $X$ in $G$ is \textbf{good} if both $X$ and $V \setminus X$ induces a connected subgraph of $G$. Also a planar embedding of a fragment is \textbf{good} if all the stumps are embedded on the boundary of a single face ("outer face").
+
+\begin{observ}
+	If $G$ is planar, then also any good fragment has a good embedding.
+\end{observ}
+
+From now on assume that $G$ is 2-connected.
+
+\begin{fact}
+	Any good embedding of a good fragment induces a cyclic order of the stumps. Moreover for any good fragment with at least one good embedding, there is a PQ-tree whose leaves correspond to the stumps and which represents precisely the cyclic orders of stupms in the good embeddings of the fragments.
+\end{fact}
+
+\begin{proof}[Sketch of proof]
+	Firstly generally for a graph $H = (V_{H}, E_{H})$ equivalence on $E_{H}$ $e,f \in E_{h}: e \sim f$ if either $e = f$ or $e, f$ belongs to common cycle. Then classes of $\sim$ are 1. bridges and 2. biconnected components.
+
+	Now the constructions is roughly that we will replace all biconected components by Q nodes. Then cutvertices to P nodes, stumps to leaves, bridge to edge and incidence between cutvertex and biconnected component will also form an edge.
+
+	Every single operation with PQ-trees can be also done to change the embedding of the graph. It is also good to show the other way and that if PQ-tree wouldn't be able to keep pace with the embedding then there is a $K_{5}$ or $K_{3,3}$ minor.
+\end{proof}
+
+\begin{algorithm}[!ht]
+	\caption{Planarity testing}
+	\begin{algorithmic}[1]
+			\Require Graph $G = (V,E)$.
+			\Ensure Planar embedding of $G$ or a $K_{5}$ or $K_{3,3}$ minor of $G$.
+			\State Create $T$ as a DFS tree of $G$.
+			\State Number its vertices in postorder (in order left-right-root).
+			\State $T_{i}:=$ subtree rooted in vertex numbered $i$ and $F_{i} :=$ good fragment induced by vertices of $T_{i}$.
+			\State Proceed bottom to top and construct PQ-trees for $F_{1}, F_{2}, \dots, F_{n}$.
+ 	\end{algorithmic}
+\end{algorithm}
+
+The exact procedure of building fragments is that in the leaf we just create a single P node and all its stumps. Then by induction let al childrens have their PQ-trees. Lets take one of these PQ-trees and it has stumps which has to be connected to the current vertex and other vertices. The former vertices has to be arranged consecutive, if it is not possilbe then end. That is similar to the PQ-trees where we tried to put all free subtrees to the above part and others to the below, now it is pretty much the same. Also in this step we remember the orientation of the stumps that will be conneted to the root. This will merge to one big Q node and connect to the root which will be new P node. Also we will create such Q nodes for all childrens of the current root.
