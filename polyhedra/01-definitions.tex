@@ -315,3 +315,136 @@ From the main theorem we may see that from mathematical perspective both \hpoly{
 \begin{fact}
 	For polytope $P \subseteq \R^{d}$ given by $n$ inequalitites it has $\leq n^{\lfloor d/2 \rfloor}$ vertices.
 \end{fact}
+
+\section{Faces of polytopes (polyhedrons)}
+
+\begin{defn}
+	Let $P$ be a polyhedron. An inequality $\alpha^{T} x \leq \beta$ is \textbf{valid} for $P$ if $P \cap \{x | \alpha^{T} x \leq \beta\} = P$.
+\end{defn}
+
+\begin{defn}
+	Let $P$ be a polyhedron and $\alpha^{T} x \leq \beta$ a valid inequality. Then $F = P \cap \{x | \alpha^{T} x = \beta\}$ is called a \textbf{face} of $P$.
+\end{defn}
+
+Keep in mind that there are two special cases that are usualy called \textit{trivial} faces. Consider $\bm{0}^{T} x \leq 0$ and $\bm{0}^{T} x \leq 1$ which are valid and the first create a face $P$, whereas the second $\emptyset$. The other faces are called \textit{non-trivial}.
+
+\begin{thm}
+	Let $P$ be a polytope $A x \leq b$ then $F$ is a face of $P$ \ifft $F = \{x | A' x = b'\} \cap P$ for some subset of "original inequalities". Or sometimes called a subsystem.
+\end{thm}
+
+\begin{proof}
+	"$\Rightarrow$" Let $F$ be a face of $P$. Then $\exists$ valid $c^{T} x \leq \delta$ such that $F = P \cap \{x | c^{T} x = \delta\}$. In the dual LP for $\max c^{T} x$ s.t. $A x \leq b$ let $y^{\ast}$ be optimum and let $I = \{i | y_{i} = 0\}$. Then $F \subseteq P \cap \{x | a_{i}^{T} x = b, i \in I\}$ can be seen from the fact about complementarity \ref{complementarity}. But also the other inclusion holds thus  $F = P \cap \{x | a_{i}^{T} x = b, i \in I\}$.
+	
+	"$\Leftarrow$" Let $F = P \cap \{x | a_{i}^{T} x = b\}$. Then claim $F$ is a face can be seen by setting $c := \sum_{i \in I} a_{i}$ and $\delta := \sum_{i \in I} b_{i}$. See that $c^{T} x \leq \delta$ is valid and it prescribe a face.
+\end{proof}
+
+\begin{fact}[Complementarity]
+	For LP $\max c^{T}x$ s.t. $A x \leq b$ and its dual $\min b^{T} y$ s.t. $A^{T} y = c, y \geq 0$. Let $x^{\ast}$ and $y^{\ast}$ be primal (dual) optimum solutions, then if $y_{i}^{\ast} > 0$ then $a_{i}^{T} x^{\ast} = b_{i}$.
+\end{fact}
+
+\begin{proof}
+	$c^{T}x = y^{T}Ax = y^{T}b$ therefore $y^{T}(Ax + b) = 0$ so component wise it must be 0 $\forall i$, hence either $y_{i} = 0$ or $(a_{i}x - b_{i}) =0$.
+\end{proof}
+
+Also faces of polyhedron are also polyhdra as well. Face of a face is also a face and intersection of faces is a face. These are some properties which can be observed. Lastly we may look at special faces by their dimensions which are prescribed in table \ref{faces}.
+
+\begin{table}[!ht]\centering
+	\begin{tabular}{c|c}
+		dimension & face \\
+		\hline
+		0 & vertices \\
+		1 & edges \\
+		$\vdots$ & $\vdots$ \\
+		$\dim(P) - 2$ & ridges \\
+		$\dim(P) - 1$ & facets
+	\end{tabular}
+	\caption{Most important faces.}
+	\label{faces}
+\end{table}
+
+\subsection{Face lettice}
+
+Let $\mathcal{F}$ be the set of faces of $P$, then $(\mathcal{F}, \subseteq)$ is called the \textit{face lattice}. The fact that it is called lattice is due to the properties it has. Moreover it has some other properties, which are sometimes called as a graded lattice (elements can be dividided by their grades). Also for all pairs it has its sublattice.
+
+\begin{example}
+	See an easy example of 2-dimensional cube and its lattice on Fig. \ref{lattice}.
+
+	\begin{figure}[!ht]\centering
+		\begin{subfigure}{.3\textwidth}\centering
+			\begin{tikzpicture}[node distance = 20mm, main/.style = {draw, circle}, thick]
+				\node[main] (a) {$a$};
+				\node[main, left of = a] (b) {$b$};
+				\node[main, below of = b] (c) {$c$};
+				\node[main, below of = a] (d) {$d$};
+				\draw (a) -- (b);
+				\draw (b) -- (c);
+				\draw (c) -- (d);
+				\draw (d) -- (a);
+			\end{tikzpicture}
+			\caption{2-dimensional cube}
+		\end{subfigure}
+		\begin{subfigure}{.65\textwidth}\centering{}
+			\begin{tikzpicture}[node distance = 20mm]
+				\node (P) {$\{a,b,c,d\}$};
+				\node[below left of = P] (bc) {$\{b,c\}$};
+				\node[below right of = P] (cd) {$\{c,d\}$};
+				\node[right of = cd] (da) {$\{a,d\}$};
+				\node[left of = bc] (ab) {$\{a,b\}$};
+				\node[below of = ab] (a) {$\{a\}$};
+				\node[below of = bc] (b) {$\{b\}$};
+				\node[below of = cd] (c) {$\{c\}$};
+				\node[below of = da] (d) {$\{d\}$};
+				\node[below left of = c] (empty) {$\emptyset$};
+				\draw (P) -- (ab);
+				\draw (P) -- (bc);
+				\draw (P) -- (cd);
+				\draw (P) -- (da);
+				\draw (a) -- (ab);
+				\draw (b) -- (ab);
+				\draw (c) -- (bc);
+				\draw (b) -- (bc);
+				\draw (d) -- (cd);
+				\draw (c) -- (cd);
+				\draw (a) -- (da);
+				\draw (d) -- (da);
+				\draw (empty) -- (a);
+				\draw (empty) -- (b);
+				\draw (empty) -- (c);
+				\draw (empty) -- (d);
+			\end{tikzpicture}
+			\caption{and its lattice.}
+		\end{subfigure}
+		\caption{Example of face lattice.}
+		\label{lattice}
+	\end{figure}
+\end{example}
+
+\subsection{Polar duality}
+
+For a polytope $P$ which is described as $A x \leq \bm{1}$ and also by $\conv(V)$ we have the polar dual $P^{\Delta}$ prescribed as $V x \leq \bm{1}$ which is same as $\conv(A)$. Also the dual is the original $P$. Note that any $A x \leq b$ can be changed to $A x \leq \bm{1}$.
+
+The polar duals have some interesting properties. For example a correspondence between vertice of $P$ and facets of $P^{\Delta}$, edges of $P$ and ridges of $P^{\Delta}$, ridges of $P$ and edges od $P^{\Delta}$ and facets of $P$ and vertices od $P^{\Delta}$. Also face lattice of $P^{\Delta}$ is same as for $P$ only "upside down". Lastly the polar duality can be even further generalized.
+
+$$
+\begin{array}{c c c}
+	A x \leq \bm{1} &  & V x \leq \bm{1} \\
+	B x \leq \bm{0} & \leftrightarrow & Y x \leq \bm{0} \\
+	\conv(V) + \cone(Y) & & \conv(A \cup \{0\}) + \cone(B)
+\end{array}
+$$
+
+One of the interesting questions may be if we have two polytopes $P,P'$ and we want to know if they are the same. But how they are same? Well there are mainly two ways how to define sameness. In one way by affine operations (which may include some transitions, rotations and scaling) or the other way is to define sameness in a combinatrial way. That is if lattices are equal.
+
+\section{1-skeleton of polytope}
+
+\begin{defn}
+	1-skeleton of polytope is a graph $G = (V,E)$ such that $V = F_{0}$, which are 0-dimensional faces (vertices) adn $E = F_{1}$, which are 1-dimensional faces (edges). This can be generalized to $k$-skeleton of polytope by setting $V = F_{k-1}$ and $E = F_{k}$.
+\end{defn}
+
+\begin{thm}[Steinitz]
+	Planar 3-connected graphs are exactly 1-skeletons of 3-dimensional polytopes.
+\end{thm}
+
+There are also present some conjectures. First is that this is not true only for 3-connected planar graphs but generally for $d$-connected graphs and $d$-dimensional polytopes. Another conjecture is that 1-skeletons are somewhat nice expanders.
+
+
