@@ -28,20 +28,20 @@ Before we show another interesting structure called SPQR-trees note that they ar
 			\node[main, above right of = 6] (8) {};
 			\node[main, above left of = 7] (9) {};
 			\node[main, below right of = 6] (10) {};
-			\draw (1) -- (2) node[midway, above left] {4};
-			\draw (1) -- (3);
-			\draw (3) -- (4);
-			\draw (2) -- (4);
-			\draw (4) -- (5);
-			\draw (3) -- (5);
-			\draw (2) -- (5);
-			\draw (1) -- (6);
-			\draw (5) -- (7);
-			\draw (6) -- (8);
-			\draw (8) -- (9);
-			\draw (7) -- (9);
-			\draw (7) -- (10);
-			\draw (6) -- (10);			
+			\draw (1) -- (2) node[midway, above left] {1};
+			\draw (1) -- (3) node[midway, above right] {2};
+			\draw (3) -- (4) node[midway, above left] {3};
+			\draw (2) -- (4) node[midway, above left] {4};
+			\draw (4) -- (5) node[midway, above left] {5};
+			\draw (3) -- (5) node[midway, above left] {6};
+			\draw (2) -- (5) node[midway, above left] {7};
+			\draw (1) -- (6) node[midway, above left] {10};
+			\draw (5) -- (7) node[midway, above left] {11};
+			\draw (6) -- (8) node[midway, above left] {12};
+			\draw (8) -- (9) node[midway, above left] {13};
+			\draw (7) -- (9) node[midway, above left] {14};
+			\draw (7) -- (10) node[midway, above left] {15};
+			\draw (6) -- (10) node[midway, above left] {16};	
 		\end{tikzpicture}
 	\end{subfigure}
 	\caption{Example of graph $G$ and some of its skeletons.}
