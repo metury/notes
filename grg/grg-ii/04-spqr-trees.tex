@@ -1,0 +1,22 @@
+\chapter{SPQR trees}
+
+Before we show another interesting structure called SPQR-trees note that they are not related to the previously mentioned PQ-trees. Also in this section we will be considering multigraphs without loops, i.e. graphs can have parallel edges.
+
+\begin{defn}
+	Let $G = (V_G, E_G)$ be a biconnected multigraph, a \textbf{skeleton} of $G$ is multigraph $H = (V_H, E_H)$ with these properties:
+	
+	\begin{enumerate}
+		\item $V_H \subseteq V_G$;
+		\item every edge $e = \{u,v\} \in E_H$ represents a connected subgraph $G_e$ of $G$ ("pertinent graph of $e$") which contains the vertices $u,v$;
+		\item every edge of $G$ belongs to exactly one pertinent graph;
+		\item for $e,f \in E_H, e \neq f$, then $V(G_e) \cap V(G_f) = e \cap f$.
+	\end{enumerate}
+\end{defn}
+
+\begin{figure}[!ht]\centering
+	\caption{Example of graph $G$ and some of its skeletons.}
+\end{figure}
+
+\begin{defn}
+	\textbf{Separation tree $T$} of a biconnected $G = (V_G, E_G)$ is a tree whose leaves correspond bijectively to edges of $G$, every internal node $\alpha$ has degree $\geq 3$ and has an associated skeleton $S_\alpha$ of $G$ with $\deg(\alpha)$ edges, such that the edge sets of the pertinent graphs of $S_\alpha$ correspond to the sets of leaves in the components of $T - \alpha$.
+\end{defn}
