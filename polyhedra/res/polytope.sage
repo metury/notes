@@ -7,5 +7,5 @@ viewpoint = [674, 108, -731]
 angle = 180
 
 # Generate the TikZ code
-Img = P.tikz(viewpoint, angle, opacity=0.4, output_type='LatexExpr')
+Img = P.tikz(viewpoint, angle, opacity=0.4)
 print(Img)  # Print the TikZ code to the console
