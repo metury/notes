@@ -97,7 +97,182 @@ Before we show another interesting structure called SPQR-trees note that they ar
 \end{thm}
 
 \begin{proof}
-	By induction on $m$. For $m = 3$ we have
+	By induction on $m$. For $m = 3$ we have only one type of SPQR tree which is a tree with one internal node and three nodes. In the internal node there can either be a triangle or three-parallel edges graph. But in both case we have that $3m - 6 = 9 - 6 = 3$ which is true.
+	
+	Let $m > 3$ and consider case 1: $T$ has a single internal node, then it is also fine. Case 2 consider that $T$ has 2 adjacent internal nodes $\alpha, \beta$ and $|E_\alpha| \geq 2, |E_\beta| \geq 2$. Split $G$ into: $G_\alpha$ which is found by $E_\alpha$ plus new edge $uv$, similarly $G_\beta$ which is found by $E_\beta$ plus new edge $uv$. Where $u$ and $v$ are the split vertices between $\alpha$ and $\beta$. From these we create their separation trees, which will be made by "replacing" the second vertex by a leaf representing edge $uv$.
+	
+	By "disconnecting" edge $\alpha\beta$ in $T$ we obtain separation trees $T_\alpha, T_\beta$ for $G_\alpha, G_\beta$ respectively. Let $k := |E_\alpha|, m -k := |E_\beta|$ and $G_\alpha$ has $k+1$ edges and $G_\beta$ has $m-k+1$ edges.
+	
+	Finally use induction. Skeletons in $T_\alpha$ have at most $3(k+1)-6$ edges and skeletons in $T_\beta$ have at most $3(m-k+1)-6$ edges. Therefore skeletons in $T$ have at most $3k + 3 - 6 + 3m - 3k + 3 - 6 = 3m -6$ edges.
 \end{proof}
 
+\section{Create SPQR tree}
+
+In this section we will show some techniques how an SPQR tree can be constructed.
+
+\begin{defn}
+	Suppose $G = (V_G, E_G)$ is a biconnected multigraph, $uv \in V_G, u \neq v$, edges $e,f \in E_G$ are in the same separation class w.r.t. $uv$ (that is $e \sim_{uv} f$) if
+	
+	\begin{enumerate}
+		\item $e = f$;
+		\item there is a path containing $e$ and $f$ whose internal vertices are different from $u,v$;
+		\item there is a cycle containing $e$ and $f$ and containing at most one of $u,v$.
+	\end{enumerate}
+\end{defn}
+
+\begin{fact}
+	$\sim_{uv}$ is an equivalence on $E_G$.
+\end{fact}
+
+\begin{defn}
+	$u,v$ are separation pair if $\sim_{uv}$ has more than one classes.
+\end{defn}
+
+We may see that cuts are separation pairs, but in fact not the only. For example $K_4$.
+
+\begin{defn}
+	A separation pair is \textbf{trivial} if
+	
+	\begin{enumerate}
+		\item $\sim_{uv}$ has two classes, one of them contains just an edge
+		\item $\sim_{uv}$ has 3 classes, all of them contains just one edge.
+	\end{enumerate}
+\end{defn}
+
+\begin{observ}
+	If $G$ has non-trivial separation pair, then $G$ is one of the following graphs: two vertices with two parallel edges, two vertices with three parallel edges, triangle, any simple 3-connected graph.
+\end{observ}
+
+\noindent Now we will show how to find an SPQR tree:
+
+\begin{enumerate}
+	\item Start with one internal node having entire $G$ in it and $|E_G|$ leaf nodes.
+	\item As long as any skeleton has non-trivial separation pair $uv$ then split skeleton along $uv$. The details of split:
+	
+	\begin{itemize}
+		\item Splitting skeleton $S = (V_S, E_S)$ along a non-trivial separation $uv$. Firstly partition $E_S$ into two parts $E_{I}, E_{II}$ s.t. each part has at least two edges and each part is a union of $\sim_{uv}$-classes.
+	\end{itemize}
+	
+	\item Merge adjacent P-nodes and S-nodes.
+	
+	\begin{itemize}
+		\item When we have two S-nodes then we have two circles where one edge is representing the other graph of the second node. So together they form one circle. For P-nodes we have some parallel edges in between two vertices, where one is for the other part of the graph. Thus all together it is all of their parallel edges together.
+	\end{itemize}
+\end{enumerate}
+
+\noindent This procedure will lead to SPQR tree.
+
 \section{SPQR-trees and planarity}
+
+We remind ourselves what a planar embedding of a connected graph is: rotation scheme (which is the cyclic order of edges around vertex).
+
+\begin{thm}
+	A biconnected $G$ is planar \ifft every skeleton in its SPQR-tree is planar $\iff$ every R-skeleton is planar.
+\end{thm}
+
+\begin{proof}
+	"$\Rightarrow$" $K$ is a skeleton of $G \Rightarrow G$ has a subdivision of $K$ as a subgraph. Thus $K$ has to be planar.
+	
+	"$\Leftarrow$" We have embedding for all skeletons. Choose arbitrary root of SPQR-tree and process from bottom to top. For every edge of every skeleton other than the edge corresponding to the parent: construct the embedding of its pertinent graph, where the poles are in the same face (poles are the two special vertices). For vertex representing a skeleton: ignore the edge of a parent and combine the children to the current skeleton.
+\end{proof}
+
+\begin{defn}
+	$G$ biconnected graph with SPQR-tree $T$, $K$ skeleton of $T$, $\mathcal{G}$ embedding of $G$, $\mathcal{K}$ embedding of $K$, $\mathcal{G}$ is \textbf{consistent} with $\mathcal{K}$ if
+	
+	\begin{enumerate}
+		\item For every edge $e = \{x,y\} \in E(K)$, the edge of $G_e$ (pertitent graph of $e$) incident to $x$ form a cyclic interval in the rotation scheme $x$ in $\mathcal{G}$, same for $y$.
+		\item For $e,f,g \in E(K)$ meeting in $x$, for $e' \in G_e, f' \in G_f, g' \in G_g$ meeting in $x$ the order of $e,f,g$ in $\mathcal{K}$ is the same as the order of $e',f',g'$ in $\mathcal{G}$.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}
+	$G,T$ as above, then
+	
+	\begin{enumerate}
+		\item For every embedding $\mathcal{G}$ of $G$ each skeleton in $T$ has unique embedding consistent with $\mathcal{G}$.
+		\item For any choice of an embedding of each skeleton of $T$, $G$ has unique embedding consistent with all skeletons.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	We will showcase both properties.
+	
+	\begin{enumerate}
+		\item We have $\mathcal{G}$ embedding of $G$ and skeleton $K$.
+		
+		\begin{enumerate}
+			\item Firstly consider $x$ is not an articulation, since $G$ and $K$ are biconnected thus they have to be paths to $y$. We have 4 paths from $x$ to $y$ either $f_1, f_2$ are in the same pertinent which is not possible since they would meet in vertex of $K$, or if they are different from P-skeleton, then it is R (ridgit) thus there would be the path. Which is a contradiction. Thus it is P-skeleton. Hence the first part of the definition is done.
+			
+			\item Due to the cyclic intervals for $e,f,g \in E(K)$ they form a cyclic intervals. To show that it forms an embedding choose a path representing in its edge in $K$ and draw it.
+		\end{enumerate}
+	
+		\item Fix an embedding of every skeleton. There exist one embedding that was constructed like in the previous theorem and we have two embeddings of $\mathcal{G}$ s.t. $\mathcal{G} \neq \mathcal{G}'$ so one cyclic order differs. We have to find node where $e',f',g'$ are in different pertinent. We may find an internal node which separates $e',f',g'$ so it suffices what we were looking for. So due 2. only one $\mathcal{G}$ or $\mathcal{G}'$ can be consistent.
+	\end{enumerate}
+\end{proof}
+
+\begin{note}
+	S-skeleton has exactly 1 embedding. R-skeleton has exactly 2 embeddings. P-skeletons with $m$ edges has $(m-1)!$ embeddings.
+\end{note}
+
+\noindent We can have more restricitions or we may count how many embeddings given graph has.
+
+\begin{example}
+	Partially Embedded Planarity (or PEP for short) is given problem:
+	
+	\begin{itemize} []
+		\item \textbf{Input:} graph $G = (V_G, E_G)$, subgraph $H = (V_H, E_H)$, embedding $\mathcal{H}$ of $H$.
+		\item \textbf{Output:} Is there a way to extend $\mathcal{H}$ into an embedding of $G$?
+	\end{itemize}
+\end{example}
+
+\begin{rem}
+	This is a special example of general cases such that partially representation is given and we have to construct the whole representation.
+\end{rem}
+
+\begin{note}
+	Embedding of $H$ is given by
+	
+	\begin{enumerate}
+		\item rotation scheme
+		\item for every cycle $C$ on the boundary of a face of $\mathcal{H}$ on every vertex $x \notin C$, specify on which side of $C$ $x$ is drawn. -- \textit{"cyclic-vertex position"}
+	\end{enumerate}
+
+	Note that again it does not keep the information about the outer face.
+\end{note}
+
+\begin{thm}
+	PEP can be solved in polynomial (in fact linear) time.
+\end{thm}
+
+\begin{proof}
+	Assume $G$ is biconnected. Then see this algorithm.
+	
+	\begin{algorithm}[!ht]
+		\begin{algorithmic}[1]
+			\State Compute SPQR-tree of $G$. This can be uniquely computed in linear time.
+			\If{$G$ is planar}
+				\State \Return
+			\EndIf
+			\ForAll{skeletons}
+				\State Determine whether it can be embedded in not obviously wrong way or have a counter example.
+			\EndFor
+		\end{algorithmic}
+	\end{algorithm}
+
+	\begin{defn}
+		Let $K$ be a skeleton of the SPQR tree of $G$, an embedding $\mathcal{K}$ of $K$ is \textbf{obviously wrong} if
+		
+		\begin{enumerate}
+			\item $\mathcal{H}$ has three edges $e,f,g$ meeting in a single vertex $x$, $\mathcal{K}$ has three edges $\bar{e}, \bar{f}, \bar{g}$, each having one of $e,f,g$ in its pertinent graph, the cyclic order of $e,f,g$ in $\mathcal{H}$ differs from the cyclic order if $\bar{e}, \bar{f}, \bar{g}$ in $\mathcal{K}$.
+			\item $\mathcal{H}$ has facial cycle $C$ and a vertex $x \notin V(G)$, the edges of $C$ projects to more then one pertinent graph of $K$, hence the edges of $K$ into which the edges of $C$ projects form a cycle $\bar{C}$, and $x$ is in the pertinent graph of an edge $\bar{E} \notin V(\bar{C})$, and in $\mathcal{K}$ the edge $\bar{e}$ is on the wrong side of $\bar{C}$. 
+		\end{enumerate}
+	\end{defn}
+
+	\begin{observ}
+		If a skeleton $K$ is embedded in obviously wrong way, then the embedding $\mathcal{G}$ of $G$ induced by the skeletons does not extend $\mathcal{H}$.
+	\end{observ}
+
+	\begin{thm}
+		If every skeleton of the SPQR-tree of $G$ is embedded in a way that is not obviously wrong, then the embedding $\mathcal{G}$ of $G$ induced by these skeleton embeddings extends $\mathcal{H}$.
+	\end{thm}
+\end{proof}
