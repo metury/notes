@@ -1,1 +1,38 @@
 \chapter{Contact graphs of discs}
+
+Firstly we have to define what a contact graph of discs is. For $v \in V$ associate disc, if $\{xy\} \in E$ then discs touch in one point.
+
+\begin{observ}
+	$G$ has a contact disc representation $\Rightarrow G$ is planar.
+\end{observ}
+
+\begin{thm}[Koebe]
+	$G$ is planar $\iff$ $G$ has a contact disc representation.
+	\label{koebe}
+\end{thm}
+
+In this section we will be proving this theorem. Note that from the first observation we have already proven "$\Leftarrow$" part.
+
+\begin{observ}
+	It is enough to prove "$\Rightarrow$" when $G$ is maximal planar, i.e. a triangulation.
+\end{observ}
+
+\begin{proof}
+	Because every planar graph $G$ is an \textit{induced} subgraph of a triangulation $G^+$. Note that subgraph is easy to see. And when speaking about induced graph we proceed similarly. That is introduce new edges to have triangulation and then introduce a vertex in the middle of every new edge. Lastly add other edges to obtain triangulation.
+\end{proof}
+
+\begin{proof}[Proof of Koebe theorem \ref{koebe}]
+	We will set $n := |V| \geq 4$, fix a plane drawing of $G$. We will also assume that $V = \{1,2, \dots, n\}$ and vertices on the outer face are $1,2,3$. Goal is to have $(r_1, r_2, \dots, r_n) \in \R^n, r_i > 0$ s.t. there exists disc representation of $G$ where $i$ is represented by a disc of radius $r_i$, the disc touching a disc representing $i$ have the order given by the drawing of $G$.
+	
+	Define
+	
+	$$
+	\mathcal{R} = \left\{(r_1, r_2, \dots, r_n) \in \R^n; \underbrace{\forall i : r_i > 0}_{\text{interior}}; \underbrace{\sum_{i = 0}^n r_i = 1}_{\text{hyperplane}}\right\}
+	$$
+	
+	\noindent which is an $n-1$ simplex. Suppose $i,j,k$ forms a face of $G$, then: $\alpha_i(\overrightarrow{r},f)$ for $f = \{i,j,k\}$ face, $\overrightarrow{r} \in \mathcal{R}$ is the angle at $i$ in the triangle $i,j,k$. Total angle at $i$:
+	
+	$$
+	t_i(\overrightarrow{r}) := \sum_{f \text{ face } \ni i} \alpha_i(\overrightarrow{r}, f).
+	$$
+\end{proof}

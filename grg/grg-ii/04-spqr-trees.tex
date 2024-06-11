@@ -275,4 +275,32 @@ We remind ourselves what a planar embedding of a connected graph is: rotation sc
 	\begin{thm}
 		If every skeleton of the SPQR-tree of $G$ is embedded in a way that is not obviously wrong, then the embedding $\mathcal{G}$ of $G$ induced by these skeleton embeddings extends $\mathcal{H}$.
 	\end{thm}
+
+	\begin{proof}
+		For the two rules if they are satisfied then the extension is rather straightforward. That is if we have some cyclic order in $\mathcal{H}$ we just insert new edges in between to the new cyclic order in $\mathcal{G}$. For the outer vertex $x$ outside cycle $C$ it is even easier.
+		
+		But suppose that the first rule is not satisfied. Then in SPQR tree is unique node having three leaves in different part. This node and particularly its skeleton must have been obviously wrong.
+		
+		Now if the second rule is note satisfied then take path from $x$ towards $\bar{C}$. $y \in \bar{C}$ first met and $e,f \in \bar{C}$ having $y$ as one vertex and $g \notin \bar{C}$ be the last edge of the path. Find separation node. Let $x\in \bar{e} \notin \bar{C}$ where $\bar{e}$ is skeleton edge and $\bar{C}$ cycle in the skeleton of $C$. Then this $\mathcal{K}$ is obviously wrong embedding.
+	\end{proof}
+
+	\begin{thm}
+		There is a polynomial algorithm which for a given $\mathcal{H}$ and SPQR-tree skeleton $K$ of $G$ determines whether $K$ has an embedding which is not obviously wrong.
+	\end{thm}
+
+	\begin{proof}
+		\begin{enumerate}[I)]
+			\item If $K$ is S-skeleton: it has 1 embedding, which is never obviously wrong.
+			\item If $K$ is R-skeleton: it has 2 embeddings, so we just check the properties for both possible embeddings.
+			\item If $K$ is P-skeleton with $d \geq 3$ edges: it has $(d-1)!$ embeddings. Do the following. $E_{xy} :=$ edges of $K$ which contains edge of $H$ incident ot $x$ and also edge of $H$ incident ot $y$ in their pertinent graph.
+			
+			\begin{enumerate}[1]
+				\item Determine cyclic order of $E_{xy}$ that is not obviously wrong.
+				\item Insert into the cyclic order of $E_{xy}$ edges having an edge of $\mathcal{H}$ incident to $x$ or $y$, in a way that is not obviously wrong.
+				\item For edge if $K$ that contains no edge of $\mathcal{H}$ incident to $x$ or $y$ in its pertinent graph: insert it in a way that is not obviously wrong (if possible).
+			\end{enumerate}
+		
+			Note that if constraint related to cycle vertex position affects me, then it is because of a cycle $\bar{C}$ in $K$ where both edges pf $\bar{C}$ are in $E_{xy}$.
+		\end{enumerate}
+	\end{proof}
 \end{proof}
