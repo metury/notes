@@ -35,4 +35,36 @@ In this section we will be proving this theorem. Note that from the first observ
 	$$
 	t_i(\overrightarrow{r}) := \sum_{f \text{ face } \ni i} \alpha_i(\overrightarrow{r}, f).
 	$$
-\end{proof}
+	
+	\noindent Now we have to show two main steps which will lead to the full proof.
+	
+	\begin{enumerate}[I)]
+		\item Show that $\exists \overrightarrow{r^\ast} \in \mathcal{R} : (t_1(\overrightarrow{r^\ast}), t_2(\overrightarrow{r^\ast}), \dots, t_n(\overrightarrow{r^\ast})) = (\frac{2\pi}{3}, \frac{2\pi}{3}, \frac{2\pi}{3}, 2\pi, \dots, 2\pi)$. \label{koebe-first}
+		\item Show that there is a contact disc representation $t^\ast$ with radii $\overrightarrow{r^\ast}$. \label{koebe-second}
+	\end{enumerate}
+
+	\noindent Ad \ref{koebe-first}: Firstly define $T : \mathcal{R} \to \R^n$, defined as $T(\overrightarrow{r}) = (t_1 (\overrightarrow{r}), t_2 (\overrightarrow{r}), \dots, t_n (\overrightarrow{r}))$. Now we have the following substeps.
+	
+	\begin{enumerate}[a)]
+		\item $T$ is injective. \label{koebe-first-a}
+		\item There is a set $A \subseteq \R^n$ s.t. $\text{Im}(T) \subseteq A$. \label{koebe-first-b}
+		\item $t^\ast \in A$ \label{koebe-first-c}
+		\item $T$ is onto $A$, i.e. $\text{Im}(T) = A$. \label{koebe-first-d}
+	\end{enumerate}
+
+	\begin{observ}
+		$\alpha_i(\overrightarrow{r}, \{i,j,k\})$ is decreasing in $r_i$, increasing in $r_j, r_k$.
+	\end{observ}
+
+	\begin{notation}
+		For $I \subseteq V: F(I)$ is the set of faces of $G$ incident to at least one vertex in $I$.
+	\end{notation}
+
+	\begin{lemma}
+		$T$ is injective.
+	\end{lemma}
+
+	\begin{proof}[Proof of lemma (also step \ref{koebe-first-a})]
+		Choose $\overrightarrow{r} \in \mathcal{R}, \overrightarrow{r'} \in \mathcal{R}, \overrightarrow{r} \neq \overrightarrow{r'}, I = \{i \in V : r_i < r_i^+\}$, where $I \neq \emptyset$ and also $I \neq V$.
+	\end{proof}
+ \end{proof}
