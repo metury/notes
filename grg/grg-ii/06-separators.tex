@@ -1,1 +1,179 @@
 \chapter{Separators theorems}
+
+\begin{defn}
+	$G = (V,E)$ graph, $\alpha \in (0,1)$ an $\alpha$-separator of $G$ is a set $S \subseteq V$ s.t. every connected component of $G - S$ has size $\leq \alpha \cdot |V|$.
+\end{defn}
+
+\begin{thm}
+	Planar graphs on $n$ vertices have $2/3$ separators of size $O(\sqrt{n})$.
+\end{thm}
+
+\noindent Note that this is best possible, take $\sqrt{n} \times \sqrt{n}$ grid.
+
+\begin{proof}[Proof only for $9/10$-separator.]
+	Fix a contact disc representation for a graph $G = (V,E)$, $V = \{1,2, \dots, n\}$, vertex $i$ is represented by a disc of radius $r_i$ centered in $c_i$. Fix a disc $D$ of smallest possible radius containing at least $1/10 n$ of the points $c_1, \dots, c_n$. WLOG $D$ has radius 1 and is centered in the origin (this is done by scaling and translating). For $x \in [1,2], C_x :=$ circle of radius $x$ centered in the origin, $S_x \subseteq V: S_x = \{i, \text{disc representing } i \text{ intersects } C_x =: P_i\}$.
+	
+	\begin{claim}[1]
+		For any $x \in [1,2]$ $S_x$ is a $9/10$ separator of $G$.
+	\end{claim}
+
+	\begin{proof}[Proof of claim 1]
+		Let $V \setminus S_x = V_{\text{in}} \dot{\cup} V_{\text{out}}$ where $V_\text{in} =\{i, D_i \text{ is inside } C_x\}$ and $V_\text{out} = \{i, D_i \text{ is outside } C_x\}$. See that $|V_{\text{out}}| \leq 9/10 n$, because there are $\geq 1/10 n$ vertices $i \in V$ s.t. $c_i \in D$. Also $|V_\text{in}| \leq 9/10 n$, because the interior of $C_x$ can be covered by 9 discs of radius $< 1$, so at most $9/10 n$ vertices have centers inside $C_x$.
+	\end{proof}
+
+	\begin{claim}[2]
+		$\exists x \in [1,2] : |S_x| \leq O(\sqrt{n})$.
+	\end{claim}
+
+	\begin{proof}[Proof of claim 2]
+		Let $l := \frac{1}{\sqrt{n}}, V_\text{big} := \{i, r_i \geq l\}$ and $V_\text{small} := V \setminus V_\text{big}$. Also denote $A_x :=$ annulus of outer radius $x+l$, inner radius $x-l$. The area of $A_x = \pi (x+l)^2 - \pi(x-l)^2 = \pi ((x+l)^2 - (x-l)^2) = \pi(4xl)$.
+		
+		For $i \in S_x \cap V_{\text{big}}:$ the set $A_x \cap D_i$ contains a disc of radius $l/2$, hence the area of $A_x \cap D_i \geq \pi(l/2)^2$. So $|S_x \cap V_{\text{big}}| \leq \frac{\pi 4xl}{\pi(l/2)^2} = O(1/l) = O(\sqrt{n})$.
+		
+		Choose $x \in [1,2]$ uniformly randomly, for any $i \in V_\text{small} : \Pr [C_x \cap D_{i} \neq \emptyset] \leq 2l$. And also we have that $\E_{x \in [1,2]} [|S_x \cap V_\text{small}] \leq 2l \cdot |V_\text{small}| \leq 2ln = O(\sqrt{n})$. So for some $x \in [1,2] : |S_x| \leq O(\sqrt{n})$.
+	\end{proof}
+
+	\noindent By finishing this proof of claim we have also proven the theorem.
+\end{proof}
+
+\begin{thm}[Lee, 2017]
+	If $G = (V,E)$ is a string graph, then $G$ has a $2/3$-separator of size $O(\sqrt{|E|})$.
+	\label{lee}
+\end{thm}
+
+\noindent Note that this is best we can have. Because also $K_n$ is a string graph. We will be showing and proving something bit different though. Before we do so we will show us a simple application.
+
+Lets not so formally define what in this chapter will drawing of $G = (V,E)$ mean. We will have several rules.
+
+\begin{itemize}
+	\item No 3 edges cross in a single point.
+	\item Any 2 edges have only finitely many points of intersection, each such point is a crossing or common endpoint. Thus touching is not permitted.
+	\item No edge passing through a vertex.
+\end{itemize}
+
+\newcommand{\cros}{\textsf{cr}}
+\newcommand{\pcros}{\textsf{pcr}}
+
+\begin{defn}
+	\textbf{Crossing number} of a drawing $D$ is $\cros(D) :=$ the number of crossings in $D$. \textbf{Pair-crossing number} of a drawing $D$ is $\pcros(D) :=$ the number of pairs of edges that cross in $D$.
+\end{defn}
+
+\begin{observ}
+	$\pcros(D) \leq \cros(D)$.
+\end{observ}
+
+For a graph $G$ we will define $\cros(G) := \min \{\cros(D) | D \text{ drawing of } G\}$ and $\pcros := \min \{\pcros(D) | D \text{ drawing of } G\}$.
+
+\begin{observ}
+	$\pcros(G) \leq \cros(G)$.
+\end{observ}
+
+\begin{lemma}
+	If $D$ is a drawing of $G$ minimizing $\cros(D)$ then any two edges of $G$ cross at most once in $D$. So $\cros(D) = \pcros(D)$.
+\end{lemma}
+
+\begin{proof}
+	We will show two examples and how they can be transformed.
+	
+	\begin{figure}
+		\caption{TODO}
+	\end{figure}
+	
+	So I have contradiction since we created drawing with less crossing.
+\end{proof}
+
+But on the other hand it may happen that there exists $D'$ of $G$ s.t. $\pcros(D') < \cros(G)$.
+
+\begin{conj}
+	$\forall G: \cros(G) = \pcros(G)$.
+\end{conj}
+
+\begin{thm}
+	$\pcros(G) \leq \cros(G) \leq O(\pcros(G)^2)$.
+\end{thm}
+
+\begin{proof}
+	Fix a drawing $D$ of $G$ minimizing $\pcros(D)$. Let $E' \subseteq E$ be the set of edges that have at least one crossing in $D$. let $l := |E'|, k:= \pcros(D) = \pcros(G)$. Clearly $l \leq 2k, k \leq \binom{l}{2}$. Apply transforms from Figures \TODO{FIGURES} until we reach a drawing $D'$ in which any two edges cross at most once. Note that only edges in $E'$ can have crossing in $D$. Also $\pcros(D') \geq \pcros(D)$. But no more than $E'$ can cross.
+	
+	$$
+	\cros(G) \leq \cros(D') \leq \binom{l}{2} \leq \binom{2k}{k} = \binom{2 \pcros(G)}{2}.
+	$$
+\end{proof}
+
+\begin{thm}[? -- will not be shown]
+	$\cros(G) \leq O(\pcros^{3/2}(G))$.
+\end{thm}
+
+\begin{thm}
+	$\cros(G) \leq O(\pcros^{3/2}(G) \cdot \log (\pcros(G)))$.
+\end{thm}
+
+\begin{lemma}[Blue-red crossing lemma]
+	Let $G$ be a graph whose edges are colored blue and red, le t $D$ be a drawing of $G$. Then there is another drawing $D'$ of $G$ with these properties:
+	
+	\begin{enumerate}
+		\item The vertices are drawn in the same way in $D$ and $D'$, the edges in $D'$ are drawn in a small neighbourhood of the edges in $D$.
+		\item Any two edges in $D'$ cross at most once.
+		\item The number of blue-blue crossings in $D' \leq$ the number of blue-blue crossing in $D$.
+	\end{enumerate}
+	\label{blue-red}
+\end{lemma}
+
+\begin{proof}[Idea of the proof]
+	Perform "local" transforms so that the triple (\#BB-crossings, \#BR-crossings, \#RR-crossings) decreases.
+	
+	\begin{figure}
+		\caption{TODO}
+	\end{figure}
+\end{proof}
+
+\begin{tvrz}
+	Mějme nakreslení $D$ grafu $G$, nechť $k := \pcros(D), l :=$ počet hran, na nichž je aspoň jedno křížení v $D$, potom existuje nakreslení $D'$ grafu $G$, v němž každá hrana je nakreselnéá v malém okolí hrany $D$ a $\cros(D') \leq A^\sim k^{3/2} \cdot \log(l)$, pro nějakou konstantu $A^\sim$.
+\end{tvrz}
+
+Pro větu $D$ je min $\pcros(D)$ takže $k = \pcros(G)$ a taky $l \leq 2k$ a $k \leq \binom{l}{2}$.
+
+\begin{proof}
+	$G = (V,E)$, nakreslení $D$ dle předpokladu, $E^+ \subseteq E$ je množina hran v $D$, které mají aspoň jedno křížení. To jest $|E^+| = l$. $H = (E^+, F)$, kde $\forall e, e' \in E^+: \{e,e'\} \in F \iff e$ a $e'$ se kříží v $D$. Pozorování: $H$ je string graf a $|F| = k$.
+	
+	Nyní použijme větu \ref{lee}, která říká, že $H$ má $2/3$-separátor $S$ velikosti $\leq C \sqrt{k}$ pro konstantu $C$. Nechť $A, B$ jsou disjunktní podgrafy $H - S$ mezi nimiž nevede hrana a $|A| \leq 2/3 l, |B| \leq 2/3 l$. Nechť $k_A$ je počet dvojic hran, které se kříží v $A$, $l_A$ je počet hran, které mají v $A$ nějaké křížení. Podobně definujeme $k_B$ a $l_B$. A $A \cup B$ budou modré hrany $G$, $S$ pak budou červené hrany.
+	
+	Nyní použijeme indukci. $A$ a $B$ lze překlesit tak, že modro-modrých křížení bude $\leq A^\sim k^{3/2} \log(l) - A^\sim k^{3/2} \log(3/2)$. Použijeme lemma \ref{blue-red}: dá se překlesit tak, že počet modro-modrých křížení se nezvýší a každé dvě hrany se budou křížit nejvýš jedenkrát. Tedy počet křížení s červenými hranami bude $\leq |S| \cdot l \leq C \sqrt{k} l \leq 2 C k^{3/2} \leq A^\sim k^3/2 \log(3/2)$ lze získat pro vhodné $A^\sim$.
+\end{proof}
+
+\newcommand{\conge}{\textsf{cong}}
+\newcommand{\spars}{\textsf{spars}}
+
+\begin{proof}[Proof of \ref{lee} by Matoušek to get $O(\sqrt{|E|} \log(|V|))$]
+	 Budeme mít $G = (V,E), n = |V|, m = |E|$. Pro $\{u,v\} \in \binom{V}{2}: \mathcal{P}_{uv}$ jsou cesty z $u$ do $v$ v $G$. $\mathcal{P} := \bigcup_{u,v} \mathcal{P}_{uv}$. Potom \textbf{(multi-komodintí) tok} v $G$ je funkce $\varphi : \mathcal{P} \to [0, +\infty)$ t.ž. $\forall \{u,v\} \in \binom{V}{2} : \sum_{P \in \mathcal{P}_{uv}} \varphi(P) \geq 1$. Pro vrchol $x \in V$ a cestu $P \in \mathcal{P}$ definujeme
+	 
+	 $$
+	 w(P,x) := \left\{
+	 \begin{array}{ll}
+	 	0 & x \in P \\
+	 	1/2 & x \text{ je koncový} \\
+	 	1 & x \text{ je vnitřní}
+	 \end{array}
+	 \right..
+	 $$
+	 
+	 Zacpanost (congestion) vrcholu $x$ v toku $\varphi$ je $\conge(x,\varphi) := \sum_{P \in \mathcal{P}} \varphi(P) w(P,x)$. Zacpanost toku $\varphi$ je $\conge(\varphi) = \max_{x \in V} \conge(x, \varphi)$. Zacpanost grafu $G$ je $\conge(G) := \min_{\varphi} \conge(\varphi)$.
+	 
+	 Řez v $G$ je trojice $(S,A,B)$, kde $V = S \dot{\cup} A \dot{\cup} B$, žádná hrana nevede mezi $A$ a $B$. $A \neq \emptyset$ a $B \neq \emptyset$. ŘÍdkost (sparsity) řezu je $\spars(S,A,B) := \frac{|S|}{|S \cup A| \cdot |S \cup B|}$. Potom $\spars(G) := \min_{(S,A,B)} \spars(S,A,B)$.
+	 
+	 Plán důkazu je následující:
+	 
+	 \begin{enumerate}
+	 	\item $G \in \text{String} \Rightarrow \conge(G) = \Omega(\frac{n^2}{\sqrt{m}})$.
+	 	\item $O(\spars(G) / \log n) \leq 1 / \conge(G) \leq O(\spars (G))$.
+	 	\item Každý podgraf $G$ velikosti $\geq 2/3 n$ má $\spars \leq \alpha(n) \Rightarrow G$ má $2/3$ separátor velikost $\leq n^2 \alpha(n).$
+	 \end{enumerate}
+ 
+ 	\begin{fact}
+ 		$\cros(K_n) = \Omega(n^4)$.
+ 	\end{fact}
+ 
+ 	Mějme $G \in$ String, tok $\varphi$, který minimalizuje $\conge(\varphi)$. Mějme stringovou reprezentaci $G$, vyrobíme nakreselní $K_n$ takto: na každý "string" $G$ umístíme 1 vrchol. Pro $\{u,v\} \in \binom{V}{2}$ volme cestu $P \in \mathcal{P}_{uv}$ s pravděpodobností danou rozdělením $\varphi$. Nakreslím hranu $u \to v$ "blízko" křivek reprezentujících. $\E [\pcros]$ tohoto nakreslení $K_n$ je shora odhadnutelná pomocí $\conge(\varphi) = \conge (G)$.
+ 	
+ 	\TODO{Tohle nebylo dodělané ani na přednášce.}
+\end{proof}
