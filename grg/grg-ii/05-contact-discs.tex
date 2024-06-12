@@ -65,6 +65,132 @@ In this section we will be proving this theorem. Note that from the first observ
 	\end{lemma}
 
 	\begin{proof}[Proof of lemma (also step \ref{koebe-first-a})]
-		Choose $\overrightarrow{r} \in \mathcal{R}, \overrightarrow{r'} \in \mathcal{R}, \overrightarrow{r} \neq \overrightarrow{r'}, I = \{i \in V : r_i < r_i^+\}$, where $I \neq \emptyset$ and also $I \neq V$.
+		Choose $\overrightarrow{r} \in \mathcal{R}, \overrightarrow{r}' \in \mathcal{R}, \overrightarrow{r} \neq \overrightarrow{r}', I = \{i \in V : r_i < r_i'\}$, where $I \neq \emptyset$ and also $I \neq V$. Also denote $T(\overrightarrow{r}) =: (t_1, t_2, \dots, t_n), T(\overrightarrow{r}') =: (t_1', t_2', \dots, t_n')$.
+		
+		$$
+		\sum_{i \in I} t_i - t_i' = \underbrace{\sum_{i \in I} \sum_{f \ni i}}_{\text{switch sums}} (\alpha_i(\overrightarrow{r}, f) - \alpha_i(\overrightarrow{r}', f)) = \sum_{f \in F(I)} \underbrace{\sum_{i \in f \cap I}(\alpha_i(\overrightarrow{r}, f) - \alpha_i(\overrightarrow{r}', f))}_{\text{denote it as } s(f)}
+		$$
+		
+		\noindent We have to show that the previous sum is positive. See these subcases:
+		
+		\begin{itemize}
+			\item If $|f\cap I| = 3$, then $s(f) = 0$.
+			\item If $|f \cap I| = 1$, then $s(f) = \alpha_i(\overrightarrow{r}, f) - \alpha_i(\overrightarrow{r}', f) > 0$.
+			\item If $|f \cap I| = 2$, then $\alpha_i(\overrightarrow{r}, f) - \alpha_i(\overrightarrow{r}', f) + \alpha_j(\overrightarrow{r}, f) - \alpha_j(\overrightarrow{r}', f) = (\pi - \alpha_k(\overrightarrow{r}, f)) - (\pi - \alpha_k(\overrightarrow{r}', f)) = \alpha_k(\overrightarrow{r}', f) - \alpha_k(\overrightarrow{r}, f) > 0$.
+		\end{itemize}
+	
+		\noindent Where the inequalities hold from the observation of $\alpha$ function. Also note that one of the last two cases must occur, since $I \neq V$ nor $I \neq \emptyset$. Therefore the whole sum is $> 0$.
 	\end{proof}
+
+	\begin{defn}
+		$A := \{(t_1, t_2, \dots, t_n) \in \R^n, \sum_{i = 1}^n t_i = (2n-4)\pi, \forall I \subseteq V : 1 \leq |I| \leq n: \sum_{i \in I} t_i < \pi \cdot |F(I)|\}$ which is also an interior of n-1 dimensional polytope embedded in n dimensional space.
+	\end{defn}
+
+	\begin{lemma}[\ref{koebe-first-b}]
+		$\forall \overrightarrow{r} \in \mathcal{R} : T(\overrightarrow{r}) \in A$.
+	\end{lemma}
+
+	\begin{proof}
+		Fix $\overrightarrow{r} \in \mathcal{R}$ and denote $T(\overrightarrow{r}) =: (t_1, t_2, \dots, t_n)$.
+		
+		$$
+		\sum_{i = 1}^{n} t_i = \sum_{i = 1}^n \sum_{f \ni i} \alpha_i (\overrightarrow{r}, f) = \sum_{f \text{ face of } G} \underbrace{\sum_{i \in f} \alpha_i (\overrightarrow{r}, f)}_{\pi} = \underbrace{(2n-4)}_{\text{number of faces in triangulation}} \pi
+		$$
+		
+		$$
+		\sum_{i \in I} t_i = \sum_{i \in I} \sum_{f \ni i} \alpha_i (\overrightarrow{r}, f) = \sum_{f \in F(I)} \underbrace{\sum_{i \in f \cap I} \alpha_i (\overrightarrow{r}, f)}_{\pi \text{ if all vertices are in } I \text{ otherwise less}} < |F(I)| \cdot \pi
+		$$
+	\end{proof}
+
+	\begin{fact}[Brower: Invariance of domain theorem]
+		Let $M \subseteq \R^d$ be an open set, let $f : M \to \R^d$ be continuous and injective, then $\text{Im}(f)$ is again open (and $f^{-1} : \text{Im}(f) \to M$ is continuous).
+	\end{fact}
+
+	\noindent So $\text{Im}(T)$ is open relatively to hyperplane "$\sum t_i = (2n-4)\pi$".
+	
+	\newcommand{\rr}[1]{\overrightarrow{r}^{(#1)}}
+	
+	\begin{lemma}
+		Let $\rr{1}, \rr{2}, \dots, \rr{n}$ be a sequence in $\mathcal{R}$ whose limit is a vector $\rr{\infty}$ on the boundary of $\mathcal{R}$, let $\overrightarrow{t}^{(\infty)}$ be any accumulation point of $T(\rr{1}), T(\rr{2}), \dots$. Then $\overrightarrow{t}^{(\infty)}$ is on the boundary of $A$.
+	\end{lemma}
+
+	\begin{proof}
+		Choose $\rr{1} \in \mathcal{R}, \rr{2} \in \mathcal{R}, \dots \to \rr{\infty} \in \partial \mathcal{R} = \{(r_1, r_2, \dots, r_n) \in \R^n, \sum_{i = 1}^{n} r_i = 1, \forall i : r_i \geq 0, \exists i : r_i = 0\}$. Also set $I := \{i \in V, r_i^\infty = 0\}, \overrightarrow{t}^\infty$ be accumulation point of $(T(\rr{m}))_{m= 1}^\infty$. Goal is $\overrightarrow{t}^\infty \in \partial A =  \{(t_1, t_2, \dots, t_n) \in \R^n, \sum_{i = 1}^n t_i = (2n-4)\pi, \forall I \subseteq V : 1 \leq |I| \leq n: \sum_{i \in I} t_i \leq \pi \cdot |F(I)|, \exists I \subseteq V : \sum_{i \in I} t_i = \pi \cdot |F(I)|\}$. Then the claim is that $\sum_{i \in I} t_i^\infty = \pi |F(I)|$. Where one can see in all the subcases (1 in $I$, 2 in $I$ and 3 in $I$) it always converges to $\pi$.
+	\end{proof}
+
+	\begin{lemma}[\ref{koebe-first-d}]
+		$T$ maps $\mathcal{R}$ onto $A$.
+	\end{lemma}
+
+	\begin{proof}
+		Suppose not. Pick $t_0 := A \setminus \text{Im}(T)$, pick $t_1 \in \text{Im}(T) \subseteq A$, consider the segment $S$ from $t_1$ to $t_0$. Certainly $S \subseteq A$ since $A$ is convex. Fix a point $t_2 \in S$, s.t. $t_2$ is the closest point to $t_1$ not belonging to $\text{Im}(T)$. Consider a sequence $t_1', t_2', t_3', \dots$ on $S \cap \text{Im}(T)$ converging towards $t_2$ and let $r^{(i)} := T^{-1}(t_i')$ and let $r^\infty$ be an accumulation point of $r^{(1)}, r^{(2)}, \dots$. Either $r^\infty \in \mathcal{R}$ or $r^\infty$ is on the boundary of $\mathcal{R}$. If the former is true then $T$ is continuous on $\mathcal{R}$, $T(r^\infty) = t_2 \notin \text{Im}(T)$, which is a contradiction. If the latter is true, then obtain a contradiction with the previous lemma: $t_2$ is an (unique) accumulation point of $T(r^{(1)}), \dots$ but $t_2$ is not on the boundary of $A$.
+	\end{proof}
+
+	\noindent \textbf{Conclusion:} $\exists \rr{\ast} \in \mathcal{R}$, s.t. $T(\rr{\ast}) = (\frac{2\pi}{3}, \frac{2\pi}{3}, \frac{2\pi}{3}, 2\pi, \dots, 2\pi)$.
+	
+	\begin{claim}[\ref{koebe-second}]
+		$G$ has a disc contact representation where vertex $i$ is represented by a disc of radius $r_i^\ast$.
+	\end{claim}
+
+	\begin{proof}
+		Step 1: $G$ can be drawn so taht every edge $\{i,j\} \in E(G)$ is represented by a segment of length $r_i^\ast + r_j^\ast$. Pick a drawing of $G$. Construct (reduced) dual graph (that is vertex only for inner faces) $G^\ast$. Choose $T^\ast$ spanning tree of $G^\ast$. Represent each inner face by a triangle of correct edge lengths, for every edge $e^\ast$ of $T^\ast$ place the two triangles next to each other, so that they touch along the common edge.
+		
+		$E^-:$ edges of $G$ whose dual edges are not in $T^\ast$. Then $E^\sim := E^- \setminus \{1,2\}$ forms a spanning tree of $G$. Otherwise if there is a cycle then the dual tree does not connect the inner face of the cycle. And if it is disconnected then $T^\ast$ of the dual has a cycle.
+		
+		We need to show $\forall e \in E^\sim$ the two adjacent faces are aligned correctly. Otherwise $E^\text{bad} \subseteq E^\sim$ the set of bad aligned edges. If $E^\text{bad} \neq \emptyset$, there is a vertex $x$ with degree 1 w.r.t. $E^\text{bad}$ which is a contradiction with $t_x(\overrightarrow{r}^\ast) = 2\pi$ for $x \in V \setminus \{1,2,3\}$. So $E^\text{bad} = \emptyset$.
+		
+		Step 2: Place disc of radius $r_i^\ast$ centered in vertex $i$.
+		
+		\begin{observ}
+			If $\{i,j\} \in E(G) \Rightarrow$ the disc around $i$ and $j$ touch.
+		\end{observ}
+	
+		\begin{lemma}
+			If $\{i,j\} \notin E(G) \Rightarrow$ disc around $i$ and $j$ are disjoint.
+		\end{lemma}
+	
+		\begin{proof}
+			For any internal vertex $i$ the disc around $i$ is inside the faces incident to $i$. Also holds for $j$.
+		\end{proof}
+	
+		\noindent This proofs the claim.
+	\end{proof}
+
+	\noindent This proofs the Koebe theorem.
  \end{proof}
+
+\begin{observ}
+	Planar graphs are $\subseteq$ 2-String graphs. (Every pair can intersect at most twice.)
+\end{observ}
+
+\begin{proof}
+	Start by Koebe theorem and draw discs, then draw the outlines of the discs, which is enough for 2-String. Alternatively start by plane drawing and mark midpoints in the edges and again draw the outlines.
+\end{proof}
+
+\noindent Also we have some other results for planar graphs, mostly these will be only stated by us and proven.
+
+\begin{thm}[ex-Conjecture -- Schcinernann, 1984]
+	Planar $\subseteq$ Seg.
+\end{thm}
+
+\begin{thm}[Chalopin, Gongalves, Ochem, 2009]
+	Planar $\subseteq$ 1-String.
+\end{thm}
+
+\begin{thm}[Chalopin, Gongalves, 2010]
+	Planar $\subseteq$ Seg.
+\end{thm}
+
+\begin{thm}[Gongalves,Isenmann, Pennarun, 2018]
+	Planar $\subseteq$ L-graphs.
+\end{thm}
+
+\begin{thm}
+	$G$ is an outer planar graph \ifft $G$ has a contact representation of L-shapes, where the corners of all the L-shapes touch the line "$y = -x$".
+\end{thm}
+
+\begin{proof}
+	"$\Leftarrow$" We have the given representation. To obtain planar drawing we set the vertices to be the meeting points with the line $y = -x$. The edges will be drawn so that they will follow the L-shapes.
+	
+	"$\Rightarrow$" WLOG $G$ is maximal outer planar: $\exists$ numbering of vertices s.t. $1,2$ is an edge on the outer face. $\forall i > 2:$ is adjacent to exactly two vertices in $\{1,2, \dots, i -1\}$, the two vertices form an edge on the outer face of the subgraph induced by $1,2, \dots, i-1$. 1 will be the first, 2 the last L-shape which will touch. Every other vertex will be drawn in the middle of the two before them and draw the L-shape so they touch.
+\end{proof}
