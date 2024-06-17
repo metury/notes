@@ -263,7 +263,7 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 		A \textit{configuration} is
 		
 		\begin{enumerate}
-			\item a collection of L-curves inside the unit square $[0,1] \times [0,1]$, whose intersection graph os triangle-free
+			\item a collection of L-curves inside the unit square $[0,1] \times [0,1]$, whose intersection graph is triangle-free
 			\item a set $\{P_1, \dots, P_m\}$ of \textit{"probes"} which are pairwise disjoint rectangles inside $[0,1] \times [0,1]$ touching its bottom boundary
 			\item any L-shape from the collection intersecting a probe $P_i$ must cross it from left to right
 			\item the L-shape crossing a given probe are pairwise disjoint.
@@ -628,7 +628,7 @@ We have a given graph $G$. Then 1 robber (\textcolor{Red}{\faCircle}) and $c$ co
 \end{proof}
 
 \begin{cons}
-	If $\mathcal{C}$ is a class of graphs closed under induced subgraphs with $\cn(\mathcal{C}) = c < + \infty$, then every graph $G \in \mathcal{C}$ of girth $\geq 5$ is $c$-degenrate and henc $\chi(G) \leq c+1$.
+	If $\mathcal{C}$ is a class of graphs closed under induced subgraphs with $\cn(\mathcal{C}) = c < + \infty$, then every graph $G \in \mathcal{C}$ of girth $\geq 5$ is $c$-degenrate and hence $\chi(G) \leq c+1$.
 \end{cons}
 
 \begin{thm}[Das and Gahlawat, 2022]
@@ -754,7 +754,7 @@ We won't show this theorem. Also the lower bound is known to be 3. Also String g
 		If there is such $w$, then for $w' \in P$ on the other side of $c$ than $w$, we have $d(r,w') > d(w', c)$. Eventually, the game reaches a situation, where after every cop move $\forall w \in P : d(c,w) \leq d(r,w)$.
 	\end{proof}
 	
-	The overview of the whole strategy is to constrain the robber by two paths and use the third cop to shrinken the graph even more. We will restrict the robber to smaller and smaller subgraphs $G = G_1 \supsetneq G_2 \subsetneq G_3 \subsetneq \dots \subsetneq \emptyset$ s.t. for $G_i$:
+	The overview of the whole strategy is to constrain the robber by two paths and use the third cop to shrinken the graph even more. We will restrict the robber to smaller and smaller subgraphs $G = G_1 \supsetneq G_2 \supsetneq G_3 \supsetneq \dots \supsetneq \emptyset$ s.t. for $G_i$:
 	
 	\begin{enumerate}[I)]
 		\item There are two paths $P,Q$ each guarded by 1 cop, $G_i$ is the connected component of $G \setminus (P \cup Q)$ containing the robber. $P,Q$ share the same endpoints $x_i, y_i$ and $P$ is the shortest $x_i \to y_i$ path in $G_i \cup P \cup Q$ and $Q$ is the shortest $x_i \to y_i$ path in $G_i \cup Q$. Where $G_i \cup P \cup Q$ is the same as $G_i \cup G[P] \cup G[Q]$.

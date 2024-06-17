@@ -249,7 +249,7 @@ Before we continue with the algorithm we will take a short topological detour to
 	
 	\begin{enumerate}
 		\item $\delta_i \sim \gamma_i$ for $i = 1, \dots, n$,
-		\item $|\delta_i \cap \delta_j| = i(\gamma_i, \gamma_j)$ for $i\neg j \in \{1, \dots, n\}$. 
+		\item $|\delta_i \cap \delta_j| = i(\gamma_i, \gamma_j)$ for $i \neq j \in \{1, \dots, n\}$. 
 	\end{enumerate}
 \end{fact}
 
@@ -336,7 +336,7 @@ Sometimes when we will be talking about $\gamma_e$ for some $e \in E$ then for $
 
 \subsection{Word equations}
 
-Before we showcase the proof we will show us a quick introduction to word algebra and its equations. We will be considering an alphabet $\mathcal{A} = \{\mathtt{a}, \mathtt{b}, \mathtt{c}, \dots\}$ finite and variables $\mathcal{V} = \{X,Y, \dots\}$. Each variable $X \in V$ has prescribed length $l(X) \in \N_0$ and represents a word over $A$ of length $l(X)$.
+Before we showcase the proof we will show us a quick introduction to word algebra and its equations. We will be considering a finite alphabet $\mathcal{A} = \{\mathtt{a}, \mathtt{b}, \mathtt{c}, \dots\}$ and variables $\mathcal{V} = \{X,Y, \dots\}$. Each variable $X \in V$ has prescribed length $l(X) \in \N_0$ and represents a word over $\mathcal{A}$ of length $l(X)$.
 
 \begin{example}
 	$\mathcal{A} = \{\mathtt{a}, \mathtt{b}\}, \mathcal{V} = \{X,Y\}, l(X) = 2, l(Y) = 3$ and the equation is:
@@ -345,7 +345,7 @@ Before we showcase the proof we will show us a quick introduction to word algebr
 	XX\mathtt{a} = XY,
 	$$
 	
-	\noindent where the operation is concatenation. A simple one solution os $X := \mathtt{ba}$ and $Y := \mathtt{baa}$.
+	\noindent where the operation is concatenation. One simple solution is $X := \mathtt{ba}$ and $Y := \mathtt{baa}$.
 \end{example}
 
 We may see that having one equation or a whole system of equation is the same. As we can see here:
@@ -358,7 +358,7 @@ $$
 \end{array}
 $$
 
-Also it may be that the size od a solution can be even exponential. But there is usually a repeating pattern. We can examine the following example to see that it is indeed true.
+Also it may be that the size of a solution can be even exponential. But there is usually a repeating pattern. We can examine the following example to see that it is indeed true.
 
 $$
 \begin{array}{r c l}
@@ -414,7 +414,7 @@ Now we will return back to the claim.
 			\right. .
 			$$
 			
-			\item For every face $t = \{x,y,z\}$ of $T$ we can see that the number of connections from $xy$ to $xz$ is equal to $\frac{c_{xy} + c_{xz} - c_{xz}}{2}$, therefore we must check that the number is in $\N_0$ for every face $t$ and every pair od edges $xy, xz$.
+			\item For every face $t = \{x,y,z\}$ of $T$ we can see that the number of connections from $xy$ to $xz$ is equal to $\frac{c_{xy} + c_{xz} - c_{xz}}{2}$, therefore we must check that the number is in $\N_0$ for every face $t$ and every pair of edges $xy, xz$.
 			
 			\begin{figure}[!ht]\centering
 				\begin{tikzpicture}[main/.style = {draw, circle, thick}, e/.style = {Green, bend right = 20, line width = 2pt}]
@@ -446,7 +446,7 @@ Now we will return back to the claim.
 				\caption{Example of connecting the triangle face edges.}
 			\end{figure}
 			
-			\item Also we need to verify that this gives a correct curve $\gamma_e$, therefore no loops are present. For which we will use word equations $\mathcal{A} = \{\mathtt{a}, \mathtt{b}\}$. For every $f = \{u,v\} \in E_T$ we will introduce two variables $X_{uv}$ and $X_{vu}$ for which $l(X_{uv}) = l(X_{vu}) = c_{uv}(e)$. For every face $t = \{u,v,w\}$ and vertex $u \in t$ we will introduce variables $Y_{ut}$ and $Y_{ut}$, where $l(Y_{ut}) = l(Y_{tu}) = \frac{c_{xy} + c_{xz} - c_{xz}}{2}$. The equations will be as follows. For every $\{u,v\} = f \in E_T, f \in \partial \mathcal{S}$:
+			\item Also we need to verify that this gives a correct curve $\gamma_e$, therefore no loops are present. For which we will use word equations $\mathcal{A} = \{\mathtt{a}, \mathtt{b}\}$. For every $f = \{u,v\} \in E_T$ we will introduce two variables $X_{uv}$ and $X_{vu}$ for which $l(X_{uv}) = l(X_{vu}) = c_{uv}(e)$. For every face $t = \{u,v,w\}$ and vertex $u \in t$ we will introduce variables $Y_{ut}$ and $Y_{tu}$, where $l(Y_{ut}) = l(Y_{tu}) = \frac{c_{xy} + c_{xz} - c_{xz}}{2}$. The equations will be as follows. For every $\{u,v\} = f \in E_T, f \in \partial \mathcal{S}$:
 			
 			$$
 			X_{uv} = X_{vu} =

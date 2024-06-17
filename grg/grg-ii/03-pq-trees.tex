@@ -37,7 +37,7 @@ Now we will introduce two problems.
 \textbf{Cyclic permutation} is determined by a permutation $\pi$ and it is the set of all cyclic shifts of $\pi$. (Unformally we may draw a circle with the elements on the boundary and all cyclic permutations are when going clockwise around the circle.) We also denote $\cyc{n}{S_1, \dots, S_k}$ as the set of cyclic permutations of $[n]$ in which all the sets $S_1, \dots, S_k$ are cyclic intervals.
 
 \begin{defn}
-	A \textbf{PQ-tree} of order $n$ is an (unrooted, undirected0 tree with $n$ leaves labeled $1,2, \dots, n$ and two types of interval nodes: P-nodes \faCircle, Q-nodes \faCircle[regular], every internal node has a prescribed cyclic permutation of its neighbours.
+	A \textbf{PQ-tree} of order $n$ is an (unrooted, undirected) tree with $n$ leaves labeled $1,2, \dots, n$ and two types of interval nodes: P-nodes \faCircle, Q-nodes \faCircle[regular], every internal node has a prescribed cyclic permutation of its neighbours.
 \end{defn}
 
 \begin{defn}
@@ -118,7 +118,7 @@ Now we will introduce two problems.
 \end{thm}
 
 \begin{proof}[Construction of the PQ-tree]
-	We won't show the whole proof, but only the construction of $T$ which will be shown by an induction on $k$. For $k=0$ we create one internal P-node which has all $[n]$ leaves ordered as $1,2, \dots, n$ clockwise. Suppose for $k > 0$ we have constructed PQ-tree $T_{k-1}$ with $R_{T_{k-1}} = \cyc{n}{S_1, \dots, S_{k-1}}$. The goal is to fing $T$ with $R_T = \cyc{n}{S_1, \dots, S_k}$.
+	We won't show the whole proof, but only the construction of $T$ which will be shown by an induction on $k$. For $k=0$ we create one internal P-node which has all $[n]$ leaves ordered as $1,2, \dots, n$ clockwise. Suppose for $k > 0$ we have constructed PQ-tree $T_{k-1}$ with $R_{T_{k-1}} = \cyc{n}{S_1, \dots, S_{k-1}}$. The goal is to find $T$ with $R_T = \cyc{n}{S_1, \dots, S_k}$.
 	
 	Let $e$ be an edge in $T_{k-1}$, then $T_{k-1}-e$ has two components "substrees determined by $e$". Then subtrees is \textbf{full} if each of its leaves is in $S_k$, \textbf{empty} if none of its leaves are from $S_k$ and \textbf{mixed} otherwise. Then an edge $e$ of $T_{k-1}$ is \textbf{mixed} if both subtrees of $T_{k-1}-e$ are mixed.
 	
@@ -131,7 +131,7 @@ Now we will introduce two problems.
 	\end{proof}
 	
 	\begin{observ}
-		If there is a certex of $T_{k-1}$ incident to three or more mixed edges, then $\cyc{n}{S_1, \dots, S_k} = \emptyset$.
+		If there is a vertex of $T_{k-1}$ incident to three or more mixed edges, then $\cyc{n}{S_1, \dots, S_k} = \emptyset$.
 	\end{observ}
 	
 	Suppose mixed edges form a path $P$. Now we will show steps to create new PQ-tree.
@@ -153,7 +153,7 @@ Now we will introduce two problems.
 
 \subsection{Recognition of INT in linear time}
 
-Recall that we have already shown that INT = Chordal $\cap$ co-Co nad also $G \in$ INT $\iff$ the maximal cluques of $G$ can be arranged into a sequence $Q_1, Q_2, \dots, Q_l$ so that for every vertex $v$, the cliques containing $v$ form an interval (in the permutation of maximal cliques).
+Recall that we have already shown that INT = Chordal $\cap$ co-Co and also $G \in$ INT $\iff$ the maximal cliques of $G$ can be arranged into a sequence $Q_1, Q_2, \dots, Q_l$ so that for every vertex $v$, the cliques containing $v$ form an interval (in the permutation of maximal cliques).
 
 \begin{algorithm}[!ht]
 	\caption{Idea of the algorithm}
@@ -235,4 +235,4 @@ From now on assume that $G$ is 2-connected.
  	\end{algorithmic}
 \end{algorithm}
 
-The exact procedure of building fragments is that in the leaf we just create a single P node and all its stumps. Then by induction let al childrens have their PQ-trees. Lets take one of these PQ-trees and it has stumps which has to be connected to the current vertex and other vertices. The former vertices has to be arranged consecutive, if it is not possilbe then end. That is similar to the PQ-trees where we tried to put all free subtrees to the above part and others to the below, now it is pretty much the same. Also in this step we remember the orientation of the stumps that will be conneted to the root. This will merge to one big Q node and connect to the root which will be new P node. Also we will create such Q nodes for all childrens of the current root.
+The exact procedure of building fragments is that in the leaf we just create a single P node and all its stumps. Then by induction let all children have their PQ-trees. Lets take one of these PQ-trees and it has stumps which has to be connected to the current vertex and other vertices. The former vertices has to be arranged consecutive, if it is not possible then end. That is similar to the PQ-trees where we tried to put all free subtrees to the above part and others to the below, now it is pretty much the same. Also in this step we remember the orientation of the stumps that will be connected to the root. This will merge to one big Q node and connect to the root which will be new P node. Also we will create such Q nodes for all children of the current root.
