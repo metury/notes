@@ -250,7 +250,7 @@ We remind ourselves what a planar embedding of a connected graph is: rotation sc
 	\begin{algorithm}[!ht]
 		\begin{algorithmic}[1]
 			\State Compute SPQR-tree of $G$. This can be uniquely computed in linear time.
-			\If{$G$ is planar}
+			\If{$G$ is not planar}
 				\State \Return
 			\EndIf
 			\ForAll{skeletons}
