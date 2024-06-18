@@ -566,11 +566,13 @@ Now we will further generalize to String graphs, which will use completely new t
 
 We have a given graph $G$. Then 1 robber (\textcolor{Red}{\faCircle}) and $c$ cops (\textcolor{Green}{\faSquare}). This game is for 2 players. Both players take turns. First one plays with cops and the second with robber.
 
-\begin{itemize}[]
-	\item \textbf{Start of the game:} First player places cops on vertices of graph $G$. Then second player places the robber on some vertex.
-	\item \textbf{Single turn:} First player can with each cop either move to adjacent vertex or stay in the same one. Then the robber can move to adjacent or stay in the same vertex.
-	\item \textbf{Goal:} If both cop and robber end up in the same vertex cops have won. Alternatively robber wants to stay as long as possible.
-\end{itemize}
+\begin{box}
+	\begin{itemize}[]
+		\item \textbf{Start of the game:} First player places cops on vertices of graph $G$. Then second player places the robber on some vertex.
+		\item \textbf{Single turn:} First player can with each cop either move to adjacent vertex or stay in the same one. Then the robber can move to adjacent or stay in the same vertex.
+		\item \textbf{Goal:} If both cop and robber end up in the same vertex cops have won. Alternatively robber wants to stay as long as possible.
+	\end{itemize}
+\end{box}
 
 \begin{example}
 	We have an easy example of the given graph and robber and cops. See Fig. \ref{cops-robber}
