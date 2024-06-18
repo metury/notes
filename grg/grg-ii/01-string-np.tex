@@ -392,6 +392,7 @@ Then for LZ-encoding we replace each $X_i$ with a point to previous occurrence a
 	Here is a simple example of converting a word to LZ-factorization and then to LZ-encoding.
 	$$
 	\begin{array}{l l l l l l l l l l}
+		1 & 2 & 3 & 4 & 5 & 6 & 7
 		\mathtt{a}&\textcolor{Green}{\mathtt{a}}&\mathtt{b}&\textcolor{Blue}{\mathtt{a}}&\textcolor{Blue}{\mathtt{b}}&\mathtt{a}&\textcolor{Red}{\mathtt{a}}&\textcolor{Red}{\mathtt{b}}&\mathtt{b}&\textcolor{violet}{\mathtt{b}}\\
 		\mathtt{a}&\textcolor{Green}{X_1}       &\mathtt{b}&\textcolor{Blue}{X_2}       &                            &\mathtt{a}&\textcolor{Red}{X_3}       &                           &\mathtt{b}&\textcolor{violet}{X_4}\\
 		\mathtt{a}&\textcolor{Green}{(1,1)}     &\mathtt{b}&\textcolor{Blue}{(2,2)}     &                            &\mathtt{a}&\textcolor{Red}{(2,2)}     &                           &\mathtt{b}&\textcolor{violet}{(3,1)}\\
