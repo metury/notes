@@ -186,12 +186,11 @@ Note that from PQ-trees this can be solved in linear time $O(|V| + \sum_{v \in V
 \subsection{Planarity testing with PQ trees}
 
 \begin{mybox}{Planarity testing}
-	
+	\begin{itemize}[]
+		\item \textbf{Input:} Graph $G = (V,E)$.
+		\item \textbf{Output:} Planar embedding of $G$ or a $K_{5}$ or $K_{3,3}$ minor of $G$.
+	\end{itemize}
 \end{mybox}
-\begin{itemize}[]
-	\item \textbf{Input:} Graph $G = (V,E)$.
-	\item \textbf{Output:} Planar embedding of $G$ or a $K_{5}$ or $K_{3,3}$ minor of $G$.
-\end{itemize}
 
 For our usecase we will denote "planar embedding" as the rotation scheme, which is for any $v \in V$, cyclic order of edges incident to $v$ in a planar drawing.
 
