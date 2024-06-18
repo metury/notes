@@ -762,7 +762,7 @@ We won't show this theorem. Also the lower bound is known to be 3. And String gr
 	
 	\begin{enumerate}[I)]
 		\item There are two paths $P,Q$ each guarded by 1 cop, $G_i$ is the connected component of $G \setminus (P \cup Q)$ containing the robber. $P,Q$ share the same endpoints $x_i, y_i$ and $P$ is the shortest $x_i \to y_i$ path in $G_i \cup P \cup Q$ and $Q$ is the shortest $x_i \to y_i$ path in $G_i \cup Q$. Where $G_i \cup P \cup Q$ is the same as $G_i \cup G[P] \cup G[Q]$. \label{typeI-planar-cop}
-		\item There is a vertex $x$ s.t. $G_i$ is a component of $G-x$ containing the robber, $x$ is occupied by a cop.
+		\item There is a vertex $x$ s.t. $G_i$ is a component of $G-x$ containing the robber, $x$ is occupied by a cop. \label{typeII-planar-cop}
 	\end{enumerate}
 	
 	Now for the strategy itself. Cops will take any vertex $x$ and robber takes any vertex $y \neq x$, let $G_2$ be the component of $G - x$ containing $y$, therefore we get type II. Now consider subcases of the starting type.
