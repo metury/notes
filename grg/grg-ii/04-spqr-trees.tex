@@ -96,7 +96,7 @@ Before we show another interesting structure called SPQR-trees note that they ar
 \begin{proof}
 	By induction on $m$. For $m = 3$ we have only one type of SPQR tree which is a tree with one internal node and three nodes. In the internal node there can either be a triangle or three-parallel edges graph. But in both case we have that $3m - 6 = 9 - 6 = 3$ which is true.
 	
-	Let $m > 3$ and consider case 1: $T$ has a single internal node, then it is also fine. Case 2 consider that $T$ has 2 adjacent internal nodes $\alpha, \beta$ and $|E_\alpha| \geq 2, |E_\beta| \geq 2$. Split $G$ into: $G_\alpha$ which is formed by $E_\alpha$ plus new edge $uv$, similarly $G_\beta$ which is found by $E_\beta$ plus new edge $uv$. Where $u$ and $v$ are the split vertices between $\alpha$ and $\beta$. From these we create their separation trees, which will be made by "replacing" the second vertex by a leaf representing edge $uv$.
+	Let $m > 3$ and consider case 1: $T$ has a single internal node, then it is also fine. Case 2 consider that $T$ has 2 adjacent internal nodes $\alpha, \beta$ and $|E_\alpha| \geq 2, |E_\beta| \geq 2$. Split $G$ into: $G_\alpha$ which is formed by $E_\alpha$ plus new edge $uv$, similarly $G_\beta$ which is formed by $E_\beta$ plus new edge $uv$. Where $u$ and $v$ are the split vertices between $\alpha$ and $\beta$. From these we create their separation trees, which will be made by "replacing" the second vertex by a leaf representing edge $uv$.
 	
 	By "disconnecting" edge $\alpha\beta$ in $T$ we obtain separation trees $T_\alpha, T_\beta$ for $G_\alpha, G_\beta$ respectively. Let $k := |E_\alpha|, m -k := |E_\beta|$ and $G_\alpha$ has $k+1$ edges and $G_\beta$ has $m-k+1$ edges.
 	
