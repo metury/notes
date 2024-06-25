@@ -338,7 +338,7 @@ Keep in mind that there are two special cases that are usualy called \textit{tri
 	"$\Leftarrow$" Let $F = P \cap \{x | a_{i}^{T} x = b\}$. Then claim $F$ is a face can be seen by setting $c := \sum_{i \in I} a_{i}$ and $\delta := \sum_{i \in I} b_{i}$. See that $c^{T} x \leq \delta$ is valid and it prescribe a face.
 \end{proof}
 
-\begin{fact}[Complementarity]
+\begin{fact}[Complementarity]\label{complementarity}
 	For LP $\max c^{T}x$ s.t. $A x \leq b$ and its dual $\min b^{T} y$ s.t. $A^{T} y = c, y \geq 0$. Let $x^{\ast}$ and $y^{\ast}$ be primal (dual) optimum solutions, then if $y_{i}^{\ast} > 0$ then $a_{i}^{T} x^{\ast} = b_{i}$.
 \end{fact}
 
