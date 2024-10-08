@@ -28,7 +28,7 @@ $$
 T := \vert \bar{X}_m - \bar{Y}_n \vert
 $$
 
-We pick a paramater $\gamma$ and if $T \geq \gamma$ then we reject $H_0$. In order to decide $\gamma$, we want our test to be statistically significant. Hence the following must hold: \newline $Pr[\text{wrong rejection} ] < \alpha = 0.05$
+We pick a paramater $\gamma$ and if $T \geq \gamma$ then we reject $H_0$. In order to decide $\gamma$, we want our test to be statistically significant. Hence the following must hold: $Pr[\text{wrong rejection} ] < \alpha = 0.05$
 
 So we will compute $\gamma$ based on the set of all measured values. Next, the observations of groups $X$ and $Y$ are pooled, and the difference in sample means is calculated and recorded for every possible way of dividing the pooled values into two groups of size $\vert X \vert$ and $\vert Y \vert$. The set of these calculated differences is the exact distribution of possible differences under the null hypothesis that group labels are exchangeable.The p-value of the test is calculated as the proportion of sampled permutations where the difference in means was greater than $T$.
 
