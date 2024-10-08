@@ -95,7 +95,7 @@ $$
 \end{proof}
 
 \begin{definice}
-	Nechť $A_{1}(x), A_{2}(x), \dots$ je posloupnost FMŘ řeknu, že součet $A_{1}(x) + A_{2}(x) + \dots$ je \textbf{konvergentní}, pokud $\forall n \in \mathbb{N}_{0}$ existuje jen konečně mnoho indexů $j \in \mathbb{N}_{0}$ takových, že $[x^{n}]A_{j}(x) \neq 0$. V takovém případě pak definuji $A_{1}(x) + A_{2}(x) + A_{3}(x) + \dots$ jako FMŘ $S(x) \in \mathbb{R}[|x|]$ splňující (jen konečně mnoho nenul):
+	Nechť $A_{1}(x), A_{2}(x), \dots$ je posloupnost FMŘ řeknu, že součet $A_{1}(x) + A_{2}(x) + \dots$ je \textbf{konve-\newline rgentní}, pokud $\forall n \in \mathbb{N}_{0}$ existuje jen konečně mnoho indexů $j \in \mathbb{N}_{0}$ takových, že $[x^{n}]A_{j}(x) \neq 0$. V takovém případě pak definuji $A_{1}(x) + A_{2}(x) + A_{3}(x) + \dots$ jako FMŘ $S(x) \in \mathbb{R}[|x|]$ splňující (jen konečně mnoho nenul):
 	
 	$$
 	\forall n \in \mathbb{N}_{0}: [x^{n}]S(x) := [x^{n}]A_{1}(x) + [x^{n}]A_{2}(x) + [x^{n}]A_{3}(x) + \dots
@@ -114,7 +114,13 @@ $$
 	Pokud $b_{0} =0$, tak $B(x) = b_{1}x + b_{2}x^{2} + b_{3}x^{3} + \dots = x (b_{1} + b_{2} x + b_{3} x^{2} + \dots)$ a tedy $B^{n}(x) = x^{n}(b_{1} + b_{2} x + b_{3} x^{2} + \dots)$ má nulové koeficienty stupňů $0,1,2,3,4, \dots, n-1$.
 \end{pozn}
 
-Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall n \in \mathbb{N}_{0}$ pouze sčítance $a_{0}, a_{1}B(x, a_{2} B^{2}(x), \dots, a_{n}B^{n}(x)$ mohou mít nenulový koeficient u $x^{n}$.
+Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall n \in \mathbb{N}_{0}$ pouze sčítance 
+
+$$
+a_{0}, a_{1}B(x, a_{2} B^{2}(x), \dots, a_{n}B^{n}(x)
+$$
+
+\noindent mohou mít nenulový koeficient u $x^{n}$.
 
 \begin{definice}
 	\textbf{Kombinatorická třída} je množina $\mathcal{A}$ taková, že každý prvek $\alpha \in \mathcal{A}$ má definovanou velikost $|\alpha| \in \mathbb{N}_{0}$ a pro každé $n \in \mathbb{N}_{0}, \mathcal{A}$ má jen konečně mnoho prvků velikosti $n$. Značení: $\mathcal{A}_{n}:=\{\alpha \in \mathcal{A}; |\alpha| = n\}$.
@@ -200,7 +206,7 @@ Součet $A(B(x)) = a_{0} + a_{1}B(x) + a_{2}B^{2}(x) + \dots$, protože $\forall
 \end{pozor}
 
 \begin{definice}
-	\textbf{Labelovaný součin} $\mathcal{A} \otimes \mathcal{B}$ labelovaných kombinačních tříd $\mathcal{A}, \mathcal{B}$ je labelo-\newline vaná kombinační třída $\{(\alpha, \beta); \alpha \in \mathcal{A}, \beta \in \mathcal{B}, V(\alpha) \cap V(\beta) = \emptyset\}$, kde $V((\alpha, \beta)) := V(\alpha) \cup V(\beta)$.
+	\textbf{Labelovaný součin} $\mathcal{A} \otimes \mathcal{B}$ labelovaných kombinačních tříd $\mathcal{A}, \mathcal{B}$ je labelovaná kombinační třída $\{(\alpha, \beta); \alpha \in \mathcal{A}, \beta \in \mathcal{B}, V(\alpha) \cap V(\beta) = \emptyset\}$, kde $V((\alpha, \beta)) := V(\alpha) \cup V(\beta)$.
 \end{definice}
 
 \begin{tvrz}

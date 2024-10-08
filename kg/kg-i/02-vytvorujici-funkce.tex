@@ -30,25 +30,20 @@ Obecný postup:
 	\item určení hodnoty
 \end{enumerate}
 
-
-\begin{table}[!h]\centering
-	\begin{tabular}{| l | l | l |}
-		\hline
-		Operace & Posloupnosti & Funkce \\
-		\hline
-		Součet                   & $(a_0+b_0, a_1+b_1, \dots)$                        & $(a+b)(x) = \sum_{i=0}^{\infty}(a_i+b_i)x^i$ \\
-		$\alpha$-násobek         & $(\alpha a_0, \alpha a_1, \dots)$                  & $\alpha a(x) = \sum_{i=0}^{\infty}(\alpha a_i)x^i$ \\
-		Posun vpravo o $n$ pozic & $(0,0,\dots ,a_0, a_1, \dots)$                     & $x^na(x)\sum_{i=0}^{\infty}a_ix^{i+n}$ \\
-		Posun vlevo o $n$ pozic  & $(a_n, a_{n+1}, dots )$                            & $\sum_{i=0}^{\infty}(a_{i+n}x^i = \frac{a(x) - \sum_{i=0}^{\infty}a_ix^i}{x^n}$ \\
-		Dosazení $\alpha x$      & $(a_0, \alpha a_1, \alpha^2 a_2, \dots)$           & $a(\alpha x) = \sum_{i=0}^{\infty}a_i+ \alpha^i x^i$ \\
-		Dosazení $x^n$           & $(a_0, 0, \dots, 0, a_1, 0, \dots)$ & $a(x^n) = \sum_{i=0}^{\infty}a_ix^ni$ \\
-		Derivace                 & $(a_1, 2a_2, 3a_3, \dots)$                         & $a'(x) = \sum_{i=1}^{\infty}ia_ix^{i-1}$ \\
-		Integrál                 & $(0, a_0, \frac{a_1}{2}, \frac{a_2}{3}, \dots)$    & $\int_{0}^{x} a(x) \mathtt{d} x = \sum_{i=0}^{\infty}\frac{a_i}{i+1}x^{i+1}$ \\
-		Součin                   & $(c_0, c_1, c_2, \dots)$                           & $a(x)b(x) = \sum_{i=0}^{\infty}(c_i)x^i$ \\
-		\hline
-	\end{tabular}
-\end{table}
-
+$$
+\begin{array}{l c c}
+	\text{\textit{Operace}}                & \text{\textit{Posloupnosti}}                     & \text{\textit{Funkce}} \\
+	\text{Součet}                          & (a_0+b_0, a_1+b_1, \dots)                        & (a+b)(x) = \sum_{i=0}^{\infty}(a_i+b_i)x^i \\
+	\alpha\text{-násobek}                  & (\alpha a_0, \alpha a_1, \dots)                  & \alpha a(x) = \sum_{i=0}^{\infty}(\alpha a_i)x^i \\
+	\text{Posun vpravo o } n \text{ pozic} & (0,0,\dots ,a_0, a_1, \dots)                     & x^na(x)\sum_{i=0}^{\infty}a_ix^{i+n} \\
+	\text{Posun vlevo o } n \text{ pozic}  & (a_n, a_{n+1}, dots )                            & \sum_{i=0}^{\infty}(a_{i+n}x^i = \frac{a(x) - \sum_{i=0}^{\infty}a_ix^i}{x^n} \\
+	\text{Dosazení } \alpha x              & (a_0, \alpha a_1, \alpha^2 a_2, \dots)           & a(\alpha x) = \sum_{i=0}^{\infty}a_i+ \alpha^i x^i \\
+	\text{Dosazení } x^n                   & (a_0, 0, \dots, 0, a_1, 0, \dots)                & a(x^n) = \sum_{i=0}^{\infty}a_ix^ni \\
+	\text{Derivace}                        & (a_1, 2a_2, 3a_3, \dots)                         & a'(x) = \sum_{i=1}^{\infty}ia_ix^{i-1} \\
+	\text{Integrál}                        & (0, a_0, \frac{a_1}{2}, \frac{a_2}{3}, \dots)    & \int_{0}^{x} a(x) \mathtt{d} x = \sum_{i=0}^{\infty}\frac{a_i}{i+1}x^{i+1} \\
+	\text{Součin}                          & (c_0, c_1, c_2, \dots)                           & a(x)b(x) = \sum_{i=0}^{\infty}(c_i)x^i \\
+\end{array}
+$$
 \section{Řešení rekurentních rovnic}
 
 Ukázka na Fibonacciho čísle. Určíme $F_n$ jako koeficient funkce $F(x)=\sum_{i=0}^{\infty}F_ix^i$. Máme $F_{n+2} = F_{n+1} + F_{n}, \forall n\geq 0$. \textbf{Vynásobíme rovnici $x^n$:} $F_{n+2} x^n= F_{n+1} x^n + F_{n} x^n$.\textbf{Sčítáme přes $n \geq 0$:} $\sum_{n \geq 0} F_{n+2} x^n= \sum_{n \geq 0} F_{n+1} x^n + \sum_{n \geq 0} F_{n} x^n$ to se rovná:
