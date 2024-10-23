@@ -6,7 +6,7 @@ RES_DELETE_FILES = $(addprefix res/, $(DELETE_FILES))
 all: res/venn.pdf temno.pdf
 
 view:
-	firefox fpc.pdf
+	xdg-open fpc.pdf
 
 temno.pdf: temno.tex
 	$(LUALATEX) temno.tex

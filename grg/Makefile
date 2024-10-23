@@ -8,7 +8,7 @@ GRG2_DELETE_FILES = $(addprefix grg-ii/, $(DELETE_FILES))
 all: res/filament.pdf grg.pdf
 
 view:
-	firefox grg.pdf
+	xdg-open grg.pdf
 
 grg.pdf: grg.tex
 	$(LUALATEX) grg.tex

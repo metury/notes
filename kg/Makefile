@@ -9,7 +9,7 @@ KG2_DELETE_FILES = $(addprefix kg-ii/, $(DELETE_FILES))
 all: res/tree.pdf kg.pdf
 
 view:
-	firefox grg.pdf
+	xdg-open grg.pdf
 
 kg.pdf: kg.tex
 	$(LUALATEX) kg.tex

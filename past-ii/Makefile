@@ -6,7 +6,7 @@ RES_DELETE_FILES = $(addprefix res/, $(DELETE_FILES))
 all: res/past-ii.pdf past-ii.pdf
 
 view:
-	firefox past-ii.pdf
+	xdg-open past-ii.pdf
 
 past-ii.pdf: past-ii.tex
 	$(LUALATEX) past-ii.tex

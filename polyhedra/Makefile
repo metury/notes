@@ -6,7 +6,7 @@ RES_DELETE_FILES = $(addprefix res/, $(DELETE_FILES))
 all: res/polytope.pdf polyhedra.pdf
 
 view:
-	firefox polyhedra.pdf
+	xdg-open polyhedra.pdf
 
 polyhedra.pdf: polyhedra.tex
 	$(LUALATEX) polyhedra.tex
