@@ -1,1 +1,24 @@
 \chapter{Introduction to Steiner systems}
+
+\section{Simple hypergraphs}
+
+\begin{defn}
+	Hypergraph is a tuple $(X, \M)$ where $\M \subseteq \mathcal{P}(X)$. Or generally just a set system.
+\end{defn}
+
+\begin{defn}
+	A simple hypergraph (linear, $k$-graph) is $(X,\M)$ if $M_1 \neq M_2 \in \M \Rightarrow |M_1 \cap M_2| \leq 1$.
+\end{defn}
+
+\begin{example}
+	Lets see some of the easier examples of simple hypergraphs.
+	
+	\begin{itemize}
+		\item Graphs themselves are simple hypergraphs. Where $(X, \M)$ and $\M \subseteq \binom{X}{2}$.
+		\item Or generally $k$-graphs, where $\M \subseteq \binom{X}{k}$.
+		\item A well known Fano plane, see picture \ref{fano-plane}.
+		\item Lets have a set of points $A$ and define $X = \binom{A}{2}$; which are edges in $A$ and $\M = \{\binom{T}{2} | |T| = 3, T \subseteq A\}$; which are triangles in $A$. This is also simple.
+	\end{itemize}
+\end{example}
+
+\TODO{Finish the first two lectures.}
