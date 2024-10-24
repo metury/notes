@@ -95,7 +95,14 @@ Lets firstly start by taking 4 points, so we are trying to create a smallest pos
 We can also apply to this to other starting points. We may see the result of applying to $3 \times 3$ grid of points and resulting in a projective plane depicted on picture \ref{3by3}.
 
 \begin{figure}[!h]\centering
-	\caption{Creating a projective plane from $3 \times 3$ grid.}
+	\begin{tikzpicture}[scale=1]
+		\foreach \j in {1,...,3} {
+			\foreach \i in {1,...,3} {
+				\node[draw, circle, fill, inner sep=1.5pt] (\j-\i) at (2*\j,2*\i) {};
+			}
+		}
+	\end{tikzpicture}
+\caption{Creating a projective plane from $3 \times 3$ grid.}
 	\label{3by3}
 \end{figure}
 
