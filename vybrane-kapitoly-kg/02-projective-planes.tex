@@ -397,3 +397,37 @@ We may now ask ourselves if this is the most number of pairwise orthogonal latin
 \end{proof}
 
 \section{Another application of projective planes}
+
+Lets now take a graph $G = (V,E)$ and suppose that we forbid $K_3$ being a subgraph of $G$. Then by either Turán's result we get that $|E| \leq \frac{n^2}{4}$ when $|V| = n$ or we look at graph $K_{n/2,n/2}$ which is also sufficient. Similarly look at the example if we forbid $K_4$ being a subgraph of $G$, then $|E| \leq O(n^3)$. Which can also be seen by Turán's result or looking at a graph which has two parts $V_1, V_2, V_3$ and all three has close to $n/3$ vertices and edges are only going between these parts. On the other hand if we forbid $C_4$ being a subgraph of $G$ then we obtain much smaller bound, which is $|E| \leq O(n^{3/2})$. Which is somewhat not expected and was proved by Erdos in 1940.
+
+\begin{prop}
+	For a graph $G = (V,E)$ and $n = |V|$ if $C_4 \not\subseteq G$ then $|E| \leq c \cdot n^{3/2}$ for some constant $c \in \R$.
+\end{prop}
+
+\begin{proof}
+	We will be counting the pairs $(v, \{v_1,v_2\})$ which are sometimes called forks. When counting from the tuple side we get that we have $\binom{n}{2}$ such pairs and for each such pair there can be at most 1. Otherwise we will have $C_4$.
+	
+	When we count from the other side we et that $\sum_{v \in V} \binom{\deg(v)}{2}$. Therefore when combining it we obtain the following inequality
+	
+	$$
+	\sum_{v \in V} (\deg(v) -1)^2 \leq \sum_{v \in V} \binom{\deg(v)}{2} \leq \binom{n}{2} \leq n^2.
+	$$
+	
+	Now lets use Cauchy-Schwarz: $\sum x_i y_i = \sqrt{\sum x_i^2} \sqrt{\sum y_i^2}$. And substitute $x_i = \deg(v) -1$ and $y_i = 1$.
+	
+	$$
+	2 \cdot |E| - n = \sum \deg(v) - 1 \leq \sqrt{n^2} \sqrt{n} = n^{3/2}
+	$$
+	
+	And therefore $|E| \leq \frac{n^{3/2} + n}{2}$.
+\end{proof}
+
+\begin{prop}
+	The previous upper bound is tight.
+\end{prop}
+
+\begin{proof}
+	Lets take a projective plane of order $q$. So we have a hypergraf $(X, \M)$ where $|X| = q^2 + q + 1 = |\M|$ where $\M \subseteq \binom{X}{k}$ for $k = q +1$.
+	
+	\TODO{Finish the proof and the rest of the lecture.}
+\end{proof}
