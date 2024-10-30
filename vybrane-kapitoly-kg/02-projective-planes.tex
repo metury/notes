@@ -158,3 +158,40 @@ Lastly see the table of known results.
 		Fano plane & Shown & & No plane in 1900. & & & & & Computer search. & & OPEN
 	\end{tabular}
 \end{table}
+
+\section{Latin squares}
+
+Lets now jump to another topic which is related to the projective planes. Latin squares are pretty much generalized sudoku.
+
+\begin{defn}
+	Latin square of order $n$ is a table $A$ of size $n \times n$, where every entry of $A$ is from a collection of $n$ items (we will assume it is $n$ numbers). Then there are two constraints:
+	
+	\begin{enumerate}
+		\item Every column has distinct entries.
+		\item Every row has distinct entries.
+	\end{enumerate}
+\end{defn}
+
+Note that the table may represent how the multiplication in an inverse grupoid is defined. Now lets establish the connection to projective planes. If we have a projective plane of order $q$, then by taking one line we say that taking element from such line will be $i$ and for another line we will take it as $j$. Then the element for which connect is $k$ and hence $a_{ij} = k$. But note that there is more choices of the other lines, therefore we have much more latin squares.
+
+\begin{defn}
+	Two latin squares $L,L'$ are said to be orthogonal; $L \perp L'$ if $\forall k,k' \exists! i,j$ such that $a_{ij} =k, a_{ij}' = k'$. (Or in other words pairs are unique.)
+\end{defn}
+
+Therefore we may see that the existence of projective plane or order $q$ lead to $q-1$ pairwise orthogonal latin squares.
+
+\begin{prop}
+	$q-1$ pairwise orthogonal latin squares exists \ifft projective plane $\text{PG}(1)$ exists.
+\end{prop}
+
+We may now ask ourselves if this is the most number of pairwise orthogonal latin squares of order $q$. See that this can be viewed only from the perspective of permutations.
+
+\begin{prop}
+	There can be at most $q-1$ pairwise orthogonal latin squares of order $q$.
+\end{prop}
+
+\begin{proof}
+	Lets assume we have $t$ pairwise orthogonal latin squares $L^1, L^2, \dots, L^t$. Lets denote $L^r = (a_{ij}^r)$. Now we will change the labeling. For all squares set $a_{1j}^r = j$  for all $r \in [t]$, so first row is identity. Now check that $a_{21}^r$ has to differ from 1, and also due to the orthogonality we have from the first row all pairs $(i,i)$, therefore $a_{21}^{r+1}$ has to differ from $a_{21}^{k}$ for $1 \leq k \leq r$. Hence $t \leq q-1$.
+\end{proof}
+
+\section{Another application of projective planes}
