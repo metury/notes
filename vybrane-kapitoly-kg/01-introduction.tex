@@ -21,4 +21,80 @@
 	\end{itemize}
 \end{example}
 
-\TODO{Finish the first two lectures.}
+Lets also define a chromatic number of such hypergraphs as:
+
+$$
+\chi (X,\M) := \min \{k | \exists \bigcup_{i=1}^k X_i = X \text{ and no } X_i \text{ contains } M \in \M\}.
+$$
+
+\noindent In other words: At least two "colors" for each $M \in \M$. And by Ramsey theory we may state that $\forall k \ \exists X: \chi(X,\M) > k$.
+
+\begin{example}
+	For fixed $k \in \N$ we have $k$ committees, each of them has $k$ members and they are meeting in a room with $k$ seats. Any two committees are disjoint. Can someone sit at the same place? And how many of them? -- This was stated by Erdos, Faber and Lovász in 1972.
+\end{example}
+
+\begin{thm}[Kuhn, Osthus, Kang, Kelly, Methuku, 2023]
+	Showed that the previous example is true for large $k$.
+\end{thm}
+
+And some different formulation is by using simple hypergraphs. Lets have simple hypergraf $(X,\M)$ where $|\M| = k$ and line chromatic number $\leq k$. That is coloring the edges instead. If they meet they have to be distinct.
+
+\begin{prop}
+	$\chi_l (K_{2k}) = 2k-1$ for $k \in \N$.
+\end{prop}
+
+\begin{proof}[Sketch of proof]
+	Lets draw the graph, so the vertices are on a circle. Then take the edges across in the same direction and one from the inside of the circle to the boundary and color them. Then rotate and color once again, until colored.
+\end{proof}
+
+\section{Dual hypergraphs}
+
+Lets now define a dual hypergraphs, which may not be so intuitive at a first glance. Lets see a picture \ref{dual-hg} showing the incidence graph for $(X,\M)$. Then the dual is obtained by switching the parts of $(X, \M)$ and $(\M',X')$. Lets denote the dual of $(X,\M)$ as $d(X,\M)$.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}
+		\draw (0,0) to (6,0);
+		\draw (0,3) to (6,3);
+		\node (X) at (6.5,0) {$\M$};
+		\node (M) at (6.5,3) {$X$};
+		\draw (2,0) -- (1,3) node[midway, below, left] {$\in$};
+		\draw (2,0) -- (2,3);
+		\draw (2,0) -- (3,3);
+		\draw (2,0) -- (4,3);
+		\node (M) at (2,-.2) {$M$};
+		\node (x1) at (1,3.2) {$x_1$};
+		\node (x2) at (2,3.2) {$x_2$};
+		\node (x3) at (3,3.2) {$x_3$};
+		\node (x4) at (4,3.2) {$x_4$};
+	\end{tikzpicture}
+	\caption{Diagram for the dual hypergraph.}
+	\label{dual-hg}
+\end{figure}
+
+\begin{lemma}
+	$(X,\M)$ is simple \ifft $d(X,\M)$ is simple.
+\end{lemma}
+
+\begin{proof}[Proof by picture]
+	For the proof see the picture \ref{simple-dual-hg}. This $C_4$ like structure happens if it is not simple and hence when we flip the diagram, obtaining the dual, the diagram does not change.
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}
+			\draw (0,0) to (6,0);
+			\draw (0,3) to (6,3);
+			\node (X) at (6.5,0) {$\M$};
+			\node (M) at (6.5,3) {$X$};
+			\draw (2,0) -- (2,3);
+			\draw (4,0) -- (4,3);
+			\draw (2,0) -- (4,3);
+			\draw (4,0) -- (2,3);
+			\node (M1) at (2,-.2) {$M_1$};
+			\node (M2) at (4,-.2) {$M_2$};
+			\node (x1) at (2,3.2) {$x_1$};
+			\node (x2) at (4,3.2) {$x_2$};
+		\end{tikzpicture}
+		\caption{Simple dual graphs proof.}
+		\label{simple-dual-hg}
+	\end{figure}
+\end{proof}
+
+Now lets denote $A(X,\M)$ as an incidence matrix of a given hypergraph, then the dual has incidence matrix $A(d(X,\M)) = A^T(X,\M)$.

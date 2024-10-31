@@ -509,3 +509,15 @@ Now consider this following problem. How many blocks (or hyperedges) can you fin
 \end{thm}
 
 Erdös and Hanani stated this problem and in 1985 V. Rödl solved this problem and proved, that it really holds. He proved it by a method which later on was called Rödl \textbf{nibbling}, which is also essential in Keevash.
+
+\begin{example}
+	We have 15 schoolgirls, 7 days in a week and we want to form a groups of 3. Moreover we want that every pair will be together in a group in exactly one day. We may only compute the value
+	
+	$$
+	\frac{\binom{15}{2}}{\binom{3}{2}} = \frac{105}{3} = 35
+	$$
+	
+	\noindent and so it is solvable.
+\end{example}
+
+Generally we would like to check if for a hypergraf $(X, \M)$ there exists $\M = \bigcup_i M_i$ where $M_i$ is exactly matching of size $2l+1$.
