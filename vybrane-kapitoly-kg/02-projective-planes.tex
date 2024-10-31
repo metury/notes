@@ -427,7 +427,79 @@ Lets now take a graph $G = (V,E)$ and suppose that we forbid $K_3$ being a subgr
 \end{prop}
 
 \begin{proof}
-	Lets take a projective plane of order $q$. So we have a hypergraf $(X, \M)$ where $|X| = q^2 + q + 1 = |\M|$ where $\M \subseteq \binom{X}{k}$ for $k = q +1$.
+	Lets take a projective plane of order $q$. So we have a hypergraf $(X, \M)$ where $|X| = q^2 + q + 1 = |\M|$ where $\M \subseteq \binom{X}{k}$ for $k = q +1$. Draw a diagram, where one line is for elements from $\M$ and the other are from $X$. See the picture \ref{tight-upper-pf}. And we can see that the red drawing cannot happen since it will induce $C_4$.
 	
-	\TODO{Finish the proof and the rest of the lecture.}
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[r/.style = {red}]
+			\draw (0,0) to (6,0);
+			\draw (0,3) to (6,3);
+			\node (X) at (6.5,0) {$X$};
+			\node (M) at (6.5,3) {$\M$};
+			\draw (2,0) -- (1,3) node[midway, right] {$\in$};
+			\node (x) at (2,-.2) {$x$};
+			\node (L) at (1,3.2) {$L$};
+			
+			\draw[r] (4,0) -- (4,3);
+			\draw[r] (5,0) -- (5,3);
+			\draw[r] (4,0) -- (5,3);
+			\draw[r] (5,0) -- (4,3);
+			
+			\node[r] (x1) at (4,-.2) {$x_1$};
+			\node[r] (x2) at (5,-.2) {$x_2$};
+			\node[r] (L1) at (4,3.2) {$L_1$};
+			\node[r] (L2) at (5,3.2) {$L_2$};
+		\end{tikzpicture}
+		\caption{Diagram for the proof.}
+		\label{tight-upper-pf}
+	\end{figure}
+	
+	Therefore we have that $|E| = |\M| \cdot (q - 1) = q^3 + \dots$ and $|V| \sim 2(q^2 + q + 1)$ therefore it is tight.
 \end{proof}
+
+\section{Existence of BIBD}
+
+Now lets get back to BIBD and if one exists with parameters $(n,k,\lambda,t)$. Recall that we have steiner triple systems $(n,3,1,2)$ and we can further generalize it to \textbf{Steiner system} which is for $\lambda = 1$; i.e. $(n,k,1,2)$. It is known that $(n,4,1,2)$ and $(n,5,1,2)$ exist non-trivial Steiner system, but for $k > 6$ it is not known.
+
+\begin{thm}[P. Keevash]
+	$\forall k, \lambda, t \ \exists n_0$ s.t. BIBD $(n,k,\lambda, t)$ where $n > n_0$ exists \ifft Integrality conditions hold. Integrality conditions are the following.
+	
+	$$
+	\lambda \frac{\binom{n - i}{k-i}}{\binom{k-i}{t-i}} \ \text{for all } i \in [t-1] \text{ has to be integers.}
+	$$
+\end{thm}
+
+\begin{proof}[Proving that integrality conditions are necessary]
+	Lets again draw a simple diagram, which can be seen on picture \ref{nec-integr-cond}. Then each such $T$ is in $\lambda$ $M$'s and $M$ is in $\binom{k}{t}$ number of $T$'s. Now lets fix a point $x$ and set $\M' = \{M \in \M; |M \cap X| > 0\}$ and also in the same way $T' = \{T \in \binom{X}{t}; |T \cap X| > 0\}$. And vice versa for all numbers, not just zero.
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}
+			\draw (0,0) to (6,0);
+			\draw (0,3) to (6,3);
+			\node (X) at (6.5,0) {$\binom{X}{t}$};
+			\node (M) at (6.5,3) {$\M$};
+			\draw (2,0) -- (1,3) node[midway, below, left] {$\subseteq$};
+			\draw (2,0) -- (2,3);
+			\draw (2,0) -- (3,3);
+			\node (T) at (2,-.2) {$T$};
+			\node (M) at (5,3.2) {$M$};
+			
+			\draw (3,0) -- (5,3);
+			\draw (5,0) -- (5,3);
+			\draw (4,0) -- (5,3);
+		\end{tikzpicture}
+		\caption{Diagram for the proof.}
+		\label{nec-integr-cond}
+	\end{figure}
+\end{proof}
+
+Note that $n_0$ is dependent on all $k,\lambda,t$. So for answering the question if $(k^2 + k +1, k+1, 1, 2)$ exists we cannot do much.
+
+Now consider this following problem. How many blocks (or hyperedges) can you find so that every tuple is in \textbf{at most} $\lambda$ sets? See that we exchanged equality for an inequality.
+
+\begin{defn}
+	Lets define a function $m :=$ maximum number of such blocks.
+\end{defn}
+
+\begin{thm}[Erdos, Hanani]
+	$\forall \epsilon$
+\end{thm}
