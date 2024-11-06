@@ -51,40 +51,52 @@ Lets firstly start by taking 4 points, so we are trying to create a smallest pos
 
 \begin{figure}[!h]\centering
 	\begin{subfigure}{0.4\textwidth}\centering
-		\begin{tikzpicture}[n/.style = {draw, circle, fill, inner sep=1.5pt}]
+		\begin{tikzpicture}[scale=1, l/.style = {line width=2pt},
+			n/.style = {draw, circle, fill, inner sep=1.5pt},
+			o/.style = {Melon},
+			r/.style = {WildStrawberry},
+			b/.style = {CornflowerBlue},
+			g/.style = {PineGreen},
+			p/.style = {Violet}]
 			\node[n] (1) at (0,0) {};
 			\node[n] (2) at (0,2) {};
 			\node[n] (3) at (2,0) {};
 			\node[n] (4) at (2,2) {};
-			\draw[color=Blue, thick] (1) to (2);
-			\draw[color=Blue, thick] (3) to (4);
-			\draw[color=Green, thick] (2) to (3);
-			\draw[color=Green, thick] (1) to (4);
-			\draw[color=RedOrange, thick] (1) to (3);
-			\draw[color=RedOrange, thick] (2) to (4);
+			\draw[l,b] (1) to (2);
+			\draw[l,b] (3) to (4);
+			\draw[l,g] (2) to (3);
+			\draw[l,g] (1) to (4);
+			\draw[l,r] (1) to (3);
+			\draw[l,r] (2) to (4);
 		\end{tikzpicture}
 		\caption{Starting box with 6 lines and 4 points.}
 		\label{fano-plane-start}
 	\end{subfigure}
 	\begin{subfigure}{0.4\textwidth}\centering
-		\begin{tikzpicture}[n/.style = {draw, circle, fill, inner sep=1.5pt}]
+		\begin{tikzpicture}[scale=1, l/.style = {line width=2pt},
+			n/.style = {draw, circle, fill, inner sep=1.5pt},
+			o/.style = {Melon},
+			r/.style = {WildStrawberry},
+			b/.style = {CornflowerBlue},
+			g/.style = {PineGreen},
+			p/.style = {Violet}]
 			\node[n] (1) at (0,0) {};
 			\node[n] (2) at (0,2) {};
 			\node[n] (3) at (2,0) {};
 			\node[n] (4) at (2,2) {};
 			
-			\node[n, RedOrange] (i1) at (3,1) {};
-			\node[n, Blue] (i2) at (1,3) {};
-			\node[n, Green] (i3) at (1,-1) {};
+			\node[n, r] (i1) at (3,1) {};
+			\node[n, b] (i2) at (1,3) {};
+			\node[n, g] (i3) at (1,-1) {};
 			
-			\draw[color=Blue, thick] (1) to (2) to[out=90, in=180] (i2);
-			\draw[color=Blue, thick] (3) to (4) to[out=90, in=0] (i2);
-			\draw[color=Green, thick] (2) to (3) to[out=270, in=0] (i3);
-			\draw[color=Green, thick] (4) to (1) to[out=270, in=180] (i3);
-			\draw[color=RedOrange, thick] (1) to (3) to[out=0, in=270] (i1);
-			\draw[color=RedOrange, thick] (2) to (4) to[out=0, in=90] (i1);
+			\draw[b, l] (1) to (2) to[out=90, in=180] (i2);
+			\draw[b, l] (3) to (4) to[out=90, in=0] (i2);
+			\draw[g, l] (2) to (3) to[out=270, in=0] (i3);
+			\draw[g, l] (4) to (1) to[out=270, in=180] (i3);
+			\draw[r,l] (1) to (3) to[out=0, in=270] (i1);
+			\draw[r,l] (2) to (4) to[out=0, in=90] (i1);
 			
-			\draw[thick] (0,-1) to (i3) to[out=0, in=270] (i1) to[out=90,in=0] (i2) to (0,3);
+			\draw[l,p] (0,-1) to (i3) to[out=0, in=270] (i1) to[out=90,in=0] (i2) to (0,3);
 		\end{tikzpicture}
 		\caption{Ending with 7 lines and 7 points.}
 		\label{fano-plane-end}
@@ -95,14 +107,78 @@ Lets firstly start by taking 4 points, so we are trying to create a smallest pos
 We can also apply to this to other starting points. We may see the result of applying to $3 \times 3$ grid of points and resulting in a projective plane depicted on picture \ref{3by3}.
 
 \begin{figure}[!h]\centering
-	\begin{tikzpicture}[scale=1]
-		\foreach \j in {1,...,3} {
-			\foreach \i in {1,...,3} {
-				\node[draw, circle, fill, inner sep=1.5pt] (\j-\i) at (2*\j,2*\i) {};
+	\begin{subfigure}{0.4\textwidth}\centering
+		\begin{tikzpicture}[scale=.6, l/.style = {line width=2pt},
+			n/.style = {draw, circle, fill, inner sep=1.5pt},
+			o/.style = {Melon},
+			r/.style = {WildStrawberry},
+			b/.style = {CornflowerBlue},
+			g/.style = {PineGreen},
+			p/.style = {Violet}]
+			\foreach \j in {1,...,3} {
+				\foreach \i in {1,...,3} {
+					\node[n] (\j-\i) at (2*\j,2*\i) {};
+				}
 			}
-		}
-	\end{tikzpicture}
-\caption{Creating a projective plane from $3 \times 3$ grid.}
+			
+			\draw[l,o] (1-1) to (1-2) to (1-3);
+			\draw[l,o] (2-1) to (2-2) to (2-3);
+			\draw[l,o] (3-1) to (3-2) to (3-3);
+			
+			\draw[l,b] (1-1) to (2-1) to (3-1);
+			\draw[l,b] (1-2) to (2-2) to (3-2);
+			\draw[l,b] (1-3) to (2-3) to (3-3);
+			
+			\draw[l,g] (1-1) to (2-2) to (3-3);
+			\draw[l,g] (1-2) to (2-3) to[out=20,in=180] (6.5,6.5) to[out=0, in=0] (3-1);
+			\draw[l,g] (1-3) to[out=200,in=180] (1.5,1.5) to[out=0,in=200] (2-1) to (3-2);
+			
+			\draw[l,r] (1-1) to[out=330,in=250] (6.5,1.5) to[out=70,in=330] (3-2) to (2-3);
+			\draw[l,r] (3-3) to[out=120,in=0] (1.5,6.5) to[out=180,in=150] (1-2) to (2-1);
+			\draw[l,r] (1-3) to (2-2) to (3-1);
+		\end{tikzpicture}
+		\caption{Starting $3 \times 3$ grid with lines and diagonals.}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}\centering
+		\begin{tikzpicture}[scale=.6, l/.style = {line width=2pt},
+			n/.style = {draw, circle, fill, inner sep=1.5pt},
+			o/.style = {Melon},
+			r/.style = {WildStrawberry},
+			b/.style = {CornflowerBlue},
+			g/.style = {PineGreen},
+			p/.style = {Violet}]
+			\foreach \j in {1,...,3} {
+				\foreach \i in {1,...,3} {
+					\node[n] (\j-\i) at (2*\j,2*\i) {};
+				}
+			}
+			
+			\node[n,o] (do) at (4,8) {};
+			\node[n,b] (db) at (8,4) {};
+			\node[n,g] (dg) at (4,0) {};
+			\node[n,r] (dr) at (0,4) {};
+			
+			\draw[l,p] (do) to[out=0,in=90] (db) to[out=270,in=0] (dg) to[out=180,in=270] (dr);
+			
+			\draw[l,o] (1-1) to (1-2) to (1-3) to (do);
+			\draw[l,o] (2-1) to (2-2) to (2-3) to (do);
+			\draw[l,o] (3-1) to (3-2) to (3-3) to (do);
+			
+			\draw[l,b] (1-1) to (2-1) to (3-1) to (db);
+			\draw[l,b] (1-2) to (2-2) to (3-2) to (db);
+			\draw[l,b] (1-3) to (2-3) to (3-3) to (db);
+			
+			\draw[l,g] (dg) to (1-1) to (2-2) to (3-3);
+			\draw[l,g] (1-2) to (2-3) to[out=20,in=180] (6.5,6.5) to[out=0, in=0] (3-1) to (dg);
+			\draw[l,g] (1-3) to[out=200,in=180] (1.5,1.5) to[out=0,in=200] (2-1) to (3-2) to (dg);
+			
+			\draw[l,r] (dr) to (1-1) to[out=330,in=250] (6.5,1.5) to[out=70,in=330] (3-2) to (2-3);
+			\draw[l,r] (3-3) to[out=120,in=0] (1.5,6.5) to[out=180,in=150] (1-2) to (2-1) to (dr);
+			\draw[l,r] (dr) to (1-3) to (2-2) to (3-1);
+		\end{tikzpicture}
+		\caption{Extension with infinite points and line.}
+	\end{subfigure}
+	\caption{Creating a projective plane from $3 \times 3$ grid.}
 	\label{3by3}
 \end{figure}
 

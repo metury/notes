@@ -131,7 +131,41 @@ $$
 |\M| \leq \frac{\binom{|X|}{2}}{\binom{k}{2}}
 $$
 
-\noindent See that this bound is actually tight. For $k=2$ we can consider a graph $K_n$ and for $k=3$ we may look at Fano plane. If the equality hold we call it \textit{Steiner system}. Or in other words it is true if $\forall x \neq y \in X \ \exists! M \in \M$ such that $\{x,y\} \subseteq M$. For $k = 3$ we call this \textit{Steiner triple system} or STS for short. This is particularly used in experiments and mainly in agriculture. Usually this is then denoted as \textit{BIBD} or balanced incomplete block design.
+\noindent See that this bound is actually tight. For $k=2$ we can consider a graph $K_n$ and for $k=3$ we may look at Fano plane. If the equality hold we call it \textit{Steiner system}. Or in other words it is true if $\forall x \neq y \in X \ \exists! M \in \M$ such that $\{x,y\} \subseteq M$. For $k = 3$ we call this \textit{Steiner triple system} or STS for short (one can be seen as Fano plane and the other as another seen on picture \ref{k=3}). This is particularly used in experiments and mainly in agriculture. Usually this is then denoted as \textit{BIBD} or balanced incomplete block design.
+
+\begin{figure}[!ht]\centering
+	\begin{tikzpicture}[scale=.6, l/.style = {line width=2pt},
+		n/.style = {draw, circle, fill, inner sep=1.5pt},
+		o/.style = {Melon},
+		r/.style = {WildStrawberry},
+		b/.style = {CornflowerBlue},
+		g/.style = {PineGreen},
+		p/.style = {Violet}]
+		\foreach \j in {1,...,3} {
+			\foreach \i in {1,...,3} {
+				\node[n] (\j-\i) at (2*\j,2*\i) {};
+			}
+		}
+		
+		\draw[l,o] (1-1) to (1-2) to (1-3);
+		\draw[l,o] (2-1) to (2-2) to (2-3);
+		\draw[l,o] (3-1) to (3-2) to (3-3);
+		
+		\draw[l,b] (1-1) to (2-1) to (3-1);
+		\draw[l,b] (1-2) to (2-2) to (3-2);
+		\draw[l,b] (1-3) to (2-3) to (3-3);
+		
+		\draw[l,g] (1-1) to (2-2) to (3-3);
+		\draw[l,g] (1-2) to (2-3) to[out=20,in=180] (6.5,6.5) to[out=0, in=0] (3-1);
+		\draw[l,g] (1-3) to[out=200,in=180] (1.5,1.5) to[out=0,in=200] (2-1) to (3-2);
+		
+		\draw[l,r] (1-1) to[out=330,in=250] (6.5,1.5) to[out=70,in=330] (3-2) to (2-3);
+		\draw[l,r] (3-3) to[out=120,in=0] (1.5,6.5) to[out=180,in=150] (1-2) to (2-1);
+		\draw[l,r] (1-3) to (2-2) to (3-1);
+	\end{tikzpicture}
+	\caption{Another Steiner triple system.}
+	\label{k=3}
+\end{figure}
 
 We may say that for STS to exists it must hold that both $n-1$ and $\frac{\binom{n}{2}}{\binom{3}{2}}$ must be integers. So it only exists if $n$ is either $6k+1$ or $6k+3$.
 
@@ -148,3 +182,41 @@ We may say that for STS to exists it must hold that both $n-1$ and $\frac{\binom
 \begin{defn}[BIBD]
 	Hypergraph $(X, \M)$ is BIBD $(n,k,\lambda,t)$ if $|X| = n$ $\M \subseteq \binom{X}{k}$ and $\forall x_1, \dots x_t \in \binom{X}{t}$ we have that $|\{M \in \M | \{x_1, \dots, x_t\} \subseteq M\}| = \lambda$. 
 \end{defn}
+
+With the similar arguments we may see that $|\M| = \frac{\binom{|X|}{t}}{\binom{k}{t}} \cdot \lambda$. Now the question is whether there actually exists BIBD with given values $(n,k,\lambda,t)$? There is pretty simple observation that if we take $A \subseteq X$ of size $|A| = a$ it must be true that $\frac{\binom{n - a}{t - a}}{\binom{k - a}{t - a}} \cdot \lambda$ must be integer for the number of such $M$'s containing $A$. From these properties we establish the integer constraints for the existence of BIBD.
+
+\begin{prop}[BIBD necessary constraints]
+	If we have BIBD $(n,k,\lambda,t)$ everything has to hold. Firstly the size of $|\M$
+	
+	$$
+	|\M| = \frac{\binom{|X|}{t}}{\binom{k}{t}} \cdot \lambda
+	$$
+	
+	\noindent and also the integrality of the following fractions.
+	
+	$$
+	\frac{\binom{n - a}{t - a}}{\binom{k - a}{t - a}} \cdot \lambda \ \text{for } a = 1, \dots, t.
+	$$
+\end{prop}
+
+Now recall that we have shown how two STS can create a new STS. Now we will show a similar proposition.
+
+\begin{prop}
+	If there exists BIBD $(n,3,2,1)$ then also BIBD $(2v +1,3,2,1)$ exists.
+\end{prop}
+
+\begin{proof}
+	The proof is by a picture. Firstly lets have STS and duplicate it. Then also add new vertex. We will create new $M$'s so that the properties of STS are still satisfied. Which also includes the newly created vertex.
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}
+			
+		\end{tikzpicture}
+		\caption{Newly created larger STS.}
+		\label{new-sts-twice}
+	\end{figure}
+\end{proof}
+
+\begin{thm}[R. Wilson, R. Chatouri]
+	$\forall k, \lambda, t =2$ for every large $n$ the integrality conditions are sufficient for the existence of BIBD.
+\end{thm}
