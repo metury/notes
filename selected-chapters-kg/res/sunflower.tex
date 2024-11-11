@@ -1,0 +1,16 @@
+\documentclass[border=1mm]{standalone}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+
+
+\begin{document}
+	\begin{tikzpicture}[edge/.style = {fill, thick, opacity=0.4}]	
+		\draw[rotate=0, edge, CornflowerBlue] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=60, edge, PineGreen] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=120, edge, Melon] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=180, edge, WildStrawberry] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=240, edge, Violet] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=300, edge, Goldenrod] (2.5,0) ellipse (3cm and 1.5cm);
+	\end{tikzpicture}
+\end{document}
