@@ -474,7 +474,7 @@ We may now ask ourselves if this is the most number of pairwise orthogonal latin
 
 \section{Another application of projective planes}
 
-Lets now take a graph $G = (V,E)$ and suppose that we forbid $K_3$ being a subgraph of $G$. Then by either Turán's result we get that $|E| \leq \frac{n^2}{4}$ when $|V| = n$ or we look at graph $K_{n/2,n/2}$ which is also sufficient. Similarly look at the example if we forbid $K_4$ being a subgraph of $G$, then $|E| \leq O(n^3)$. Which can also be seen by Turán's result or looking at a graph which has two parts $V_1, V_2, V_3$ and all three has close to $n/3$ vertices and edges are only going between these parts. On the other hand if we forbid $C_4$ being a subgraph of $G$ then we obtain much smaller bound, which is $|E| \leq O(n^{3/2})$. Which is somewhat not expected and was proved by Erdös in 1940.
+Lets now take a graph $G = (V,E)$ and suppose that we forbid $K_3$ being a subgraph of $G$. Then by either Turán's result we get that $|E| \leq \frac{n^2}{4}$ when $|V| = n$ or we look at graph $K_{n/2,n/2}$ which is also sufficient. Similarly look at the example if we forbid $K_4$ being a subgraph of $G$, then $|E| \leq O(n^3)$. Which can also be seen by Turán's result or looking at a graph which has two parts $V_1, V_2, V_3$ and all three has close to $n/3$ vertices and edges are only going between these parts. On the other hand if we forbid $C_4$ being a subgraph of $G$ then we obtain much smaller bound, which is $|E| \leq O(n^{3/2})$. Which is somewhat not expected and was proved by Erd\H os in 1940.
 
 \begin{prop}
 	For a graph $G = (V,E)$ and $n = |V|$ if $C_4 \not\subseteq G$ then $|E| \leq c \cdot n^{3/2}$ for some constant $c \in \R$.
@@ -576,15 +576,16 @@ Now consider this following problem. How many blocks (or hyperedges) can you fin
 	Lets define a function $m :=$ maximum number of such blocks.
 \end{defn}
 
-\begin{thm}[Erdös, Hanani]
+\begin{thm}[Erd\H os, Hanani]
 	$\forall \epsilon \ \exists n_0 \ \forall n \geq n_0$  the following holds
 	
 	$$
 	m(n,k,\lambda,t) \geq \lambda \frac{\binom{n}{k}}{\binom{k}{t}}(1 - \epsilon).
 	$$
+	\label{existence-of-bibd}
 \end{thm}
 
-Erdös and Hanani stated this problem and in 1985 V. Rödl solved this problem and proved, that it really holds. He proved it by a method which later on was called Rödl \textbf{nibbling}, which is also essential in Keevash.
+Erd\H os and Hanani stated this problem and in 1985 V. Rödl solved this problem and proved, that it really holds. He proved it by a method which later on was called Rödl \textbf{nibbling}, which is also essential in Keevash.
 
 \begin{example}
 	We have 15 schoolgirls, 7 days in a week and we want to form a groups of 3. Moreover we want that every pair will be together in a group in exactly one day. We may only compute the value
@@ -597,3 +598,11 @@ Erdös and Hanani stated this problem and in 1985 V. Rödl solved this problem a
 \end{example}
 
 Generally we would like to check if for a hypergraf $(X, \M)$ there exists $\M = \bigcup_i M_i$ where $M_i$ is exactly matching of size $2l+1$.
+
+\section{Conjectures and theorems}
+
+As it was stated before we may furthermore extend the list of conjectures and sometimes even proven theorems.
+
+\begin{topic}{Existence of BIBD}
+	As it was stated in theorem \ref{existence-of-bibd} for large enough set $X$ there exists such BIBD $(X, \M)$.
+\end{topic}
