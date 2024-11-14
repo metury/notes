@@ -268,37 +268,40 @@ Problem where there is given a Boolean formula and we have to say if it is satis
 
 Special case of \textit{SAT} where all clauses have at most $2$ literals.
 
-\subsubsection{Algorithm for 2-SAT}
 
-\begin{enumerate}
-	\item Start with any assignment $(x_{1} = x_{2} = \dots = x_{n} = F)$
-	\item Repeat up to $2mn^{2}$ times ($n$ is the number of variables and $m$ is an arbitrary parameter)
-	\begin{itemize}
-		\item if $\varphi$ is satisfiable return "YES"
-		\item otherwise, choose any clause that is not satisfied and randomly change one of its variables $(\ast)$
-	\end{itemize}
-	\item Return "NO"
-\end{enumerate}
+\begin{algorithm}[!ht]
+	\begin{algorithmic}[1]
+		\State Start with any assignment $(x_{1} = x_{2} = \dots = x_{n} = F)$
+		\While{Repeat up to $2mn^{2}$ times ($n$ is the number of variables and $m$ is an arbitrary parameter)}
+			\If{$\varphi$ is satisfiable}
+				\State \Return "YES"
+			\Else \State choose any clause that is not satisfied and randomly change one of its variables $(\ast)$
+			\EndIf
+		\EndWhile
+		\State \Return "NO"
+	\end{algorithmic}
+	\caption{Algorithm for 2-SAT}
+\end{algorithm}
 
-$Pr[\text{incorrectly saying no}]  \leq \frac{1}{2m}$ which can be proved by Markov inequality.
-
-$Pr[\text{incorrectly saying no}]  \leq \frac{1}{2^m}$ using iterative Markov inequality.
+$Pr[\text{incorrectly saying no}]  \leq \frac{1}{2m}$ which can be proved by Markov inequality. $Pr[\text{incorrectly saying no}]  \leq \frac{1}{2^m}$ using iterative Markov inequality.
 
 \subsection{3-SAT}
 
-\subsubsection{Algortihm for 3-SAT}
-
-\begin{itemize}
-	\item Repeat for $\leq m$ times
-	\begin{itemize}
-		\item Repeat for $\leq 3^{n/2}$ times
-		\begin{itemize}
-			\item randomly initialize the variables
-			\item if $\varphi$ is satisfiable return "YES"
-			\item otherwise, choose any clause that is not satisfied and randomly change one of its variables
-		\end{itemize}
-	\end{itemize}
-\end{itemize}
+\begin{algorithm}[!ht]
+	\begin{algorithmic}[1]
+		\While{Repeat for $\leq m$ times}
+			\While{Repeat for $\leq 3^{n/2}$ times}
+				\State randomly initialize the variables
+				\If{$\varphi$ is satisfiable}
+					\State \Return "YES"
+				\Else
+					\State choose any clause that is not satisfied and randomly change one of its variables
+				\EndIf
+			\EndWhile
+		\EndWhile
+	\end{algorithmic}
+	\caption{Algorithm for 3-SAT}
+\end{algorithm}
 
 Running time of this algortihm is exponential in $n$.
 
