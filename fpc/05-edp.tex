@@ -39,8 +39,8 @@ Now one can see where the catch in the algorithm is. Consider that there are no 
 		\While{$\exists i \notin I$ and $\exists s_{i}-t_{i}$ path in $G$, s.t. $|P_{i}| \leq \sqrt{m}$}
 		\State $I = I \cup \{i\}$, keep $P_{i}$, $G = G \setminus P_{i}$
 		\EndWhile
-		\If{\textcolor{Green}{$I = \emptyset$}}
-			\State \textcolor{Green}{Connect any $s_{i}-t_{i}$ path if possible.}
+		\If{\textit{$I = \emptyset$}}
+			\State \textit{Connect any $s_{i}-t_{i}$ path if possible.}
 		\EndIf
 	\end{algorithmic}
 \end{algorithm}
@@ -428,7 +428,7 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 			\node[main] (87) [right of=86] {$t_{1}$};
 			\draw (77) -- (87);
 			\draw (87) -- (86);
-			\path[color=blue, line width = 4] (0) edge (10)
+			\path[color=myblue, line width = 4] (0) edge (10)
 			(10) edge (11)
 			(11) edge (21)
 			(21) edge (22)
@@ -614,7 +614,7 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 			\node[main] (87) [right of=86] {$t_{1}$};
 			\draw (77) -- (87);
 			\draw (87) -- (86);
-			\path[color=orange, line width = 4] (0) edge (10)
+			\path[color=myorange, line width = 4] (0) edge (10)
 			(10) edge (11)
 			(11) edge (21)
 			(21) edge (22)
@@ -629,7 +629,7 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 			(66) edge (76)
 			(76) edge (77)
 			(77) edge (87);
-			\path[color=VioletRed, line width = 4] (2) edge (12)
+			\path[color=myviolet, line width = 4] (2) edge (12)
 			(12) edge (13)
 			(13) edge (23)
 			(23) edge (24)
@@ -644,7 +644,7 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 			(66) edge (65)
 			(65) edge (64)
 			(64) edge (74)	(74) edge (75)	(75) edge (85);
-			\path[color=blue, line width = 4] (4) edge (14)
+			\path[color=myblue, line width = 4] (4) edge (14)
 			(14) edge (15)
 			(15) edge (25)
 			(25) edge (26)
@@ -658,7 +658,7 @@ The graph you may see at the picture \ref{brick-wall} is planar. Also it can be 
 			(43) edge (42)
 			(42) edge (52)
 			(52) edge (53)	(53) edge (63)	(63) edge (62)	(62) edge (72)	(72) edge (73)	(73) edge (83);
-			\path[color=Green, line width = 4] (6) edge (16)
+			\path[color=mygreen, line width = 4] (6) edge (16)
 			(16) edge (17)
 			(17) edge (27)
 			(27) edge (26)
@@ -765,9 +765,9 @@ Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\
 			\node[main] (b) [below of=a] {$b$};
 			\node[main] (c) [right of=a] {$c$};
 			\node[main] (d) [right of=b] {$d$};
-			\draw[color=blue, thick] (a) edge (d);
-			\draw[color=red, thick] (b) edge (d);
-			\draw[color=violet, thick] (c) edge (d);
+			\draw[color=myblue, thick] (a) edge (d);
+			\draw[color=myred, thick] (b) edge (d);
+			\draw[color=myviolet, thick] (c) edge (d);
 		\end{tikzpicture}
 		\caption{Original graph $G$.}
 	\end{subfigure}
@@ -788,18 +788,18 @@ Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\
 			\node[main] (c3) [right of=b3] {$c_{3}$};
 			\node[main] (d3) [right of=c3] {$d_{3}$};
 			
-			\path[->, color=gray, thick] (a1) edge (a2) (a2) edge (a3);
-			\path[->, color=gray, thick] (b1) edge (b2) (b2) edge (b3);
-			\path[->, color=gray, thick] (c1) edge (c2) (c2) edge (c3);
-			\path[->, color=gray, thick] (d1) edge (d2) (d2) edge (d3);
+			\path[->, thick] (a1) edge (a2) (a2) edge (a3);
+			\path[->, thick] (b1) edge (b2) (b2) edge (b3);
+			\path[->, thick] (c1) edge (c2) (c2) edge (c3);
+			\path[->, thick] (d1) edge (d2) (d2) edge (d3);
 			
-			\path[->, color=blue, thick] (a1) edge (d2) (d1) edge (a2)
+			\path[->, color=myblue, thick] (a1) edge (d2) (d1) edge (a2)
 			                             (a2) edge (d3) (d2) edge (a3);
 			                               
-			\path[->, color=red, thick] (b1) edge (d2) (d1) edge (b2)
+			\path[->, color=myred, thick] (b1) edge (d2) (d1) edge (b2)
 			                            (b2) edge (d3) (d2) edge (b3);
 			
-			\path[->, color=violet, thick] (c1) edge (d2) (d1) edge (c2)
+			\path[->, color=myviolet, thick] (c1) edge (d2) (d1) edge (c2)
 			                               (c2) edge (d3) (d2) edge (c3);
 			
 		\end{tikzpicture}
@@ -838,28 +838,28 @@ Now for a given $G = (V,E)$ we denote $I_{0}$ as an instance of the PMFP with $\
 Before we properly show the proof we show the idea behind it. We set $L = \frac{2F}{\epsilon}$ and for every path we find the first $L$ vertices and last $L$ vertices. In some paths they may overlap. We will connect the opposite vertices and scale demands and flows, so it will eventually work.
 
 \begin{proof}
-	Denote $\mathcal{O}$ the set of the paths in $S$. For $p \in \mathcal{O}$ denote $f_{p}$ as the amount of flow on path $p$. Now let $\mathcal{O}' = \{p \in \mathcal{O} \mid |p| > L\}$ for $L = \frac{2F}{\epsilon}$. For a path $p \in \mathcal{O}'$ let $a_{p,1}, \dots, a_{p,L}$ be the \textcolor{violet}{first} $L$ vertices on path $p$. And let $b_{p,L}, \dots, b_{p,1}$ be the \textcolor{orange}{last} $L$ vertices on path $p$. (As you may see on picture \ref{shortening-path}). Now we define
+	Denote $\mathcal{O}$ the set of the paths in $S$. For $p \in \mathcal{O}$ denote $f_{p}$ as the amount of flow on path $p$. Now let $\mathcal{O}' = \{p \in \mathcal{O} \mid |p| > L\}$ for $L = \frac{2F}{\epsilon}$. For a path $p \in \mathcal{O}'$ let $a_{p,1}, \dots, a_{p,L}$ be the \textcolor{myviolet}{first} $L$ vertices on path $p$. And let $b_{p,L}, \dots, b_{p,1}$ be the \textcolor{myorange}{last} $L$ vertices on path $p$. (As you may see on picture \ref{shortening-path}). Now we define
 	
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
-			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[main, color=myviolet] (1) {$a_{p,1}$};
 			\node[below of = 1] (phantom) {};
-			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
+			\node[main, right of = 1, color=myviolet] (2) {$a_{p,2}$};
 			\node[right of = 2] (3) {};
 			\node[right of = 3] (4) {};
 			\node[right of = 4] (5) {};
-			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
-			\node[main, below of = phantom, color=orange] (7) {$b_{p,L}$};
+			\node[main, right of = 5, color=myviolet] (6) {$a_{p,L}$};
+			\node[main, below of = phantom, color=myorange] (7) {$b_{p,L}$};
 			\node[right of = 7] (8) {};
 			\node[right of = 8] (9) {};
 			\node[right of = 9] (10) {};
-			\node[main, right of = 10, color=orange] (11) {$b_{p,2}$};
-			\node[main, right of = 11, color=orange] (12) {$b_{p,1}$};
-			\draw[color=violet] (1) edge (2);
-			\draw[color=orange] (12) edge (11);
-			\draw[color=violet, dashed] (2) edge (6);
-			\draw[color=orange, dashed] (7) edge (11);
-			\draw[color=black, bend right = 110] (12) edge (6);
+			\node[main, right of = 10, color=myorange] (11) {$b_{p,2}$};
+			\node[main, right of = 11, color=myorange] (12) {$b_{p,1}$};
+			\draw[color=myviolet] (1) edge (2);
+			\draw[color=myorange] (12) edge (11);
+			\draw[color=myviolet, dashed] (2) edge (6);
+			\draw[color=myorange, dashed] (7) edge (11);
+			\draw[bend right = 110] (12) edge (6);
 		\end{tikzpicture}
 		\caption{Illustration of the point in the path $p$.}
 		\label{shortening-path}
@@ -875,31 +875,31 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 	
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
-			\node[main, color=violet] (1) {$a_{p,1}$};
+			\node[main, color=myviolet] (1) {$a_{p,1}$};
 			\node[below of = 1] (phantom) {};
-			\node[main, right of = 1, color=violet] (2) {$a_{p,2}$};
+			\node[main, right of = 1, color=myviolet] (2) {$a_{p,2}$};
 			\node[right of = 2] (3) {};
 			\node[main, right of = 3, color=cyan] (4) {$a_{p,i}$};
 			\node[right of = 4] (5) {};
-			\node[main, right of = 5, color=violet] (6) {$a_{p,L}$};
-			\node[main, below of = phantom, color=orange] (7) {$b_{p,L}$};
+			\node[main, right of = 5, color=myviolet] (6) {$a_{p,L}$};
+			\node[main, below of = phantom, color=myorange] (7) {$b_{p,L}$};
 			\node[right of = 7] (8) {};
 			\node[main, right of = 8, color=cyan] (9) {$b_{p,i}$};
 			\node[right of = 9] (10) {};
-			\node[main, right of = 10, color=orange] (11) {$b_{p,2}$};
-			\node[main, right of = 11, color=orange] (12) {$b_{p,1}$};
-			\draw[color=violet] (1) edge (2);
-			\draw[color=orange] (12) edge (11);
-			\draw[color=violet, dashed] (2) edge (4);
-			\draw[color=violet, dashed] (4) edge (6);
-			\draw[color=orange, dashed] (7) edge (9);
-			\draw[color=orange, dashed] (9) edge (11);
-			\draw[color=black, bend right = 110] (12) edge (6);
-			\draw[color=cyan] (4) edge (9);
-			\draw[color=cyan, bend right = 15] (4) edge (9);
-			\draw[color=cyan, bend left = 15] (4) edge (9);
-			\draw[color=cyan, bend right = 30] (4) edge (9);
-			\draw[color=cyan, bend left = 30] (4) edge (9);
+			\node[main, right of = 10, color=myorange] (11) {$b_{p,2}$};
+			\node[main, right of = 11, color=myorange] (12) {$b_{p,1}$};
+			\draw[color=myviolet] (1) edge (2);
+			\draw[color=myorange] (12) edge (11);
+			\draw[color=myviolet, dashed] (2) edge (4);
+			\draw[color=myviolet, dashed] (4) edge (6);
+			\draw[color=myorange, dashed] (7) edge (9);
+			\draw[color=myorange, dashed] (9) edge (11);
+			\draw[bend right = 110] (12) edge (6);
+			\draw[color=myblue] (4) edge (9);
+			\draw[color=myblue, bend right = 15] (4) edge (9);
+			\draw[color=myblue, bend left = 15] (4) edge (9);
+			\draw[color=myblue, bend right = 30] (4) edge (9);
+			\draw[color=myblue, bend left = 30] (4) edge (9);
 		\end{tikzpicture}
 		\caption{Illustration of the shortening system for $S_{p,i}$.}
 		\label{shortening}
@@ -1022,23 +1022,23 @@ In this section we will take a look at the hardness of this problem. That is $\f
 			\draw[->] (l2) edge (l3);
 			\draw[->, dotted] (l3) edge (ll);
 			
-			\node[left of = 11] (s1) {\textcolor{cyan}{$s_1$}};
-			\node[left of = 12] (s2) {\textcolor{cyan}{$s_2$}};
-			\node[left of = 13] (s3) {\textcolor{cyan}{$s_3$}};
-			\node[left of = 1l] (sl) {\textcolor{cyan}{$s_l$}};
-			\draw[->, color=cyan, dashed] (s1) edge (11);
-			\draw[->, color=cyan, dashed] (s2) edge (12);
-			\draw[->, color=cyan, dashed] (s3) edge (13);
-			\draw[->, color=cyan, dashed] (sl) edge (1l);
+			\node[left of = 11] (s1) {\textcolor{myblue}{$s_1$}};
+			\node[left of = 12] (s2) {\textcolor{myblue}{$s_2$}};
+			\node[left of = 13] (s3) {\textcolor{myblue}{$s_3$}};
+			\node[left of = 1l] (sl) {\textcolor{myblue}{$s_l$}};
+			\draw[->, color=myblue, dashed] (s1) edge (11);
+			\draw[->, color=myblue, dashed] (s2) edge (12);
+			\draw[->, color=myblue, dashed] (s3) edge (13);
+			\draw[->, color=myblue, dashed] (sl) edge (1l);
 			
-			\node[below of = 1l] (t1) {\textcolor{orange}{$t_1$}};
-			\node[below of = 2l] (t2) {\textcolor{orange}{$t_2$}};
-			\node[below of = 3l] (t3) {\textcolor{orange}{$t_3$}};
-			\node[below of = ll] (tl) {\textcolor{orange}{$t_l$}};
-			\draw[->, color=orange, dashed] (1l) edge (t1);
-			\draw[->, color=orange, dashed] (2l) edge (t2);
-			\draw[->, color=orange, dashed] (3l) edge (t3);
-			\draw[->, color=orange, dashed] (ll) edge (tl);
+			\node[below of = 1l] (t1) {\textcolor{myorange}{$t_1$}};
+			\node[below of = 2l] (t2) {\textcolor{myorange}{$t_2$}};
+			\node[below of = 3l] (t3) {\textcolor{myorange}{$t_3$}};
+			\node[below of = ll] (tl) {\textcolor{myorange}{$t_l$}};
+			\draw[->, color=myorange, dashed] (1l) edge (t1);
+			\draw[->, color=myorange, dashed] (2l) edge (t2);
+			\draw[->, color=myorange, dashed] (3l) edge (t3);
+			\draw[->, color=myorange, dashed] (ll) edge (tl);
 		\end{tikzpicture}
 		\caption{$l \times l$ original mesh.}
 		\label{l_by_l_mesh}
@@ -1267,12 +1267,12 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 			\node[main, right of = O11] (O12) {};
 			
 			\node[above of = O2] (8) {$8$};
-			\node[above of = O3, color = orange] (C) {$C$};
-			\node[above of = O4, color = cyan] (D) {$D$};
+			\node[above of = O3, color = myorange] (C) {$C$};
+			\node[above of = O4, color = myblue] (D) {$D$};
 			\node[above of = O5] (8') {$8'$};
 			\node[below of = O8] (11) {$11$};
-			\node[below of = O9, color = orange] (A) {$A$};
-			\node[below of = O10, color = cyan] (B) {$B$};
+			\node[below of = O9, color = myorange] (A) {$A$};
+			\node[below of = O10, color = myblue] (B) {$B$};
 			\node[below of = O11] (11') {$11'$};
 			
 			\path[thick] (O1) edge (O2)
@@ -1288,12 +1288,12 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 				(O11) edge (O12)
 				(O12) edge (O6);
 			\draw[->] (8) edge (O2);
-			\draw[->, color = orange] (C) edge (O3);
-			\draw[->, color = cyan] (O4) edge (D);
+			\draw[->, color = myorange] (C) edge (O3);
+			\draw[->, color = myblue] (O4) edge (D);
 			\draw[->] (8') edge (O5);
 			\draw[->] (O8) edge (11);
-			\draw[->, color = orange] (O9) edge (A);
-			\draw[->, color = cyan] (B) edge (O10);
+			\draw[->, color = myorange] (O9) edge (A);
+			\draw[->, color = myblue] (B) edge (O10);
 			\draw[->] (O11) edge (11');
 		\end{tikzpicture}
 		\caption{Scheme for analyzing.}
@@ -1308,18 +1308,18 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 			\node[main, fill, right of = mid] (phantom') {};
 			\node[main, below of = phantom'] (8') {$8'$};
 			\node[main, above of = phantom'] (11') {$11'$};
-			\node[above right of = mid, color = red] (D) {$D$};
-			\node[above left of = mid, color = blue] (C) {$C$};
-			\node[below right of = mid, color = red] (B) {$B$};
-			\node[below left of = mid, color = blue] (A) {$A$};
+			\node[above right of = mid, color = myred] (D) {$D$};
+			\node[above left of = mid, color = myblue] (C) {$C$};
+			\node[below right of = mid, color = myred] (B) {$B$};
+			\node[below left of = mid, color = myblue] (A) {$A$};
 			
 			\draw[->] (8) edge (11);
 			\draw[->] (8') edge (11');
 			\draw[dashed] (phantom) edge (phantom');
-			\draw[->, bend right = 20, color = blue] (mid) edge (A);
-			\draw[->, bend left = 20, color = red] (B) edge (mid);
-			\draw[->, bend left = 20, color = blue] (C) edge (mid);
-			\draw[->, bend right = 20, color = red] (mid) edge (D);
+			\draw[->, bend right = 20, color = myblue] (mid) edge (A);
+			\draw[->, bend left = 20, color = myred] (B) edge (mid);
+			\draw[->, bend left = 20, color = myblue] (C) edge (mid);
+			\draw[->, bend right = 20, color = myred] (mid) edge (D);
 		\end{tikzpicture}
 		\caption{Drawn switch scheme.}
 	\end{subfigure}
@@ -1331,11 +1331,11 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 We may see that the switch is a small graph with 4 "inputs" $B, C, 8, 8'$ and 4 "outputs" $A, D, 11, 11'$. It can be shown that this graph has two following properties.
 
 \begin{enumerate}
-	\item If there are 2 edge disjoint paths one leaving at \textcolor{orange}{$A$} and the other entering at \textcolor{cyan}{$B$}, then the former is entering at \textcolor{orange}{$C$} and the later leaving at \textcolor{cyan}{$D$}. Look at the picture \ref{scheme analyse}.
+	\item If there are 2 edge disjoint paths one leaving at \textcolor{myorange}{$A$} and the other entering at \textcolor{myblue}{$B$}, then the former is entering at \textcolor{myorange}{$C$} and the later leaving at \textcolor{myblue}{$D$}. Look at the picture \ref{scheme analyse}.
 	\item And exactly one more edge-disjoint path through the graph exists and it is either $8 \to 11$ or $8' \to 11'$.
 \end{enumerate}
 
-These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices \textcolor{violet}{$W, X, Y, Z$} as shown on the global picture \ref{global scheme}.
+These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. Therefore we insert the switches so $8 \to 11$ is for the variable in the clause gadget and the other ($8' \to 11'$) is replaced for the variable in the variable clause. After that we arbitrarily connect all switches together. Lastly we also insert vertices \textcolor{myviolet}{$W, X, Y, Z$} as shown on the global picture \ref{global scheme}.
 
 \begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance={15mm}, main/.style = {draw, thick, circle}]
@@ -1402,33 +1402,33 @@ These switches can be connected by combining $A$ and $C$ and also $B$ and $D$. T
 		\draw[dashed] (dotc0) -- (dotxk) node[main, midway] (mid0) {};
 		\draw[dashed] (dotc1) -- (dotx0) node[main, midway] (mid1) {};
 		
-		\node[above left of = mid0, color = blue] (C0) {$C$};
-		\node[above of = mid0, color = red] (D0) {$D$};
-		\node[below right of = mid0, color = red] (B0) {$B$};
-		\node[below of = mid0, color = blue] (A0) {$A$};
+		\node[above left of = mid0, color = myblue] (C0) {$C$};
+		\node[above of = mid0, color = myred] (D0) {$D$};
+		\node[below right of = mid0, color = myred] (B0) {$B$};
+		\node[below of = mid0, color = myblue] (A0) {$A$};
 		
-		\node[above left of = mid1, color = blue] (C1) {$C$};
-		\node[above of = mid1, color = red] (D1) {$D$};
-		\node[below right of = mid1, color = red] (B1) {$B$};
-		\node[below of = mid1, color = blue] (A1) {$A$};
+		\node[above left of = mid1, color = myblue] (C1) {$C$};
+		\node[above of = mid1, color = myred] (D1) {$D$};
+		\node[below right of = mid1, color = myred] (B1) {$B$};
+		\node[below of = mid1, color = myblue] (A1) {$A$};
 		
-		\draw[->, bend left = 20, color = blue] (C0) edge (mid0);
-		\draw[->, bend left = 20, color = red] (B0) edge (mid0);
-		\draw[->, bend right = 20, color = blue] (mid0) edge (A0);
-		\draw[->, bend right = 20, color = red] (mid0) edge (D0);
+		\draw[->, bend left = 20, color = myblue] (C0) edge (mid0);
+		\draw[->, bend left = 20, color = myred] (B0) edge (mid0);
+		\draw[->, bend right = 20, color = myblue] (mid0) edge (A0);
+		\draw[->, bend right = 20, color = myred] (mid0) edge (D0);
 		
-		\draw[->, bend left = 20, color = blue] (C1) edge (mid1);
-		\draw[->, bend left = 20, color = red] (B1) edge (mid1);
-		\draw[->, bend right = 20, color = blue] (mid1) edge (A1);
-		\draw[->, bend right = 20, color = red] (mid1) edge (D1);
+		\draw[->, bend left = 20, color = myblue] (C1) edge (mid1);
+		\draw[->, bend left = 20, color = myred] (B1) edge (mid1);
+		\draw[->, bend right = 20, color = myblue] (mid1) edge (A1);
+		\draw[->, bend right = 20, color = myred] (mid1) edge (D1);
 		
-		\draw[->, dashed, bend right = 20, color = red] (D0) edge (B1);
-		\draw[->, dashed, bend right = 20, color = blue] (A1) edge (C0);
+		\draw[->, dashed, bend right = 20, color = myred] (D0) edge (B1);
+		\draw[->, dashed, bend right = 20, color = myblue] (A1) edge (C0);
 		
-		\node[below of = A0, color = violet] (X) {$X$};
-		\node[below of = B0, color = violet] (Y) {$Y$};
-		\node[above of = cl, color = violet] (Z) {$Z$};
-		\node[above of = C1, color = violet] (W) {$W$};
+		\node[below of = A0, color = myviolet] (X) {$X$};
+		\node[below of = B0, color = myviolet] (Y) {$Y$};
+		\node[above of = cl, color = myviolet] (Z) {$Z$};
+		\node[above of = C1, color = myviolet] (W) {$W$};
 		
 		\draw[->] (A0) edge (X);
 		\draw[->] (Y) edge (B0);

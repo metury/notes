@@ -119,7 +119,7 @@ We know that both $v_{i}$ and $r$ are unit vectors. So $\cos \alpha = v_{i}^T \c
 			every axis y label/.style={at={(ticklabel* cs:1.05)}, anchor=south},
 			every axis x label/.style={at={(ticklabel* cs:1.05)}, anchor=west},
 			]
-			\addplot[blue, thick] {cos(deg(x))};
+			\addplot[myblue, thick] {cos(deg(x))};
 		\end{axis}
 	\end{tikzpicture}
 	\caption{Cosine function.}
@@ -151,12 +151,12 @@ The meaning of it is shown on the picture \ref{meaning}.
 			every axis x label/.style={at={(ticklabel* cs:1.05)}, anchor=west},
 			legend pos=outer north east,
 			]
-			\addplot[blue, thick, label=($(1 - \cos(x)) /2$)] {(1 - cos(deg(x))) / 2};
-			\addplot[red, thick, label=($x/(\pi \cdot \alpha)$)] {x / (0.87856 * pi)};
+			\addplot[myblue, thick, label=($(1 - \cos(x)) /2$)] {(1 - cos(deg(x))) / 2};
+			\addplot[myred, thick, label=($x/(\pi \cdot \alpha)$)] {x / (0.87856 * pi)};
 			\legend{}
 		\end{axis}
 	\end{tikzpicture}
-	\caption{The \textcolor{red}{red} function is for $x/(\pi \cdot \alpha)$ and \textcolor{blue}{blue} for $(1 - \cos(x)) /2$.}
+	\caption{The \textcolor{myred}{red} function is for $x/(\pi \cdot \alpha)$ and \textcolor{myblue}{blue} for $(1 - \cos(x)) /2$.}
 	\label{meaning}
 \end{figure}
 
