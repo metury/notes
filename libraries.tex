@@ -31,3 +31,73 @@
 	fonttitle=\bfseries,
 	title={#1.},
 	center title}
+
+\overfullrule=1mm
+
+\theoremstyle{plain}
+\newtheorem{veta}{Věta}
+\newtheorem{lemma}[veta]{Lemma}
+\newtheorem{tvrz}[veta]{Tvrzení}
+
+\theoremstyle{plain}
+\newtheorem{definice}{Definice}
+\newtheorem*{pozor}{Pozorování}
+\newtheorem*{cvic}{Cvičení}
+\newtheorem*{fakt}{Fakt}
+
+\theoremstyle{remark}
+\newtheorem*{dusl}{Důsledek}
+\newtheorem*{pozn}{Poznámka}
+\newtheorem*{prikl}{Příklad}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}{Conjecture}
+
+\theoremstyle{plain}
+\newtheorem{defn}{Definition}
+\newtheorem*{observ}{Observation}
+\newtheorem*{notation}{Notation}
+\newtheorem*{exerc}{Exercise}
+\newtheorem*{fact}{Fact}
+\newtheorem*{comm}{Comment}
+
+\theoremstyle{remark}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{cons}{Consequence}
+\newtheorem*{rem}{Remark}
+\newtheorem*{example}{Example}
+\newtheorem*{note}{Note}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\DeclareMathOperator{\pr}{\textsf{P}}
+\DeclareMathOperator{\E}{\textsf{E}\,}
+\DeclareMathOperator{\var}{\textrm{var}}
+
+\newcommand{\abs}[1]{\left|{#1}\right|}
+
+\predate{\begin{center}\placetitlepicture\large}
+	\postdate{\par\end{center}}
+
+\newcommand{\titlepicture}[2][]{
+	\renewcommand\placetitlepicture{
+		\includegraphics[#1]{#2}\par\medskip
+	}
+}
+
+\newcommand{\placetitlepicture}{}
+\newcommand{\INFO}{Keep in mind there may be some mistakes. You may visit \href{https://github.com/metury/notes}{GitHub}.}
+\newcommand{\ifft}{if and only if }
+\newcommand{\wlogt}{without loss of generality }
+\newcommand{\PES}{\faDog }
+\newcommand{\OPEN}{\faDoorOpen }
+
+\newenvironment{topic}[1]{\par\medskip\noindent\textbf{#1.}}{\par\medskip}
+
+\newcommand{\TODO}[1]{\noindent\textcolor{myred}{[TODO:} #1\textcolor{myred}{]}}
+\newcommand{\NOTE}[1]{\noindent\textcolor{myblue}{[NOTE:} #1\textcolor{myblue}{]}}
