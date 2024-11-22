@@ -3,14 +3,18 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
 
+\input{../../themes}
+
+%\lighttheme
+\darktheme
 
 \begin{document}
 	\begin{tikzpicture}[edge/.style = {fill, thick, opacity=0.4}]	
-		\draw[rotate=0, edge, CornflowerBlue] (2.5,0) ellipse (3cm and 1.5cm);
-		\draw[rotate=60, edge, PineGreen] (2.5,0) ellipse (3cm and 1.5cm);
-		\draw[rotate=120, edge, Melon] (2.5,0) ellipse (3cm and 1.5cm);
-		\draw[rotate=180, edge, WildStrawberry] (2.5,0) ellipse (3cm and 1.5cm);
-		\draw[rotate=240, edge, Violet] (2.5,0) ellipse (3cm and 1.5cm);
-		\draw[rotate=300, edge, Goldenrod] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=0, edge, myblue] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=60, edge, mygreen] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=120, edge, myorange] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=180, edge, myred] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=240, edge, myviolet] (2.5,0) ellipse (3cm and 1.5cm);
+		\draw[rotate=300, edge, myyellow] (2.5,0) ellipse (3cm and 1.5cm);
 	\end{tikzpicture}
 \end{document}
