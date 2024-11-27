@@ -89,11 +89,11 @@ If $\mathcal{G}$ is $\leq_{m}$-closed, then there exists a \textbf{finite} $\mat
 	\begin{figure}[!h]\centering
 		\begin{subfigure}{0.4\textwidth}\centering
 			\begin{tikzpicture}[node distance={20mm}, thick, main/.style = {draw, circle}]
-				\node[main, color = cyan] (1) {1};
+				\node[main, color = myblue] (1) {1};
 				\node[main, color = Apricot, above right of = 1] (2) {2};
-				\node[main, color = Violet, below right of=2] (3) {3};
-				\node[main, color = VioletRed, below of=1] (4) {4};
-				\node[main, color = Green, below of = 3] (5) {5};
+				\node[main, color = myviolet, below right of=2] (3) {3};
+				\node[main, color = myred, below of=1] (4) {4};
+				\node[main, color = mygreen, below of = 3] (5) {5};
 				\path (1) edge (2)
 					(1) edge (3)
 					(1) edge (5)
@@ -110,15 +110,15 @@ If $\mathcal{G}$ is $\leq_{m}$-closed, then there exists a \textbf{finite} $\mat
 		\end{subfigure}
 		\begin{subfigure}{0.55\textwidth}\centering
 			\begin{tikzpicture}[node distance={13mm}, thick, main/.style = {draw, circle}]
-				\node[main, color = cyan] (6) {1};
-				\node[main, color = VioletRed, below right of = 6] (7) {4};
+				\node[main, color = myblue] (6) {1};
+				\node[main, color = myred, below right of = 6] (7) {4};
 				\node[main, color = Apricot, below right of = 7] (8) {2};
-				\node[main, color = cyan, below right of = 8] (9) {1};
-				\node[main, color = VioletRed, below right of=9] (10) {4};
-				\node[main, color = Green, below left of=8] (11) {5};
-				\node[main, color = Violet, below left of=11] (12) {3};
-				\node[main, color = Violet, above right of=8] (13) {3};
-				\node[main, color = Green, above right of=13] (14) {5};
+				\node[main, color = myblue, below right of = 8] (9) {1};
+				\node[main, color = myred, below right of=9] (10) {4};
+				\node[main, color = mygreen, below left of=8] (11) {5};
+				\node[main, color = myviolet, below left of=11] (12) {3};
+				\node[main, color = myviolet, above right of=8] (13) {3};
+				\node[main, color = mygreen, above right of=13] (14) {5};
 				\node[main, color = Apricot, above right of=6, above left of=14, above of=8] (15) {2};
 				\path (6) edge (7)
 					(7) edge (8)
@@ -159,7 +159,7 @@ $$
 Contrary we take $\mathcal{G} = \{G : (\forall uv \in V(G) \ u \neq v, \deg(u) \geq 5, \deg(v) \geq 5) (\exists X \subseteq E(G) : |X| \leq 1) \ u \text{ and } v$ are in different component of $G - X\}$ which is $\leq_{t}$-closed. But take these graphs:
 
 \begin{figure}[!h]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep=1.5pt}]
 		\node[main] (1) {};
 		\node[main] (2) [above right of=1] {};
 		\node[main] (3) [below right of=2] {};
@@ -248,7 +248,7 @@ $$
 $$
 
 \begin{figure}[!h]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep=1.5pt}]
 		\node[main] (1) {};
 		\node[main] (2) [above right of=1] {};
 		\node[main] (3) [below right of=2] {};
@@ -370,7 +370,7 @@ $$
 Well technically $K_{5} \nleq_{t} G \Rightarrow K_{5} \nleq_{m} G$ but the other way around is what doesn't work $K_{5} \nleq_{m} G \nRightarrow K_{5} \nleq_{t} G$. For that we can see an example \ref{minor-not-top}. We may see that $\mathcal{G} = \{G : G \text{ has } \leq 4 \text{ vertices of degree } \geq 4\}$ these graphs are so that $K_{5} \nleq_{t} G$.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep=1.5pt}]
 		\node[main] (1) {};
 		\node[main] (2) [right of=1] {};
 		\node[main] (3) [below of=1] {};
@@ -529,33 +529,33 @@ Also we can say $\exists f_{l}(k) = O(k \sqrt{\log k})$. If $G$ is $f_{l}(k)$-co
 We may take a look at an example of model of $K_{4}$ which is in picture \ref{k4-model}.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
-		\node[main] (1) [color=cyan] {};
-		\node[main] (2) [above of=1] [color=cyan] {};
-		\node[main] (3) [below left of=1] [color=cyan] {};
-		\node[main] (4) [below right of=1] [color=cyan] {};
-		\node[main] (5) [left of=1] [color=cyan] {};
-		\node[main] (6) [right of=1] [color=cyan] {};
-		\node[main] (7) [right of=6] [color=cyan] {};
-		\node[main] (8) [below right of=6] [below right of=4] [color=orange] {};
-		\node[main] (9) [below left of=5] [below left of=3] [color=blue] {};
-		\node[main] (10) [left of=9] [color=blue] {};
-		\node[main] (11) [below of=10] [color=blue] {};
-		\node[main] (12) [below of=9] [color=blue] {};
-		\node[main] (13) [below right = 1.8cm of 12] [color=purple] {};
-		\node[main] (14) [below left of=13] [color=purple] {};
-		\node[main] (15) [below right of=13] [color=purple] {};
-		\path[color=blue] (9) edge (10)
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =1.5pt}]
+		\node[main] (1) [color=mygreen] {};
+		\node[main] (2) [above of=1] [color=mygreen] {};
+		\node[main] (3) [below left of=1] [color=mygreen] {};
+		\node[main] (4) [below right of=1] [color=mygreen] {};
+		\node[main] (5) [left of=1] [color=mygreen] {};
+		\node[main] (6) [right of=1] [color=mygreen] {};
+		\node[main] (7) [right of=6] [color=mygreen] {};
+		\node[main] (8) [below right of=6] [below right of=4] [color=myorange] {};
+		\node[main] (9) [below left of=5] [below left of=3] [color=myblue] {};
+		\node[main] (10) [left of=9] [color=myblue] {};
+		\node[main] (11) [below of=10] [color=myblue] {};
+		\node[main] (12) [below of=9] [color=myblue] {};
+		\node[main] (13) [below right = 1.8cm of 12] [color=myviolet] {};
+		\node[main] (14) [below left of=13] [color=myviolet] {};
+		\node[main] (15) [below right of=13] [color=myviolet] {};
+		\path[color=myblue] (9) edge (10)
 			(9) edge (12)
 			(10) edge (11)
 			(11) edge (12);
-		\path[color=cyan] (1) edge (2)
+		\path[color=mygreen] (1) edge (2)
 			(1) edge (3)
 			(1) edge (4)
 			(1) edge (5)
 			(1) edge (6)
 			(6) edge (7);
-		\path[color=purple] (13) edge (14)
+		\path[color=myviolet] (13) edge (14)
 			(13) edge (15)
 			(14) edge (15);
 		\path (8) edge [bend left = 40] (15)
@@ -580,9 +580,9 @@ We may take a look at an example of model of $K_{4}$ which is in picture \ref{k4
 On picture \ref{separation} we may see an example of $(A,B)$-separation. Where the \textcolor{orange}{orange} points are both in $A$ and $B$ and then the rest is either only in one or second part, which are set by their connectivity.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
-		\node[main] (1) [color=orange] {};
-		\node[main] (2) [color=orange] [below of=1] {};
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =1.5pt}]
+		\node[main] (1) [color=myorange] {};
+		\node[main] (2) [color=myorange] [below of=1] {};
 		\node[main] (3) [right of=1] {};
 		\node[main] (4) [right of=2] {};
 		\node[main] (5) [left of=2] {};
@@ -627,8 +627,8 @@ We can see that this is somewhat reformulation of theorem before (\ref{2-linked-
 	\end{enumerate}
 \end{defn}
 
-\begin{thm}[\textcolor{Green}{Slightly changed}]
-	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ \textcolor{Green}{$S$-relaxed mdel} of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
+\begin{thm}[\textcolor{mygreen}{Slightly changed}]
+	$\forall G_{i}, S = \{s_{1}, s_{2}, \dots, s_{k}, t_{1}, t_{2}, \dots, t_{k}\} \subseteq V(G)$ and $M_{1}, \dots, M_{4k}$ \textcolor{mygreen}{$S$-relaxed mdel} of $K_{4m}$ in $G$. If $S$  is well-linked to $M_{1}, M_{2}, \dots, M_{4k}$ then $G$ contains distinct paths from $s_{i}$ to $t_{i}$ for all $i \in [k]$.
 \end{thm}
 
 \begin{proof}

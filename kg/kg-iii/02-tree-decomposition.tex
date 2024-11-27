@@ -27,18 +27,18 @@ Firstly we may recall that: $K_{5} \nleq_{m} G$ iff $G$ is obtained from planar 
 	$(T, \beta)$ is tree decomposition of $G$ and let $x \in V(T)$ then the \textbf{torso} of $x$. is $G[\beta(x)] + $ cliques on $\beta(x) \cap \beta(y)$ for every $xy \in E(T)$.
 \end{defn}
 
-This definition may not be clear to everybody so lets take a look at an example. On picture \ref{example-torso} we may see the original graph \ref{g-torso} and on picture \ref{t-torso} we may see the tree decomposition. Now we set $x$ to be \texttt{\textcolor{Green}{B}\textcolor{orange}{G}\textcolor{cyan}{E}}. Now for the torso itself we create a three vertices \texttt{B}, \texttt{G} and \texttt{E} where there is no induced edge. Then for the neighbors \texttt{ABG} we add a edge between \texttt{B} and \texttt{G}. For \texttt{BED} we add an edge between \texttt{B} and \texttt{E} and lastly for \texttt{EGF} we add \texttt{E}--\texttt{G} edge. And finally we get what is drawn on picture \ref{torso}.
+This definition may not be clear to everybody so lets take a look at an example. On picture \ref{example-torso} we may see the original graph \ref{g-torso} and on picture \ref{t-torso} we may see the tree decomposition. Now we set $x$ to be \texttt{\textcolor{mygreen}{B}\textcolor{myorange}{G}\textcolor{myblue}{E}}. Now for the torso itself we create a three vertices \texttt{B}, \texttt{G} and \texttt{E} where there is no induced edge. Then for the neighbors \texttt{ABG} we add a edge between \texttt{B} and \texttt{G}. For \texttt{BED} we add an edge between \texttt{B} and \texttt{E} and lastly for \texttt{EGF} we add \texttt{E}--\texttt{G} edge. And finally we get what is drawn on picture \ref{torso}.
 
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.3\textwidth}\centering
 		\begin{tikzpicture}[node distance={14mm}, thick, main/.style = {draw, circle}]
 			\node[main] (1) {A};
-			\node[main] (2) [below right of=1, color = Green] {B};
+			\node[main] (2) [below right of=1, color = mygreen] {B};
 			\node[main] (3) [above right of=2] {C};
 			\node[main] (4) [below right of=3] {D};
-			\node[main] (5) [below of=4, color = cyan] {E};
+			\node[main] (5) [below of=4, color = myblue] {E};
 			\node[main] (6) [below left of=5] {F};
-			\node[main] (7) [left of=6, color = orange] {G};
+			\node[main] (7) [left of=6, color = myorange] {G};
 			\node[main] (8) [above left of=7] {H};
 			\path
 				(1) edge (2)
@@ -55,12 +55,12 @@ This definition may not be clear to everybody so lets take a look at an example.
 	\end{subfigure}
 	\begin{subfigure}{0.35\textwidth}\centering
 		\begin{tikzpicture}[node distance={14mm}, thick, main/.style = {draw, circle}]
-			\node[main] (1) {\tiny{A\textcolor{orange}{G}H}};
-			\node[main] (2) [below right of=1] {{\tiny A\textcolor{Green}{B}\textcolor{orange}{G}}};
-			\node[main] (3) [below right of=2] {{\tiny \textcolor{Green}{B}\textcolor{orange}{G}\textcolor{cyan}{E}}};
-			\node[main] (4) [above right of=3] {{\tiny \textcolor{Green}{B}\textcolor{cyan}{E}D}};
-			\node[main] (5) [above right of=4] {{\tiny \textcolor{Green}{B}CD}};
-			\node[main] (6) [below of=3] {{\tiny \textcolor{cyan}{E}\textcolor{orange}{G}F}};
+			\node[main] (1) {\tiny{A\textcolor{myorange}{G}H}};
+			\node[main] (2) [below right of=1] {{\tiny A\textcolor{mygreen}{B}\textcolor{myorange}{G}}};
+			\node[main] (3) [below right of=2] {{\tiny \textcolor{mygreen}{B}\textcolor{myorange}{G}\textcolor{myblue}{E}}};
+			\node[main] (4) [above right of=3] {{\tiny \textcolor{mygreen}{B}\textcolor{myblue}{E}D}};
+			\node[main] (5) [above right of=4] {{\tiny \textcolor{mygreen}{B}CD}};
+			\node[main] (6) [below of=3] {{\tiny \textcolor{myblue}{E}\textcolor{myorange}{G}F}};
 			\path
 			(1) edge (2)
 			(2) edge (3)
@@ -73,9 +73,9 @@ This definition may not be clear to everybody so lets take a look at an example.
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}\centering
 		\begin{tikzpicture}[node distance={14mm}, thick, main/.style = {draw, circle}]
-			\node[main] (1) {\textcolor{Green}{B}};
-			\node[main] (2) [below right of=1] {\textcolor{cyan}{E}};
-			\node[main] (3) [below left of=1] {\textcolor{orange}{G}};
+			\node[main] (1) {\textcolor{mygreen}{B}};
+			\node[main] (2) [below right of=1] {\textcolor{myblue}{E}};
+			\node[main] (3) [below left of=1] {\textcolor{myorange}{G}};
 			\path
 			(1) edge (2)
 			(2) edge (3)
@@ -148,13 +148,13 @@ As previously we will take a look at an example of a bramble so that a reader ge
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, thick, circle}]
 		\node[main] (1) [color=black] {{\tiny $B_{3}$}};
 		\node[main] (2) [right of=1] [color=purple] {{\tiny $B_{3}$, $B_{4}$}};
-		\node[main] (3) [right of=2] [color=orange] {{\tiny $B_{1}$}};
+		\node[main] (3) [right of=2] [color=myorange] {{\tiny $B_{1}$}};
 		\node[main] (4) [below of=1] [color=purple] {{\tiny $B_{3}$, $B_{4}$}};
 		\node[main] (5) [right of=4] [color=purple] {{\tiny $B_{4}$}};
-		\node[main] (6) [right of=5] [color=orange] {{\tiny $B_{1}$}};
+		\node[main] (6) [right of=5] [color=myorange] {{\tiny $B_{1}$}};
 		\node[main] (7) [below of=4] [color=blue] {{\tiny $B_{2}$}};
 		\node[main] (8) [right of=7] [color=blue] {{\tiny $B_{2}$}};
-		\node[main] (9) [right of=8] [color=orange] {{\tiny $B_{1}$}};
+		\node[main] (9) [right of=8] [color=myorange] {{\tiny $B_{1}$}};
 		\path
 			(1) edge (2) (2) edge (5)
 			(2) edge (3) (3) edge (6)
@@ -344,15 +344,15 @@ When we examine a tree decomposition we may easily find one such with tree width
 	\begin{subfigure}{0.25\textwidth}
 		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
 			\node[main] (1) {};
-			\node[main] (2) [right of=1] [color = orange] {};
+			\node[main] (2) [right of=1] [color = myorange] {};
 			\node[main] (3) [right of=2] {};
 			\node[main] (4) [below of=1] {};
-			\node[main] (5) [right of=4] [color = orange] {};
+			\node[main] (5) [right of=4] [color = myorange] {};
 			\node[main] (6) [right of=5] {};
-			\node[main] (7) [below of=4] [color = orange] {};
-			\node[main] (8) [right of=7] [color = orange] {};
+			\node[main] (7) [below of=4] [color = myorange] {};
+			\node[main] (8) [right of=7] [color = myorange] {};
 			\node[main] (9) [right of=8] {};
-			\node[main] (10) [below of=7] [color = orange] {};
+			\node[main] (10) [below of=7] [color = myorange] {};
 			\node[main] (11) [right of=10] {};
 			\node[main] (12) [right of=11] {};
 			\node[main] (13) [right of=3] {};
@@ -391,10 +391,10 @@ So we can say that $\text{tw}(n \times n \text{grid}) \leq n$. Can we construct 
 		\node[main] (10) [below of=7] [color = blue] {};
 		\node[main] (11) [right of=10] [color = blue] {};
 		\node[main] (12) [right of=11] [color = blue] {};
-		\node[main] (13) [right of=3] [color = orange] {};
-		\node[main] (14) [right of=6] [color = orange] {};
-		\node[main] (15) [right of=9] [color = orange] {};
-		\node[main] (16) [right of=12] [color = orange] {};
+		\node[main] (13) [right of=3] [color = myorange] {};
+		\node[main] (14) [right of=6] [color = myorange] {};
+		\node[main] (15) [right of=9] [color = myorange] {};
+		\node[main] (16) [right of=12] [color = myorange] {};
 		\path
 		(1) edge (2) (2) edge (5) (14) edge (13)
 		(2) edge (3) (3) edge (6) (14) edge (15)
