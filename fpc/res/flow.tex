@@ -5,17 +5,16 @@
 \usetikzlibrary{positioning}
 
 \input{../themes}
-\lighttheme
 
 \begin{document}
 	\begin{tikzpicture}[node distance={17mm}, thick, main/.style = {draw, circle, fill},
 		b/.style = {myblue}]
-		\node[main] (1) [b] {\textcolor{black}{$s$}};
+		\node[main] (1) [b] {\textcolor{white}{$s$}};
 		\node[main] (2) [above right of=1] [b] {};
 		\node[main] (3) [below right of=1] [b] {};
 		\node[main] (4) [right of=2] [b] {};
 		\node[main] (5) [right of=3] [b] {};
-		\node[main] (6) [below right of=4] [b] {\textcolor{black}{$t$}};
+		\node[main] (6) [below right of=4] [b] {\textcolor{white}{$t$}};
 		\draw[->] (1) -- (2) [b] node[midway, above left] {4};
 		\draw[->] (1) -- (3) [b] node[midway, below left] {5};
 		\draw[->] (2) -- (3) [b] node[midway, left] {3};

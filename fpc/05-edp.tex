@@ -879,12 +879,12 @@ Before we properly show the proof we show the idea behind it. We set $L = \frac{
 			\node[below of = 1] (phantom) {};
 			\node[main, right of = 1, color=myviolet] (2) {$a_{p,2}$};
 			\node[right of = 2] (3) {};
-			\node[main, right of = 3, color=cyan] (4) {$a_{p,i}$};
+			\node[main, right of = 3, color=myblue] (4) {$a_{p,i}$};
 			\node[right of = 4] (5) {};
 			\node[main, right of = 5, color=myviolet] (6) {$a_{p,L}$};
 			\node[main, below of = phantom, color=myorange] (7) {$b_{p,L}$};
 			\node[right of = 7] (8) {};
-			\node[main, right of = 8, color=cyan] (9) {$b_{p,i}$};
+			\node[main, right of = 8, color=myblue] (9) {$b_{p,i}$};
 			\node[right of = 9] (10) {};
 			\node[main, right of = 10, color=myorange] (11) {$b_{p,2}$};
 			\node[main, right of = 11, color=myorange] (12) {$b_{p,1}$};
@@ -1268,11 +1268,11 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 			
 			\node[above of = O2] (8) {$8$};
 			\node[above of = O3, color = myorange] (C) {$C$};
-			\node[above of = O4, color = myblue] (D) {$D$};
+			\node[above of = O4, color = mygreen] (D) {$D$};
 			\node[above of = O5] (8') {$8'$};
 			\node[below of = O8] (11) {$11$};
 			\node[below of = O9, color = myorange] (A) {$A$};
-			\node[below of = O10, color = myblue] (B) {$B$};
+			\node[below of = O10, color = mygreen] (B) {$B$};
 			\node[below of = O11] (11') {$11'$};
 			
 			\path[thick] (O1) edge (O2)
@@ -1289,11 +1289,11 @@ For that we will introduce \textbf{switch} gadget which connects the two previou
 				(O12) edge (O6);
 			\draw[->] (8) edge (O2);
 			\draw[->, color = myorange] (C) edge (O3);
-			\draw[->, color = myblue] (O4) edge (D);
+			\draw[->, color = mygreen] (O4) edge (D);
 			\draw[->] (8') edge (O5);
 			\draw[->] (O8) edge (11);
 			\draw[->, color = myorange] (O9) edge (A);
-			\draw[->, color = myblue] (B) edge (O10);
+			\draw[->, color = mygreen] (B) edge (O10);
 			\draw[->] (O11) edge (11');
 		\end{tikzpicture}
 		\caption{Scheme for analyzing.}
