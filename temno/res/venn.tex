@@ -1,7 +1,11 @@
-\documentclass[tikz, border=1mm]{standalone}
+\documentclass[border=1mm]{standalone}
 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
 \usetikzlibrary{shapes}
 \usetikzlibrary{patterns}
+
+\input{../../themes}
 
 \begin{document}
 	\begin{tikzpicture}
@@ -10,31 +14,31 @@
 		\def\thirdcircle{(60:2 cm) circle (1.5 cm)}
 		
 		% Draw the circles
-		\draw[color=cyan] \firstcircle;
-		\draw[color=olive] \secondcircle;
-		\draw[color=lime] \thirdcircle;
+		\draw[color=myblue] \firstcircle;
+		\draw[color=mygreen] \secondcircle;
+		\draw[color=myred] \thirdcircle;
 		
 		% Fill the intersections
 		\begin{scope}
 			\clip \firstcircle;
 			\clip \secondcircle;
-			\fill[pattern=north east lines, pattern color=cyan] \thirdcircle;
+			\fill[pattern=north east lines, pattern color=myyellow] \thirdcircle;
 		\end{scope}
 		
 		\begin{scope}
 			\clip \secondcircle;
-			\fill[pattern=grid, pattern color=olive] \thirdcircle;
+			\fill[pattern=grid, pattern color=mygreen] \thirdcircle;
 		\end{scope}
 		
 		\begin{scope}
 			\clip \firstcircle;
-			\fill[pattern=dots, pattern color=lime] \thirdcircle;
+			\fill[pattern=dots, pattern color=myred] \thirdcircle;
 		\end{scope}
 		
 		
 		\begin{scope}
 			\clip \firstcircle;
-			\fill[pattern=horizontal lines, pattern color=lightgray] \secondcircle;
+			\fill[pattern=horizontal lines, pattern color=myblue] \secondcircle;
 		\end{scope}
 		
 		% Label the sets
