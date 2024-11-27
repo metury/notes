@@ -61,14 +61,14 @@ Chceme dokázat, že $(\forall k \in \N) \ (\exists f(k) \in \N) \ : \forall G \
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}
 			\draw[thick] (0,0) -- (13,0);
-			\draw[color=Blue, thick] (1,0) arc (180:0:4);
-			\draw[color=Blue, thick] (2,0) arc (180:0:4);
-			\draw[color=Blue, thick, dashed] (3,0) arc (180:0:4);
-			\draw[color=Blue, thick] (4,0) arc (180:0:4);
-			\draw[color=Green, thick] (4.4,0) arc (180:0:.3);
-			\draw[color=Green, thick] (5.6,0) arc (180:0:.3);
-			\draw[color=Green, thick, dashed] (6.8,0) arc (180:0:.3);
-			\draw[color=Green, thick] (8,0) arc (180:0:.3);
+			\draw[color=myblue, thick] (1,0) arc (180:0:4);
+			\draw[color=myblue, thick] (2,0) arc (180:0:4);
+			\draw[color=myblue, thick, dashed] (3,0) arc (180:0:4);
+			\draw[color=myblue, thick] (4,0) arc (180:0:4);
+			\draw[color=mygreen, thick] (4.4,0) arc (180:0:.3);
+			\draw[color=mygreen, thick] (5.6,0) arc (180:0:.3);
+			\draw[color=mygreen, thick, dashed] (6.8,0) arc (180:0:.3);
+			\draw[color=mygreen, thick] (8,0) arc (180:0:.3);
 			\node at (1, -.3) {$x_1$};
 			\node at (2, -.3) {$x_2$};
 			\node at (3, -.3) {$x_i$};
@@ -201,14 +201,14 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.45\textwidth}\centering
-			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {Blue}]
+			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {myblue}]
 				\draw[l, b] (0,2) to[out=270, in=90] (0,0) to[out=0, in=180] (4,0);
 				\node[b] at (-.3,0) {$l_1$};
 			\end{tikzpicture}
 			\caption{L-curves.}
 		\end{subfigure}
 		\begin{subfigure}{.45\textwidth}\centering
-			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {Blue}]
+			\begin{tikzpicture}[l/.style = {line width = 2pt}, b/.style = {myblue}]
 				\draw[l, gray] (0,0) -- (5,0);
 				\node[gray] at (-.3,0) {$x$};
 				\draw[l, b] (1, -2) -- (1,0);
@@ -229,8 +229,8 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 				\node at (.7,-2) {$l_2$};
 				\draw[l] (2,-.5) to[out=270, in=90] (2,-1.5) to[out=0, in=180] (5,-1.5);
 				\node at (1.7,-1.5) {$l_3$};
-				\draw[l, Blue] (.5,3) to[out=270, in=90] (.5,2) to[out=0, in=180] (4,2);
-				\node[Blue] at (.8,3) {$l_4$};
+				\draw[l, myblue] (.5,3) to[out=270, in=90] (.5,2) to[out=0, in=180] (4,2);
+				\node[myblue] at (.8,3) {$l_4$};
 			\end{tikzpicture}
 			\caption{L-curves.}
 		\end{subfigure}
@@ -246,8 +246,8 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 				\draw[l] (2, -3) -- (3.6,-.6);
 				\draw[dotted, line width = 1pt] (2, -3) -- (4,0);
 				\node at (1.7, -3) {$p_3$};
-				\draw[l, Blue] (4.7, -.5) -- (2,0);
-				\node[Blue] at (5, -.5) {$p_4$};
+				\draw[l, myblue] (4.7, -.5) -- (2,0);
+				\node[myblue] at (5, -.5) {$p_4$};
 			\end{tikzpicture}
 			\caption{Segments.}
 		\end{subfigure}
@@ -272,21 +272,21 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 		\begin{figure}[!ht]\centering
 			\begin{subfigure}{.45\textwidth}\centering
 				\begin{tikzpicture}[l/.style = {line width = 1pt}]
-					\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-					\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-					\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+					\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+					\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+					\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
 					\draw[l] (.5,5) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
 					\draw[l] (2.3,2) to[out=270, in=90] (2.3,1.5) to[out=0, in=180] (5.4,1.5);
 					\draw[l] (2.6,3) to[out=270, in=90] (2.6,2) to[out=0, in=180] (5.6,2);
 					\draw[l] (3,5.5) to[out=270, in=90] (3,4) to[out=0, in=180] (5,4);
 				\end{tikzpicture}
-				\caption{Example of configuration where we have \textcolor{Red}{two probes} in a \textcolor{Blue}{[0,1] box} with four L-curves.}
+				\caption{Example of configuration where we have \textcolor{myred}{two probes} in a \textcolor{myblue}{[0,1] box} with four L-curves.}
 			\end{subfigure}
 			\begin{subfigure}{.45\textwidth}\centering
 				\begin{tikzpicture}[l/.style = {line width = 1pt}]
-					\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-					\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-					\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+					\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+					\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+					\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
 					\draw[l] (2.6,2) to[out=270, in=90] (2.6,.5) to[out=0, in=180] (4.6,.5);
 					\draw[l] (4,4) to[out=270, in=90] (4,2) to[out=0, in=180] (4.6,2);
 					\draw[l] (.5,5) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
@@ -309,11 +309,11 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[l/.style = {line width = 1pt}]
-			\draw[Blue, fill=Blue!20] (0,0) rectangle (3,3);
-			\draw[Red, fill=Red!20] (1,0) rectangle (2,2);
+			\draw[myblue, fill=myblue!20] (0,0) rectangle (3,3);
+			\draw[myred, fill=myred!20] (1,0) rectangle (2,2);
 			\draw[l] (.5,2.6) to[out=270, in=90] (.5,1) to[out=0, in=180] (2.5,1);
 		\end{tikzpicture}
-		\caption{Start of the induction with \textcolor{Red}{one probe} and one L-curve.}
+		\caption{Start of the induction with \textcolor{myred}{one probe} and one L-curve.}
 		\label{start-configuration}
 	\end{figure}
 	
@@ -333,9 +333,9 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}[l/.style = {line width = 1pt}]
-				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+				\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+				\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
 				\draw[l] (1,1) to (2,1);
 				\draw[l] (1,2) to (2,2);
 				\draw[l] (1,3) to (2,3);
@@ -343,27 +343,27 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 				\draw[l] (3,2) to (5,2);
 				\node at (5,5) {$B_k$};
 			\end{tikzpicture}
-			\caption{Simplification with \textcolor{Red}{two probes}.}
+			\caption{Simplification with \textcolor{myred}{two probes}.}
 		\end{subfigure}
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}[l/.style = {line width = 1pt}]
-				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
-				\draw[VioletRed, fill=VioletRed!20] (1.1,0) rectangle (1.2,3.7);
-				\draw[VioletRed, fill=VioletRed!20] (1.4,0) rectangle (1.6,.8);
+				\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+				\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+				\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
+				\draw[myorange, fill=myorange!20] (1.1,0) rectangle (1.2,3.7);
+				\draw[myorange, fill=myorange!20] (1.4,0) rectangle (1.6,.8);
 				\draw[l] (1,1) to (2,1);
 				\draw[l] (1,2) to (2,2);
 				\draw[l] (1,3) to (2,3);
-				\draw[l, Green] (1.3,3.6) to[out=270, in=90] (1.3,.5) to[out=0, in=180] (1.7,.5);
-				\draw[VioletRed, fill=VioletRed!20] (3.1,0) rectangle (3.4,2.7);
-				\draw[VioletRed, fill=VioletRed!20] (3.6,0) rectangle (4.4,.8);
+				\draw[l, mygreen] (1.3,3.6) to[out=270, in=90] (1.3,.5) to[out=0, in=180] (1.7,.5);
+				\draw[myorange, fill=myorange!20] (3.1,0) rectangle (3.4,2.7);
+				\draw[myorange, fill=myorange!20] (3.6,0) rectangle (4.4,.8);
 				\draw[l] (3,1) to (5,1);
 				\draw[l] (3,2) to (5,2);
-				\draw[l, Green] (3.5,2.6) to[out=270, in=90] (3.5,.5) to[out=0, in=180] (4.5,.5);
+				\draw[l, mygreen] (3.5,2.6) to[out=270, in=90] (3.5,.5) to[out=0, in=180] (4.5,.5);
 				\node at (4.3,5) {$B_k \to A_{k+1}$};
 			\end{tikzpicture}
-			\caption{\textcolor{Green}{Two new L-curves} and \textcolor{VioletRed}{four new probes}.}
+			\caption{\textcolor{mygreen}{Two new L-curves} and \textcolor{myorange}{four new probes}.}
 		\end{subfigure}
 		\caption{Conversion from $B_k$ to $A_{k+1}$.}
 		\label{ak+1}
@@ -372,9 +372,9 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}[l/.style = {line width = 1pt}]
-				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+				\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+				\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
 				\draw[l] (1,1) to (2,1);
 				\draw[l] (1,2) to (2,2);
 				\draw[l] (1,3) to (2,3);
@@ -382,17 +382,17 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 				\draw[l] (3,2) to (5,2);
 				\node at (5,5) {$B_k$};
 			\end{tikzpicture}
-			\caption{Simplification with \textcolor{Red}{two probes}.}
+			\caption{Simplification with \textcolor{myred}{two probes}.}
 		\end{subfigure}
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}[l/.style = {line width = 1pt}]
-				\draw[Blue, fill=Blue!20] (0,0) rectangle (6,6);
-				\draw[Red, fill=Red!20] (1,0) rectangle (2,4);
-				\draw[Red, fill=Red!20] (3,0) rectangle (5,3);
+				\draw[myblue, fill=myblue!20] (0,0) rectangle (6,6);
+				\draw[myred, fill=myred!20] (1,0) rectangle (2,4);
+				\draw[myred, fill=myred!20] (3,0) rectangle (5,3);
 				\draw[Violet, fill=Violet!20] (1.1, 3.1) rectangle (1.9, 3.9);
-				\draw[VioletRed, fill=VioletRed!20] (1.2, 0) rectangle (1.6, 3.6);
+				\draw[myorange, fill=myorange!20] (1.2, 0) rectangle (1.6, 3.6);
 				\draw[Violet, fill=Violet!20] (3.6, 2.1) rectangle (4.4, 2.9);
-				\draw[VioletRed, fill=VioletRed!20] (3.7, 0) rectangle (4.1, 2.6);
+				\draw[myorange, fill=myorange!20] (3.7, 0) rectangle (4.1, 2.6);
 				\draw[l] (1,1) to (2,1);
 				\draw[l] (1,2) to (2,2);
 				\draw[l] (1,3) to (2,3);
@@ -400,7 +400,7 @@ Now the question might be if SEG graphs are $\chi$-bounded or not. This was firs
 				\draw[l] (3,2) to (5,2);
 				\node at (4,5) {$B_k \ \& \ A_{k+1} \to B_{k+1}$};
 			\end{tikzpicture}
-			\caption{\textcolor{Violet}{Copies of $A_{k+1}$} and \textcolor{VioletRed}{prolonged probes}.}
+			\caption{\textcolor{Violet}{Copies of $A_{k+1}$} and \textcolor{myorange}{prolonged probes}.}
 		\end{subfigure}
 		\caption{Conversion from $A_{k+1}$ and $B_{k}$ to $B_{k+1}$.}
 		\label{bk+1}
@@ -442,16 +442,16 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 	\begin{figure}[!ht]\centering
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}
-				\draw[VioletRed, fill=VioletRed!20] (0, 0) rectangle (2, 2);
-				\draw[VioletRed, fill=VioletRed!20, opacity=0.8] (1, 1) rectangle (3, 3);
+				\draw[myorange, fill=myorange!20] (0, 0) rectangle (2, 2);
+				\draw[myorange, fill=myorange!20, opacity=0.8] (1, 1) rectangle (3, 3);
 			\end{tikzpicture}
 			\caption{One vertex is inside the other rectangle.}
 			\label{inter-box}
 		\end{subfigure}
 		\begin{subfigure}{.45\textwidth}\centering
 			\begin{tikzpicture}
-				\draw[VioletRed, fill=VioletRed!20] (0, 1) rectangle (3, 2);
-				\draw[VioletRed, fill=VioletRed!20, opacity=0.8] (1, 0) rectangle (2, 3);
+				\draw[myorange, fill=myorange!20] (0, 1) rectangle (3, 2);
+				\draw[myorange, fill=myorange!20, opacity=0.8] (1, 0) rectangle (2, 3);
 			\end{tikzpicture}
 			\caption{Cross-like intersection.}
 			\label{cross-box}
@@ -469,23 +469,23 @@ Now we may ask ourselves if this prove can be extended to some other type of int
 	
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance = 30mm, main/.style = {draw, circle, thick}]
-			\node[main] (0) {(1,\textcolor{Green}{1})};
-			\node[main, above of = 0] (1) {(2,\textcolor{Green}{1})};
-			\node[main, left of = 1] (2) {(3,\textcolor{Green}{1})};
-			\node[main, right of = 1] (3) {(2,\textcolor{Green}{2})};
-			\node[main, left of = 0] (4) {(1,\textcolor{Green}{3})};
-			\node[main, above of = 2] (5) {(1,\textcolor{Green}{3})};
+			\node[main] (0) {(1,\textcolor{mygreen}{1})};
+			\node[main, above of = 0] (1) {(2,\textcolor{mygreen}{1})};
+			\node[main, left of = 1] (2) {(3,\textcolor{mygreen}{1})};
+			\node[main, right of = 1] (3) {(2,\textcolor{mygreen}{2})};
+			\node[main, left of = 0] (4) {(1,\textcolor{mygreen}{3})};
+			\node[main, above of = 2] (5) {(1,\textcolor{mygreen}{3})};
 			\draw[thick] (0) -- (1);
 			\draw[thick] (0) -- (2);
 			\draw[thick] (1) -- (2);
 			\draw[thick] (1) -- (5);
-			\draw[thick, Green] (0) -- (3);
-			\draw[thick, Green] (0) -- (5);
-			\draw[thick, Green] (1) -- (4);
-			\draw[thick, Green] (1) -- (3);
-			\draw[thick, Green] (2) -- (4);
-			\draw[thick, Green] (2) -- (5);
-			\draw[thick, Green] (3) -- (4);
+			\draw[thick, mygreen] (0) -- (3);
+			\draw[thick, mygreen] (0) -- (5);
+			\draw[thick, mygreen] (1) -- (4);
+			\draw[thick, mygreen] (1) -- (3);
+			\draw[thick, mygreen] (2) -- (4);
+			\draw[thick, mygreen] (2) -- (5);
+			\draw[thick, mygreen] (3) -- (4);
 			\draw[thick] (3) -- (5);
 		\end{tikzpicture}
 		\caption{Disjoint union of edges for coloring.}
@@ -564,28 +564,28 @@ Now we will further generalize to String graphs, which will use completely new t
 
 \section{Game of robber and cops}
 
-We have a given graph $G$. Then 1 robber (\textcolor{Red}{\faCircle}) and $c$ cops (\textcolor{Green}{\faSquare}). This game is for 2 players. Both players take turns. First one plays with cops and the second with robber.
+We have a given graph $G$. Then 1 robber (\textcolor{myred}{\faCircle}) and $c$ cops (\textcolor{mygreen}{\faSquare}). This game is for 2 players. Both players take turns. First one plays with cops and the second with robber.
 
-\begin{mybox}{Rules}
+\begin{topic}{Rules}
 	\begin{itemize}[]
 		\item \textbf{Start of the game:} First player places cops on vertices of graph $G$. Then second player places the robber on some vertex.
 		\item \textbf{Single turn:} First player can with each cop either move to adjacent vertex or stay in the same one. Then the robber can move to adjacent or stay in the same vertex.
 		\item \textbf{Goal:} If both cop and robber end up in the same vertex cops have won. Alternatively robber wants to stay as long as possible.
 	\end{itemize}
-\end{mybox}
+\end{topic}
 
 \begin{example}
 	We have an easy example of the given graph and robber and cops. See Fig. \ref{cops-robber}
 	
 	\begin{figure}[!ht]\centering
 		\begin{tikzpicture}[node distance = 15mm, main/.style = {draw, circle}, thick]
-			\node[main] (0) {\textcolor{Green}{\faSquare}};
-			\node[main, below of = 0] (1) {\textcolor{Green}{\faSquare}};
+			\node[main] (0) {\textcolor{mygreen}{\faSquare}};
+			\node[main, below of = 0] (1) {\textcolor{mygreen}{\faSquare}};
 			\node[main, left of =1] (2) {};
 			\node[main, right of =1] (3) {};
 			\node[main, below of =1] (4) {};
-			\node[main, left of=4] (5) {\textcolor{Green}{\faSquare} \textcolor{Green}{\faSquare}};
-			\node[main, right of=4] (6) {\textcolor{Red}{\faCircle}};
+			\node[main, left of=4] (5) {\textcolor{mygreen}{\faSquare} \textcolor{mygreen}{\faSquare}};
+			\node[main, right of=4] (6) {\textcolor{myred}{\faCircle}};
 			\node[main, below of =6] (7) {};
 			\draw (0) -- (1);
 			\draw (1) -- (2);
@@ -656,29 +656,29 @@ We won't show this theorem. Also the lower bound is known to be 3. And String gr
 			    	}
 				\foreach \i in {1,...,4} {
 					\pgfmathtruncatemacro{\j}{\i+1}
-					\draw[thick, Blue, bend right = 25] (O-\i) edge (O-\j);
+					\draw[thick, myblue, bend right = 25] (O-\i) edge (O-\j);
 				}
-				\draw[thick, Blue, bend right = 25] (O-5) edge (O-1);
+				\draw[thick, myblue, bend right = 25] (O-5) edge (O-1);
 			       	\foreach \i in {1,...,5} {
 			    		\node[draw,circle, fill] (M-\i) at ({360/5 * (\i-1) + 20}:2) {};
 			    	}
 			    	\foreach \i in {1,...,4} {
 					\pgfmathtruncatemacro{\j}{\i+1}
-					\draw[thick, Blue, bend right = 25] (M-\i) edge (M-\j);
+					\draw[thick, myblue, bend right = 25] (M-\i) edge (M-\j);
 				}
-				\draw[thick, Blue, bend right = 25] (M-5) edge (M-1);
+				\draw[thick, myblue, bend right = 25] (M-5) edge (M-1);
 			    	\foreach \i in {1,...,5} {
 					\node[draw, circle, fill] (I-\i) at ({360/5 * (\i-1)}:1) {};
 			    	}
 			    	\foreach \i in {1,...,4} {
 					\pgfmathtruncatemacro{\j}{\i+1}
-					\draw[thick, Blue, bend right = 25] (I-\i) edge (I-\j);
+					\draw[thick, myblue, bend right = 25] (I-\i) edge (I-\j);
 				}
-				\draw[thick, Blue, bend right = 25] (I-5) edge (I-1);
+				\draw[thick, myblue, bend right = 25] (I-5) edge (I-1);
 				\foreach \i in {1,...,5} {
-					\draw[thick, Green] (I-\i) -- (M-\i);
-					\draw[thick, Green] (O-\i) -- (M-\i);
-					\draw[thick, Green] (O-\i) -- (I-\i);
+					\draw[thick, mygreen] (I-\i) -- (M-\i);
+					\draw[thick, mygreen] (O-\i) -- (M-\i);
+					\draw[thick, mygreen] (O-\i) -- (I-\i);
 				}
 			\end{tikzpicture}
 		\end{subfigure}
@@ -687,13 +687,13 @@ We won't show this theorem. Also the lower bound is known to be 3. And String gr
 				\draw[Black!30] (0,0) -- (7,0);
 				\foreach \i in {1,...,4}{
 					\pgfmathtruncatemacro{\j}{\i+1}
-					\draw[Blue] (\i,0) to (\i,1) to (\j.1,.5);
-					\draw[Blue] (\i.2,0) to (\i.2,2) to (\j.3, 1);
-					\draw[Blue] (\i.4,0) to (\i.4,3) to (\j.5, 2);
+					\draw[myblue] (\i,0) to (\i,1) to (\j.1,.5);
+					\draw[myblue] (\i.2,0) to (\i.2,2) to (\j.3, 1);
+					\draw[myblue] (\i.4,0) to (\i.4,3) to (\j.5, 2);
 				}
-				\draw[Blue] (5,0) to (5,1) to (6.6,.5) to[out=-10, in=0] (2,4.8) to[out=180, in=90] (1.1,.5);
-				\draw[Blue] (5.2,0) to (5.2,2) to (6.3, 1) to[out=-10, in=0] (2,4.4) to[out=180, in=90] (1.3,1.5);
-				\draw[Blue] (5.4,0) to (5.4,2) to[out=120, in=0] (2,4) to[out=180, in=90] (1.5,2.5);
+				\draw[myblue] (5,0) to (5,1) to (6.6,.5) to[out=-10, in=0] (2,4.8) to[out=180, in=90] (1.1,.5);
+				\draw[myblue] (5.2,0) to (5.2,2) to (6.3, 1) to[out=-10, in=0] (2,4.4) to[out=180, in=90] (1.3,1.5);
+				\draw[myblue] (5.4,0) to (5.4,2) to[out=120, in=0] (2,4) to[out=180, in=90] (1.5,2.5);
 			\end{tikzpicture}
 		\end{subfigure}
 		\caption{Graph on the left and on the right its representation.}
@@ -715,31 +715,31 @@ We won't show this theorem. Also the lower bound is known to be 3. And String gr
 		    	}
 			\foreach \i in {1,...,4} {
 				\pgfmathtruncatemacro{\j}{\i+1}
-				\draw[thick, Blue] (O-\i) -- (O-\j);
+				\draw[thick, myblue] (O-\i) -- (O-\j);
 			}
-			\draw[thick, Blue] (O-5) -- (O-1);
+			\draw[thick, myblue] (O-5) -- (O-1);
 		       	\foreach \i in {1,...,10} {
 		    		\node[draw,circle, fill] (M-\i) at ({360/10 * (\i-1)}:2) {};
 		    	}
 		    	\foreach \i in {1,...,9} {
 				\pgfmathtruncatemacro{\j}{\i+1}
-				\draw[thick, Blue] (M-\i) -- (M-\j);
+				\draw[thick, myblue] (M-\i) -- (M-\j);
 			}
-			\draw[thick, Blue] (M-10) -- (M-1);
+			\draw[thick, myblue] (M-10) -- (M-1);
 		    	\foreach \i in {2,4,6,8,10} {
 		    		\pgfmathtruncatemacro{\j}{\i / 2}
 				\node[draw, circle, fill] (I-\j) at ({360/10 * (\i - 1)}:1) {};
 		    	}
 		    	\foreach \i in {1,...,4} {
 				\pgfmathtruncatemacro{\j}{\i+1}
-				\draw[thick, Blue] (I-\i) -- (I-\j);
+				\draw[thick, myblue] (I-\i) -- (I-\j);
 			}
-			\draw[thick, Blue] (I-5) -- (I-1);
+			\draw[thick, myblue] (I-5) -- (I-1);
 			\foreach \i in {1,...,5} {
 				\pgfmathtruncatemacro{\j}{2*\i}
 				\pgfmathtruncatemacro{\k}{2*\i-1}
-				\draw[thick, Blue] (I-\i) -- (M-\j);
-				\draw[thick, Blue] (O-\i) -- (M-\k);
+				\draw[thick, myblue] (I-\i) -- (M-\j);
+				\draw[thick, myblue] (O-\i) -- (M-\k);
 			}
 		\end{tikzpicture}
 		\caption{Dodecahedron as a planar graph.}

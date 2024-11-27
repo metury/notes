@@ -10,19 +10,19 @@
 
 Now we will introduce two problems.
 
-\begin{mybox}{Consecutivity}
+\begin{problem}{Consecutivity}
 	\begin{itemize}[]
 		\item \textbf{Input:} $n \in \N$, sets $S_1, S_2, \dots, S_k \subseteq [n]$.
 		\item \textbf{Question:} is there a permutation $\pi$ of $[n]$ in which $S_1, S_2, \dots, S_k$ are all intervals?
 	\end{itemize}
-\end{mybox}
+\end{problem}
 
-\begin{mybox}{Cyclic consecutivity}
+\begin{problem}{Cyclic consecutivity}
 	\begin{itemize}[]
 		\item \textbf{Input:} $n \in \N$, sets $S_1, S_2, \dots, S_k \subseteq [n]$.
 		\item \textbf{Question:} is there a permutation $\pi$ of $[n]$ in which $S_1, S_2, \dots, S_k$ are all cyclic intervals?
 	\end{itemize}
-\end{mybox}
+\end{problem}
 
 \begin{lemma}
 	Consecutivity can be reduced to cyclic consecutivity.
@@ -185,12 +185,12 @@ Note that from PQ-trees this can be solved in linear time $O(|V| + \sum_{v \in V
 
 \subsection{Planarity testing with PQ trees}
 
-\begin{mybox}{Planarity testing}
+\begin{problem}{Planarity testing}
 	\begin{itemize}[]
 		\item \textbf{Input:} Graph $G = (V,E)$.
 		\item \textbf{Output:} Planar embedding of $G$ or a $K_{5}$ or $K_{3,3}$ minor of $G$.
 	\end{itemize}
-\end{mybox}
+\end{problem}
 
 For our usecase we will denote "planar embedding" as the rotation scheme, which is for any $v \in V$, cyclic order of edges incident to $v$ in a planar drawing.
 

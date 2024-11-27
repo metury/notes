@@ -48,17 +48,17 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}
 			\draw[line width = 3] (0,0) -- (6,0);
-			\draw[line width = 4, color = cyan] (1, .12) -- (3, .12);
-			\draw[line width = 4, color = violet] (4, .12) -- (5, .12);
-			\draw[line width = 4, color = orange] (2, .25) -- (5.5, .25);
+			\draw[line width = 4, color = myblue] (1, .12) -- (3, .12);
+			\draw[line width = 4, color = myviolet] (4, .12) -- (5, .12);
+			\draw[line width = 4, color = myorange] (2, .25) -- (5.5, .25);
 		\end{tikzpicture}
 		\caption{Drawn intervals.}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}[node distance={7mm}, thick, main/.style = {draw, circle, fill}]
-			\node[main, color=cyan] (C) {};
-			\node[main, color=orange] (O) [above right of=C] {};
-			\node[main, color=violet] (V) [below right of=O] {};
+			\node[main, color=myblue] (C) {};
+			\node[main, color=myorange] (O) [above right of=C] {};
+			\node[main, color=myviolet] (V) [below right of=O] {};
 			\draw (O) edge (V);
 			\draw (C) edge (O);
 		\end{tikzpicture}
@@ -70,12 +70,12 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}[node distance={9mm}, thick, main/.style = {draw, circle}]
-			\draw[line width = 2, color = cyan] (0,1) -- (3,2);
-			\draw[line width = 2, color = orange] (0,2) -- (3,5);
-			\draw[line width = 2, color = lime] (0,3) -- (3,1);
-			\draw[line width = 2, color = blue] (0,4) -- (3,4);
-			\draw[line width = 2, color = red] (0,5) -- (3,6);
-			\draw[line width = 2, color = violet] (0,6) -- (3,3);
+			\draw[line width = 2, color = myblue] (0,1) -- (3,2);
+			\draw[line width = 2, color = myorange] (0,2) -- (3,5);
+			\draw[line width = 2, color = mygreen] (0,3) -- (3,1);
+			\draw[line width = 2, color = myyellow] (0,4) -- (3,4);
+			\draw[line width = 2, color = myred] (0,5) -- (3,6);
+			\draw[line width = 2, color = myviolet] (0,6) -- (3,3);
 			\draw[line width = 2] (0,.8) -- (0,6.2);
 			\draw[line width = 2] (3,.8) -- (3,6.2);
 		\end{tikzpicture}
@@ -83,12 +83,12 @@ In many cases, the members of $\mathcal{M}$ are defined by their geometric shape
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}\centering
 		\begin{tikzpicture}[node distance={14mm}, thick, main/.style = {draw, circle, fill}]
-			\node[main, color=cyan] (1) {};
-			\node[main, color=lime] (2) [right of=1] {};
-			\node[main, color=orange] (3) [below of=2] {};
-			\node[main, color=blue] (4) [below of=3] {};
-			\node[main, color=violet] (5) [left of=4] {};
-			\node[main, color=red] (6) [below of=5] {};
+			\node[main, color=myblue] (1) {};
+			\node[main, color=mygreen] (2) [right of=1] {};
+			\node[main, color=myorange] (3) [below of=2] {};
+			\node[main, color=myyellow] (4) [below of=3] {};
+			\node[main, color=myviolet] (5) [left of=4] {};
+			\node[main, color=myred] (6) [below of=5] {};
 
 			\draw (1) edge (2);
 			\draw (2) edge (3);
