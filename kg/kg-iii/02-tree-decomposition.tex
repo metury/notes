@@ -147,13 +147,13 @@ As previously we will take a look at an example of a bramble so that a reader ge
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, thick, circle}]
 		\node[main] (1) [color=black] {{\tiny $B_{3}$}};
-		\node[main] (2) [right of=1] [color=purple] {{\tiny $B_{3}$, $B_{4}$}};
+		\node[main] (2) [right of=1] [color=myviolet] {{\tiny $B_{3}$, $B_{4}$}};
 		\node[main] (3) [right of=2] [color=myorange] {{\tiny $B_{1}$}};
-		\node[main] (4) [below of=1] [color=purple] {{\tiny $B_{3}$, $B_{4}$}};
-		\node[main] (5) [right of=4] [color=purple] {{\tiny $B_{4}$}};
+		\node[main] (4) [below of=1] [color=myviolet] {{\tiny $B_{3}$, $B_{4}$}};
+		\node[main] (5) [right of=4] [color=myviolet] {{\tiny $B_{4}$}};
 		\node[main] (6) [right of=5] [color=myorange] {{\tiny $B_{1}$}};
-		\node[main] (7) [below of=4] [color=blue] {{\tiny $B_{2}$}};
-		\node[main] (8) [right of=7] [color=blue] {{\tiny $B_{2}$}};
+		\node[main] (7) [below of=4] [color=myblue] {{\tiny $B_{2}$}};
+		\node[main] (8) [right of=7] [color=myblue] {{\tiny $B_{2}$}};
 		\node[main] (9) [right of=8] [color=myorange] {{\tiny $B_{1}$}};
 		\path
 			(1) edge (2) (2) edge (5)
@@ -176,12 +176,12 @@ For the previous example a hit could be all these vertices highlighted on the pi
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, thick, circle}]
 		\node[main] (1) {{\tiny $B_{3}$}};
-		\node[main] (2) [right of=1] [color=purple] {{\tiny $B_{3}$, $B_{4}$}};
+		\node[main] (2) [right of=1] [color=myviolet] {{\tiny $B_{3}$, $B_{4}$}};
 		\node[main] (3) [right of=2] {{\tiny $B_{1}$}};
 		\node[main] (4) [below of=1] {{\tiny $B_{3}$, $B_{4}$}};
 		\node[main] (5) [right of=4] {{\tiny $B_{4}$}};
-		\node[main] (6) [right of=5] [color=purple] {{\tiny $B_{1}$}};
-		\node[main] (7) [below of=4] [color=purple] {{\tiny $B_{2}$}};
+		\node[main] (6) [right of=5] [color=myviolet] {{\tiny $B_{1}$}};
+		\node[main] (7) [below of=4] [color=myviolet] {{\tiny $B_{2}$}};
 		\node[main] (8) [right of=7] {{\tiny $B_{2}$}};
 		\node[main] (9) [right of=8] {{\tiny $B_{1}$}};
 		\path
@@ -246,7 +246,7 @@ In other words we may rewrite the previous findings as a similiar lemma.
 Now we will take a look at a simple example of a graph and its tree decomposition and bramble. This graph is an $n \times n$ grid where every neighbor is connected, one can be seen on picture \ref{nbynmatrix}.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 		\node[main] (1) {};
 		\node[main] (2) [right of=1] {};
 		\node[main] (3) [right of=2] {};
@@ -282,17 +282,17 @@ When we examine a tree decomposition we may easily find one such with tree width
 
 \begin{figure}[!ht]\centering
 	\begin{subfigure}{0.25\textwidth}
-		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 			\node[main] (1) [color = red] {};
-			\node[main] (2) [right of=1] [color = red] {};
+			\node[main] (2) [right of=1] [color = myred] {};
 			\node[main] (3) [right of=2] {};
-			\node[main] (4) [below of=1] [color = red] {};
+			\node[main] (4) [below of=1] [color = myred] {};
 			\node[main] (5) [right of=4] {};
 			\node[main] (6) [right of=5] {};
-			\node[main] (7) [below of=4] [color = red] {};
+			\node[main] (7) [below of=4] [color = myred] {};
 			\node[main] (8) [right of=7] {};
 			\node[main] (9) [right of=8] {};
-			\node[main] (10) [below of=7] [color = red] {};
+			\node[main] (10) [below of=7] [color = myred] {};
 			\node[main] (11) [right of=10] {};
 			\node[main] (12) [right of=11] {};
 			\node[main] (13) [right of=3] {};
@@ -312,17 +312,17 @@ When we examine a tree decomposition we may easily find one such with tree width
 		\end{tikzpicture}
 	\end{subfigure}
 	\begin{subfigure}{0.25\textwidth}
-		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 			\node[main] (1) {};
-			\node[main] (2) [right of=1] [color = blue] {};
+			\node[main] (2) [right of=1] [color = myblue] {};
 			\node[main] (3) [right of=2] {};
-			\node[main] (4) [below of=1] [color = blue] {};
-			\node[main] (5) [right of=4] [color = blue] {};
+			\node[main] (4) [below of=1] [color = myblue] {};
+			\node[main] (5) [right of=4] [color = myblue] {};
 			\node[main] (6) [right of=5] {};
-			\node[main] (7) [below of=4] [color = blue] {};
+			\node[main] (7) [below of=4] [color = myblue] {};
 			\node[main] (8) [right of=7] {};
 			\node[main] (9) [right of=8] {};
-			\node[main] (10) [below of=7] [color = blue] {};
+			\node[main] (10) [below of=7] [color = myblue] {};
 			\node[main] (11) [right of=10] {};
 			\node[main] (12) [right of=11] {};
 			\node[main] (13) [right of=3] {};
@@ -342,7 +342,7 @@ When we examine a tree decomposition we may easily find one such with tree width
 		\end{tikzpicture}
 	\end{subfigure}
 	\begin{subfigure}{0.25\textwidth}
-		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+		\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 			\node[main] (1) {};
 			\node[main] (2) [right of=1] [color = myorange] {};
 			\node[main] (3) [right of=2] {};
@@ -378,19 +378,19 @@ When we examine a tree decomposition we may easily find one such with tree width
 So we can say that $\text{tw}(n \times n \text{grid}) \leq n$. Can we construct some with even lower width? We can use the previous lemma and construct a bramble which can be seen on picture \ref{bramblenbyn}. So there are two special sets on the sides and then we have all the crosses in the rest of the grid. This will lead to bramble $\mathcal{B}$ of order $\geq n+1$. We must select two points for two special sets and points on the diagonal for example. Therefore with the use of the lemma we also have that $\text{tw}(n \times n \text{grid}) \geq n$ thus it has to be equal.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 		\node[main] (1) {};
-		\node[main] (2) [right of=1] [color = purple] {};
+		\node[main] (2) [right of=1] [color = myviolet] {};
 		\node[main] (3) [right of=2] {};
-		\node[main] (4) [below of=1] [color = purple] {};
-		\node[main] (5) [right of=4] [color = purple] {};
-		\node[main] (6) [right of=5] [color = purple] {};
+		\node[main] (4) [below of=1] [color = myviolet] {};
+		\node[main] (5) [right of=4] [color = myviolet] {};
+		\node[main] (6) [right of=5] [color = myviolet] {};
 		\node[main] (7) [below of=4] {};
-		\node[main] (8) [right of=7] [color = purple] {};
+		\node[main] (8) [right of=7] [color = myviolet] {};
 		\node[main] (9) [right of=8] {};
-		\node[main] (10) [below of=7] [color = blue] {};
-		\node[main] (11) [right of=10] [color = blue] {};
-		\node[main] (12) [right of=11] [color = blue] {};
+		\node[main] (10) [below of=7] [color = myblue] {};
+		\node[main] (11) [right of=10] [color = myblue] {};
+		\node[main] (12) [right of=11] [color = myblue] {};
 		\node[main] (13) [right of=3] [color = myorange] {};
 		\node[main] (14) [right of=6] [color = myorange] {};
 		\node[main] (15) [right of=9] [color = myorange] {};
@@ -423,7 +423,7 @@ This is quite recent discovery and long time it was only exponential. Now it is 
 $n$-ladder is graph that looks like a $2 \times n$ grid. Or just like it is on the picture \ref{nladder}.
 
 \begin{figure}[!ht]\centering
-	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill}]
+	\begin{tikzpicture}[node distance={10mm}, thick, main/.style = {draw, circle, fill, inner sep =2pt}]
 		\node[main] (1) {};
 		\node[main] (2) [right of=1] {};
 		\node[main] (3) [right of=2] {};

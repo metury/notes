@@ -123,18 +123,18 @@ $$
 			\node[main] (2) [above right of=1] {$v_{2}$};
 			\node[main] (3) [below right of=1] {$v_{3}$};
 			\node[main] (4) [above right of=3] {$v_{4}$};
-			\draw[->] (1) -- (2) node[midway, above left] {$(x_{2} -$\textcolor{red}{$x_{1}$}$)$};
-			\draw[->] (3) -- (1) node[midway, below left] {$(x_{1} -$\textcolor{red}{$x_{3}$}$)$};
-			\draw[->] (2) -- (3) node[midway, left] {$($\textcolor{red}{$x_{3}$}$ - x_{2})$};
-			\draw[->] (2) -- (4) node[midway, above right] {$($\textcolor{red}{$x_{4}$}$ - x_{2})$};
-			\draw[->] (4) -- (3) node[midway, below right] {$($\textcolor{red}{$x_{3}$}$ - x_{4})$};
-			\draw[->, bend left=20, color=cyan] (2) edge (1);
-			\draw[->, bend right=20, color=cyan] (2) edge (4);
-			\draw[->, bend right=20, color=cyan] (4) edge (3);
-			\draw[->, bend left=20, color=cyan] (2) edge (3);
-			\draw[->, bend left=20, color=cyan] (1) edge (3);
+			\draw[->] (1) -- (2) node[midway, above left] {$(x_{2} -$\textcolor{myred}{$x_{1}$}$)$};
+			\draw[->] (3) -- (1) node[midway, below left] {$(x_{1} -$\textcolor{myred}{$x_{3}$}$)$};
+			\draw[->] (2) -- (3) node[midway, left] {$($\textcolor{myred}{$x_{3}$}$ - x_{2})$};
+			\draw[->] (2) -- (4) node[midway, above right] {$($\textcolor{myred}{$x_{4}$}$ - x_{2})$};
+			\draw[->] (4) -- (3) node[midway, below right] {$($\textcolor{myred}{$x_{3}$}$ - x_{4})$};
+			\draw[->, bend left=20, color=myblue] (2) edge (1);
+			\draw[->, bend right=20, color=myblue] (2) edge (4);
+			\draw[->, bend right=20, color=myblue] (4) edge (3);
+			\draw[->, bend left=20, color=myblue] (2) edge (3);
+			\draw[->, bend left=20, color=myblue] (1) edge (3);
 		\end{tikzpicture}
-		\caption{The \textcolor{red}{choice} and \textcolor{cyan}{new orientation $\overrightsimarrow{G}$}.}
+		\caption{The \textcolor{myred}{choice} and \textcolor{myblue}{new orientation $\overrightsimarrow{G}$}.}
 		\label{orientation-choice}
 	\end{subfigure}
 	\caption{Example for computing polynomial by orientation, the original graph $\overrightarrow{G}$.}
@@ -166,17 +166,17 @@ When we show another example where we have a vertex with in degree 3. See pictur
 		\draw[->] (1) edge (R2);
 		\draw[->] (1) edge (R3);
 		\draw[->] (1) edge (R4);
-		\draw[->, bend left=10, color=cyan] (L1) edge (1);
-		\draw[->, bend right=10, color=cyan] (1) edge (L2);
-		\draw[->, bend right=10, color=cyan] (1) edge (L3);
-		\draw[->, bend left=10, color=cyan] (R1) edge (1);
-		\draw[->, bend left=10, color=cyan] (R2) edge (1);
-		\draw[->, bend right=10, color=cyan] (1) edge (R3);
-		\draw[->, bend right=10, color=cyan] (1) edge (R4);
-		\draw[->, bend left=10, color=red] (1) edge (R1);
-		\draw[->, bend left=10, color=red] (1) edge (R2);
-		\draw[->, bend right=10, color=red] (L3) edge (1);
-		\draw[->, bend right=10, color=red] (L2) edge (1);
+		\draw[->, bend left=10, color=myblue] (L1) edge (1);
+		\draw[->, bend right=10, color=myblue] (1) edge (L2);
+		\draw[->, bend right=10, color=myblue] (1) edge (L3);
+		\draw[->, bend left=10, color=myblue] (R1) edge (1);
+		\draw[->, bend left=10, color=myblue] (R2) edge (1);
+		\draw[->, bend right=10, color=myblue] (1) edge (R3);
+		\draw[->, bend right=10, color=myblue] (1) edge (R4);
+		\draw[->, bend left=10, color=myred] (1) edge (R1);
+		\draw[->, bend left=10, color=myred] (1) edge (R2);
+		\draw[->, bend right=10, color=myred] (L3) edge (1);
+		\draw[->, bend right=10, color=myred] (L2) edge (1);
 	\end{tikzpicture}
 	\caption{Example for Eulerian subgraph orientations.}
 	\label{eulerian-orientation}
@@ -224,11 +224,11 @@ Lets see this result on an example on pictures \ref{euler-list}. Where the sizes
 			\node[main] (2) [above right of=1] {3};
 			\node[main] (3) [below right of=1] {2};
 			\node[main] (4) [above right of=3] {2};
-			\draw[->, color=cyan] (1) -- (2);
-			\draw[->, color=cyan] (3) -- (1);
-			\draw[->, color=cyan] (3) -- (2);
-			\draw[->, color=cyan] (2) -- (4);
-			\draw[->, color=cyan] (4) -- (3);
+			\draw[->, color=myblue] (1) -- (2);
+			\draw[->, color=myblue] (3) -- (1);
+			\draw[->, color=myblue] (3) -- (2);
+			\draw[->, color=myblue] (2) -- (4);
+			\draw[->, color=myblue] (4) -- (3);
 		\end{tikzpicture}
 		\caption{The orientation $\overrightarrow{G}$.}
 	\end{subfigure}
@@ -238,20 +238,20 @@ Lets see this result on an example on pictures \ref{euler-list}. Where the sizes
 			\node[main] (2) [above right of=1] {3};
 			\node[main] (3) [below right of=1] {2};
 			\node[main] (4) [above right of=3] {2};
-			\draw[->, color=cyan] (1) -- (2);
-			\draw[->, color=cyan] (3) -- (1);
-			\draw[->, color=cyan] (3) -- (2);
-			\draw[->, color=cyan] (2) -- (4);
-			\draw[->, color=cyan] (4) -- (3);
+			\draw[->, color=myblue] (1) -- (2);
+			\draw[->, color=myblue] (3) -- (1);
+			\draw[->, color=myblue] (3) -- (2);
+			\draw[->, color=myblue] (2) -- (4);
+			\draw[->, color=myblue] (4) -- (3);
 			% First eulerian path.
-			\draw[->, bend left=20, color=orange] (1) edge (2);
-			\draw[->, bend left=20, color=orange] (3) edge (1);
-			\draw[->, bend left=20, color=orange] (2) edge (4);
-			\draw[->, bend left=20, color=orange] (4) edge (3);
+			\draw[->, bend left=20, color=myorange] (1) edge (2);
+			\draw[->, bend left=20, color=myorange] (3) edge (1);
+			\draw[->, bend left=20, color=myorange] (2) edge (4);
+			\draw[->, bend left=20, color=myorange] (4) edge (3);
 			% Eulerian path second.
-			\draw[->, bend left=20, color=blue] (3) edge (2);
-			\draw[->, bend right=20, color=blue] (2) edge (4);
-			\draw[->, bend right=20, color=blue] (4) edge (3);
+			\draw[->, bend left=20, color=mygreen] (3) edge (2);
+			\draw[->, bend right=20, color=mygreen] (2) edge (4);
+			\draw[->, bend right=20, color=mygreen] (4) edge (3);
 		\end{tikzpicture}
 		\caption{Euler subgraphs.}
 	\end{subfigure}

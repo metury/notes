@@ -118,28 +118,28 @@ Now we will try to use this even more for computing the number of triangles from
 Now with all of that we would like to see if we are able to partition the vertices of graph $G$ into such sets which are $\epsilon$-regular. At least we would like to try bounding the number of partitions for some $m$ and larger $M_\epsilon$ which will be bounded to $\epsilon$. Well we may see that it won't work this way, like for the graph known as \textbf{Half graph} which is shown in the picture \ref{half-graph}.
 
 \begin{figure}[!ht] \centering
-	\begin{tikzpicture}[node distance={16mm}, main/.style = {draw, circle, fill}]
-		\node[main, color=Green] (1) {};
-		\node[main, right of = 1, color=Green] (2) {};
-		\node[main, right of = 2, color=Green] (3) {};
-		\node[main, right of = 3, color=Green] (4) {};
-		\node[main, right of = 4, color=Green] (5) {};
-		\node[main, right of = 5, color=Green] (6) {};
-		\node[main, right of = 6, color=Green] (7) {};
-		\node[main, right of = 7, color=Green] (8) {};
-		\node[main, right of = 8, color=Green] (9) {};
+	\begin{tikzpicture}[node distance={16mm}, main/.style = {draw, circle, fill, inner sep=2pt}]
+		\node[main, color=mygreen] (1) {};
+		\node[main, right of = 1, color=mygreen] (2) {};
+		\node[main, right of = 2, color=mygreen] (3) {};
+		\node[main, right of = 3, color=mygreen] (4) {};
+		\node[main, right of = 4, color=mygreen] (5) {};
+		\node[main, right of = 5, color=mygreen] (6) {};
+		\node[main, right of = 6, color=mygreen] (7) {};
+		\node[main, right of = 7, color=mygreen] (8) {};
+		\node[main, right of = 8, color=mygreen] (9) {};
 		
 		\node[below of = 1] (phantom) {};
 		
-		\node[main, below of = phantom, color=cyan] (11) {};
-		\node[main, right of = 11, color=cyan] (12) {};
-		\node[main, right of = 12, color=cyan] (13) {};
-		\node[main, right of = 13, color=cyan] (14) {};
-		\node[main, right of = 14, color=cyan] (15) {};
-		\node[main, right of = 15, color=cyan] (16) {};
-		\node[main, right of = 16, color=cyan] (17) {};
-		\node[main, right of = 17, color=cyan] (18) {};
-		\node[main, right of = 18, color=cyan] (19) {};
+		\node[main, below of = phantom, color=myblue] (11) {};
+		\node[main, right of = 11, color=myblue] (12) {};
+		\node[main, right of = 12, color=myblue] (13) {};
+		\node[main, right of = 13, color=myblue] (14) {};
+		\node[main, right of = 14, color=myblue] (15) {};
+		\node[main, right of = 15, color=myblue] (16) {};
+		\node[main, right of = 16, color=myblue] (17) {};
+		\node[main, right of = 17, color=myblue] (18) {};
+		\node[main, right of = 18, color=myblue] (19) {};
 		
 		\draw (1) edge (11) (1) edge (12)
 			(1) edge (13) (1) edge (14)

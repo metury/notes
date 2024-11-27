@@ -11,17 +11,17 @@ VC stands for the names Varnik--Cherrorenkis. We will be considering a set syste
 Lets see for ourselves an example, which is on picture \ref{broken-x}. For $\mathcal{F}$ we have all half planes in $\R^2$. Then the set $X = \{a,b,c\}$. Then if we draw all lines and choose both planes it will generate
 
 $$
-X \cap \mathcal{F} = \{ \textcolor{gray}{\emptyset}, \textcolor{cyan}{\{a\}}, \textcolor{orange}{\{b\}}, \textcolor{teal}{\{c\}}, \textcolor{teal}{\{a,b\}}, \textcolor{cyan}{\{b,c\}}, \textcolor{orange}{\{a,c\}}, \textcolor{gray}{\{a,b,c\}}\}
+X \cap \mathcal{F} = \{ \textcolor{myviolet}{\emptyset}, \textcolor{myblue}{\{a\}}, \textcolor{myorange}{\{b\}}, \textcolor{mygreen}{\{c\}}, \textcolor{mygreen}{\{a,b\}}, \textcolor{myblue}{\{b,c\}}, \textcolor{myorange}{\{a,c\}}, \textcolor{myviolet}{\{a,b,c\}}\}
 $$
 
 \noindent which are all subsets of $X$. Hence it breaks the $X$.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}[node distance={15mm}, thick, main/.style = {draw, circle}]
-		\draw[color=cyan] (0,5) -- (5,0);
-		\draw[color=orange] (1, 0) -- (5, 5);
-		\draw[color=teal] (0,4) -- (5,3);
-		\draw[color=gray] (0,0) -- (5, 1);
+		\draw[color=myblue] (0,5) -- (5,0);
+		\draw[color=myorange] (1, 0) -- (5, 5);
+		\draw[color=mygreen] (0,4) -- (5,3);
+		\draw[color=myviolet] (0,0) -- (5, 1);
 		\node[main] at (1, 2) {$a$};
 		\node[main] at (4, 2) {$b$};
 		\node[main] at (3, 4) {$c$};		
