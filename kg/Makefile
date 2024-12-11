@@ -4,7 +4,7 @@ DELETE_FILES = *.aux *.bbl *.blg *.log *.toc *.out *.pdf *.aux
 RES_DELETE_FILES = $(addprefix res/, $(DELETE_FILES))
 KG1_DELETE_FILES = $(addprefix kg-i/, $(DELETE_FILES))
 KG2_DELETE_FILES = $(addprefix kg-ii/, $(DELETE_FILES))
-KG2_DELETE_FILES = $(addprefix kg-ii/, $(DELETE_FILES))
+KG3_DELETE_FILES = $(addprefix kg-iii/, $(DELETE_FILES))
 
 all: res/tree.pdf kg.pdf
 
