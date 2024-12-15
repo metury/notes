@@ -55,6 +55,41 @@ But the main issue is that this theorem is rather more algebraic and also used i
 	\end{figure}
 \end{topic}
 
-\begin{thm}{Hales-Jewett, 1963}
-	For every finite $\Sigma$ and finite $n > 0$ $\exists N > 0$ such that the chromatic number of $H(\Sigma^n, \text{Lines})$ is at least $n$.
+\begin{thm}{Hales-Jewett, 1964}
+	For every finite $\Sigma$ and finite $n > 0$ $\exists N > 0$ denoted as $\HJ (|\Sigma|, r)$ such that the chromatic number of $H(\Sigma^n, \text{Lines})$ is at least $n$, or alternatively if $\Sigma^n$ is $r$-colored then there exist monochromatic combinatorial line (which is a subspace of dimension 1).
 \end{thm}
+
+\begin{thm}{Van der Warden, 1927}
+	For $r$ number of colors and $l$ length of progression is known then there is finite version $N = \VW(r,k)$. And $N$ is not primitive recursion.
+\end{thm}
+
+Actually in the terms of Van der Warden theorem Shelah showed that $\VW$ has upper bound via a primitive recursion which is of a kind
+
+$$
+2^{2^{r^{2^{2^{k+q}}}}}.
+$$
+
+\newpage
+
+\begin{topic}{Proof of Hales Jewett theorem}
+	\begin{defn}
+		Parameter spaces are for $\Sigma$ finite alphabet and its $n$-dimensional parameter $\Sigma^n$ of functions $[r] \to \Sigma$ space.
+	\end{defn}
+
+	So the $d$-dimensional subspace is a subset of $\Sigma^n$ described by a word in $\Sigma \cup \{\lambda_1, \lambda_2, \dots, \lambda_d\}$ where every $\lambda_i$ appears at least once and is a set $S = \{w(u) | u \in \Sigma^d\}$.
+	
+	\begin{example}
+		$\Sigma = \{a,b\}$ let $W = a \lambda_1 \lambda_2 b \lambda_1$, which by $(aa)$ is replaced to $aaaba$.
+	\end{example}
+
+	Now we will proceed with improvement of the Hales Jewett theorem.
+	
+	\begin{thm}{Hales Jewett improved}
+		$\forall$ finite $\Sigma$ $\forall r > 0, d > 0$ there exists $N = \HJ(|\Sigma, r, d)$ such that if $\Sigma^N$ is $r$-colored then there exist monochromatic $d$-dimensional subspace.
+		\label{hj-imrpov}
+	\end{thm}
+
+	\begin{observ}
+		$\forall s, d: \ \HJ (s, 1, d) = d$ and also $\forall r, d: \ \HJ(1, r, d) = d$. Lets see that $\HJ(2,2,1) = 2$, or generally that $\HJ(2,r,1) = r$ which can be viewed by pigeonhole principle, so that there is $k$ zeroes followed by $r - k$ ones, then every pair makes a line. In $\Sigma^r$ are $r + 1$ step functions.
+	\end{observ}
+\end{topic}
