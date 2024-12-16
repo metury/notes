@@ -92,4 +92,44 @@ $$
 	\begin{observ}
 		$\forall s, d: \ \HJ (s, 1, d) = d$ and also $\forall r, d: \ \HJ(1, r, d) = d$. Lets see that $\HJ(2,2,1) = 2$, or generally that $\HJ(2,r,1) = r$ which can be viewed by pigeonhole principle, so that there is $k$ zeroes followed by $r - k$ ones, then every pair makes a line. In $\Sigma^r$ are $r + 1$ step functions.
 	\end{observ}
+
+	\begin{lemma}
+		$\forall r > 0 \ \HJ(s,r,1) \Rightarrow \forall r, d > 0 \ \HJ(s,r,d)$
+		\label{hj-lemma-1}
+	\end{lemma}
+
+	\begin{lemma}
+		$\forall r, d > 0 \ \HJ(s,r,d) \Rightarrow \forall r > 0 \ \HJ(s+1, r, 1)$
+		\label{hj-lemma-2}
+	\end{lemma}
+
+	\begin{proof}[Proof of theorem \ref{hj-imrpov}]
+		Simply put both lemmas \ref{hj-lemma-1} and \ref{hj-lemma-2} together and we are able to recreate $\HJ$ for all $s, r, d$.
+	\end{proof}
+
+	\begin{proof}[Proof of lemma \ref{hj-lemma-1}]
+		We will show that if $\forall r, d > 0 \ \HJ(s,r,1)$ is finite then $\forall r > 0 \ \HJ(s+, r, 2)$ is finite. Fix $s, r$ and assume $\HJ(s, r', 1)$ is finite. Put $n_1 = \HJ(s,r,1)$ and $n_2 = \HJ(s, r^{s^{n-1}}, 1)$ and then $\HJ(s,r,2) \leq n_2 + n_1$. We may see this as that we have $n_2$ initial segment and $n_1$ suffix.
+		
+		Let $\Sigma^{n_1 + n_2}$ be $r$-colored, then define $r \cdot s^{n_1}$ coloring of $\Sigma^{n_2}$. By the choice od $n_2$ then $\Sigma^{n_2}$ contains a monochromatic line. $\chi : \Sigma^{n_2 + n_1} \to r$ and $\chi'$ is a function from $\Sigma^{n_2}$ to the set of all functions $\Sigma^{n_1} \to r$.
+		
+		Color of this line is a $r$-coloring of $\Sigma^{n_1}$. By the choice of $n_1$ it contains a monochromatic line. For higher $d$ replace $n_1 = \HJ(s, r^{s^{n_1}}, d)$.
+	\end{proof}
+
+	\begin{proof}[Proof of lemma \ref{hj-lemma-2}]
+		Define $S_a$ as a set of specials words. Suppose we know it for $\Sigma$ and we want to add new letter $a \notin \Sigma$ and find $\HJ(|\Sigma \cup \{a\}|, r, 1)$. Suppose for $S_d \subseteq \Sigma^d$ we have $k$-times $a$ and then the rest, that is some word $u \in \Sigma^{d-k}$.
+		
+		\begin{claim}
+			$\forall r$ if $S_r$ is $r$-colored in a way that color depends only on length of the initial segment (the number of $a$'s) then $S_r$ contains monochromatic line.
+		\end{claim}
+	
+		The claim is basically for the step function as was seen earlier.
+		
+		\begin{claim}
+			$\forall r, d, l \ \exists N$ such that if $(\Sigma \cup \{a\})^N$ is $r$-colored then there exists $d$-dimensional subspace such that color of words with at most $l$ number of $a$'s followed by $u \in \Sigma^{d-l}$ depends only on number of $a$'s.
+		\end{claim}
+	
+		\begin{proof}
+			For $l = 0$ use $N = \HJ(|\Sigma|, r, d)$. Let $l = 1$ then set $n_1 = \HJ(|\Sigma|, r, d-1)$ and $n_2 = \HJ(|\Sigma|, r, n_1 + 1)$. Then $N = n_2$.
+		\end{proof}
+	\end{proof}
 \end{topic}
