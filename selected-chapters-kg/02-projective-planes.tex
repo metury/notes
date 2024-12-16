@@ -690,5 +690,11 @@ As it was stated before we may furthermore extend the list of conjectures and so
 \begin{topic}{Back to STS}
 	For STS $(v,3,1,2)$ simple hypergraph $(X, \M)$ where $\M$ contains on $k$ points at least $k-3$ triples; that is for $k \geq 4$. Erd\H os stated if there exists STS $(X, \M)$ such that on any $l$ points there are $\leq l-3$ edges. This was proven as being true.
 	
-	But what about $|\M| \geq n^{1 + \epsilon}$? This will be shown as being actually hard. \NOTE{This is end of the lecture.}
+	But what about $|\M| \geq n^{1 + \epsilon}$? This will be shown as being actually hard.
 \end{topic}
+
+For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due to Ramsey and Hales Jewett, but $PG(g)$ has $\chi = 2$ for $g > 2$. Also $\M \sim \binom{|X|}{2}$ due to Erd\H s and Hanani. Now lets see if $|\M| \geq |X|^{1 + \epsilon}$ can be true. Before showing the proof lets some direct results from such statement.
+
+\begin{thm}[Ordering property]
+	Assume $|\M| \geq |X|^{1 + \epsilon}$ fo given $k, \epsilon$ and large $X$. $\forall G = (V,E)$ and $\forall$ linear ordering of $V$ there exists graph $H = (W,F)$ such that for every linear ordering $\preceq$ of $W$ there exist monotone embedding $f : (G, \leq) \to (H, \preceq)$. In particular $f : V \to W$, $\{x,y\} \in E \iff \{f(x), f(y)\} \in F$ and $x \leq y \iff f(x) \preceq f(y)$.
+\end{thm}
