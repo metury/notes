@@ -52,6 +52,7 @@ But the main issue is that this theorem is rather more algebraic and also used i
 			\node[b] at (6.5,1.5) {$\lambda\lambda$};	
 		\end{tikzpicture}
 		\caption{Combinatorial representation of combinatorial lines for $\Sigma = \{1,2,3\}$ and $n =2$. Which we can see we obtain a hypergraph $H = (\Sigma^n, \text{Lines})$.}
+		\label{comb}
 	\end{figure}
 \end{topic}
 
@@ -132,4 +133,8 @@ $$
 			For $l = 0$ use $N = \HJ(|\Sigma|, r, d)$. Let $l = 1$ then set $n_1 = \HJ(|\Sigma|, r, d-1)$ and $n_2 = \HJ(|\Sigma|, r, n_1 + 1)$. Then $N = n_2$.
 		\end{proof}
 	\end{proof}
+\end{topic}
+
+\begin{topic}{Van der Warden from Hales Jewett}
+	We may see a simple example \ref{comb} for which we would create a progression of numbers $(11, 12, 13, 21, 22, 23, 31, 32, 33)$ for which the progression are in a bijection to the example above. This is somehow the principle of doing it in general. We encode the combinatorial lines into a progressions.
 \end{topic}
