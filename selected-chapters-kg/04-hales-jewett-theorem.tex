@@ -1,8 +1,8 @@
 \chapter{Hales-Jewett theorem}
 
-We will now jump to another topic and mainly the Hales-Jewett theorem. This was actually motivated by famous Van der Waerden theorem \ref{van-der-waerden}.
+We will now jump to another topic which is mainly the Hales-Jewett theorem. This was actually motivated by famous Van der Warden theorem \ref{van-der-waerden}.
 
-\begin{thm}
+\begin{thm}[Van der Warden]
 	For every $n > 0$ and every finite coloring of integers there exists monochromatic arithmetic progression of length $n$, i.e. $a, a + b, a + 2b, \dots, a + (n-1)b$ for $b > 0$.
 	\label{van-der-waerden}
 \end{thm}
@@ -56,18 +56,18 @@ But the main issue is that this theorem is rather more algebraic and also used i
 	\end{figure}
 \end{topic}
 
-\begin{thm}{Hales-Jewett, 1964}
+\begin{thm}[Hales-Jewett, 1964]
 	For every finite $\Sigma$ and finite $n > 0$ $\exists N > 0$ denoted as $\HJ (|\Sigma|, r)$ such that the chromatic number of $H(\Sigma^n, \text{Lines})$ is at least $n$, or alternatively if $\Sigma^n$ is $r$-colored then there exist monochromatic combinatorial line (which is a subspace of dimension 1).
 \end{thm}
 
-\begin{thm}{Van der Warden, 1927}
+\begin{thm}[Van der Warden, 1927]
 	For $r$ number of colors and $l$ length of progression is known then there is finite version $N = \VW(r,k)$. And $N$ is not primitive recursion.
 \end{thm}
 
 Actually in the terms of Van der Warden theorem Shelah showed that $\VW$ has upper bound via a primitive recursion which is of a kind
 
 $$
-2^{2^{r^{2^{2^{k+q}}}}}.
+\VW (r,k) \leq 2^{2^{r^{2^{2^{k+q}}}}}.
 $$
 
 \newpage
@@ -85,8 +85,8 @@ $$
 
 	Now we will proceed with improvement of the Hales Jewett theorem.
 	
-	\begin{thm}{Hales Jewett improved}
-		$\forall$ finite $\Sigma$ $\forall r > 0, d > 0$ there exists $N = \HJ(|\Sigma, r, d)$ such that if $\Sigma^N$ is $r$-colored then there exist monochromatic $d$-dimensional subspace.
+	\begin{thm}[Hales Jewett -- improved version]
+		$\forall$ finite $\Sigma$ $\forall r > 0, d > 0$ there exists $N = \HJ(|\Sigma|, r, d)$ such that if $\Sigma^N$ is $r$-colored then there exist monochromatic $d$-dimensional subspace.
 		\label{hj-imrpov}
 	\end{thm}
 
@@ -132,9 +132,51 @@ $$
 		\begin{proof}
 			For $l = 0$ use $N = \HJ(|\Sigma|, r, d)$. Let $l = 1$ then set $n_1 = \HJ(|\Sigma|, r, d-1)$ and $n_2 = \HJ(|\Sigma|, r, n_1 + 1)$. Then $N = n_2$.
 		\end{proof}
+	
+		Which finishes the proof of the lemma.
 	\end{proof}
 \end{topic}
 
 \begin{topic}{Van der Warden from Hales Jewett}
 	We may see a simple example \ref{comb} for which we would create a progression of numbers $(11, 12, 13, 21, 22, 23, 31, 32, 33)$ for which the progression are in a bijection to the example above. This is somehow the principle of doing it in general. We encode the combinatorial lines into a progressions.
+\end{topic}
+
+\begin{topic}{Dual theorems}
+	Now we will dig a little deeper into the Ramsey and Hales-Jewett theorems and how they interact between each other.
+	
+	\begin{table}[!ht]\centering
+		\begin{tabular}{| c | c |}
+			\hline
+			Direct Ramsey & Dual Ramsey \\
+			Pigeon hole principle & Hales-Jewet theorem for $n = 1$ \\
+			2-dimensional Pigeon hole principle & Hales-Jewet theorem for $n > 1$ \\
+			Ramsey & Graham-Rothschild theorem \\
+			\hline
+		\end{tabular}
+		\caption{Dual theorems.}
+	\end{table}
+
+	\begin{thm}[Graham-Rothschild, 1971]
+		$\forall$ finite $\Sigma$ $\forall d, n, r > 0$ $\exists N = \GR(|\Sigma|, d, n, r)$ such that if $d$-dimensional subspace of $\Sigma^N$ are $n$-colored then there exists monochromatic $n$-dimensional subspace.
+		\label{gr-thm}
+	\end{thm}
+
+	
+	Lets define $d$-parameter word in alphabet $\Sigma$ of length $n$ as $w \in (\Sigma \cup \{\lambda_1, \dots, \lambda_d\})$ such that for every $i < d$ $\lambda_{i+1}$ occurs first time after occurrences of $\lambda_i$. For example $\Sigma = \{a,b\}, n = 4, d = 2$ we have $a \lambda_1 \lambda_2 b$ which is ok and $\lambda_! \lambda_2 \lambda_1 \lambda_2$  is also fine.
+	
+	Lets denote $[\Sigma]\binom{n}{d}$ as the set of all $d$-parameter words in $\Sigma$ of length $n$. The notation arises from notation which can be used for Ramsey theorem. Which can be written as $\forall d, n, r \ \exists N: N \to (n)_r^d$, meaning that for every $r$-coloring of $\binom{N}{d}$ there exists $s \in \binom{N}{n}$ such that $\binom{s}{d}$ is monochromatic.
+	
+	Then also GR theorem can be rewritten as $\forall d, n,r \Sigma \ \exists N : N \to^{\Sigma} (n)_r^d$, meaning that for every $r$-coloring of $[\Sigma]\binom{N}{d}$ $\exists w \in [W]\binom{N}{n}$ such that $W[[\Sigma]\binom{n}{d}] = \{W(u) | u \in [\Sigma]\binom{n}{d}\}$ is monochromatic.
+		
+	\begin{proof}[Sketch of proof for theorem \ref{gr-thm}]
+		$\forall$ graph $G$, $\forall r \ \exists H$ such that if all vertices of $H$ are $r$-colored then $H$ contains $G$ as induced monochromatic subgraph.
+		
+		Given set $S$ consider graph $H_S$ with vertices $\mathcal{P}(S) \setminus \{\emptyset\}$ such that $A, B \in \mathcal{P}(S)$ form edge \ifft $A \cap B = \emptyset$.
+		
+		Now observe that $\forall G \ \exists S$ large enough such that $G$ is isomorphic to induced subgraph $H_S$. So we take $\Sigma = \{a\}$ and $[\Sigma]\binom{N}{2}$.
+		
+		Given $G$ find $N$ such that there is an embedding $f : G \to H_{[n]}$ where $N$ is the number of nonedges + the number of vertices. Given $r$ set $N = \GR(1,n,2)$. Then let $H_{[N]}$ be $r$-edge-colored. Then this corresponds to coloring $[\Sigma]\binom{N}{2}$ for $\Sigma = \{a\}$. By GR there exists $n$-dimensional subspace (which is an embedding $H_{[n]}$ to $H_{[N]}$) such that all edges are monochromatic.
+	\end{proof}
+
+	That can be aslo extended to cliques. On the other hand paths won't work.
 \end{topic}

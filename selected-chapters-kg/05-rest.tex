@@ -1,6 +1,8 @@
-\chapter{TBD}
+\chapter{Girth, ordering and coloring of hypergraphs}
 
-For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due to Ramsey and Hales Jewett, but $PG(g)$ has $\chi = 2$ for $g > 2$. Also $\M \sim \binom{|X|}{2}$ due to Erd\H s and Hanani. Now lets see if $|\M| \geq |X|^{1 + \epsilon}$ can be true. Before showing the proof lets some direct results from such statement.
+\section{Size of edges -- lemma}
+
+For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due to Ramsey and Hales Jewett, but $PG(g)$ has $\chi = 2$ for $g > 2$. Also $\M \sim \binom{|X|}{2}$ due to Erd\H os and Hanani. Now lets see if $|\M| \geq |X|^{1 + \epsilon}$ can be true. Before showing the proof lets some direct results from such statement.
 
 \begin{thm}[Ordering property]
 	Assume $|\M| \geq |X|^{1 + \epsilon}$ fo given $k, \epsilon$ and large $X$. $\forall G = (V,E)$ and $\forall$ linear ordering of $V$ there exists graph $H = (W,F)$ such that for every linear ordering $\preceq$ of $W$ there exist monotone embedding $f : (G, \leq) \to (H, \preceq)$. In particular $f : V \to W$, $\{x,y\} \in E \iff \{f(x), f(y)\} \in F$ and $x \leq y \iff f(x) \preceq f(y)$.
@@ -15,7 +17,7 @@ For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due 
 	n^{1 + \epsilon} \log a > n \log n + n^{1 + \epsilon} \log(a-1)
 	$$
 	
-	\noindent Hence there exists $H \ in \mathcal{G}$ such that it suffices the property.
+	\noindent Hence there exists $H \in \mathcal{G}$ such that it suffices the property.
 \end{proof}
 
 Other remark is that there exists $H$ where all orderings of $(G, \leq)$ appear almost equally likely, which was shown by Angel, Kechris and Lyons. The technique is called \textit{random placement method} used in 1991 by Nešetřil, Rodl and Ramsey.
@@ -23,7 +25,7 @@ Other remark is that there exists $H$ where all orderings of $(G, \leq)$ appear 
 Now we will show a stronger version of our stated property.
 
 \begin{thm}
-	$\forall k \forall l \exists \epsilon$ There exist $(X, \M)$ $k$-graph such that
+	$\forall k \ \forall l \ \exists \epsilon$ there exist $(X, \M)$ $k$-graph such that
 	
 	\begin{enumerate}
 		\item $|\M| \geq |X|^{1 + \epsilon}$ and
@@ -126,6 +128,8 @@ Note that for this theorem there does not exist a constructive proof.
 \end{proof}
 
 We will also present a constructive proof in this case. But before we do so, we state some remarks. Usually the \textit{chromatic number} of a graphs is something like the complexity, or in other words it cannot be split into small pieces. On the other hand \textit{girth} is something like local simplicity. So the theorem states that even a graph which locally seems simple it is still complex.
+
+\section{Unavoidible configurations}
 
 \begin{defn}
 	Graph $F$ is $\chi$-unavoidable if $\exists n_0(F)$ for every graph $G$ with $\chi(G) \geq n_0(F)$ contains $F$ as a subgraph (not necessarily induced).
@@ -234,3 +238,132 @@ We will also present a constructive proof in this case. But before we do so, we 
 \begin{example}
 	Another construction is so called \textit{Shift graph.} We will create $G_n$ by taking $V$ to be $E(K_n)$ and $E(G_n)$ being two consecutive edges in $K_n$ by an ordering $\leq$. This graph also does not have triangles and $\chi(G_n) = \log n$. Suppose that $\chi(G_n) \leq t$ then $E = E_1 \dot\cup E_2 \dot\cup \dots \dot\cup E_t = E(K_n)$ easily seen that $\chi([n], E_i) \leq 2$ since no beginnings and ends can overlap. Therefore $\chi(K_n) \leq 2^t$, where the logarithm follows.
 \end{example}
+
+\section{Constructions}
+
+\begin{thm}
+	$\forall u,g,r$ there exists an $u$-uniform hypergraph of girth $\geq g$ and chromatic number $\geq r$.
+\end{thm}
+
+\begin{defn}
+	$n$-partite uniform hypergraph is $(V_1, \dots, V_n, E)$ where $E \subseteq \binom{V_1 \cup \dots \cup V_n}{u}$ and $V_1, \dots, V_n$ are pairwise disjoint and $\forall e \in E \ \forall i < n \ |e \cap V_i| \leq 1$. 
+\end{defn}
+
+\begin{example}
+	For example if we set $u = 2$ and $n = 2$ then we obtain normal bipartite graph.
+\end{example}
+
+\begin{proof}[By partite construction -- Nešetřil and Rodl]
+	We will se a proof for $g = 4$ and every $u,r$. Let $N \to (u)_r^1$ be pigeon hole number $N = (u-1) \cdot r + 1$. Picture 0 is $N$-partite hypergraph created as a disjoint union of $\binom{N}{u}$. Edges are one for every projections.
+	
+	\begin{figure}[!ht]\centering
+		\begin{tikzpicture}[main/.style = {draw, circle, inner sep=2.5pt}]
+			\node[main] at (0,3) {$P_0^1$};
+			\node[main] at (0,2) {$P_0^2$};
+			\node[main] at (0,1) {$P_0^3$};
+			\node[main] at (0,0) {$P_0^4$};
+			\draw (1,3) -- (8,3);
+			\draw (1,2) -- (8,2);
+			\draw (1,1) -- (8,1);
+			\draw (1,0) -- (8,0);
+			\node[main, myorange, fill] (1) at (2,3) {};
+			\node[main, mygreen, fill] (2) at (2,2) {};
+			\node[main, mygreen, fill] (3) at (3,2) {};
+			\node[main, myorange, fill] (4) at (3,1) {};
+			\node[main, myorange, fill] (5) at (4,1) {};
+			\node[main, myblue, fill] (6) at (4,0) {};
+			\node[main, myorange, fill] (7) at (5,3) {};
+			\node[main, myorange, fill] (8) at (5,1) {};
+			\node[main, mygreen, fill] (9) at (6,2) {};
+			\node[main, myblue, fill] (10) at (6,0) {};
+			\node[main, myorange, fill] (11) at (7,3) {};
+			\node[main, myblue, fill] (12) at (7,0) {};
+			\draw (1) -- (2);
+			\draw (3) -- (4);
+			\draw (5) -- (6);
+			\draw (7) -- (8);
+			\draw (9) -- (10);
+			\draw (11) -- (12);
+		\end{tikzpicture}
+		\caption{Example: Picture 0 for $u = 2, r =3$ and hence $N = 4$ with nice coloring having a monochromatic edge.}
+	\end{figure}
+
+	Observe that if picture 0 is $r$-colored such that vertices with the same projection has the same color then $P_0$ has monochromatic edge.
+	
+	Now by induction on $n$ construct Pictures $P_1, \dots, P_N$ such that
+	
+	\begin{enumerate}
+		\item every $P_i$ is a $r$-partite $u$-uniform hypergraph with girth $\geq 4$ and
+		\item if $P_i$ is $r$-colored then it contains a copy of $P_{i-1}$ such that all vertices in part $i$ are monochromatic.
+	\end{enumerate}
+
+	\begin{claim}
+		$\chi(P_N) \geq r$.
+	\end{claim}
+
+	\begin{proof}
+		Let $P_N$ be $r$-colored by backward induction. Find copy of $P_0$ s.t. colors depends only on projection and use observation, see the picture \ref{cascades}.
+		
+		\begin{figure}[!ht]\centering
+			\begin{tikzpicture}[scale = 0.5, line/.style = {line width=2.5pt}, box/.style = {line width=2pt, fill, fill opacity=0.1, gray}]
+				\draw[box] (0,4) rectangle (10, 10);
+				\node at (10.5, 10) {$P_4$};
+				\draw[myblue, line] (0,5) -- (10,5);
+				
+				\draw[box] (1,3) rectangle (9,11);
+				\node at (9.5, 11) {$P_3$};
+				\draw[mygreen, line] (1,6) -- (9,6);
+				
+				\draw[box] (2,2) rectangle (8,12);
+				\node at (8.5, 12) {$P_2$};
+				\draw[myorange, line] (2,7) -- (8,7);
+				
+				\draw[box] (3,1) rectangle (7,13);
+				\node at (7.5, 13) {$P_1$};
+				\draw[myblue, line] (3,8) -- (7,8);
+				
+				\draw[box] (4,0) rectangle (6,14);
+				\node at (6.5, 14) {$P_0$};
+				\draw[myred, line] (4,9) -- (6,9);
+			\end{tikzpicture}
+			\caption{Example for $4$ Pictures.}
+			\label{cascades}
+		\end{figure}
+	\end{proof}
+
+	Now we need to provide the exact construction which will have all the properties. That is we will construct $P_i$ from $P_{i-1}$. Let $N_i \to (|P_{i-1}^i|)_r^1$. Let $P_i^i = \{1, \dots, N_i\}$. Now extend every subset of $P_i^i$ of size $|P_{i-1}^i|$ to a disjoint copy of $P_{i-1}$ preserving partitions.
+	
+	The second property we can see that for every $r$-coloring of $P_{i-1}^i$ such that Part $i$ is monochromatic holds by the choice of $N_i$. The first property is to argue $P_i$ has girth $\geq 4$. This is since we have disjoint copies and by induction and free amalgamations does not create triangles.
+\end{proof}
+
+\begin{proof}
+	For higher $g > 4$ we will repair the previous proof in the following way. We will change $N_i$ vertices so taht we will have a hypergaph with at most 1 vertex in the intersection. So that we use this theorem for lower $g$. In other words let $H$ be $|P_{i-1}^i|$-uniform hyper-graph of girth $\geq g-1$ and $\chi(H) \geq r$ and we replace subsets by hyperedges of $H$.
+\end{proof}
+
+\subsection{Applications}
+
+\begin{thm}[Folkman]
+	$\forall G$ finite $u$-uniform $\forall r > 0$ $\exists H$ $u$-uniform such that if vertices of $H$ are $r$-colored then $H$ contains monochromatic copy of $G$ as an induced sub-hyper-graph and $\omega(H) = \omega(G)$ (which is the size of the largest clique).
+\end{thm}
+
+\begin{proof}
+	Let $H_0$ be 4-uniform hyper-graph of girth $\geq 3$ and $\chi(H_0) \geq 3$. Replace every hyper-edge of $H_0$ by $G$.
+\end{proof}
+
+\begin{defn}
+	Recall that the metric space is $M = (X, d)$ where $d : \binom{X}{2} \to \R^+_0$ and it satisfied triangle inequality.
+\end{defn}
+
+\begin{thm}
+	$\forall$ finite metric space $M$ $\forall r > 0 \ \exists$ a finite metric space $N$ such that if $N$ is $r$-colored then it contains monochromatic copy of $M$.
+\end{thm}
+
+\begin{proof}
+	Replace hyper-edges by $M$ and complete $N$ so the missing distances equal to the shortes path. But we have to avoid cycles of length $\frac{d_{\max}}{d_{\min}}$.
+\end{proof}
+
+\begin{thm}[ROdl, Dudek et al.]
+	$F(G,r) \leq \frac{cn}{cv(G)} \log^d n$ for $d \leq 5$ and $c$ depends on $r$.
+\end{thm}
+
+This is done by projective planes and probabilistic methods, but it was only mentioned on the very last lecture.
