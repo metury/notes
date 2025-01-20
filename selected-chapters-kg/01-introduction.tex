@@ -40,7 +40,7 @@
 	Showed that the previous example is true for large $k$.
 \end{thm}
 
-And some different formulation is by using simple hypergraphs. Lets have simple hypergraf $(X,\M)$ where $|\M| = k$ and line chromatic number $\leq k$. That is coloring the edges instead. If they meet they have to be distinct.
+A different formulation can be said using simple hypergraphs. Lets have simple hypergraf $(X,\M)$ where $|\M| = k$ and line chromatic number $\leq k$. That is coloring the edges instead. If they meet they have to be distinct.
 
 \begin{prop}
 	$\chi_l (K_{2k}) = 2k-1$ for $k \in \N$.
@@ -120,7 +120,9 @@ Lets now define a dual hypergraphs, which may not be so intuitive at a first gla
 	\end{figure}
 \end{proof}
 
-Now lets denote $A(X,\M)$ as an incidence matrix of a given hypergraph, then the dual has incidence matrix $A(d(X,\M)) = A^T(X,\M)$. Lets consider $(X, \M)$ a $k$-uniform hypergraph. Can we somehow bound the size of $|\M|$? We may establish trivial bounds as $0 \leq |\M| \leq \binom{X}{k}$. We will further make better bound. lets see the picture \ref{bounds}. We will be using double counting, for which we notice that for some $\binom{X}{2}$ we have at least one $M \in \M$.
+Now lets denote $A(X,\M)$ as an incidence matrix of a given hypergraph, then the dual has incidence matrix $A(d(X,\M)) = A^T(X,\M)$.
+
+Lets consider $(X, \M)$ a $k$-uniform hypergraph. Can we somehow bound the size of $|\M|$? We may establish trivial bounds as $0 \leq |\M| \leq \binom{X}{k}$. We will further on make better bounds. Lets see the picture \ref{bounds}. We will be using double counting method, for which we notice that for some $\binom{X}{2}$ we have at least one $M \in \M$.
 
 \begin{figure}[!ht]\centering
 	\begin{tikzpicture}

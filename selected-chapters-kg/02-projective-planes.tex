@@ -199,7 +199,7 @@ Lets have $\mathbb{F}$ as a finite field. For such field we would like to create
 Lets talk about some other propositions and definitions of projective planes.
 
 \begin{defn}
-	Order of projective plane is the number of points on every line $-1$.
+	Order of projective plane is the number of points on a(ny) line $-1$.
 \end{defn}
 
 For this definition it is crucial to show that each line has the same number of points. For this see the next lemma.
@@ -338,6 +338,8 @@ Note that the table may represent how the multiplication in an inverse grupoid i
 			\draw[line, r] (3,4) rectangle (4,5);
 			\draw[line, o] (4,4) rectangle (5,5);
 			\draw[line] (0,0) rectangle (5,5);
+			
+			\node at (-0.5,5) {$L_1$};
 		\end{tikzpicture}
 	\end{subfigure}
 	\begin{subfigure}{.3\textwidth}\centering
@@ -379,6 +381,7 @@ Note that the table may represent how the multiplication in an inverse grupoid i
 			\draw[line, o] (4,4) rectangle (5,5);
 			
 			\draw[line] (0,0) rectangle (5,5);
+			\node at (-0.5,5) {$L_2$};
 		\end{tikzpicture}
 	\end{subfigure}
 	\begin{subfigure}{.3\textwidth}\centering
@@ -451,6 +454,7 @@ Note that the table may represent how the multiplication in an inverse grupoid i
 			\draw[line, o] (4.25,4.25) rectangle (4.75,4.75);
 			
 			\draw[line] (0,0) rectangle (5,5);
+			\node at (-1.3,5) {$L_1 \perp L_2$};
 		\end{tikzpicture}
 	\end{subfigure}
 	\caption{Example of a two orthogonal latin square.}
@@ -483,7 +487,7 @@ Lets now take a graph $G = (V,E)$ and suppose that we forbid $K_3$ being a subgr
 \begin{proof}
 	We will be counting the pairs $(v, \{v_1,v_2\})$ which are sometimes called forks. When counting from the tuple side we get that we have $\binom{n}{2}$ such pairs and for each such pair there can be at most 1. Otherwise we will have $C_4$.
 	
-	When we count from the other side we et that $\sum_{v \in V} \binom{\deg(v)}{2}$. Therefore when combining it we obtain the following inequality
+	When we count from the other side we get that $\sum_{v \in V} \binom{\deg(v)}{2}$. Therefore when combining it we obtain the following inequality
 	
 	$$
 	\sum_{v \in V} (\deg(v) -1)^2 \leq \sum_{v \in V} \binom{\deg(v)}{2} \leq \binom{n}{2} \leq n^2.

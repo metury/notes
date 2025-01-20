@@ -46,7 +46,7 @@ But the main issue is that this theorem is rather more algebraic and also used i
 				\draw[o,l] (\j-1) to (\j-2) to (\j-3);
 				\node[o] at (2*\j, 1.5) {$\lambda$\j};
 				\draw[g,l] (1-\j) to (2-\j) to (3-\j);
-				\node[g] at (6.5, 2*\j) {\j$\lambda$};
+				\node[g] at (6.5, 8-2*\j) {\j$\lambda$};
 			}
 			\draw[b,l] (1-3) to (2-2) to (3-1);
 			\node[b] at (6.5,1.5) {$\lambda\lambda$};	
@@ -111,7 +111,7 @@ $$
 	\begin{proof}[Proof of lemma \ref{hj-lemma-1}]
 		We will show that if $\forall r, d > 0 \ \HJ(s,r,1)$ is finite then $\forall r > 0 \ \HJ(s+, r, 2)$ is finite. Fix $s, r$ and assume $\HJ(s, r', 1)$ is finite. Put $n_1 = \HJ(s,r,1)$ and $n_2 = \HJ(s, r^{s^{n-1}}, 1)$ and then $\HJ(s,r,2) \leq n_2 + n_1$. We may see this as that we have $n_2$ initial segment and $n_1$ suffix.
 		
-		Let $\Sigma^{n_1 + n_2}$ be $r$-colored, then define $r \cdot s^{n_1}$ coloring of $\Sigma^{n_2}$. By the choice od $n_2$ then $\Sigma^{n_2}$ contains a monochromatic line. $\chi : \Sigma^{n_2 + n_1} \to r$ and $\chi'$ is a function from $\Sigma^{n_2}$ to the set of all functions $\Sigma^{n_1} \to r$.
+		Let $\Sigma^{n_1 + n_2}$ be $r$-colored, then define $r \cdot s^{n_1}$ coloring of $\Sigma^{n_2}$. By the choice of $n_2$ then $\Sigma^{n_2}$ contains a monochromatic line. $\chi : \Sigma^{n_2 + n_1} \to r$ and $\chi'$ is a function from $\Sigma^{n_2}$ to the set of all functions $\Sigma^{n_1} \to r$.
 		
 		Color of this line is a $r$-coloring of $\Sigma^{n_1}$. By the choice of $n_1$ it contains a monochromatic line. For higher $d$ replace $n_1 = \HJ(s, r^{s^{n_1}}, d)$.
 	\end{proof}
@@ -157,7 +157,7 @@ $$
 	\end{table}
 
 	\begin{thm}[Graham-Rothschild, 1971]
-		$\forall$ finite $\Sigma$ $\forall d, n, r > 0$ $\exists N = \GR(|\Sigma|, d, n, r)$ such that if $d$-dimensional subspace of $\Sigma^N$ are $n$-colored then there exists monochromatic $n$-dimensional subspace.
+		$\forall$ finite $\Sigma$ $\forall d, n, r > 0$ $\exists N = \GR(|\Sigma|, d, n, r)$ such that if $d$-dimensional subspace of $\Sigma^N$ are $r$-colored then there exists monochromatic $n$-dimensional subspace.
 		\label{gr-thm}
 	\end{thm}
 

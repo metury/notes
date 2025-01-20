@@ -2,14 +2,14 @@
 
 \section{Size of edges -- lemma}
 
-For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due to Ramsey and Hales Jewett, but $PG(g)$ has $\chi = 2$ for $g > 2$. Also $\M \sim \binom{|X|}{2}$ due to Erd\H os and Hanani. Now lets see if $|\M| \geq |X|^{1 + \epsilon}$ can be true. Before showing the proof lets some direct results from such statement.
+For simple $k$-graphs $(X, \M)$ we have shown that $\chi$ may be unbounded, due to Ramsey and Hales Jewett, but $PG(g)$ has $\chi = 2$ for $g > 2$. Also $\M \sim \binom{|X|}{2}$ due to Erd\H os and Hanani. Now lets see if $|\M| \geq |X|^{1 + \epsilon}$ can be true. Before showing the proof lets show some direct results from such statement.
 
 \begin{thm}[Ordering property]
 	Assume $|\M| \geq |X|^{1 + \epsilon}$ fo given $k, \epsilon$ and large $X$. $\forall G = (V,E)$ and $\forall$ linear ordering of $V$ there exists graph $H = (W,F)$ such that for every linear ordering $\preceq$ of $W$ there exist monotone embedding $f : (G, \leq) \to (H, \preceq)$. In particular $f : V \to W$, $\{x,y\} \in E \iff \{f(x), f(y)\} \in F$ and $x \leq y \iff f(x) \preceq f(y)$.
 \end{thm}
 
 \begin{proof}
-	Let $G = (V,E)$ be given and $|V| = k$. Let $(X, \M)$ be simple $k$-graph with $n$ vertices. Let $\mathcal{G}$ be the set of all graphs $H = (X,F)$ with property that for any $M \in \M$ the graph $H|_M \simeq G$ and every edge of $F$ is a subset of an $M \in \M$. Then the number of placements of different orderings of $G$ is $a = \frac{k!}{\mathtt{Aut}(G)} = a$ where $\mathtt{Aut}(G)$ is the automorfism group of graph $G$.
+	Let $G = (V,E)$ be given and $|V| = k$. Let $(X, \M)$ be simple $k$-graph with $n$ vertices. Let $\mathcal{G}$ be the set of all graphs $H = (X,F)$ with property that for any $M \in \M$ the graph $H|_M \simeq G$ and every edge of $F$ is a subset of an $M \in \M$. Then the number of placements of different orderings of $G$ is $a = \frac{k!}{\mathtt{Aut}(G)}$ where $\mathtt{Aut}(G)$ is the automorfism group of graph $G$.
 	
 	Then $|\mathcal{G}| = a^{|\M|} \geq a^{n^{1+\epsilon}}$. How many graphs $H$ in $\mathcal{G}$ contain embedding $(G, \leq) \to (H, \preceq)$ for some $\preceq$? That is $\leq n! (a - 1)^{n^{1+\epsilon}}$ which is $\ll a^{n^{1+\epsilon}}$, which can be seen by taking logarithms.
 	
