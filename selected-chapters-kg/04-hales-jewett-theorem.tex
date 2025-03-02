@@ -10,7 +10,10 @@ We will now jump to another topic which is mainly the Hales-Jewett theorem. This
 But the main issue is that this theorem is rather more algebraic and also used in combinatorics. For example we could create an auxiliary hypergraph $H = (\N, \text{all pregressions of length }n)$ so that we are looking at edges.
 
 \begin{topic}{Multidimensional Tic-Tac-Toe}
-	Lets consider $\Sigma$ finite alphabet (set). Then $\Sigma^n$ is set of functions $[n] \to \Sigma$ (usually called words). Lets define a hypergraph by the following set. $L \subseteq \Sigma^n$ is combinatorial line if $M \subseteq \{1, 2, \dots, n\}$ nonempty and $f: [n] \to \Sigma$ such that
+	Lets consider $\Sigma$ finite alphabet (set). Then $\Sigma^n$ is set of
+	functions $[n] \to \Sigma$ (usually called words). Lets define a
+	hypergraph by the following set. $L \subseteq \Sigma^n$ is
+	combinatorial line if there exist $M \subseteq \{1, 2, \dots, n\}$ nonempty and $f: [n] \to \Sigma$ such that
 	
 	$$
 	L = \left\{g | \exists c \in \Sigma \ g(i) = \left\{
@@ -57,11 +60,17 @@ But the main issue is that this theorem is rather more algebraic and also used i
 \end{topic}
 
 \begin{thm}[Hales-Jewett, 1964]
-	For every finite $\Sigma$ and finite $n > 0$ $\exists N > 0$ denoted as $\HJ (|\Sigma|, r)$ such that the chromatic number of $H(\Sigma^n, \text{Lines})$ is at least $n$, or alternatively if $\Sigma^n$ is $r$-colored then there exist monochromatic combinatorial line (which is a subspace of dimension 1).
+	For every finite $\Sigma$ and finite $r > 0$ $\exists N > 0$ denoted as
+	$\HJ (|\Sigma|, r)$ such that the chromatic number of $H(\Sigma^N,
+	\text{Lines})$ is at least $r$, or alternatively if $\Sigma^N$ is
+	$(r-1)$-colored then there exists a monochromatic combinatorial line
+	(which is a subspace of dimension 1).
 \end{thm}
 
 \begin{thm}[Van der Warden, 1927]
-	For $r$ number of colors and $l$ length of progression is known then there is finite version $N = \VW(r,k)$. And $N$ is not primitive recursion.
+	For $r$ number of colors and $l$ length of progression is known then
+	there is finite version $N = \VW(r,k)$. And $N$ is not primitive
+	recursive.
 \end{thm}
 
 Actually in the terms of Van der Warden theorem Shelah showed that $\VW$ has upper bound via a primitive recursion which is of a kind
@@ -105,7 +114,9 @@ $$
 	\end{lemma}
 
 	\begin{proof}[Proof of theorem \ref{hj-imrpov}]
-		Simply put both lemmas \ref{hj-lemma-1} and \ref{hj-lemma-2} together and we are able to recreate $\HJ$ for all $s, r, d$.
+		Simply put both lemmas \ref{hj-lemma-1} and \ref{hj-lemma-2}
+		and the observation together and we are able to recreate $\HJ$
+		for all $s, r, d$.
 	\end{proof}
 
 	\begin{proof}[Proof of lemma \ref{hj-lemma-1}]
